@@ -1,6 +1,6 @@
 package com.doantotnghiep.server.auth;
 
-import com.doantotnghiep.server.auth.dto.AuthenticationRequest;
+import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.config.JwtService;
@@ -9,21 +9,13 @@ import com.doantotnghiep.server.user.Role;
 import com.doantotnghiep.server.user.User;
 import com.doantotnghiep.server.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.server.WebExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,17 +50,20 @@ public class AuthenticationService {
 
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
-        User user = userRepository.findUserByUsername(request.getUsername());
-
-        return AuthenticationResponse.builder()
-                .token(jwtService.generateToken(user))
-                .build();
+    public AuthenticationResponse authenticate(LoginRequest request) throws ResponseException {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(),
+                            request.getPassword()
+                    )
+            );
+            User user = userRepository.findUserByUsername(request.getUsername());
+            return AuthenticationResponse.builder()
+                    .token(jwtService.generateToken(user))
+                    .build();
+        } catch (Exception e) {
+            throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+        }
     }
 }

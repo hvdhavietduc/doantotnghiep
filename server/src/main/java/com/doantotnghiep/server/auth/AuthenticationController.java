@@ -1,16 +1,17 @@
 package com.doantotnghiep.server.auth;
 
-import com.doantotnghiep.server.auth.dto.AuthenticationRequest;
+import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.exception.ResponseException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,16 +21,25 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
-            @RequestBody RegisterRequest request
+            @Valid @RequestBody RegisterRequest request
     ) throws ResponseException {
-        return authenticationService.register(request);
+        try {
+            return authenticationService.register(request);
+        } catch (Exception e) {
+            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
+        }
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
-
+            @Valid @RequestBody LoginRequest request
+    ) throws ResponseException {
+        try {
+            return ResponseEntity.ok(authenticationService.authenticate(request));
+        } catch (Exception e) {
+            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
+        }
     }
+
+
 }
