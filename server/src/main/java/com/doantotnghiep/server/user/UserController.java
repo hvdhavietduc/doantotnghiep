@@ -33,7 +33,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getMe")
+    @GetMapping("/me")
     public User getMe(HttpServletRequest request) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
