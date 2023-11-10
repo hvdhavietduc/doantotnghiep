@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.config;
 
+import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.user.Role;
 import com.doantotnghiep.server.user.User;
 import io.jsonwebtoken.Claims;
@@ -9,6 +10,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.websocket.servlet.UndertowWebSocketServletWebServerCustomizer;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -21,7 +23,7 @@ import java.util.function.Function;
 public class JwtService {
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F442847284B6250645367566B5970";
 
-    public String extractUsername(String token) {
+    public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -64,7 +66,7 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token){
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())
@@ -78,21 +80,26 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public User getUserFromHeader(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            Claims claims = extractAllClaims(token);
-            User user = new User();
-            Role role = Role.valueOf(claims.get("role").toString());
-            user.setUsername(claims.get("username").toString());
-            user.setEmail(claims.get("email").toString());
-            user.setName(claims.get("name").toString());
-            user.setId(claims.get("id").toString());
-            user.setRole(role);
-            user.setAvatar(claims.get("avatar").toString());
-            return user;
+    public User getUserFromHeader(HttpServletRequest request) throws ResponseException {
+        try {
+            String token = request.getHeader("Authorization");
+            if (token != null && token.startsWith("Bearer ")) {
+                token = token.substring(7);
+                Claims claims = extractAllClaims(token);
+                User user = new User();
+                Role role = Role.valueOf(claims.get("role").toString());
+                user.setUsername(claims.get("username").toString());
+                user.setEmail(claims.get("email").toString());
+                user.setName(claims.get("name").toString());
+                user.setId(claims.get("id").toString());
+                user.setRole(role);
+                user.setAvatar(claims.get("avatar").toString());
+                return user;
+            }
+            throw new ResponseException("Token not found", HttpStatus.BAD_REQUEST, 400);
         }
-        return null;
+        catch (ResponseException error){
+            throw new ResponseException(error.getMessage(),error.getStatus(),error.getStatusCode());
+        }
     }
 }

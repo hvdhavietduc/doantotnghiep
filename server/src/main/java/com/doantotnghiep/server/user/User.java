@@ -1,9 +1,6 @@
 package com.doantotnghiep.server.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,6 +15,7 @@ import java.util.List;
 @Data
 @Document
 public class User implements UserDetails {
+    @Getter
     @Id
     private String id;
 
@@ -41,8 +39,8 @@ public class User implements UserDetails {
     @Field
     private Role role;
 
-    public String getId() {
-        return id;
+    public static User builder() {
+        return new User();
     }
 
     public User(String id, String username, String name, String password, String email, String avatar) {

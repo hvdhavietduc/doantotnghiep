@@ -28,9 +28,13 @@ public class AuthenticationService {
 
     public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) throws ResponseException {
         try {
-            User userExist = userRepository.findUserByUsername(request.getUsername());
-            if (userExist != null) {
-                throw new Exception("Username already exists");
+            User usernameExist = userRepository.findUserByUsername(request.getUsername());
+            if (usernameExist != null) {
+                throw new ResponseException("Username already exists", HttpStatus.BAD_REQUEST, 400);
+            }
+            User emailExist = userRepository.findUserByEmail(request.getEmail());
+            if (emailExist != null) {
+                throw new ResponseException("Email already exists", HttpStatus.BAD_REQUEST, 400);
             }
             User user = new User();
             user.setUsername(request.getUsername());
@@ -41,29 +45,69 @@ public class AuthenticationService {
             userRepository.save(user);
             var token = jwtService.generateToken(user);
 
-            AuthenticationResponse response = new AuthenticationResponse();
-            response.setToken(token);
+            AuthenticationResponse response = AuthenticationResponse.builder()
+                    .token(token)
+                    .username(user.getUsername())
+                    .email(user.getEmail())
+                    .role(user.getRole().name())
+                    .id(user.getId())
+                    .avatar(user.getAvatar())
+                    .build();
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
 
     }
 
-    public AuthenticationResponse authenticate(LoginRequest request) throws ResponseException {
+    public ResponseEntity<AuthenticationResponse> authenticate(LoginRequest request) throws ResponseException {
         try {
+            User user = userRepository.findUserByUsername(request.getUsername());
+            if (user == null) {
+                throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+            }
+            String password = user.getPassword();
+            if (!passwordEncoder.matches(request.getPassword(), password)) {
+                throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+            }
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
                             request.getPassword()
                     )
             );
-            User user = userRepository.findUserByUsername(request.getUsername());
-            return AuthenticationResponse.builder()
+
+            AuthenticationResponse response = AuthenticationResponse.builder()
                     .token(jwtService.generateToken(user))
+                    .username(user.getUsername())
+                    .email(user.getEmail())
+                    .role(user.getRole().name())
+                    .id(user.getId())
+                    .avatar(user.getAvatar())
                     .build();
-        } catch (Exception e) {
-            throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+    public ResponseEntity<AuthenticationResponse> logout(String userId) throws ResponseException {
+        try {
+            User user = userRepository.findUsersById(userId);
+            if (user == null) {
+                throw new ResponseException("User not found", HttpStatus.NOT_FOUND, 404);
+            }
+
+            AuthenticationResponse response = AuthenticationResponse.builder()
+                    .token("")
+                    .username("")
+                    .email("")
+                    .role("")
+                    .id("")
+                    .avatar("")
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
 }
