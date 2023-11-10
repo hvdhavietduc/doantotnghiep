@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.auth.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -14,23 +15,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
-    @NotEmpty
-    @NotNull
+    @Valid
+    @NotEmpty(message = "Username must not be empty")
+    @NotNull(message = "Username must not be null")
     @Size(min = 6, max = 20, message = "Username must be between 6 and 20 characters")
     private String username;
 
-    @NotEmpty
-    @NotNull
+    @Valid
+    @NotEmpty(message = "Password must not be empty")
+    @NotNull(message = "Password must not be null")
     @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
 
-    @NotEmpty
-    @NotNull
-    @Email
+    @Valid
+    @NotEmpty(message = "Email must not be empty")
+    @NotNull(message = "Email must not be null")
+    @Email(message = "Email must be valid")
     private String email;
 
-    @NotEmpty
-    @NotNull
+    @Valid
+    @NotEmpty(message = "Name must not be empty")
+    @NotNull(message = "Name must not be null")
     @Size(min = 6, max = 20, message = "Name must be between 6 and 20 characters")
     private String name;
 }

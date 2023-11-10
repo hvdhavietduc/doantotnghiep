@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.auth.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,13 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginRequest {
-    @NotEmpty
-    @NotNull
-    @Size(min = 6, max = 20, message = "Username must be b  etween 6 and 20 characters")
+    @Valid
+    @NotEmpty(message = "Username must not be empty")
+    @NotNull(message = "Username must not be null")
+    @Size(min = 6, max = 20, message = "Username must be between 6 and 20 characters")
     private String username;
 
-    @NotEmpty
-    @NotNull
+    @Valid
+    @NotEmpty(message = "Password must not be empty")
+    @NotNull(message = "Password must not be null")
     @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
 }

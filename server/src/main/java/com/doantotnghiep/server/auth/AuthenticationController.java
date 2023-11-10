@@ -3,11 +3,15 @@ package com.doantotnghiep.server.auth;
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
+import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
+import com.doantotnghiep.server.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,28 +22,48 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final JwtService jwtService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(
-            @Valid @RequestBody RegisterRequest request
+    public ResponseEntity<AuthenticationResponse> register(
+            @Valid @RequestBody RegisterRequest request,
+            BindingResult bindingResult
     ) throws ResponseException {
         try {
+            if (bindingResult.hasErrors()) {
+                throw new ResponseException(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST, 400);
+            }
             return authenticationService.register(request);
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @Valid @RequestBody LoginRequest request
+            @Valid @RequestBody LoginRequest request,
+            BindingResult bindingResult
     ) throws ResponseException {
         try {
-            return ResponseEntity.ok(authenticationService.authenticate(request));
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
+            if (bindingResult.hasErrors()) {
+                throw new ResponseException(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST, 400);
+            }
+            return authenticationService.authenticate(request);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<AuthenticationResponse> logout(
+            HttpServletRequest request
+    ) throws ResponseException {
+        try {
+            User user = jwtService.getUserFromHeader(request);
+            return authenticationService.logout(user.getId());
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
 
 }
