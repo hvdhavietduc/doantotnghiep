@@ -17,9 +17,18 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleException(ResponseException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", e.getTimestamp());
-        map.put("messageError", e.getMessage());
+        map.put("message", e.getMessage());
         map.put("status", e.getStatus());
         map.put("statusCode", e.getStatusCode());
-        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(map, e.getStatus());
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGlobalException(Exception e){
+        Map<String, Object> map = new HashMap<>();
+        map.put("timestamp", LocalDateTime.now().toString());
+        map.put("message", e.getMessage());
+        map.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+        map.put("statusCode", 500);
+        return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

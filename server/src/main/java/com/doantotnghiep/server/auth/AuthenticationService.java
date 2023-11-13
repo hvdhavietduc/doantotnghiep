@@ -3,6 +3,7 @@ package com.doantotnghiep.server.auth;
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
+import com.doantotnghiep.server.common.AuthErrorEnum;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.user.Role;
@@ -30,11 +31,11 @@ public class AuthenticationService {
         try {
             User usernameExist = userRepository.findUserByUsername(request.getUsername());
             if (usernameExist != null) {
-                throw new ResponseException("Username already exists", HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(AuthErrorEnum.USERNAME_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
             }
             User emailExist = userRepository.findUserByEmail(request.getEmail());
             if (emailExist != null) {
-                throw new ResponseException("Email already exists", HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(AuthErrorEnum.EMAIL_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
             }
             User user = new User();
             user.setUsername(request.getUsername());
@@ -64,11 +65,11 @@ public class AuthenticationService {
         try {
             User user = userRepository.findUserByUsername(request.getUsername());
             if (user == null) {
-                throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
             String password = user.getPassword();
             if (!passwordEncoder.matches(request.getPassword(), password)) {
-                throw new ResponseException("Wrong username or password", HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -94,7 +95,7 @@ public class AuthenticationService {
         try {
             User user = userRepository.findUsersById(userId);
             if (user == null) {
-                throw new ResponseException("User not found", HttpStatus.NOT_FOUND, 404);
+                throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
 
             AuthenticationResponse response = AuthenticationResponse.builder()
@@ -110,4 +111,5 @@ public class AuthenticationService {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
+
 }
