@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
@@ -31,4 +30,6 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
         map.put("statusCode", 500);
         return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 }

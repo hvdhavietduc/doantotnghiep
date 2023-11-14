@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/auth/**").permitAll() // Configure public endpoints here
+                                .requestMatchers("/api/auth/**").permitAll() // Configure public endpoints here
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->
