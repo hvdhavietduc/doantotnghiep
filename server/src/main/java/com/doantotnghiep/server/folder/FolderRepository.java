@@ -10,7 +10,12 @@ import java.util.Optional;
 @Repository
 public interface FolderRepository extends MongoRepository<Folder, String> {
     Folder findByNameAndUserId(String id, String userId);
+
     Page<Folder> getAllByUserId(String userId, Pageable pageable);
+
     void deleteByIdAndUserId(String id, String userId);
+
     Folder findByIdAndUserId(String id, String userId);
+
+    Integer countAllByUserId(String userId);
 }

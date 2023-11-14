@@ -5,6 +5,7 @@ import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
+import com.doantotnghiep.server.exception.ValidateExceptionHandle;
 import com.doantotnghiep.server.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
+    private final ValidateExceptionHandle validateExceptionHandle;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -30,9 +32,7 @@ public class AuthenticationController {
             BindingResult bindingResult
     ) throws ResponseException {
         try {
-            if (bindingResult.hasErrors()) {
-                throw new ResponseException(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST, 400);
-            }
+            validateExceptionHandle.handleException(bindingResult);
             return authenticationService.register(request);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
@@ -45,9 +45,7 @@ public class AuthenticationController {
             BindingResult bindingResult
     ) throws ResponseException {
         try {
-            if (bindingResult.hasErrors()) {
-                throw new ResponseException(bindingResult.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST, 400);
-            }
+            validateExceptionHandle.handleException(bindingResult);
             return authenticationService.authenticate(request);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
