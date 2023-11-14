@@ -56,7 +56,7 @@ public class FolderService {
         try {
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
             if (folder == null) {
-                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
             folderRepository.deleteByIdAndUserId(folderId, userId);
             return ResponseEntity.ok(true);
@@ -70,7 +70,7 @@ public class FolderService {
             String folderId = request.getId();
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
             if (folder == null) {
-                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
             String nameFolder = request.getName();
             Folder folderExist = folderRepository.findByNameAndUserId(nameFolder, userId);
@@ -93,7 +93,7 @@ public class FolderService {
         try {
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
             if (folder == null) {
-                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.BAD_REQUEST, 400);
+                throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
             return ResponseEntity.ok(folder);
         } catch (ResponseException e) {
