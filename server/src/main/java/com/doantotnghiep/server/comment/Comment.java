@@ -20,14 +20,17 @@ public class Comment {
     public String postId;
     @Field
     public Date createdAt;
+    @Field
+    public Date updatedAt;
 
     public Comment() {
     }
 
-    public Comment(String content, String authorId, String postId, Date createdAt) {
+    public Comment(String content, String authorId, String postId, Date createdAt, Date updatedAt) {
         this.content = content;
         this.authorId = authorId;
         this.postId = postId;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }

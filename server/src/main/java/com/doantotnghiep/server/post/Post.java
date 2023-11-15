@@ -18,6 +18,8 @@ public class Post {
     @Field
     public Date createdAt;
     @Field
+    public Date updatedAt;
+    @Field
     public String image;
     @Field
     public String content;
@@ -29,9 +31,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, Date createdAt, String image, String content, String authorId, List<String> commentIds) {
+    public Post(String title, Date createdAt, Date updatedAt, String image, String content, String authorId, List<String> commentIds) {
         this.title = title;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.image = image;
         this.content = content;
         this.authorId = authorId;
