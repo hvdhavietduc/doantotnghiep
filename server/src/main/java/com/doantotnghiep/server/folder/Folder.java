@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,14 +20,20 @@ public class Folder {
     public String userId;
     @Field
     public List<String> wordIds;
+    @Field
+    public Date createdAt;
+    @Field
+    public Date updatedAt;
 
     public Folder() {
     }
 
-    public Folder(String name, String userId, List<String> wordIds) {
+    public Folder(String name, String userId, List<String> wordIds, Date createdAt, Date updatedAt) {
         this.name = name;
         this.userId = userId;
         this.wordIds = wordIds;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public void appendWord(String wordId) {
