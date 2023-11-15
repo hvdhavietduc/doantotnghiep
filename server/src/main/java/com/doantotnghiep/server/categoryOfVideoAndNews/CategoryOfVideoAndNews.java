@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,6 +16,10 @@ public class CategoryOfVideoAndNews {
     @Field
     public String name;
     @Field
+    public Date createdAt;
+    @Field
+    public Date updatedAt;
+    @Field
     public List<String> videoIds;
     @Field
     public List<String> newsIds;
@@ -22,8 +27,10 @@ public class CategoryOfVideoAndNews {
     public CategoryOfVideoAndNews() {
     }
 
-    public CategoryOfVideoAndNews(String name, List<String> videoIds, List<String> newsIds) {
+    public CategoryOfVideoAndNews(String name, Date createdAt, Date updatedAt, List<String> videoIds, List<String> newsIds) {
         this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.videoIds = videoIds;
         this.newsIds = newsIds;
     }

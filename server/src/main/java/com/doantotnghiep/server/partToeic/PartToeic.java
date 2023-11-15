@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,17 +25,23 @@ public class PartToeic {
     public List<String> imagesOfPart;
     @Field
     public List<String> contentsOfPart;
+    @Field
+    public Date createdAt;
+    @Field
+    public Date updatedAt;
 
     public PartToeic() {
     }
 
-    public PartToeic(String name, String instruction, String audio, List<String> questionIds, List<String> imagesOfPart, List<String> contentsOfPart) {
+    public PartToeic(String name, String instruction, String audio, List<String> questionIds, List<String> imagesOfPart, List<String> contentsOfPart, Date createdAt, Date updatedAt) {
         this.name = name;
         this.instruction = instruction;
         this.audio = audio;
         this.questionIds = questionIds;
         this.imagesOfPart = imagesOfPart;
         this.contentsOfPart = contentsOfPart;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public void appendQuestionId(String questionId) {
