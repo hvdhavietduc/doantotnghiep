@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,6 +38,8 @@ public class NewsService {
         News news = new News();
         news.setTitle(request.getTitle());
         news.setContent(request.getContent());
+        news.setCreatedAt(new Date());
+        news.setUpdatedAt(new Date());
         return ResponseEntity.ok(newsRepository.save(news));
 
     }
@@ -50,6 +53,7 @@ public class NewsService {
             }
             news.setTitle(request.getTitle());
             news.setContent(request.getContent());
+            news.setUpdatedAt(new Date());
             newsRepository.save(news);
             return ResponseEntity.ok(true);
         } catch (ResponseException e) {
