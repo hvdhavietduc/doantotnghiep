@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,8 @@ public class FolderService {
             folder.setName(nameFolder);
             folder.setUserId(userId);
             folder.setWordIds(new ArrayList<>());
+            folder.setCreatedAt(new Date());
+            folder.setUpdatedAt(new Date());
             folderRepository.save(folder);
             return ResponseEntity.ok(folder);
 
@@ -76,11 +79,16 @@ public class FolderService {
             Folder folderExist = folderRepository.findByNameAndUserId(nameFolder, userId);
             if (folderExist == null) {
                 folder.setName(request.getName());
+                folder.setUpdatedAt(new Date());
                 folderRepository.save(folder);
                 return ResponseEntity.ok(true);
             } else if (!folderExist.getId().equals(folderId)) {
                 throw new ResponseException(FolderErrorEnum.FOLDER_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
-
+            }
+            else{
+                folder.setName(request.getName());
+                folder.setUpdatedAt(new Date());
+                folderRepository.save(folder);
             }
             return ResponseEntity.ok(true);
 
