@@ -8,6 +8,7 @@ import com.doantotnghiep.server.folder.response.AllFolderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class FolderService {
     }
 
     public ResponseEntity<AllFolderResponse> getAllFolder(String userId, Integer page, Integer size) throws ResponseException {
-        Pageable paging = PageRequest.of(page, size);
+        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         List<Folder> folders = folderRepository.getAllByUserId(userId, paging).getContent();
         Integer total = folderRepository.countAllByUserId(userId);
         AllFolderResponse response = AllFolderResponse.builder()

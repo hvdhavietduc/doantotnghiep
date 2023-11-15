@@ -8,6 +8,7 @@ import com.doantotnghiep.server.news.response.AllNewsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class NewsService {
     }
 
     public ResponseEntity<AllNewsResponse> getAllNews(Integer page, Integer size) {
-        Pageable paging = PageRequest.of(page, size);
+        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Integer total = newsRepository.countAllBy();
         List<News> listNews = newsRepository.findAll(paging).getContent();
         AllNewsResponse response = AllNewsResponse.builder()
