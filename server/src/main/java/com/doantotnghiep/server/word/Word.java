@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,17 +16,27 @@ public class Word {
     @Field
     public String name;
     @Field
-    public List<Mean> means;
+    public String pronunciationUK;
+    @Field
+    public String pronunciationUS;
+    @Field
+    public List<Type> types;
 
     public Word() {
+        this.name = "";
+        this.pronunciationUK = "";
+        this.pronunciationUS = "";
+        this.types = new ArrayList<>();
     }
 
-    public Word(String name, List<Mean> means) {
+    public Word(String name, String pronunciationUK, String pronunciationUS, List<Type> types) {
         this.name = name;
-        this.means = means;
+        this.pronunciationUK = pronunciationUK;
+        this.pronunciationUS = pronunciationUS;
+        this.types = types;
     }
 
-    public void appendMean(Mean mean) {
-        this.means.add(mean);
+    public void appendType(Type type) {
+        this.types.add(type);
     }
 }
