@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryOfWordRepository extends MongoRepository<CategoryOfWord, String> {
+    CategoryOfWord findByName(String name);
 }

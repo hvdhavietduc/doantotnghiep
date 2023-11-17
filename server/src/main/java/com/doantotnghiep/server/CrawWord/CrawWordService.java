@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.CrawWord;
 
+import com.doantotnghiep.server.common.WordErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.word.Example;
 import com.doantotnghiep.server.word.Mean;
@@ -32,7 +33,7 @@ public class CrawWordService {
         wordCraw.setPronunciationUS(crawPronunciationUS(doc));
         wordCraw.setTypes(crawTypes(doc));
         if(wordCraw.getTypes().isEmpty()){
-            throw new ResponseException("Word not found", HttpStatus.NOT_FOUND, 404);
+            throw new ResponseException(WordErrorEnum.WORD_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
         }
         return wordCraw;
     }
