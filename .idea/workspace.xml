@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/CategoryOfWordErrorEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/WordErrorEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByFolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/AddWordToCategoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/AddWordToFolderRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/RemoveWordFromCategoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/RemoveWordFromFolderRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfVideoAndNews/CategoryOfVideoAndNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfVideoAndNews/CategoryOfVideoAndNews.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/Folder.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/Folder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +80,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "fix/uniqueDB",
+    "git-widget-placeholder": "server",
     "last_opened_file_path": "/Users/d003024/HVD/Doantotnghiep/doantotnghiep",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -143,6 +152,20 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java</url>
+          <line>127</line>
+          <properties class="com.doantotnghiep.server.word.WordService" method="addWordToCategory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
