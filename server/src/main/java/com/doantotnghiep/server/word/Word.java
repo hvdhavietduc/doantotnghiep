@@ -2,6 +2,7 @@ package com.doantotnghiep.server.word;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -14,6 +15,7 @@ public class Word {
     @Id
     public String id;
     @Field
+    @Indexed(unique = true)
     public String name;
     @Field
     public String pronunciationUK;

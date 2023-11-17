@@ -3,6 +3,7 @@ package com.doantotnghiep.server.folder;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -15,6 +16,7 @@ public class Folder {
     @Id
     public String id;
     @Field
+    @Indexed(unique = true)
     public String name;
     @Field
     public String userId;
