@@ -3,9 +3,9 @@ package com.doantotnghiep.server.word;
 import com.doantotnghiep.server.CrawWord.CrawWordService;
 import com.doantotnghiep.server.categoryOfWord.CategoryOfWord;
 import com.doantotnghiep.server.categoryOfWord.CategoryOfWordRepository;
-import com.doantotnghiep.server.common.CategoryOfWordErrorEnum;
-import com.doantotnghiep.server.common.FolderErrorEnum;
-import com.doantotnghiep.server.common.WordErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.CategoryOfWordErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.FolderErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.WordErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.folder.Folder;
 import com.doantotnghiep.server.folder.FolderRepository;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package com.doantotnghiep.server.common;
+package com.doantotnghiep.server.common.ErrorEnum;
 
 import java.util.Set;
 

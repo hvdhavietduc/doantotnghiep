@@ -1,4 +1,4 @@
-package com.doantotnghiep.server.common;
+package com.doantotnghiep.server.common.ErrorEnum;
 
 public class WordErrorEnum {
     public static final String WORD_NOT_FOUND = "Word not found";

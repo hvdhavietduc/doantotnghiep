@@ -1,4 +1,4 @@
-package com.doantotnghiep.server.common;
+package com.doantotnghiep.server.common.ErrorEnum;
 
 public class FolderErrorEnum {
     public static final String FOLDER_NOT_FOUND = "Folder not found";

@@ -1,6 +1,6 @@
 package com.doantotnghiep.server.CrawWord;
 
-import com.doantotnghiep.server.common.WordErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.WordErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.word.Example;
 import com.doantotnghiep.server.word.Mean;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 @ControllerAdvice

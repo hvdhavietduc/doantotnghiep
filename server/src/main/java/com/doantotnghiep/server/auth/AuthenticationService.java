@@ -3,13 +3,16 @@ package com.doantotnghiep.server.auth;
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
-import com.doantotnghiep.server.common.AuthErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.AuthErrorEnum;
+import com.doantotnghiep.server.common.MailMessage.MailMessage;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
+import com.doantotnghiep.server.mailService.MailService;
 import com.doantotnghiep.server.user.Role;
 import com.doantotnghiep.server.user.User;
 import com.doantotnghiep.server.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +29,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final MailService mailService;
 
     public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) throws ResponseException {
         try {
@@ -107,6 +111,24 @@ public class AuthenticationService {
                     .avatar("")
                     .build();
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    public ResponseEntity<Boolean> forgotPassword(String email) throws ResponseException {
+        try {
+            User user = userRepository.findUserByEmail(email);
+            if (user == null) {
+                throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
+            }
+
+            String newPassword = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+
+            mailService.sendMail(email, MailMessage.FORGORT_PASSWORD_SUBJECT, MailMessage.FORGORT_PASSWORD_CONTENT + newPassword);
+            return ResponseEntity.ok(true);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }

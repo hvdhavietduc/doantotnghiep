@@ -1,4 +1,4 @@
-package com.doantotnghiep.server.common;
+package com.doantotnghiep.server.common.ErrorEnum;
 
 public class CategoryOfWordErrorEnum {
     public static final String CATEGORY_OF_WORD_NOT_FOUND = "Category of word not found";

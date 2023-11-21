@@ -1,6 +1,6 @@
 package com.doantotnghiep.server.news;
 
-import com.doantotnghiep.server.common.NewsErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.NewsErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.news.dto.CreateNewsRequest;
 import com.doantotnghiep.server.news.dto.UpdateNewsRequest;

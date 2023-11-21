@@ -26,18 +26,23 @@ public class WordController {
     private final ValidateExceptionHandle validateExceptionHandle;
     private final JwtService jwtService;
 
-    @GetMapping("/by-name")
-    public ResponseEntity<Word> getWordByName(@RequestParam String name) throws ResponseException, IOException {
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Word> getWordByName(@PathVariable String name) throws ResponseException, IOException {
         return wordService.getWordByName(name);
     }
 
-    @GetMapping("/by-id")
-    public ResponseEntity<Word> getWordById(@RequestParam String id) throws ResponseException, IOException {
+    @GetMapping("/{id}")
+    public ResponseEntity<Word> getWordById(@PathVariable String id) throws ResponseException, IOException {
         return wordService.getWordById(id);
     }
 
-    @GetMapping("/by-folder")
-    public ResponseEntity<AllWordByFolder> getAllWordByFolderId(HttpServletRequest request, @RequestParam String folderId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
+    @GetMapping("/folder")
+    public ResponseEntity<AllWordByFolder> getAllWordByFolderId(
+            HttpServletRequest request,
+            @RequestParam String folderId,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size
+    ) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
             return wordService.getAllWordByFolderId(user.getId(), folderId, page, size);
@@ -46,8 +51,12 @@ public class WordController {
         }
     }
 
-    @GetMapping("/by-category")
-    public ResponseEntity<AllWordByCategory> getAllWordByCategoryId(@RequestParam String categoryId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
+    @GetMapping("/category")
+    public ResponseEntity<AllWordByCategory> getAllWordByCategoryId(
+            @RequestParam String categoryId,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size
+    ) throws ResponseException {
         try {
             return wordService.getAllWordByCategory(categoryId, page, size);
         } catch (ResponseException e) {
@@ -55,8 +64,12 @@ public class WordController {
         }
     }
 
-    @PostMapping("/add-to-folder")
-    public ResponseEntity<Boolean> addWordToFolder(HttpServletRequest request, @RequestBody AddWordToFolderRequest addWordToFolderRequest,  BindingResult bindingResult) throws ResponseException {
+    @PostMapping("/folder")
+    public ResponseEntity<Boolean> addWordToFolder(
+            HttpServletRequest request,
+            @RequestBody AddWordToFolderRequest addWordToFolderRequest,
+            BindingResult bindingResult
+    ) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             User user = jwtService.getUserFromHeader(request);
@@ -66,8 +79,11 @@ public class WordController {
         }
     }
 
-    @PostMapping("/add-to-category")
-    public ResponseEntity<Boolean> addWordToCategory(@RequestBody AddWordToCategoryRequest addWordToFolderRequest, BindingResult bindingResult) throws ResponseException {
+    @PostMapping("/category")
+    public ResponseEntity<Boolean> addWordToCategory(
+            @RequestBody AddWordToCategoryRequest addWordToFolderRequest,
+            BindingResult bindingResult
+    ) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             return wordService.addWordToCategory(addWordToFolderRequest);
@@ -76,8 +92,12 @@ public class WordController {
         }
     }
 
-    @DeleteMapping("/delete-from-folder")
-    public ResponseEntity<Boolean> deleteWordFromFolder(HttpServletRequest request, RemoveWordFromFolderRequest removeWordFromFolderRequest, BindingResult bindingResult) throws ResponseException {
+    @DeleteMapping("/folder")
+    public ResponseEntity<Boolean> deleteWordFromFolder(
+            HttpServletRequest request,
+            @RequestBody RemoveWordFromFolderRequest removeWordFromFolderRequest,
+            BindingResult bindingResult
+    ) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             User user = jwtService.getUserFromHeader(request);
@@ -87,8 +107,11 @@ public class WordController {
         }
     }
 
-    @DeleteMapping("/delete-from-category")
-    public ResponseEntity<Boolean> deleteWordFromCategory(RemoveWordFromCategoryRequest removeWordFromFolderRequest, BindingResult bindingResult) throws ResponseException {
+    @DeleteMapping("/category")
+    public ResponseEntity<Boolean> deleteWordFromCategory(
+            @RequestBody RemoveWordFromCategoryRequest removeWordFromFolderRequest,
+            BindingResult bindingResult
+    ) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             return wordService.removeWordFromCategory(removeWordFromFolderRequest);

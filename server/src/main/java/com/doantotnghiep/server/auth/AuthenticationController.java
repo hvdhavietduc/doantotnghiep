@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.auth;
 
+import com.doantotnghiep.server.auth.dto.ForgotPasswordRequest;
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
@@ -9,6 +10,7 @@ import com.doantotnghiep.server.exception.ValidateExceptionHandle;
 import com.doantotnghiep.server.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +65,18 @@ public class AuthenticationController {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<Boolean> forgotPassword(
+            @RequestBody ForgotPasswordRequest request
+            ) throws ResponseException {
+        try {
+            return authenticationService.forgotPassword(request.getEmail());
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+
 
 }

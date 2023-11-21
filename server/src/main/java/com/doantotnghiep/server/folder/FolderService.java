@@ -1,6 +1,6 @@
 package com.doantotnghiep.server.folder;
 
-import com.doantotnghiep.server.common.FolderErrorEnum;
+import com.doantotnghiep.server.common.ErrorEnum.FolderErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.folder.dto.CreateFolderRequest;
 import com.doantotnghiep.server.folder.dto.UpdateFolderRequest;

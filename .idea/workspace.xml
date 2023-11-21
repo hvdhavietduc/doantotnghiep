@@ -5,20 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/CategoryOfWordErrorEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/WordErrorEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByFolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/AddWordToCategoryRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/AddWordToFolderRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/RemoveWordFromCategoryRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/dto/RemoveWordFromFolderRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/dto/ForgotPasswordRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/MailMessage/MailMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/mailService/MailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/categoryOfWord/CategoryOfWordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/AuthErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/AuthErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/CategoryOfWordErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/CategoryOfWordErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/FolderErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/FolderErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/NewsErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/NewsErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/WordErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/WordErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/FolderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/FolderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +84,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "server",
     "last_opened_file_path": "/Users/d003024/HVD/Doantotnghiep/doantotnghiep",
@@ -98,9 +104,11 @@
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
         <env name="db_url" value="mongodb+srv://ducvietha82:doantotnghiep@cluster0.2t7itdx.mongodb.net/doantotnghiep?retryWrites=true&amp;w=majority" />
+        <env name="email" value="duc.ha000412@hcmut.edu.vn" />
         <env name="password" value="doantotnghiep" />
-        <env name="username" value="doantotnghiep" />
+        <env name="password_mail" value="zqclafxvftjqthum" />
         <env name="TOKEN_TTL" value="86400" />
+        <env name="username" value="doantotnghiep" />
       </envs>
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="server" />
@@ -135,6 +143,13 @@
       <workItem from="1699967227786" duration="11180000" />
       <workItem from="1700052148959" duration="2523000" />
       <workItem from="1700095184729" duration="16620000" />
+      <workItem from="1700308596856" duration="402000" />
+      <workItem from="1700309208048" duration="6000" />
+      <workItem from="1700314229902" duration="18000" />
+      <workItem from="1700362093459" duration="779000" />
+      <workItem from="1700383183877" duration="1311000" />
+      <workItem from="1700571557435" duration="540000" />
+      <workItem from="1700573258758" duration="6781000" />
     </task>
     <servers />
   </component>
@@ -152,20 +167,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java</url>
-          <line>127</line>
-          <properties class="com.doantotnghiep.server.word.WordService" method="addWordToCategory">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
