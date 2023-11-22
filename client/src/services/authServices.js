@@ -1,0 +1,14 @@
+import httpRequest from '~/utils/httpRequest';
+import config from '~/config';
+
+const login = async (data) => {
+    const res = await httpRequest.post(config.api.LOGIN, data);
+    return res.data;
+};
+
+const signup = async (data) => {
+    const res = await httpRequest.post(config.api.SIGNUP, data);
+    return res.data;
+};
+
+export { login, signup };
