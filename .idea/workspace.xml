@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/Response/UserResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,30 +61,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;server&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/d003024/HVD/Doantotnghiep/doantotnghiep&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "server",
+    "last_opened_file_path": "/Users/d003024/HVD/Doantotnghiep/doantotnghiep",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Language Defaults",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
@@ -89,10 +92,9 @@
         <env name="email" value="duc.ha000412@hcmut.edu.vn" />
         <env name="password" value="doantotnghiep" />
         <env name="password_mail" value="zqclafxvftjqthum" />
-        <env name="TOKEN_TTL" value="86400" />
-        <env name="username" value="doantotnghiep" />
         <env name="SECRET_KEY" value="404E635266556A586E3272357538782F413F442847284B6250645367566B5970" />
-        <env name="JWT_TTL" value="86400" />
+        <env name="TOKEN_TTL" value="86400000" />
+        <env name="username" value="doantotnghiep" />
       </envs>
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="server" />
@@ -135,6 +137,7 @@
       <workItem from="1700571557435" duration="540000" />
       <workItem from="1700573258758" duration="7697000" />
       <workItem from="1700657479991" duration="105000" />
+      <workItem from="1700661100089" duration="1443000" />
     </task>
     <servers />
   </component>
@@ -155,5 +158,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
