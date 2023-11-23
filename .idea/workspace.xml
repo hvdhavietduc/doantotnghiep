@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hvdhavietduc&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="13a60aef-d4f6-4dcb-88c9-7dd8784694ff" />
+        <option name="url" value="https://github.com/hvdhavietduc/doantotnghiep.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadAnnotationsAutomatically" value="true" />
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2XnrixQqO153b4M7EiwNqLow5Mz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "server",
+    "last_opened_file_path": "/Users/d003024/HVD/Doantotnghiep/doantotnghiep",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="db_url" value="mongodb+srv://ducvietha82:doantotnghiep@cluster0.2t7itdx.mongodb.net/doantotnghiep?retryWrites=true&amp;w=majority" />
+        <env name="email" value="duc.ha000412@hcmut.edu.vn" />
+        <env name="password" value="doantotnghiep" />
+        <env name="password_mail" value="zqclafxvftjqthum" />
+        <env name="SECRET_KEY" value="404E635266556A586E3272357538782F413F442847284B6250645367566B5970" />
+        <env name="TOKEN_TTL" value="86400000" />
+        <env name="username" value="doantotnghiep" />
+      </envs>
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.doantotnghiep.server.ServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="" />
+      <created>1699275817064</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699275817064</updated>
+      <workItem from="1699275818126" duration="1210000" />
+      <workItem from="1699278288853" duration="914000" />
+      <workItem from="1699284321186" duration="1276000" />
+      <workItem from="1699361389852" duration="5939000" />
+      <workItem from="1699405071657" duration="28000" />
+      <workItem from="1699405107741" duration="56000" />
+      <workItem from="1699456511858" duration="434000" />
+      <workItem from="1699457490160" duration="598000" />
+      <workItem from="1699619874927" duration="2610000" />
+      <workItem from="1699622494165" duration="230000" />
+      <workItem from="1699622730418" duration="753000" />
+      <workItem from="1699623490779" duration="104000" />
+      <workItem from="1699623877482" duration="5741000" />
+      <workItem from="1699966549480" duration="531000" />
+      <workItem from="1699967227786" duration="11180000" />
+      <workItem from="1700052148959" duration="2523000" />
+      <workItem from="1700095184729" duration="16620000" />
+      <workItem from="1700308596856" duration="402000" />
+      <workItem from="1700309208048" duration="6000" />
+      <workItem from="1700314229902" duration="18000" />
+      <workItem from="1700362093459" duration="779000" />
+      <workItem from="1700383183877" duration="1311000" />
+      <workItem from="1700571557435" duration="540000" />
+      <workItem from="1700573258758" duration="7697000" />
+      <workItem from="1700657479991" duration="105000" />
+      <workItem from="1700661100089" duration="1443000" />
+      <workItem from="1700663854809" duration="4954000" />
+      <workItem from="1700669257118" duration="5983000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsRepository.java</url>
+          <line>19</line>
+          <properties class="com.doantotnghiep.server.news.NewsRepository">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
