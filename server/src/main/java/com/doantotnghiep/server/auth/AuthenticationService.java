@@ -2,6 +2,7 @@ package com.doantotnghiep.server.auth;
 
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
+import com.doantotnghiep.server.auth.dto.VerifyRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.common.ErrorEnum.AuthErrorEnum;
 import com.doantotnghiep.server.common.MailMessage.MailMessage;
@@ -31,7 +32,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final MailService mailService;
 
-    public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) throws ResponseException {
+    public ResponseEntity<Boolean> register(RegisterRequest request) throws ResponseException {
         try {
             User usernameExist = userRepository.findUserByUsername(request.getUsername());
             if (usernameExist != null) {
@@ -41,12 +42,39 @@ public class AuthenticationService {
             if (emailExist != null) {
                 throw new ResponseException(AuthErrorEnum.EMAIL_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
             }
+            String codeVerified = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
             User user = new User();
             user.setUsername(request.getUsername());
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             user.setEmail(request.getEmail());
             user.setName(request.getName());
             user.setRole(Role.USER);
+            user.setIsVerified(false);
+            user.setVerifyCode(codeVerified);
+
+            userRepository.save(user);
+            mailService.sendMail(request.getEmail(), MailMessage.VERIFY_SUBJECT, MailMessage.VERIFY_CONTENT + codeVerified);
+            return ResponseEntity.ok(true);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+
+    }
+
+    public ResponseEntity<AuthenticationResponse> verifyRegister(VerifyRequest request) throws ResponseException {
+        try {
+            User user = userRepository.findUserByEmail(request.getEmail());
+            if (user == null) {
+                throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
+            }
+            if (user.getIsVerified()) {
+                throw new ResponseException(AuthErrorEnum.USER_ALREADY_VERIFIED, HttpStatus.BAD_REQUEST, 400);
+            }
+            if (!user.getVerifyCode().equals(request.getCode())) {
+                throw new ResponseException(AuthErrorEnum.WRONG_VERIFY_CODE, HttpStatus.BAD_REQUEST, 400);
+            }
+            user.setIsVerified(true);
+            user.setVerifyCode(null);
             userRepository.save(user);
             var token = jwtService.generateToken(user);
 
@@ -58,11 +86,10 @@ public class AuthenticationService {
                     .id(user.getId())
                     .avatar(user.getAvatar())
                     .build();
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return ResponseEntity.ok(response);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
-
     }
 
     public ResponseEntity<AuthenticationResponse> authenticate(LoginRequest request) throws ResponseException {
@@ -70,6 +97,9 @@ public class AuthenticationService {
             User user = userRepository.findUserByUsername(request.getUsername());
             if (user == null) {
                 throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+            if(!user.getIsVerified()){
+                throw new ResponseException(AuthErrorEnum.USER_NOT_VERIFIED, HttpStatus.BAD_REQUEST, 400);
             }
             String password = user.getPassword();
             if (!passwordEncoder.matches(request.getPassword(), password)) {
@@ -95,6 +125,7 @@ public class AuthenticationService {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
+
     public ResponseEntity<AuthenticationResponse> logout(String userId) throws ResponseException {
         try {
             User user = userRepository.findUsersById(userId);

@@ -3,6 +3,7 @@ package com.doantotnghiep.server.auth;
 import com.doantotnghiep.server.auth.dto.ForgotPasswordRequest;
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
+import com.doantotnghiep.server.auth.dto.VerifyRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
@@ -29,13 +30,26 @@ public class AuthenticationController {
     private final ValidateExceptionHandle validateExceptionHandle;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public ResponseEntity<Boolean> register(
             @Valid @RequestBody RegisterRequest request,
             BindingResult bindingResult
     ) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             return authenticationService.register(request);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<AuthenticationResponse> verify(
+            @Valid @RequestBody VerifyRequest request,
+            BindingResult bindingResult
+    ) throws ResponseException {
+        try {
+            validateExceptionHandle.handleException(bindingResult);
+            return authenticationService.verifyRegister(request);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
@@ -69,14 +83,13 @@ public class AuthenticationController {
     @PostMapping("/forgot-password")
     public ResponseEntity<Boolean> forgotPassword(
             @RequestBody ForgotPasswordRequest request
-            ) throws ResponseException {
+    ) throws ResponseException {
         try {
             return authenticationService.forgotPassword(request.getEmail());
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
-
 
 
 }

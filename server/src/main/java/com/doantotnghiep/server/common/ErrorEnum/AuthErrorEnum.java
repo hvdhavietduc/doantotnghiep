@@ -8,4 +8,9 @@ public class AuthErrorEnum {
     public static final String WRONG_USERNAME_OR_PASSWORD = "Wrong username or password";
     public static final String USER_NOT_FOUND = "User not found";
 
+    public static final String USER_ALREADY_VERIFIED = "User already verified";
+
+    public static final String WRONG_VERIFY_CODE = "Wrong verify code";
+    public static final String USER_NOT_VERIFIED = "User not verified";
+
 }

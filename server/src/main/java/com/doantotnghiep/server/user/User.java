@@ -37,6 +37,12 @@ public class User implements UserDetails {
     private String avatar;
 
     @Field
+    private Boolean isVerified = false;
+
+    @Field
+    private String verifyCode = null;
+
+    @Field
     private Role role;
 
     public static User builder() {
