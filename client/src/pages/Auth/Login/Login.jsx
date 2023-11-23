@@ -28,15 +28,15 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const onSubmit = (data, e) => {
+    const onSubmit = (formData, e) => {
         e.preventDefault();
 
-        const formData = {
-            username: data.username,
-            password: data.password,
+        const data = {
+            username: formData.username,
+            password: formData.password,
         };
 
-        dispatch(loginUser(formData)).then((result) => {
+        dispatch(loginUser(data)).then((result) => {
             if (!result.payload.messageError) {
                 message.success('login success');
                 navigate(config.routes.HOME);
@@ -67,9 +67,8 @@ function Login() {
                 <Button className={cx('btn')} primary rounded>
                     {loading ? 'Login...' : 'Login'}
                 </Button>
-                
             </form>
-            <Button className={cx('btn','btn-google')} red rounded leftIcon={faGoogle}>
+            <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
                 Login with google
             </Button>
             <div className={cx('modifer')} id="modifer">

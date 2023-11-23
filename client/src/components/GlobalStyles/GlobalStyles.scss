@@ -10,6 +10,7 @@
     // --width-search: 500px;
     --text-color: rgb(22, 24, 35);
     --text-color-secondnary: #ffffff;
+    --text-color-link: #82aae3;
     --background-color: #ffffff;
     --background-color-secondnary: #eafdfc;
     --background-button: #bfeaf5;
@@ -59,7 +60,7 @@ input,
 }
 
 a {
-    color: var(--text-color);
+    color: var(--text-color-link) !important;
     text-decoration: none;
 }
 
