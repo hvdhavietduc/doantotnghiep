@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private Boolean isVerified = false;
 
     @Field
-    private String verifyCode = null;
+    private String verifyCode;
 
     @Field
     private Role role;
@@ -49,12 +49,13 @@ public class User implements UserDetails {
         return new User();
     }
 
-    public User(String id, String username, String name, String password, String email, String avatar) {
+    public User(String id, String username, String name, String password, String email, String avatar, String verifyCode) {
         this.username = username;
         this.name = name;
         this.password = password;
         this.email = email;
         this.avatar = avatar;
+        this.verifyCode = verifyCode;
     }
     public User(){
         this.username = "";
@@ -62,6 +63,7 @@ public class User implements UserDetails {
         this.password = "";
         this.email = "";
         this.avatar = "";
+        this.verifyCode = "";
     }
 
     public void setId(String id) {
@@ -131,6 +133,22 @@ public class User implements UserDetails {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Boolean getVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(Boolean verified) {
+        isVerified = verified;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
     }
 
     @Override
