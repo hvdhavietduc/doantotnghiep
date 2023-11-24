@@ -3,4 +3,4 @@ const api = {
     SIGNUP: 'auth/register',
 };
 
-export { api };
+export default api;

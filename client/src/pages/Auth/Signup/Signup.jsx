@@ -8,7 +8,8 @@ import Input from '~/components/Input';
 import styles from './Signup.module.scss';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
-import { valid } from '../logicAuth';
+import Loading from '~/components/Loading';
+import valid from '../logicAuth';
 import config from '~/config';
 import { signupUser } from '~/redux/userSlice';
 
@@ -50,16 +51,17 @@ function Signup() {
             if (!result.payload.messageError) {
                 message.success('signup success');
                 navigate(config.routes.LOGIN);
+                return true;
             } else {
                 const messageError = result.payload.messageError;
-                console.log('messageError', messageError);
                 if (messageError.includes('Username')) {
                     setError('username', { type: 'custom', message: messageError });
                 } else {
-                    setError('email', { type: 'custom', message: 'email is exists' });
+                    setError('email', { type: 'custom', message: 'Email is exists' });
                 }
 
                 message.error('signup failed');
+                return true;
             }
         });
     };
@@ -105,7 +107,7 @@ function Signup() {
                 />
 
                 <Button className={cx('btn')} primary rounded>
-                    {loading ? 'Sign up...' : 'Sign up'}
+                    {loading ? <Loading /> : 'Sign up'}
                 </Button>
             </form>
             <div className={cx('modifer')} id="modifer">

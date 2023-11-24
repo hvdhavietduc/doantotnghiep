@@ -20,7 +20,7 @@ i18n.use(Backend)
     .init({
         resources,
         fallbackLng: 'vi',
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },

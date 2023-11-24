@@ -9,7 +9,8 @@ import styles from './Login.module.scss';
 import Input from '~/components/Input';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
-import { valid } from '../logicAuth';
+import Loading from '~/components/Loading';
+import valid from '../logicAuth';
 import config from '~/config';
 import { loginUser } from '~/redux/userSlice';
 
@@ -65,7 +66,7 @@ function Login() {
                     errolMesseage={errors.password?.message}
                 />
                 <Button className={cx('btn')} primary rounded>
-                    {loading ? 'Login...' : 'Login'}
+                    {loading ? <Loading /> : 'Login'}
                 </Button>
             </form>
             <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>

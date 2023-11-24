@@ -5,7 +5,7 @@ import Input from '~/components/Input';
 import styles from './ForgetPassword.module.scss';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
-import { valid } from '../logicAuth';
+import valid from '../logicAuth';
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {

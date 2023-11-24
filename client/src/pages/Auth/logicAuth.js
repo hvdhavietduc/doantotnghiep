@@ -1,51 +1,71 @@
+import config from '~/config';
+
+const { validateAuth } = config;
+
 const valid = {
     fullName: {
-        required: 'fullName is required',
+        required: 'Full Name is required',
         minLength: {
-            value: 6,
-            message: 'fullName should least 6 characters',
+            value: validateAuth.length.MIN_LENGTH_NAME,
+            message: 'Full Name should least' + validateAuth.length.MIN_LENGTH_NAME + 'characters.',
+        },
+        maxLength: {
+            value: validateAuth.length.MAX_LENGTH_NAME,
+            message: 'Full Name should most ' + validateAuth.length.MAX_LENGTH_NAME + ' characters.',
         },
         pattern: {
-            value: /^[a-zA-Z\s]/,
-            message: 'fullName  contain only letters and spaces.s',
+            value: validateAuth.pattern.FULLNAME,
+            message: 'Full Name contain only letters and spaces.s',
         },
     },
     userName: {
-        required: 'username is required',
+        required: 'Username is required',
         minLength: {
-            value: 6,
-            message: 'username should least 6 characters',
+            value: validateAuth.length.MIN_LENGTH_NAME,
+            message: 'Email should least' + validateAuth.length.MIN_LENGTH_NAME + 'characters.',
+        },
+        maxLength: {
+            value: validateAuth.length.MAX_LENGTH_NAME,
+            message: 'Email should most ' + validateAuth.length.MAX_LENGTH_NAME + ' characters.',
         },
         pattern: {
-            value: /^[a-zA-Z0-9_]/,
-            message: 'username include letters, numbers, and underscores',
+            value: validateAuth.pattern.USERNAME,
+            message: 'Username include letters, numbers, and underscores',
         },
     },
     email: {
-        required: 'email is required',
+        required: 'Email is required',
         pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            value: validateAuth.pattern.EMAIL,
             message: 'Invalid email address',
         },
     },
     password: {
-        required: 'password is required',
+        required: 'Password is required',
         minLength: {
-            value: 8,
-            message: 'password should least 8 characters',
+            value: validateAuth.length.MIN_LENGTH_PASSWORD,
+            message: 'Password should least' + validateAuth.length.MIN_LENGTH_PASSWORD + 'characters.',
         },
         maxLength: {
-            value: 20,
-            message: 'password should most 20 characters',
+            value: validateAuth.length.MAX_LENGTH_PASSWORD,
+            message: 'Password should most ' + validateAuth.length.MAX_LENGTH_PASSWORD + ' characters.',
         },
         pattern: {
-            value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]/,
-            message: 'password include at least one letter, one number, and one special character.',
+            value: validateAuth.pattern.PASSWORD,
+            message: 'Password include at least one letter, one number, and one special character.',
         },
     },
     passwordConfirm: {
-        required: 'password comfirm is required',
+        minLength: {
+            value: validateAuth.length.MIN_LENGTH_PASSWORD,
+            message: 'Password Confirm should least' + validateAuth.length.MIN_LENGTH_PASSWORD + 'characters.',
+        },
+        maxLength: {
+            value: validateAuth.length.MAX_LENGTH_PASSWORD,
+            message: 'Password Confirm should most ' + validateAuth.length.MAX_LENGTH_PASSWORD + ' characters.',
+        },
+        required: 'Password comfirm is required',
     },
 };
 
-export { valid };
+export default valid;

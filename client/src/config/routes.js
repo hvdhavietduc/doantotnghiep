@@ -4,7 +4,7 @@ const routes = {
     LOGIN: '/login',
     SIGNUP: '/signup',
     FORGETPASSWORD: '/forgetpassword',
-    CONFIRMEMAIL: '/confirmemail',
+    VERIFYREGISTER: '/VerifyRegister',
     CREATENEWPASSWORD: '/createnewpassword',
 };
 
