@@ -11,4 +11,14 @@ const signup = async (data) => {
     return res.data;
 };
 
-export { login, signup };
+const getEmail = async (data) => {
+    const res = await httpRequest.get(config.api.GETEMAIL, {
+        params: {
+            username: data.username,
+            password: data.password,
+        },
+    });
+    return res.data;
+};
+
+export { login, signup, getEmail };

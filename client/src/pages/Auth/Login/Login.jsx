@@ -3,7 +3,6 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { message } from 'antd';
 
 import styles from './Login.module.scss';
 import Input from '~/components/Input';
@@ -13,6 +12,7 @@ import Loading from '~/components/Loading';
 import valid from '../logicAuth';
 import config from '~/config';
 import { loginUser } from '~/redux/userSlice';
+import notify from '~/utils/notify';
 
 const cx = classNames.bind(styles);
 
@@ -38,14 +38,26 @@ function Login() {
         };
 
         dispatch(loginUser(data)).then((result) => {
-            if (!result.payload.messageError) {
-                message.success('login success');
+            const payload = result.payload;
+            if (!payload.statusCode) {
+                notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
             } else {
-                setError('username', { type: 'custom', message: result.payload.messageError });
-                setError('password', { type: 'custom', message: result.payload.messageError });
-                message.error('login failed');
+                console.log('status', payload.statusCode);
+                if (payload.statusCode === 400) {
+                    if (payload.message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
+                        setError('username', { type: 'custom', message: payload.message });
+                        setError('password', { type: 'custom', message: payload.message });
+                        return;
+                    } else if (payload.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
+                        localStorage.setItem('username', data.username);
+                        localStorage.setItem('password', data.password);
+                        navigate(config.routes.VERIFYREGISTER);
+                    } else {
+                    }
+                }
             }
+            return;
         });
     };
 
@@ -61,7 +73,7 @@ function Login() {
                 <Input
                     name={'password'}
                     placeholder={'Password'}
-                    // type={'password'}
+                    type={'password'}
                     {...register('password', valid.password)}
                     errolMesseage={errors.password?.message}
                 />

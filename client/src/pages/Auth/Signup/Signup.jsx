@@ -49,17 +49,15 @@ function Signup() {
         //handle signup
         dispatch(signupUser(formData)).then((result) => {
             const payload = result.payload;
-
             if (payload === true) {
-                localStorage.setItem('username', formData.username);
                 notify.success(config.notification.SIGNUP_SUCCESS);
                 navigate(config.routes.VERIFYREGISTER);
             } else {
                 console.log('status', payload.statusCode);
                 if (payload.statusCode === 400) {
-                    if (payload.message.includes('Username')) {
+                    if (payload.message.includes(config.errorMesseage.USERNAME_EXIST)) {
                         setError('username', { type: 'custom', message: payload.message });
-                    } else if (payload.message.includes('Email')) {
+                    } else if (payload.message.includes(config.errorMesseage.EMAIL_EXIST)) {
                         setError('email', { type: 'custom', message: payload.message });
                     } else {
                     }

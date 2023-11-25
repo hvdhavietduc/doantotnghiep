@@ -14,6 +14,17 @@ export const loginUser = createAsyncThunk('user/loginUser', async (data, { rejec
 export const signupUser = createAsyncThunk('user/signupUser', async (data, { rejectWithValue }) => {
     try {
         const response = await signup(data);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('password', data.password);
+        return response;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+});
+
+export const verifyRegisterUser = createAsyncThunk('user/verifyRegisterUser', async (data, { rejectWithValue }) => {
+    try {
+        const response = await signup(data);
         return response;
     } catch (error) {
         return rejectWithValue(error.response.data);
