@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/dto/ResetPasswordRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/dto/VerifyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/auth/dto/VerifyRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/MailMessage/MailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/MailMessage/MailMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/user/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +140,9 @@
       <workItem from="1700663854809" duration="4954000" />
       <workItem from="1700669257118" duration="7195000" />
       <workItem from="1700715679639" duration="933000" />
-      <workItem from="1700716836741" duration="3225000" />
+      <workItem from="1700716836741" duration="8879000" />
+      <workItem from="1700842725705" duration="2133000" />
+      <workItem from="1700880657416" duration="822000" />
     </task>
     <servers />
   </component>

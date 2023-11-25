@@ -131,6 +131,24 @@ public class AuthenticationService {
         }
     }
 
+    public ResponseEntity<String> getEmailOfUser(LoginRequest request) throws ResponseException {
+        try {
+            User user = userRepository.findUserByUsername(request.getUsername());
+            if (user == null) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+
+            String password = user.getPassword();
+            if (!passwordEncoder.matches(request.getPassword(), password)) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+
+            return new ResponseEntity<>(user.getEmail(), HttpStatus.OK);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
     public ResponseEntity<AuthenticationResponse> logout(String userId) throws ResponseException {
         try {
             User user = userRepository.findUsersById(userId);

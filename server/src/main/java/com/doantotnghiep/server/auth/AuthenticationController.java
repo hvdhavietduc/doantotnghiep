@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -94,6 +91,16 @@ public class AuthenticationController {
         try {
             validateExceptionHandle.handleException(bindingResult);
             return authenticationService.resetPassword(request);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<String> getEmailOfUser(@Valid @RequestBody LoginRequest request, BindingResult bindingResult) throws ResponseException{
+        try {
+            validateExceptionHandle.handleException(bindingResult);
+            return authenticationService.getEmailOfUser(request);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
