@@ -99,16 +99,17 @@ public class AuthenticationService {
             if (user == null) {
                 throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
+
+            String password = user.getPassword();
+            if (!passwordEncoder.matches(request.getPassword(), password)) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
             if (!user.getIsVerified()) {
                 String codeVerified = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
                 user.setVerifyCode(codeVerified);
                 userRepository.save(user);
                 mailService.sendMail(user.getEmail(), MailMessage.VERIFY_SUBJECT, MailMessage.VERIFY_CONTENT + codeVerified);
                 throw new ResponseException(AuthErrorEnum.USER_NOT_VERIFIED, HttpStatus.BAD_REQUEST, 400);
-            }
-            String password = user.getPassword();
-            if (!passwordEncoder.matches(request.getPassword(), password)) {
-                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -131,15 +132,15 @@ public class AuthenticationService {
         }
     }
 
-    public ResponseEntity<String> getEmailOfUser(LoginRequest request) throws ResponseException {
+    public ResponseEntity<String> getEmailOfUser(String username, String password) throws ResponseException {
         try {
-            User user = userRepository.findUserByUsername(request.getUsername());
+            User user = userRepository.findUserByUsername(username);
             if (user == null) {
                 throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
 
-            String password = user.getPassword();
-            if (!passwordEncoder.matches(request.getPassword(), password)) {
+            String passwordOfUser = user.getPassword();
+            if (!passwordEncoder.matches(password, passwordOfUser)) {
                 throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
 

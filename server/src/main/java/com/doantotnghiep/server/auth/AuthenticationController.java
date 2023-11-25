@@ -97,10 +97,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/email")
-    public ResponseEntity<String> getEmailOfUser(@Valid @RequestBody LoginRequest request, BindingResult bindingResult) throws ResponseException{
+    public ResponseEntity<String> getEmailOfUser(@RequestParam String username, @RequestParam String password) throws ResponseException {
         try {
-            validateExceptionHandle.handleException(bindingResult);
-            return authenticationService.getEmailOfUser(request);
+            return authenticationService.getEmailOfUser(username, password);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
