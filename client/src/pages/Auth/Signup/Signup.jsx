@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { message } from 'antd';
 
 import Input from '~/components/Input';
 import styles from './Signup.module.scss';
@@ -12,6 +11,7 @@ import Loading from '~/components/Loading';
 import valid from '../logicAuth';
 import config from '~/config';
 import { signupUser } from '~/redux/userSlice';
+import notify from '~/utils/notify';
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +35,7 @@ function Signup() {
         //valid comfim password
         const isValid = getValues('password') === getValues('passwordConfirm');
         if (!isValid) {
-            setError('passwordConfirm', { type: 'custom', message: 'Passwords do not match.' });
+            setError('passwordConfirm', { type: 'custom', message: config.errorMesseage.PASSWORD_NOT_MATCH });
             return;
         }
 
@@ -48,21 +48,24 @@ function Signup() {
 
         //handle signup
         dispatch(signupUser(formData)).then((result) => {
-            if (!result.payload.messageError) {
-                message.success('signup success');
-                navigate(config.routes.LOGIN);
-                return true;
-            } else {
-                const messageError = result.payload.messageError;
-                if (messageError.includes('Username')) {
-                    setError('username', { type: 'custom', message: messageError });
-                } else {
-                    setError('email', { type: 'custom', message: 'Email is exists' });
-                }
+            const payload = result.payload;
 
-                message.error('signup failed');
-                return true;
+            if (payload === true) {
+                localStorage.setItem('username', formData.username);
+                notify.success(config.notification.SIGNUP_SUCCESS);
+                navigate(config.routes.VERIFYREGISTER);
+            } else {
+                console.log('status', payload.statusCode);
+                if (payload.statusCode === 400) {
+                    if (payload.message.includes('Username')) {
+                        setError('username', { type: 'custom', message: payload.message });
+                    } else if (payload.message.includes('Email')) {
+                        setError('email', { type: 'custom', message: payload.message });
+                    } else {
+                    }
+                }
             }
+            return;
         });
     };
 
@@ -93,7 +96,7 @@ function Signup() {
                 <Input
                     placeholder={'Password'}
                     name={'password'}
-                    // type={'password'}
+                    type={'password'}
                     {...register('password', valid.password)}
                     errolMesseage={errors.password?.message}
                 />
@@ -101,7 +104,7 @@ function Signup() {
                 <Input
                     placeholder={'Repeat Password'}
                     name={'passwordConfirm'}
-                    // type={'password'}
+                    type={'password'}
                     {...register('passwordConfirm', valid.passwordConfirm)}
                     errolMesseage={errors.passwordConfirm?.message}
                 />
