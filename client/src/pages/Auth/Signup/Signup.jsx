@@ -75,6 +75,7 @@ function Signup() {
                 <Input
                     placeholder={'Full name'}
                     name={'fullname'}
+                    autoComplete={'name'}
                     {...register('fullname', valid.fullName)}
                     errolMesseage={errors.fullname?.message}
                 />
@@ -82,6 +83,7 @@ function Signup() {
                 <Input
                     placeholder={'Username'}
                     name={'username'}
+                    autoComplete={'username'}
                     {...register('username', valid.userName)}
                     errolMesseage={errors.username?.message}
                 />
@@ -89,6 +91,7 @@ function Signup() {
                 <Input
                     placeholder={'Email'}
                     name={'email'}
+                    autoComplete={'email'}
                     {...register('email', valid.email)}
                     errolMesseage={errors.email?.message}
                 />
@@ -97,6 +100,7 @@ function Signup() {
                     placeholder={'Password'}
                     name={'password'}
                     type={'password'}
+                    autoComplete={'new-password'}
                     {...register('password', valid.password)}
                     errolMesseage={errors.password?.message}
                 />
@@ -105,6 +109,7 @@ function Signup() {
                     placeholder={'Repeat Password'}
                     name={'passwordConfirm'}
                     type={'password'}
+                    autoComplete={'new-password'}
                     {...register('passwordConfirm', valid.passwordConfirm)}
                     errolMesseage={errors.passwordConfirm?.message}
                 />

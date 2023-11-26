@@ -50,10 +50,10 @@ const valid = {
             value: validateAuth.length.MAX_LENGTH_PASSWORD,
             message: 'Password should most ' + validateAuth.length.MAX_LENGTH_PASSWORD + ' characters.',
         },
-        // pattern: {
-        //     value: validateAuth.pattern.PASSWORD,
-        //     message: 'Password include at least one letter, one number, and one special character.',
-        // },
+        pattern: {
+            value: validateAuth.pattern.PASSWORD,
+            message: 'Password include at least one letter, one number, and one special character.',
+        },
     },
     passwordConfirm: {
         minLength: {

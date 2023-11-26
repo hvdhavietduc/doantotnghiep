@@ -39,7 +39,7 @@ function Login() {
 
         dispatch(loginUser(data)).then((result) => {
             const payload = result.payload;
-            if (!payload.statusCode) {
+            if (!payload?.statusCode) {
                 notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
                 return;
@@ -68,6 +68,7 @@ function Login() {
                 <Input
                     name={'username'}
                     placeholder={'Username'}
+                    autoComplete={'username'}
                     {...register('username', valid.userName)}
                     errolMesseage={errors.username?.message}
                 />
@@ -75,6 +76,7 @@ function Login() {
                     name={'password'}
                     placeholder={'Password'}
                     type={'password'}
+                    autoComplete={'current-password'}
                     {...register('password', valid.password)}
                     errolMesseage={errors.password?.message}
                 />

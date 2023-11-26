@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { login, signup } from '~/services/authServices';
+import Cookies from 'universal-cookie';
 
 export const loginUser = createAsyncThunk('user/loginUser', async (data, { rejectWithValue }) => {
     try {
         const response = await login(data);
-        localStorage.setItem('token', response.token);
+        const cookies = new Cookies();
+        cookies.set('token', response.token, { path: '/', expires: 1 });
         return response;
     } catch (error) {
         return rejectWithValue(error.response.data);
