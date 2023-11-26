@@ -42,19 +42,20 @@ function Login() {
             if (!payload.statusCode) {
                 notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
-            } else {
-                console.log('status', payload.statusCode);
-                if (payload.statusCode === 400) {
-                    if (payload.message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
-                        setError('username', { type: 'custom', message: payload.message });
-                        setError('password', { type: 'custom', message: payload.message });
-                        return;
-                    } else if (payload.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
-                        localStorage.setItem('username', data.username);
-                        localStorage.setItem('password', data.password);
-                        navigate(config.routes.VERIFYREGISTER);
-                    } else {
-                    }
+                return;
+            }
+
+            if (payload.statusCode && payload.statusCode === 400) {
+                if (payload.message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
+                    setError('username', { type: 'custom', message: payload.message });
+                    setError('password', { type: 'custom', message: payload.message });
+                    return;
+                }
+                if (payload.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('password', data.password);
+                    navigate(config.routes.VERIFYREGISTER);
+                    return;
                 }
             }
             return;

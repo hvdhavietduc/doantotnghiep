@@ -34,7 +34,7 @@ function Signup() {
 
         //valid comfim password
         const isValid = getValues('password') === getValues('passwordConfirm');
-        if (!isValid) {
+        if (isValid === false) {
             setError('passwordConfirm', { type: 'custom', message: config.errorMesseage.PASSWORD_NOT_MATCH });
             return;
         }
@@ -52,15 +52,17 @@ function Signup() {
             if (payload === true) {
                 notify.success(config.notification.SIGNUP_SUCCESS);
                 navigate(config.routes.VERIFYREGISTER);
-            } else {
-                console.log('status', payload.statusCode);
-                if (payload.statusCode === 400) {
-                    if (payload.message.includes(config.errorMesseage.USERNAME_EXIST)) {
-                        setError('username', { type: 'custom', message: payload.message });
-                    } else if (payload.message.includes(config.errorMesseage.EMAIL_EXIST)) {
-                        setError('email', { type: 'custom', message: payload.message });
-                    } else {
-                    }
+                return;
+            }
+
+            if (payload !== true && payload.statusCode === 400) {
+                if (payload.message.includes(config.errorMesseage.USERNAME_EXIST)) {
+                    setError('username', { type: 'custom', message: payload.message });
+                    return;
+                }
+                if (payload.message.includes(config.errorMesseage.EMAIL_EXIST)) {
+                    setError('email', { type: 'custom', message: payload.message });
+                    return;
                 }
             }
             return;
