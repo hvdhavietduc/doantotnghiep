@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signup } from '~/services/authServices';
+import { login, signup, verify } from '~/services/authServices';
 import Cookies from 'universal-cookie';
+import config from '~/config';
 
 export const loginUser = createAsyncThunk('user/loginUser', async (data, { rejectWithValue }) => {
     try {
@@ -9,16 +10,16 @@ export const loginUser = createAsyncThunk('user/loginUser', async (data, { rejec
         cookies.set('token', response.token, { path: '/', expires: 1 });
         return response;
     } catch (error) {
+        if (error.response.data.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) return rejectWithValue(data);
         return rejectWithValue(error.response.data);
     }
 });
 
 export const signupUser = createAsyncThunk('user/signupUser', async (data, { rejectWithValue }) => {
     try {
+        // eslint-disable-next-line no-unused-vars
         const response = await signup(data);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem('password', data.password);
-        return response;
+        return data;
     } catch (error) {
         return rejectWithValue(error.response.data);
     }
@@ -26,7 +27,7 @@ export const signupUser = createAsyncThunk('user/signupUser', async (data, { rej
 
 export const verifyRegisterUser = createAsyncThunk('user/verifyRegisterUser', async (data, { rejectWithValue }) => {
     try {
-        const response = await signup(data);
+        const response = await verify(data);
         return response;
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -53,7 +54,13 @@ const userSlice = createSlice({
         });
         builder.addCase(loginUser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            if (action.payload.username) {
+                state.user = action.payload;
+                state.error = null;
+            }
+            if (!action.payload.username) {
+                state.error = action.payload;
+            }
         });
 
         //signup
@@ -63,9 +70,25 @@ const userSlice = createSlice({
         });
         builder.addCase(signupUser.fulfilled, (state, action) => {
             state.loading = false;
+            state.user = action.payload;
             state.error = null;
         });
         builder.addCase(signupUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+        //verify
+
+        builder.addCase(verifyRegisterUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(verifyRegisterUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload;
+            state.error = null;
+        });
+        builder.addCase(verifyRegisterUser.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         });

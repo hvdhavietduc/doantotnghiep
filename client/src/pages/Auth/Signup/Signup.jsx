@@ -49,13 +49,13 @@ function Signup() {
         //handle signup
         dispatch(signupUser(formData)).then((result) => {
             const payload = result.payload;
-            if (payload === true) {
+            if (payload.username) {
                 notify.success(config.notification.SIGNUP_SUCCESS);
                 navigate(config.routes.VERIFYREGISTER);
                 return;
             }
 
-            if (payload !== true && payload.statusCode === 400) {
+            if (payload.statusCode === 400) {
                 if (payload.message.includes(config.errorMesseage.USERNAME_EXIST)) {
                     setError('username', { type: 'custom', message: payload.message });
                     return;

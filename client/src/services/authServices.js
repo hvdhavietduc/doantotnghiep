@@ -21,4 +21,9 @@ const getEmail = async (data) => {
     return res.data;
 };
 
-export { login, signup, getEmail };
+const verify = async (data) => {
+    const res = await httpRequest.post(config.api.VERIFYREGISTER, data);
+    return res.data;
+};
+
+export { login, signup, getEmail, verify };

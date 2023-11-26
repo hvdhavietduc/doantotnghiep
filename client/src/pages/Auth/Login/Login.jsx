@@ -39,6 +39,10 @@ function Login() {
 
         dispatch(loginUser(data)).then((result) => {
             const payload = result.payload;
+            if (payload.username) {
+                navigate(config.routes.VERIFYREGISTER);
+                return;
+            }
             if (!payload?.statusCode) {
                 notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
