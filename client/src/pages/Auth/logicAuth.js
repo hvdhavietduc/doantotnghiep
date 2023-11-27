@@ -7,7 +7,7 @@ const valid = {
         required: 'Full Name is required',
         minLength: {
             value: validateAuth.length.MIN_LENGTH_NAME,
-            message: 'Full Name should least' + validateAuth.length.MIN_LENGTH_NAME + 'characters.',
+            message: 'Full Name should least ' + validateAuth.length.MIN_LENGTH_NAME + ' characters.',
         },
         maxLength: {
             value: validateAuth.length.MAX_LENGTH_NAME,
@@ -22,7 +22,7 @@ const valid = {
         required: 'Username is required',
         minLength: {
             value: validateAuth.length.MIN_LENGTH_NAME,
-            message: 'Email should least' + validateAuth.length.MIN_LENGTH_NAME + 'characters.',
+            message: 'Email should least ' + validateAuth.length.MIN_LENGTH_NAME + ' characters.',
         },
         maxLength: {
             value: validateAuth.length.MAX_LENGTH_NAME,
@@ -44,7 +44,7 @@ const valid = {
         required: 'Password is required',
         minLength: {
             value: validateAuth.length.MIN_LENGTH_PASSWORD,
-            message: 'Password should least' + validateAuth.length.MIN_LENGTH_PASSWORD + 'characters.',
+            message: 'Password should least ' + validateAuth.length.MIN_LENGTH_PASSWORD + ' characters.',
         },
         maxLength: {
             value: validateAuth.length.MAX_LENGTH_PASSWORD,
@@ -58,11 +58,22 @@ const valid = {
     passwordConfirm: {
         minLength: {
             value: validateAuth.length.MIN_LENGTH_PASSWORD,
-            message: 'Password Confirm should least' + validateAuth.length.MIN_LENGTH_PASSWORD + 'characters.',
+            message: 'Password Confirm should least' + validateAuth.length.MIN_LENGTH_PASSWORD + ' characters.',
         },
         maxLength: {
             value: validateAuth.length.MAX_LENGTH_PASSWORD,
             message: 'Password Confirm should most ' + validateAuth.length.MAX_LENGTH_PASSWORD + ' characters.',
+        },
+        required: 'Password comfirm is required',
+    },
+    code: {
+        minLength: {
+            value: validateAuth.length.MIN_LENGTH_CODE,
+            message: 'Code should least' + validateAuth.length.MIN_LENGTH_PASSWORD + ' characters.',
+        },
+        maxLength: {
+            value: validateAuth.length.MAX_LENGTH_CODE,
+            message: 'Code should most ' + validateAuth.length.MAX_LENGTH_PASSWORD + ' characters.',
         },
         required: 'Password comfirm is required',
     },
