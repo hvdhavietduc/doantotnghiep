@@ -13,6 +13,7 @@ import valid from '../logicAuth';
 import config from '~/config';
 import { loginUser } from '~/redux/userSlice';
 import notify from '~/utils/notify';
+import { Fragment } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -38,22 +39,23 @@ function Login() {
         };
 
         dispatch(loginUser(data)).then((result) => {
-            const payload = result.payload;
-            if (!payload?.statusCode) {
+            const payload = JSON.parse(result.payload);
+
+            if (!payload.status) {
                 notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
-                return;
+                return true;
             }
 
-            if (payload.statusCode && payload.statusCode === 400) {
-                if (payload.message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
-                    setError('username', { type: 'custom', message: payload.message });
-                    setError('password', { type: 'custom', message: payload.message });
+            if (payload.status === 400) {
+                const { message } = payload.data;
+
+                if (message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
+                    setError('username', { type: 'custom', message: message });
+                    setError('password', { type: 'custom', message: message });
                     return;
                 }
-                if (payload.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
-                    localStorage.setItem('username', data.username);
-                    localStorage.setItem('password', data.password);
+                if (message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
                     navigate(config.routes.VERIFYREGISTER);
                     return;
                 }
@@ -63,35 +65,38 @@ function Login() {
     };
 
     return (
-        <WrapperAuth title="Login">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    name={'username'}
-                    placeholder={'Username'}
-                    autoComplete={'username'}
-                    {...register('username', valid.userName)}
-                    errolMesseage={errors.username?.message}
-                />
-                <Input
-                    name={'password'}
-                    placeholder={'Password'}
-                    type={'password'}
-                    autoComplete={'current-password'}
-                    {...register('password', valid.password)}
-                    errolMesseage={errors.password?.message}
-                />
-                <Button className={cx('btn')} primary rounded>
-                    {loading ? <Loading /> : 'Login'}
+        <Fragment>
+            <WrapperAuth title="Login">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        name={'username'}
+                        placeholder={'Username'}
+                        autoComplete={'username'}
+                        {...register('username', valid.userName)}
+                        errolMesseage={errors.username?.message}
+                    />
+                    <Input
+                        name={'password'}
+                        placeholder={'Password'}
+                        type={'password'}
+                        autoComplete={'current-password'}
+                        {...register('password', valid.password)}
+                        errolMesseage={errors.password?.message}
+                    />
+                    <Button className={cx('btn')} primary rounded>
+                        Login
+                    </Button>
+                </form>
+                <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
+                    Login with google
                 </Button>
-            </form>
-            <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
-                Login with google
-            </Button>
-            <div className={cx('modifer')} id="modifer">
-                <Link to={config.routes.FORGETPASSWORD}>Forgot password?</Link>
-                <Link to={config.routes.SIGNUP}>Sign up</Link>
-            </div>
-        </WrapperAuth>
+                <div className={cx('modifer')} id="modifer">
+                    <Link to={config.routes.FORGETPASSWORD}>Forgot password?</Link>
+                    <Link to={config.routes.SIGNUP}>Sign up</Link>
+                </div>
+            </WrapperAuth>
+            {loading && <Loading />}
+        </Fragment>
     );
 }
 

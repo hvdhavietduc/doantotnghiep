@@ -12,6 +12,7 @@ import valid from '../logicAuth';
 import config from '~/config';
 import { signupUser } from '~/redux/userSlice';
 import notify from '~/utils/notify';
+import { Fragment } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +23,6 @@ function Signup() {
         register,
         handleSubmit,
         setError,
-        getValues,
         formState: { errors },
     } = useForm();
 
@@ -33,7 +33,7 @@ function Signup() {
         e.preventDefault();
 
         //valid comfim password
-        const isValid = getValues('password') === getValues('passwordConfirm');
+        const isValid = data.password === data.passwordConfirm;
         if (isValid === false) {
             setError('passwordConfirm', { type: 'custom', message: config.errorMesseage.PASSWORD_NOT_MATCH });
             return;
@@ -48,20 +48,22 @@ function Signup() {
 
         //handle signup
         dispatch(signupUser(formData)).then((result) => {
-            const payload = result.payload;
-            if (payload === true) {
+            const payload = JSON.parse(result.payload);
+            if (!payload.status) {
                 notify.success(config.notification.SIGNUP_SUCCESS);
                 navigate(config.routes.VERIFYREGISTER);
                 return;
             }
 
-            if (payload !== true && payload.statusCode === 400) {
-                if (payload.message.includes(config.errorMesseage.USERNAME_EXIST)) {
-                    setError('username', { type: 'custom', message: payload.message });
+            if (payload.status === 400) {
+                const { message } = payload.data;
+
+                if (message.includes(config.errorMesseage.USERNAME_EXIST)) {
+                    setError('username', { type: 'custom', message: message });
                     return;
                 }
-                if (payload.message.includes(config.errorMesseage.EMAIL_EXIST)) {
-                    setError('email', { type: 'custom', message: payload.message });
+                if (message.includes(config.errorMesseage.EMAIL_EXIST)) {
+                    setError('email', { type: 'custom', message: message });
                     return;
                 }
             }
@@ -70,58 +72,61 @@ function Signup() {
     };
 
     return (
-        <WrapperAuth title="Sign up">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    placeholder={'Full name'}
-                    name={'fullname'}
-                    autoComplete={'name'}
-                    {...register('fullname', valid.fullName)}
-                    errolMesseage={errors.fullname?.message}
-                />
+        <Fragment>
+            <WrapperAuth title="Sign up">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        placeholder={'Full name'}
+                        name={'fullname'}
+                        autoComplete={'name'}
+                        {...register('fullname', valid.fullName)}
+                        errolMesseage={errors.fullname?.message}
+                    />
 
-                <Input
-                    placeholder={'Username'}
-                    name={'username'}
-                    autoComplete={'username'}
-                    {...register('username', valid.userName)}
-                    errolMesseage={errors.username?.message}
-                />
+                    <Input
+                        placeholder={'Username'}
+                        name={'username'}
+                        autoComplete={'username'}
+                        {...register('username', valid.userName)}
+                        errolMesseage={errors.username?.message}
+                    />
 
-                <Input
-                    placeholder={'Email'}
-                    name={'email'}
-                    autoComplete={'email'}
-                    {...register('email', valid.email)}
-                    errolMesseage={errors.email?.message}
-                />
+                    <Input
+                        placeholder={'Email'}
+                        name={'email'}
+                        autoComplete={'email'}
+                        {...register('email', valid.email)}
+                        errolMesseage={errors.email?.message}
+                    />
 
-                <Input
-                    placeholder={'Password'}
-                    name={'password'}
-                    type={'password'}
-                    autoComplete={'new-password'}
-                    {...register('password', valid.password)}
-                    errolMesseage={errors.password?.message}
-                />
+                    <Input
+                        placeholder={'Password'}
+                        name={'password'}
+                        type={'password'}
+                        autoComplete={'new-password'}
+                        {...register('password', valid.password)}
+                        errolMesseage={errors.password?.message}
+                    />
 
-                <Input
-                    placeholder={'Repeat Password'}
-                    name={'passwordConfirm'}
-                    type={'password'}
-                    autoComplete={'new-password'}
-                    {...register('passwordConfirm', valid.passwordConfirm)}
-                    errolMesseage={errors.passwordConfirm?.message}
-                />
+                    <Input
+                        placeholder={'Repeat Password'}
+                        name={'passwordConfirm'}
+                        type={'password'}
+                        autoComplete={'new-password'}
+                        {...register('passwordConfirm', valid.passwordConfirm)}
+                        errolMesseage={errors.passwordConfirm?.message}
+                    />
 
-                <Button className={cx('btn')} primary rounded>
-                    {loading ? <Loading /> : 'Sign up'}
-                </Button>
-            </form>
-            <div className={cx('modifer')} id="modifer">
-                <Link to={config.routes.LOGIN}>You have account? Login</Link>
-            </div>
-        </WrapperAuth>
+                    <Button className={cx('btn')} primary rounded>
+                        Sign up
+                    </Button>
+                </form>
+                <div className={cx('modifer')} id="modifer">
+                    <Link to={config.routes.LOGIN}>You have account? Login</Link>
+                </div>
+            </WrapperAuth>
+            {loading && <Loading />}
+        </Fragment>
     );
 }
 

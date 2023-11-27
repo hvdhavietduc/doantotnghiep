@@ -1,35 +1,39 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login, signup } from '~/services/authServices';
+import { login, signup, verify } from '~/services/authServices';
 import Cookies from 'universal-cookie';
+import config from '~/config';
 
 export const loginUser = createAsyncThunk('user/loginUser', async (data, { rejectWithValue }) => {
     try {
         const response = await login(data);
         const cookies = new Cookies();
-        cookies.set('token', response.token, { path: '/', expires: 1 });
-        return response;
+        cookies.set('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
+        return JSON.stringify(response);
     } catch (error) {
-        return rejectWithValue(error.response.data);
+        if (error.response.data.message.includes(config.errorMesseage.EMAIL_NOT_VERIFY))
+            error.response.data.inforVerify = data;
+        return rejectWithValue(JSON.stringify(error.response));
     }
 });
 
 export const signupUser = createAsyncThunk('user/signupUser', async (data, { rejectWithValue }) => {
     try {
+        // eslint-disable-next-line no-unused-vars
         const response = await signup(data);
-        localStorage.setItem('username', data.username);
-        localStorage.setItem('password', data.password);
-        return response;
+        return JSON.stringify(data);
     } catch (error) {
-        return rejectWithValue(error.response.data);
+        return rejectWithValue(JSON.stringify(error.response));
     }
 });
 
 export const verifyRegisterUser = createAsyncThunk('user/verifyRegisterUser', async (data, { rejectWithValue }) => {
     try {
-        const response = await signup(data);
-        return response;
+        const response = await verify(data);
+        const cookies = new Cookies();
+        cookies.set('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
+        return JSON.stringify(response);
     } catch (error) {
-        return rejectWithValue(error.response.data);
+        return rejectWithValue(JSON.stringify(error.response));
     }
 });
 
@@ -38,6 +42,7 @@ const userSlice = createSlice({
     initialState: {
         loading: false,
         user: null,
+        inforVerify: null,
         error: null,
     },
     extraReducers: (builder) => {
@@ -48,12 +53,14 @@ const userSlice = createSlice({
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.loading = false;
-            state.user = action.payload;
+            state.user = JSON.parse(action.payload);
             state.error = null;
         });
         builder.addCase(loginUser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            const { inforVerify } = JSON.parse(action.payload).data;
+            state.inforVerify = inforVerify ? inforVerify : null;
+            state.error = JSON.parse(action.payload);
         });
 
         //signup
@@ -63,11 +70,28 @@ const userSlice = createSlice({
         });
         builder.addCase(signupUser.fulfilled, (state, action) => {
             state.loading = false;
+            state.inforVerify = JSON.parse(action.payload);
             state.error = null;
         });
         builder.addCase(signupUser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.error = JSON.parse(action.payload);
+        });
+
+        //verify
+
+        builder.addCase(verifyRegisterUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(verifyRegisterUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = JSON.parse(action.payload);
+            state.inforVerify = null;
+            state.error = null;
+        });
+        builder.addCase(verifyRegisterUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = JSON.parse(action.payload);
         });
     },
 });
