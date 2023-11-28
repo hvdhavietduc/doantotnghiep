@@ -1,11 +1,16 @@
+import classNames from 'classnames/bind';
+
+import styles from './DefautLayout.module.scss';
 import Header from '../Header';
 import Footer from '../Footer';
+
+const cx = classNames.bind(styles);
 
 function DefautLayout({ children }) {
     return (
         <div>
             <Header />
-            <div className="content">{children}</div>
+            <div className={cx('content')}>{children}</div>
             <Footer />
         </div>
     );
