@@ -1,11 +1,16 @@
 const api = {
-    LOGIN: 'auth/login',
-    SIGNUP: 'auth/register',
-    GETEMAIL: 'auth/email',
-    VERIFYREGISTER: '/auth/verify',
-    FORGOTPASSWORD: '/auth/forgot-password',
-    RESETPASSWORD: '/auth/reset-password',
-    LOGOUT: '/auth/logout',
+    auth: {
+        LOGIN: 'auth/login',
+        SIGNUP: 'auth/register',
+        GETEMAIL: 'auth/email',
+        VERIFYREGISTER: '/auth/verify',
+        FORGOTPASSWORD: '/auth/forgot-password',
+        RESETPASSWORD: '/auth/reset-password',
+        LOGOUT: '/auth/logout',
+    },
+    user: {
+        GETME: 'user/me',
+    },
 };
 
 export default api;

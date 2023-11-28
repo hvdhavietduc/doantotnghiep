@@ -9,7 +9,7 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function WrapperAuth({ title, children, verifyPage }) {
+function WrapperAuth({ title, children, BackLoginPage }) {
     return (
         <div className={cx('WrapperAuth')}>
             <div className={cx('wave wave1')}></div>
@@ -21,7 +21,7 @@ function WrapperAuth({ title, children, verifyPage }) {
                 <div className={cx('form')}>{children}</div>
                 <footer className={cx('footer')}>
                     <FontAwesomeIcon icon={faArrowLeftLong} />
-                    {verifyPage ? (
+                    {BackLoginPage ? (
                         <Link to={config.routes.LOGIN}>Back to Login page</Link>
                     ) : (
                         <Link to={config.routes.HOME}>Back to home page</Link>
