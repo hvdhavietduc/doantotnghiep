@@ -1,24 +1,27 @@
 import classNames from 'classnames/bind';
+import { Fragment, useState } from 'react';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 import styles from './Login.module.scss';
 import Input from '~/components/Input';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
-import valid from '../logicAuth';
+import { login } from '~/services/authServices';
+import { getMe } from '~/services/userServices';
+import valid from '../validateAuth';
 import config from '~/config';
-import { loginUser } from '~/redux/userSlice';
+import { deleteInforVerify, addInforVerify } from '~/redux/userSlice';
 import notify from '~/utils/notify';
-import { Fragment } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login() {
-    const { loading } = useSelector((state) => state.user);
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -38,25 +41,48 @@ function Login() {
             password: formData.password,
         };
 
-        dispatch(loginUser(data)).then((result) => {
-            const payload = JSON.parse(result.payload);
-
-            if (!payload.status) {
+        setLoading(true);
+        const handleLogin = async () => {
+            const response = await login(data).then((response) => {
+                setLoading(false);
+                const { token } = response;
+                const cookies = new Cookies();
+                cookies.set('token', response.token, {
+                    path: '/',
+                    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                });
+                dispatch(deleteInforVerify());
                 notify.success(config.notification.LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
-                return true;
+                return token;
+            });
+            const user = await getMe(response);
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('name', user.name);
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('avatar', user.avatar);
+        };
+        handleLogin().catch((error) => {
+            setLoading(false);
+
+            if (!error.response) {
+                notify.error(config.errorMesseage.ERROR_NETWORD);
+                return;
             }
 
-            if (payload.status === 400) {
-                const { message } = payload.data;
+            notify.error(error.response.data.message);
+            if (error.response.status === 400) {
+                const { message } = error.response.data;
+                if (message.includes(config.errorMesseage.USER_NOT_VERIFY)) {
+                    setError('code', { type: 'custom', message: message });
+                    dispatch(addInforVerify(data));
+                    navigate(config.routes.VERIFYREGISTER);
+                    return;
+                }
 
                 if (message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
                     setError('username', { type: 'custom', message: message });
                     setError('password', { type: 'custom', message: message });
-                    return;
-                }
-                if (message.includes(config.errorMesseage.EMAIL_NOT_VERIFY)) {
-                    navigate(config.routes.VERIFYREGISTER);
                     return;
                 }
             }

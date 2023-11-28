@@ -3,23 +3,26 @@ import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 import Input from '~/components/Input';
 import styles from './VerifyRegister.module.scss';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
-import { getEmail } from '~/services/authServices';
-import { verifyRegisterUser } from '~/redux/userSlice';
-import valid from '../logicAuth';
+import { getEmail, verify } from '~/services/authServices';
+import { getMe } from '~/services/userServices';
+import { deleteInforVerify } from '~/redux/userSlice';
+import valid from '../validateAuth';
 import config from '~/config';
 import notify from '~/utils/notify';
 
 const cx = classNames.bind(styles);
 
 function VerifyRegister() {
-    const { loading, inforVerify } = useSelector((state) => state.user);
+    const { inforVerify } = useSelector((state) => state.user);
 
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
 
     const navigate = useNavigate();
@@ -40,11 +43,11 @@ function VerifyRegister() {
         getEmail(data)
             .then((result) => {
                 setEmail(result);
-                return;
+                return true;
             })
             .catch((err) => {
                 console.log(err);
-                return;
+                return false;
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -63,17 +66,43 @@ function VerifyRegister() {
             email: email,
             code: formData.code,
         };
-        dispatch(verifyRegisterUser(data)).then((result) => {
-            const payload = JSON.parse(result.payload);
 
-            if (!payload.status) {
+        setLoading(true);
+
+        const handleVerify = async () => {
+            const response = await verify(data).then((response) => {
+                setLoading(false);
+                const { token } = response;
+                const cookies = new Cookies();
+                cookies.set('token', response.token, {
+                    path: '/',
+                    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                });
+                dispatch(deleteInforVerify());
                 notify.success(config.notification.VERIFY_SUCCESS);
                 navigate(config.routes.HOME);
-                return true;
+                return token;
+            });
+
+            const user = await getMe(response);
+            localStorage.setItem('email', user.email);
+            localStorage.setItem('name', user.name);
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('avatar', user.avatar);
+            return;
+        };
+
+        handleVerify().catch((error) => {
+            setLoading(false);
+
+            if (!error.response) {
+                notify.error(config.errorMesseage.ERROR_NETWORD);
+                return;
             }
 
-            if (payload.status === 400) {
-                const { message } = payload.data;
+            notify.error(error.response.data.message);
+            if (error.response.status === 400) {
+                const { message } = error.response.data;
                 setError('code', { type: 'custom', message: message });
             }
             return;
@@ -84,7 +113,7 @@ function VerifyRegister() {
 
     return (
         <Fragment>
-            <WrapperAuth title="Verify Register" verifyPage>
+            <WrapperAuth title="Verify Register" BackLoginPage>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('message')}>We have send code to {hideEmail(email)} successfully</div>
                     <Input

@@ -1,23 +1,25 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Input from '~/components/Input';
 import styles from './Signup.module.scss';
 import WrapperAuth from '~/components/WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
-import valid from '../logicAuth';
+import valid from '../validateAuth';
 import config from '~/config';
-import { signupUser } from '~/redux/userSlice';
+import { addInforVerify } from '~/redux/userSlice';
+import { signup } from '~/services/authServices';
 import notify from '~/utils/notify';
 import { Fragment } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Signup() {
-    const { loading } = useSelector((state) => state.user);
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -46,29 +48,38 @@ function Signup() {
             email: data.email,
         };
 
-        //handle signup
-        dispatch(signupUser(formData)).then((result) => {
-            const payload = JSON.parse(result.payload);
-            if (!payload.status) {
+        setLoading(true);
+        signup(formData)
+            .then(() => {
+                setLoading(false);
+                dispatch(addInforVerify(data));
                 notify.success(config.notification.SIGNUP_SUCCESS);
                 navigate(config.routes.VERIFYREGISTER);
                 return;
-            }
+            })
+            .catch((error) => {
+                setLoading(false);
 
-            if (payload.status === 400) {
-                const { message } = payload.data;
-
-                if (message.includes(config.errorMesseage.USERNAME_EXIST)) {
-                    setError('username', { type: 'custom', message: message });
+                if (!error.response) {
+                    notify.error(config.errorMesseage.ERROR_NETWORD);
                     return;
                 }
-                if (message.includes(config.errorMesseage.EMAIL_EXIST)) {
-                    setError('email', { type: 'custom', message: message });
-                    return;
+
+                notify.error(error.response.data.message);
+                if (error.response.status === 400) {
+                    const { message } = error.response.data;
+
+                    if (message.includes(config.errorMesseage.USERNAME_EXIST)) {
+                        setError('username', { type: 'custom', message: message });
+                        return;
+                    }
+                    if (message.includes(config.errorMesseage.EMAIL_EXIST)) {
+                        setError('email', { type: 'custom', message: message });
+                        return;
+                    }
                 }
-            }
-            return;
-        });
+                return;
+            });
     };
 
     return (

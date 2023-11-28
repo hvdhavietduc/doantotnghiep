@@ -9,7 +9,7 @@ import config from '~/config';
 import { DefautLayout } from '~/layout';
 
 const publicRoutes = [
-    { path: config.routes.HOME, element: Home },
+    { path: config.routes.HOME, element: Home, layout: DefautLayout },
     { path: config.routes.LOGIN, element: Login, layout: null },
     { path: config.routes.SIGNUP, element: Signup, layout: null },
     { path: config.routes.FORGETPASSWORD, element: ForgetPassword, layout: null },
