@@ -30,6 +30,6 @@ public class ResetPasswordRequest {
     @Valid
     @NotEmpty(message = "Password must not be empty")
     @NotNull(message = "Password must not be empty")
-    @Size(min = 6, max = 10, message = "Password must be between 6 and 20")
+    @Size(min = 6, max = 20, message = "Password must be between 6 and 20")
     private String password;
 }
