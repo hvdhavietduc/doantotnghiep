@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/cloudinary/CloudinaryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/cloudinary/CloudinaryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/common/ErrorEnum/CloudinaryErrorEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +89,8 @@
   <component name="RunManager">
     <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
+        <env name="cloud_api_key" value="125998247333392" />
+        <env name="cloud_name" value="dyc5vrfyd" />
         <env name="db_url" value="mongodb+srv://ducvietha82:doantotnghiep@cluster0.2t7itdx.mongodb.net/doantotnghiep?retryWrites=true&amp;w=majority" />
         <env name="email" value="duc.ha000412@hcmut.edu.vn" />
         <env name="password" value="doantotnghiep" />
@@ -92,6 +98,7 @@
         <env name="SECRET_KEY" value="404E635266556A586E3272357538782F413F442847284B6250645367566B5970" />
         <env name="TOKEN_TTL" value="86400000" />
         <env name="username" value="doantotnghiep" />
+        <env name="cloud_api_secret" value="ZbdQNtI-P-hP6b0uRwIey9_67iE" />
       </envs>
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="server" />
@@ -145,7 +152,7 @@
       <workItem from="1700970247137" duration="3319000" />
       <workItem from="1701004396819" duration="3503000" />
       <workItem from="1701089605984" duration="1280000" />
-      <workItem from="1701175587629" duration="660000" />
+      <workItem from="1701175587629" duration="5184000" />
     </task>
     <servers />
   </component>
