@@ -17,7 +17,7 @@ function Search() {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const debouncedValue = useDebounce(searchValue, 500);
+    //const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -66,8 +66,10 @@ function Search() {
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper className={cx('padding-wrapper')}>
-                            {searchResult.map((result) => (
-                                <div className={cx('result-item')}>{result}</div>
+                            {searchResult.map((result, index) => (
+                                <div key={index} className={cx('result-item')}>
+                                    {result}
+                                </div>
                             ))}
                         </PopperWrapper>
                     </div>

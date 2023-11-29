@@ -1,19 +1,35 @@
 import classNames from 'classnames/bind';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import {} from '@fortawesome/free-brands-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import Search from './Search';
-import Input from '~/components/Input';
-import Button from '~/components/Button';
+import Action from './Action';
 import logo from '~/assets/img/logo.png';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
+const navigation = [
+    { title: 'Translation', link: config.routes.TRANSLATION },
+    { title: 'WordBooks', link: '' },
+    { title: 'Video', link: '' },
+    { title: 'News', link: '' },
+    { title: 'Text online', link: '' },
+    { title: 'Forum', link: '' },
+    { title: 'Chat AI', link: '' },
+    { title: 'Game', link: '' },
+];
+
 function Header() {
+    const [indexNavigate, setIndexNavigate] = useState(-1);
+
+    const handleNavigate = (index) => {
+        console.log(indexNavigate);
+        setIndexNavigate(index);
+    };
+
     return (
         <div className={cx('header')}>
             <div className={cx('inner')}>
@@ -23,9 +39,21 @@ function Header() {
 
                 <Search />
 
-                <div className="navigation">navigation</div>
+                <ul className={cx('navigation')}>
+                    {navigation.map((value, index) => {
+                        return (
+                            <li
+                                key={index}
+                                className={cx('navigation-item', index === indexNavigate && 'navigation-item-curent')}
+                                onClick={() => handleNavigate(index)}
+                            >
+                                <Link to={value.link}>{value.title}</Link>
+                            </li>
+                        );
+                    })}
+                </ul>
 
-                <div className={cx('action')}>action</div>
+                <Action />
             </div>
         </div>
     );

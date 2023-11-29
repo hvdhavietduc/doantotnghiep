@@ -8,19 +8,17 @@
     background-color: transparent;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--primary);
     color: var(--text-color);
     font-weight: 600;
-    &:hover {
-        color: var(--text-color-secondnary);
-    }
 }
 
 .primary {
     background-color: var(--background-button);
+    border: 1px solid var(--primary);
 
     &:hover {
         background: #0074e4;
+        color: var(--text-color-secondnary);
     }
 }
 
@@ -30,6 +28,7 @@
 
     &:hover {
         background: rgb(239, 98, 98);
+        color: var(--text-color-secondnary);
     }
 }
 

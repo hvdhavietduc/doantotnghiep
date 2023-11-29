@@ -1,17 +1,18 @@
 .search,
 .search-result {
-    width: 361px;
+    width: 300px;
 }
 
 .search {
     --search-border-radius: 92px;
     --search-top-spacer: 9px;
-    --search-height: 46px;
+    --search-height: 40px;
     --search-button-width: 52px;
 
     position: relative;
     height: var(--search-height);
     padding-left: 16px;
+    margin-left: 16px;
     display: flex;
     background-color: var(--background-color-secondnary);
     border-radius: var(--search-border-radius);
@@ -43,7 +44,7 @@
     }
 
     &:focus-within {
-        border-color: rgba(22, 24, 35, 0.2);
+        border-color: var(--primary);
     }
 }
 
