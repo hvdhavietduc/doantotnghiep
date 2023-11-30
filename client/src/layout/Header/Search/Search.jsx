@@ -11,7 +11,7 @@ import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Search() {
+function Search({ showBoxSearch }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([1, 2, 3]);
     const [showResult, setShowResult] = useState(false);
@@ -20,6 +20,9 @@ function Search() {
     //const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
+    const boxSearchRef = useRef();
+
+    const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
     // useEffect(() => {
     //     if (!debouncedValue.trim()) {
@@ -59,12 +62,12 @@ function Search() {
     return (
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
-        <div>
+        <div className={cx('wrapper')}>
             <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
-                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                    <div className={cx('search-result')} style={styleTagSearchResult} tabIndex="-1" {...attrs}>
                         <PopperWrapper className={cx('padding-wrapper')}>
                             {searchResult.map((result, index) => (
                                 <div key={index} className={cx('result-item')}>
@@ -76,7 +79,12 @@ function Search() {
                 )}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx('search')}>
+                <div
+                    className={cx('search', {
+                        'search-active': showBoxSearch,
+                    })}
+                    ref={boxSearchRef}
+                >
                     <input
                         ref={inputRef}
                         value={searchValue}

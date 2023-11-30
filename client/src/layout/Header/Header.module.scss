@@ -1,3 +1,5 @@
+@import '/src/components/GlobalStyles/GlobalStyles';
+
 //layout
 .header {
     position: fixed;
@@ -19,6 +21,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.menu-btn {
+    visibility: hidden;
 }
 
 //logo
@@ -45,19 +51,24 @@
         display: flex;
         align-items: center;
         height: 100%;
-        padding: 0 6px;
+        padding: 0 8px;
         font-size: 1.45rem;
         font-weight: 600;
         cursor: pointer;
 
         &:hover {
-            box-shadow: 0px 5px 10px 3px #b799ff;
+            // box-shadow: #b799ff 0px 50px 100px -20px, #b799ff 0px 30px 60px -30px;
+            box-shadow: var(--text-color-link-hightlight) 0px 20px 40px -7px;
+            border-bottom: 3px solid var(--text-color-link-hightlight);
+            border-top: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-left: 3px solid transparent;
         }
 
         a {
             color: var(--primary);
             &:hover {
-                color: #b799ff;
+                color: var(--text-color-link-hightlight);
             }
         }
     }
@@ -71,6 +82,17 @@
             color: #b799ff;
         }
     }
+}
+
+//open Search,close Search
+.open-search,
+.close-search {
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--background-button);
+    display: none;
 }
 
 //action
@@ -103,4 +125,54 @@
     border-radius: 50%;
     margin-left: 14px;
     cursor: pointer;
+}
+
+@media (max-width: $width-ipad) {
+    .inner {
+        position: relative;
+    }
+
+    .menu-btn {
+        visibility: visible;
+        padding-right: 16px;
+    }
+
+    .logo-link {
+        img {
+            height: calc(var(--default-layout-header-height) - 20px);
+        }
+    }
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: calc(var(--default-layout-header-height) + 1px);
+        left: 0;
+        transform: translateX(-100%);
+        height: auto;
+        width: 100%;
+        background-color: var(--background-color);
+        visibility: hidden;
+        overflow: hidden;
+    }
+
+    .navigation-active {
+        visibility: visible;
+        transform: translateX(0);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navigation-item {
+        width: 100%;
+        border-bottom: 1px solid var(--text-color-link-hightlight);
+        padding: 12px !important;
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: $width-mobile) {
+    .open-search,
+    .close-search {
+        display: block;
+    }
 }

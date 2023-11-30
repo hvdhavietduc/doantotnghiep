@@ -1,5 +1,6 @@
-.search,
-.search-result {
+@import '/src/components/GlobalStyles/GlobalStyles';
+
+.search {
     width: 300px;
 }
 
@@ -102,5 +103,26 @@
 
     &:active {
         background-color: rgba(22, 24, 35, 0.06);
+    }
+}
+
+@media (max-width: $width-ipad) {
+    .wrapper {
+        flex: 1;
+    }
+}
+
+@media (max-width: $width-mobile) {
+    .search {
+        visibility: hidden;
+        position: absolute;
+        top: calc(var(--default-layout-header-height) + 3px);
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .search-active {
+        visibility: visible;
     }
 }

@@ -1,5 +1,5 @@
 function Translation() {
-    return <h1>Translation Page</h1>;
+    return <div className="text-gray-900 text-7xl dark:text-white font-black  mt-5">TRANSLATION PAGE</div>;
 }
 
 export default Translation;

@@ -1,5 +1,9 @@
 // @import 'normalize.css';
 
+//responsive
+$width-ipad: 1260px;
+$width-mobile: 800px;
+
 :root {
     --primary: #82aae3;
     --font-family: Arial, Helvetica, sans-serif;
@@ -13,6 +17,7 @@
     --text-color: rgb(22, 24, 35);
     --text-color-secondnary: #ffffff;
     --text-color-link: #82aae3;
+    --text-color-link-hightlight: #b799ff;
     --background-color: #ffffff;
     --background-color-secondnary: #eafdfc;
     --background-button: #bfeaf5;
