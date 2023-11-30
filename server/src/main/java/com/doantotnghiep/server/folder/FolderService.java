@@ -69,20 +69,21 @@ public class FolderService {
         }
     }
 
-    public ResponseEntity<Boolean> updateFolder(String userId, UpdateFolderRequest request) throws ResponseException {
+    public ResponseEntity<Folder> updateFolder(String userId, UpdateFolderRequest request) throws ResponseException {
         try {
             String folderId = request.getId();
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
             if (folder == null) {
                 throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
+
             String nameFolder = request.getName();
             Folder folderExist = folderRepository.findByNameAndUserId(nameFolder, userId);
             if (folderExist == null) {
                 folder.setName(request.getName());
                 folder.setUpdatedAt(new Date());
                 folderRepository.save(folder);
-                return ResponseEntity.ok(true);
+                return ResponseEntity.ok(folder);
             } else if (!folderExist.getId().equals(folderId)) {
                 throw new ResponseException(FolderErrorEnum.FOLDER_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
             }
@@ -91,7 +92,7 @@ public class FolderService {
                 folder.setUpdatedAt(new Date());
                 folderRepository.save(folder);
             }
-            return ResponseEntity.ok(true);
+            return ResponseEntity.ok(folder);
 
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
