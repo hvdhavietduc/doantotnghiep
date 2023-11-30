@@ -18,7 +18,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public ResponseEntity<UserResponse> getMe(String userId) throws ResponseException {
+    public ResponseEntity<UserResponse> getUserById(String userId) throws ResponseException {
         try {
             User user = userRepository.findUsersById(userId);
             if (user == null) {
