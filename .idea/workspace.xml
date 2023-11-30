@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="">
+    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="change response update folder and news">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/Folder.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/Folder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,12 +153,16 @@
       <workItem from="1701089605984" duration="1280000" />
       <workItem from="1701175587629" duration="6743000" />
       <workItem from="1701262786934" duration="1161000" />
-      <workItem from="1701263960383" duration="5319000" />
+      <workItem from="1701263960383" duration="7226000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change response update folder and news" />
+    <option name="LAST_COMMIT_MESSAGE" value="change response update folder and news" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

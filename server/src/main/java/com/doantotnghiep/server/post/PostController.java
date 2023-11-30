@@ -24,7 +24,7 @@ public class PostController {
     private final JwtService jwtService;
 
     @PostMapping("")
-    public ResponseEntity<PostResponse> cretePost(HttpServletRequest request, @Valid @RequestBody CreatePostRequest createPostRequest, BindingResult bindingResult) throws ResponseException {
+    public ResponseEntity<PostResponse> createPost(HttpServletRequest request, @Valid @ModelAttribute CreatePostRequest createPostRequest, BindingResult bindingResult) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
             validateExceptionHandle.handleException(bindingResult);
@@ -35,7 +35,7 @@ public class PostController {
     }
 
     @PutMapping("")
-    public ResponseEntity<PostResponse> updatePost(HttpServletRequest request,@RequestBody @Valid UpdatePostRequest updatePostRequest, BindingResult bindingResult) throws ResponseException {
+    public ResponseEntity<PostResponse> updatePost(HttpServletRequest request,@ModelAttribute @Valid UpdatePostRequest updatePostRequest, BindingResult bindingResult) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
             validateExceptionHandle.handleException(bindingResult);

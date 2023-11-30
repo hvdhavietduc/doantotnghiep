@@ -46,19 +46,19 @@ public class PostService {
             post.setAuthorId(userId);
             post.setCommentIds(new ArrayList<>());
 
+            Post newPost = postRepository.save(post);
             UserResponse user = userService.getUserById(userId).getBody();
 
             PostResponse response = PostResponse.builder()
-                    .id(post.getId())
-                    .title(post.getTitle())
-                    .content(post.getContent())
-                    .image(post.getImage())
-                    .createdAt(post.getCreatedAt())
-                    .updatedAt(post.getUpdatedAt())
-                    .totalComment(post.getCommentIds().size())
+                    .id(newPost.getId())
+                    .title(newPost.getTitle())
+                    .content(newPost.getContent())
+                    .image(newPost.getImage())
+                    .createdAt(newPost.getCreatedAt())
+                    .updatedAt(newPost.getUpdatedAt())
+                    .totalComment(newPost.getCommentIds().size())
                     .author(user)
                     .build();
-            postRepository.save(post);
             return ResponseEntity.ok(response);
 
         } catch (ResponseException e) {

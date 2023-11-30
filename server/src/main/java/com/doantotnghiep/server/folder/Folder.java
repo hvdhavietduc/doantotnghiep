@@ -16,7 +16,6 @@ public class Folder {
     @Id
     public String id;
     @Field
-    @Indexed(unique = true)
     public String name;
     @Field
     public String userId;
