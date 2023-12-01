@@ -41,7 +41,7 @@ function ForgetPassword() {
         forgotPassword(data)
             .then(() => {
                 setLoading(false);
-                navigate(config.routes.CREATENEWPASSWORD);
+                navigate(config.routes.auth.CREATENEWPASSWORD);
                 dispatch(addInforVerify(data));
                 return true;
             })

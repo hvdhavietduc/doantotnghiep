@@ -54,7 +54,7 @@ function Signup() {
                 setLoading(false);
                 dispatch(addInforVerify(data));
                 notify.success(config.notification.SIGNUP_SUCCESS);
-                navigate(config.routes.VERIFYREGISTER);
+                navigate(config.routes.auth.VERIFYREGISTER);
                 return;
             })
             .catch((error) => {
@@ -133,7 +133,7 @@ function Signup() {
                     </Button>
                 </form>
                 <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.LOGIN}>You have account? Login</Link>
+                    <Link to={config.routes.auth.LOGIN}>You have account? Login</Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

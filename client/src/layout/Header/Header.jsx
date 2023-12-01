@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,13 +14,12 @@ import { navigation } from './Constant';
 const cx = classNames.bind(styles);
 
 function Header() {
-    const [indexNavigate, setIndexNavigate] = useState(-1);
     const [showMenu, setShowMenu] = useState(false);
     const [showBoxSearch, setShowBoxSearch] = useState(false);
 
-    const handleNavigate = (index) => {
-        setIndexNavigate(index);
-    };
+    const location = useLocation();
+
+    const currentPath = location.pathname;
 
     const handleClickBtnMenu = () => {
         if (showMenu === false) {
@@ -60,8 +59,10 @@ function Header() {
                         return (
                             <li
                                 key={index}
-                                className={cx('navigation-item', index === indexNavigate && 'navigation-item-curent')}
-                                onClick={() => handleNavigate(index)}
+                                className={cx(
+                                    'navigation-item',
+                                    currentPath.includes(value.link) && 'navigation-item-curent',
+                                )}
                             >
                                 <Link to={value.link} onClick={handleClickBtnMenu}>
                                     {value.title}

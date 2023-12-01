@@ -22,7 +22,7 @@ function WrapperAuth({ title, children, BackLoginPage }) {
                 <footer className={cx('footer')}>
                     <FontAwesomeIcon icon={faArrowLeftLong} />
                     {BackLoginPage ? (
-                        <Link to={config.routes.LOGIN}>Back to Login page</Link>
+                        <Link to={config.routes.auth.LOGIN}>Back to Login page</Link>
                     ) : (
                         <Link to={config.routes.HOME}>Back to home page</Link>
                     )}

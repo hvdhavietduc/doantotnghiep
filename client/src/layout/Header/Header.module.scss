@@ -57,8 +57,7 @@
         cursor: pointer;
 
         &:hover {
-            // box-shadow: #b799ff 0px 50px 100px -20px, #b799ff 0px 30px 60px -30px;
-            box-shadow: var(--text-color-link-hightlight) 0px 20px 40px -7px;
+            background-color: var(--background-color-secondnary);
             border-bottom: 3px solid var(--text-color-link-hightlight);
             border-top: 3px solid transparent;
             border-right: 3px solid transparent;

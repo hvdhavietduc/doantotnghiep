@@ -60,7 +60,7 @@ function CreateNewPassword() {
                 setLoading(false);
                 notify.success(config.notification.CREATE_NEW_PASSWORD_SUCCESS);
                 dispatch(deleteInforVerify());
-                navigate(config.routes.LOGIN);
+                navigate(config.routes.auth.LOGIN);
                 return true;
             })
             .catch((error) => {

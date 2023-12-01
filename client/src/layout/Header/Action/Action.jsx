@@ -35,7 +35,7 @@ function Action() {
                 setLoading(false);
                 localStorage.clear();
                 cookie.remove('token');
-                navigate(config.routes.LOGIN);
+                navigate(config.routes.auth.LOGIN);
             })
             .catch((error) => {
                 setLoading(false);
@@ -83,10 +83,10 @@ function Action() {
                     <></>
                 ) : (
                     <Fragment>
-                        <Button className={cx('btn-login')} primary to={config.routes.LOGIN}>
+                        <Button className={cx('btn-login')} primary to={config.routes.auth.LOGIN}>
                             Log in
                         </Button>
-                        <Button className={cx('btn-signup')} primary to={config.routes.SIGNUP}>
+                        <Button className={cx('btn-signup')} primary to={config.routes.auth.SIGNUP}>
                             Sign up
                         </Button>
                     </Fragment>

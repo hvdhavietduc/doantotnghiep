@@ -76,7 +76,7 @@ function Login() {
                 if (message.includes(config.errorMesseage.USER_NOT_VERIFY)) {
                     setError('code', { type: 'custom', message: message });
                     dispatch(addInforVerify(data));
-                    navigate(config.routes.VERIFYREGISTER);
+                    navigate(config.routes.auth.VERIFYREGISTER);
                     return;
                 }
 
@@ -117,8 +117,8 @@ function Login() {
                     Login with google
                 </Button>
                 <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.FORGETPASSWORD}>Forgot password?</Link>
-                    <Link to={config.routes.SIGNUP}>Sign up</Link>
+                    <Link to={config.routes.auth.FORGETPASSWORD}>Forgot password?</Link>
+                    <Link to={config.routes.auth.SIGNUP}>Sign up</Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}
