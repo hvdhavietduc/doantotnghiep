@@ -79,8 +79,10 @@ public class NewsService {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Integer total = newsRepository.countAllBy();
         List<News> listNews = newsRepository.findAll(paging).getContent();
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
         AllNewsResponse response = AllNewsResponse.builder()
                 .total(total)
+                .totalPage(totalPage)
                 .listNews(listNews)
                 .build();
         return ResponseEntity.ok(response);

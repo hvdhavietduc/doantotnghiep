@@ -168,9 +168,11 @@ public class PostService {
         }
 
         Integer total = postResponses.size();
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
         AllPostResponse response = AllPostResponse.builder()
                 .listPost(postResponses)
                 .total(total)
+                .totalPage(totalPage)
                 .build();
 
         return ResponseEntity.ok(response);
@@ -197,9 +199,11 @@ public class PostService {
         }
 
         Integer total = postResponses.size();
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
         AllPostResponse response = AllPostResponse.builder()
                 .listPost(postResponses)
                 .total(total)
+                .totalPage(totalPage)
                 .build();
 
         return ResponseEntity.ok(response);

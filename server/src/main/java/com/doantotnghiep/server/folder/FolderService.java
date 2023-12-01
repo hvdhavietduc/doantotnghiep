@@ -49,8 +49,11 @@ public class FolderService {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         List<Folder> folders = folderRepository.getAllByUserId(userId, paging).getContent();
         Integer total = folderRepository.countAllByUserId(userId);
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
+
         AllFolderResponse response = AllFolderResponse.builder()
                 .total(total)
+                .totalPage(totalPage)
                 .folders(folders)
                 .build();
         return ResponseEntity.ok(response);

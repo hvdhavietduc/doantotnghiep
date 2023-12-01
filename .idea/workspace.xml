@@ -6,8 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="change response update folder and news">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/exception/ExceptionHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/exception/ExceptionHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/FolderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/FolderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/response/AllFolderResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/folder/response/AllFolderResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/response/AllNewsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/response/AllNewsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/response/AllPostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/post/response/AllPostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByFolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/Response/AllWordByFolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/word/WordService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +162,9 @@
       <workItem from="1701263960383" duration="12927000" />
       <workItem from="1701351987992" duration="1054000" />
       <workItem from="1701355042678" duration="484000" />
-      <workItem from="1701392460200" duration="403000" />
+      <workItem from="1701392460200" duration="734000" />
+      <workItem from="1701416587943" duration="430000" />
+      <workItem from="1701420234449" duration="2458000" />
     </task>
     <servers />
   </component>
