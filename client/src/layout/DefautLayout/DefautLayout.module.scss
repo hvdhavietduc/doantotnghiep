@@ -1,6 +1,12 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .content {
     margin-top: var(--default-layout-header-height);
-    height: 500px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
