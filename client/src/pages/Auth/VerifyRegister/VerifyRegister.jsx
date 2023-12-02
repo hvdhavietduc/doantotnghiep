@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
 
 import Input from '~/components/Input';
@@ -27,6 +28,7 @@ function VerifyRegister() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
 
     const {
         register,
@@ -96,35 +98,44 @@ function VerifyRegister() {
             setLoading(false);
 
             if (!error.response) {
-                notify.error(config.errorMesseage.ERROR_NETWORD);
+                notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
                 return;
             }
 
-            notify.error(error.response.data.message);
-            if (error.response.status === 400) {
-                const { message } = error.response.data;
-                setError('code', { type: 'custom', message: message });
+            const { messeageLogic, messeageNotify } = config.errorMesseage;
+            if (
+                error.response.status === 400 &&
+                error.response.data.message.includes(messeageLogic.WRONG_VERIFY_CODE)
+            ) {
+                setError('code', { type: 'custom', message: messeageNotify.WRONG_VERIFY_CODE });
+                notify.error(messeageNotify.WRONG_VERIFY_CODE);
+                return;
             }
+            notify.error(error.response.data?.message);
             return;
         });
     };
 
-    if (!inforVerify) return <div>Cannot access this page</div>;
+    if (!inforVerify) return <div className={cx('text-xl10')}>{t('cannot_access_this_page')}</div>;
 
     return (
         <Fragment>
-            <WrapperAuth title="Verify Register" BackLoginPage>
+            <WrapperAuth title={t('verify_register')} BackLoginPage>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className={cx('message')}>We have send code to {hideEmail(email)} successfully</div>
+                    <div className={cx('message')}>
+                        {t('we_have_send_code_to')}
+                        {hideEmail(email)}
+                        {t('successfully')}
+                    </div>
                     <Input
                         name={'code'}
-                        placeholder={'Enter code'}
+                        placeholder={t('enter_code')}
                         autoComplete={'one-time-code'}
                         {...register('code', valid.code)}
                         errolMesseage={errors.code?.message}
                     />
                     <Button className={cx('btn')} primary rounded>
-                        Confirm
+                        {t('confirm')}
                     </Button>
                 </form>
             </WrapperAuth>

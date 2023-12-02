@@ -41,7 +41,7 @@ function Action() {
                 setLoading(false);
                 console.log(error);
                 if (!error.response) {
-                    notify.error(config.errorMesseage.ERROR_NETWORD);
+                    notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
                     return;
                 }
 

@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './CreateNewPassword.module.scss';
@@ -24,6 +25,7 @@ function CreateNewPassword() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
 
     const {
         register,
@@ -45,7 +47,10 @@ function CreateNewPassword() {
         //valid comfim password
         const isValid = formData.password === formData.passwordConfirm;
         if (isValid === false) {
-            setError('passwordConfirm', { type: 'custom', message: config.errorMesseage.PASSWORD_NOT_MATCH });
+            setError('passwordConfirm', {
+                type: 'custom',
+                message: config.errorMesseage.messeageNotify.PASSWORD_NOT_MATCH,
+            });
             return;
         }
 
@@ -66,10 +71,20 @@ function CreateNewPassword() {
             .catch((error) => {
                 setLoading(false);
                 if (!error.response) {
-                    notify.error(config.errorMesseage.ERROR_NETWORD);
+                    notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
                     return;
                 }
-                notify.error(error.response.data.message);
+
+                const { messeageLogic, messeageNotify } = config.errorMesseage;
+                if (
+                    error.response.status === 404 &&
+                    error.response.data.message.includes(messeageLogic.WRONG_VERIFY_CODE)
+                ) {
+                    setError('code', { type: 'custom', message: messeageNotify.WRONG_VERIFY_CODE });
+                    notify.error(messeageNotify.WRONG_VERIFY_CODE);
+                    return;
+                }
+                notify.error(error.response.data?.message);
             });
     };
 
@@ -77,19 +92,23 @@ function CreateNewPassword() {
 
     return (
         <Fragment>
-            <WrapperAuth title="Create New Password" BackLoginPage>
-                <div className={cx('message')}>We have send code to {hideEmail(inforVerify.email)} successfully</div>
+            <WrapperAuth title={t('create_new_password')} BackLoginPage>
+                <div className={cx('message')}>
+                    {t('we_have_send_code_to')}
+                    {hideEmail(inforVerify.email)}
+                    {t('successfully')}
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         name={'code'}
-                        placeholder={'Enter code'}
+                        placeholder={t('enter_code')}
                         autoComplete={'one-time-code'}
                         {...register('code', valid.code)}
                         errolMesseage={errors.code?.message}
                     />
 
                     <Input
-                        placeholder={'New password'}
+                        placeholder={t('new_password')}
                         name={'password'}
                         type={'password'}
                         autoComplete={'new-password'}
@@ -98,7 +117,7 @@ function CreateNewPassword() {
                     />
 
                     <Input
-                        placeholder={'Repeate new password'}
+                        placeholder={t('repeat_new_password')}
                         name={'passwordConfirm'}
                         type={'password'}
                         autoComplete={'new-password'}

@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,6 +11,8 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function WrapperAuth({ title, children, BackLoginPage }) {
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
+
     return (
         <div className={cx('WrapperAuth')}>
             <div className={cx('wave wave1')}></div>
@@ -22,9 +25,9 @@ function WrapperAuth({ title, children, BackLoginPage }) {
                 <footer className={cx('footer')}>
                     <FontAwesomeIcon icon={faArrowLeftLong} />
                     {BackLoginPage ? (
-                        <Link to={config.routes.auth.LOGIN}>Back to Login page</Link>
+                        <Link to={config.routes.auth.LOGIN}>{t('back_to_login_page')}</Link>
                     ) : (
-                        <Link to={config.routes.HOME}>Back to home page</Link>
+                        <Link to={config.routes.HOME}>{t('back_to_home_page')}</Link>
                     )}
                 </footer>
             </div>
