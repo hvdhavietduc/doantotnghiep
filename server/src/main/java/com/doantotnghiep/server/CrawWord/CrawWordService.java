@@ -6,6 +6,8 @@ import com.doantotnghiep.server.word.Example;
 import com.doantotnghiep.server.word.Mean;
 import com.doantotnghiep.server.word.Type;
 import com.doantotnghiep.server.word.Word;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +27,49 @@ import java.util.List;
 public class CrawWordService {
     private final static String url = "https://dictionary.cambridge.org";
     private final static String endpointWord = "/dictionary/english/";
+
+    private final static String urlThirdPartyApi = "https://api.dictionaryapi.dev/api/v2/entries/en/";
     public Word crawWord(String word) throws IOException, ResponseException {
         String urlWord = url + endpointWord+ word;
         Document doc = Jsoup.connect(urlWord).get();
         Word wordCraw = new Word();
         wordCraw.setName(word);
-        wordCraw.setPronunciationUK(crawPronunciationUK(doc));
+        wordCraw.setPronunciationUKAudio(crawPronunciationUKAudio(doc));
+        wordCraw.setPronunciationUSAudio(crawPronunciationUSAudio(doc));
         wordCraw.setPronunciationUS(crawPronunciationUS(doc));
+        wordCraw.setPronunciationUK(crawPronunciationUK(doc));
         wordCraw.setTypes(crawTypes(doc));
         if(wordCraw.getTypes().isEmpty()){
             throw new ResponseException(WordErrorEnum.WORD_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
         }
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(new URL(urlThirdPartyApi + word));
+
+        List<String> synonyms = new ArrayList<>();
+        List<String> antonyms = new ArrayList<>();
+
+        for (JsonNode wordNode: jsonNode){
+            JsonNode meanings = wordNode.get("meanings");
+            for(JsonNode meaning: meanings){
+                synonyms = addSynonymOrAntonym(meaning, synonyms, "synonyms");
+                antonyms = addSynonymOrAntonym(meaning, antonyms, "antonyms");
+
+                JsonNode definitions = meaning.get("definitions");
+                for (JsonNode definition: definitions){
+                    synonyms = addSynonymOrAntonym(definition, synonyms, "synonyms");
+                    antonyms = addSynonymOrAntonym(definition, antonyms, "antonyms");
+                }
+
+            }
+        }
+        synonyms = deleteDuplicate(synonyms);
+        antonyms = deleteDuplicate(antonyms);
+        wordCraw.setSynonyms(synonyms);
+        wordCraw.setAntonyms(antonyms);
         return wordCraw;
     }
 
-    public String crawPronunciationUK(Document doc) {
+    public String crawPronunciationUKAudio(Document doc) {
         Element AudioPronunciationUK = doc.getElementById("audio1");
         if(AudioPronunciationUK == null){
             return "";
@@ -51,7 +82,7 @@ public class CrawWordService {
         String urlPronunciationUK = url + pronunciationUK;
         return urlPronunciationUK;
     }
-    public String crawPronunciationUS(Document doc) {
+    public String crawPronunciationUSAudio(Document doc) {
         Element AudioPronunciationUS = doc.getElementById("audio2");
         if(AudioPronunciationUS == null){
             return "";
@@ -63,6 +94,28 @@ public class CrawWordService {
         String pronunciationUS = sourcePronunciationUS.attr("src");
         String urlPronunciationUS = url + pronunciationUS;
         return urlPronunciationUS;
+    }
+    public String crawPronunciationUK(Document doc) {
+        Element pronunciationUKElement = doc.select(".uk.dpron-i").first();
+        if(pronunciationUKElement == null){
+            return "";
+        }
+        Element pronunciationUKText = pronunciationUKElement.select(".pron.dpron").first();
+        if(pronunciationUKText == null){
+            return "";
+        }
+        return pronunciationUKText.text();
+    }
+    public String crawPronunciationUS(Document doc) {
+        Element pronunciationUSElement = doc.select(".us.dpron-i").first();
+        if(pronunciationUSElement == null){
+            return "";
+        }
+        Element pronunciationUSText = pronunciationUSElement.select(".pron.dpron").first();
+        if(pronunciationUSText == null){
+            return "";
+        }
+        return pronunciationUSText.text();
     }
     public List<Type> crawTypes(Document doc) {
         List<Type> typesList = new ArrayList<>();
@@ -135,5 +188,24 @@ public class CrawWordService {
             examplesList.add(example);
         }
         return examplesList;
+    }
+
+    public List<String> deleteDuplicate(List<String> list){
+        List<String> newList = new ArrayList<>();
+        for(String item: list){
+            if(!newList.contains(item)){
+                newList.add(item);
+            }
+        }
+        return newList;
+    }
+    public List<String> addSynonymOrAntonym(JsonNode node, List<String> list, String type){
+        JsonNode nodeSynonymOrAntonym = node.get(type);
+        if(nodeSynonymOrAntonym != null){
+            for(JsonNode item: nodeSynonymOrAntonym){
+                list.add(item.asText());
+            }
+        }
+        return list;
     }
 }
