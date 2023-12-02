@@ -39,6 +39,7 @@ public class WordService {
 
     public ResponseEntity<Word> getWordByName(String name) throws ResponseException, IOException {
         try {
+            name = name.trim();
             Word word = wordRepository.findByName(name);
             if (word != null) {
                 return ResponseEntity.ok(word);

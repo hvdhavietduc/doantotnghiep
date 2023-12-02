@@ -29,4 +29,16 @@ public class CreatePostRequest {
     @Size(min = 1, max = 1000, message = "Content must be between 1 and 1000 characters")
     private String content;
 
+    public void setTitle(String title){
+        if(title != null){
+            title = title.trim();
+        }
+        this.title = title;
+    }
+    public void setContent(String content){
+        if(content != null){
+            content = content.trim();
+        }
+        this.content = content;
+    }
 }

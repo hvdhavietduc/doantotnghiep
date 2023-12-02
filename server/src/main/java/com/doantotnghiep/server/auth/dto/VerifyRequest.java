@@ -24,4 +24,11 @@ public class VerifyRequest {
     @NotEmpty(message = "Email must not be empty")
     @NotNull(message = "Email must not be null")
     private String email;
+
+    public void setCode(String code){
+        if(code != null){
+            code = code.trim();
+        }
+        this.code = code;
+    }
 }

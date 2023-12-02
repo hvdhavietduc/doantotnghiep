@@ -38,4 +38,23 @@ public class RegisterRequest {
     @NotNull(message = "Name must not be null")
     @Size(min = 6, max = 20, message = "Name must be between 6 and 20 characters")
     private String name;
+
+    public void setUsername(String username){
+        if(username != null){
+            username = username.trim();
+        }
+        this.username = username;
+    }
+    public void setPassword(String password){
+        if(password != null){
+            password = password.trim();
+        }
+        this.password = password;
+    }
+    public void setName(String name){
+        if(name != null){
+            name = name.trim();
+        }
+        this.name = name;
+    }
 }
