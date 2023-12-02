@@ -37,6 +37,7 @@ public class FolderService {
             folder.setWordIds(new ArrayList<>());
             folder.setCreatedAt(new Date());
             folder.setUpdatedAt(new Date());
+            folder.setDescription(request.getDescription());
             folderRepository.save(folder);
             return ResponseEntity.ok(folder);
 
@@ -84,6 +85,7 @@ public class FolderService {
             Folder folderExist = folderRepository.findByNameAndUserId(nameFolder, userId);
             if (folderExist == null) {
                 folder.setName(request.getName());
+                folder.setDescription(request.getDescription());
                 folder.setUpdatedAt(new Date());
                 folderRepository.save(folder);
                 return ResponseEntity.ok(folder);
@@ -93,6 +95,7 @@ public class FolderService {
             else{
                 folder.setName(request.getName());
                 folder.setUpdatedAt(new Date());
+                folder.setDescription(request.getDescription());
                 folderRepository.save(folder);
             }
             return ResponseEntity.ok(folder);

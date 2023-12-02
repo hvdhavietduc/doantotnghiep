@@ -18,6 +18,8 @@ public class Folder {
     @Field
     public String name;
     @Field
+    public String description;
+    @Field
     public String userId;
     @Field
     public List<String> wordIds;
@@ -29,12 +31,13 @@ public class Folder {
     public Folder() {
     }
 
-    public Folder(String name, String userId, List<String> wordIds, Date createdAt, Date updatedAt) {
+    public Folder(String name, String description, String userId, List<String> wordIds, Date createdAt, Date updatedAt) {
         this.name = name;
         this.userId = userId;
         this.wordIds = wordIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.description = description;
     }
 
     public void appendWord(String wordId) {
