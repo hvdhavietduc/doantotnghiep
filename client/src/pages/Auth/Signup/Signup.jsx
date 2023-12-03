@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './Signup.module.scss';
@@ -25,19 +26,25 @@ function Signup() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
 
     const onSubmit = (data, e) => {
         e.preventDefault();
 
+        const messeageNotify = config.errorMesseage.getMesseageNotify();
         //valid comfim password
         const isValid = data.password === data.passwordConfirm;
         if (isValid === false) {
-            setError('passwordConfirm', { type: 'custom', message: config.errorMesseage.PASSWORD_NOT_MATCH });
+            setError('passwordConfirm', {
+                type: 'custom',
+                message: messeageNotify.PASSWORD_NOT_MATCH,
+            });
             return;
         }
 
@@ -53,7 +60,7 @@ function Signup() {
             .then(() => {
                 setLoading(false);
                 dispatch(addInforVerify(data));
-                notify.success(config.notification.SIGNUP_SUCCESS);
+                notify.success(config.notification().SIGNUP_SUCCESS);
                 navigate(config.routes.auth.VERIFYREGISTER);
                 return;
             })
@@ -61,33 +68,36 @@ function Signup() {
                 setLoading(false);
 
                 if (!error.response) {
-                    notify.error(config.errorMesseage.ERROR_NETWORD);
+                    notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
 
-                notify.error(error.response.data.message);
                 if (error.response.status === 400) {
                     const { message } = error.response.data;
+                    const { messeageLogic } = config.errorMesseage;
 
-                    if (message.includes(config.errorMesseage.USERNAME_EXIST)) {
-                        setError('username', { type: 'custom', message: message });
+                    if (message.includes(messeageLogic.USERNAME_EXIST)) {
+                        setError('username', { type: 'custom', message: messeageNotify.USERNAME_EXIST });
+                        notify.error(messeageNotify.USERNAME_EXIST);
                         return;
                     }
-                    if (message.includes(config.errorMesseage.EMAIL_EXIST)) {
-                        setError('email', { type: 'custom', message: message });
+                    if (message.includes(messeageLogic.EMAIL_EXIST)) {
+                        setError('email', { type: 'custom', message: messeageNotify.EMAIL_EXIST });
+                        notify.error(messeageNotify.EMAIL_EXIST);
                         return;
                     }
                 }
+                notify.error(error.response.data.message);
                 return;
             });
     };
 
     return (
         <Fragment>
-            <WrapperAuth title="Sign up">
+            <WrapperAuth title={t('signup')} clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
-                        placeholder={'Full name'}
+                        placeholder={t('full_name')}
                         name={'fullname'}
                         autoComplete={'name'}
                         {...register('fullname', valid.fullName)}
@@ -95,7 +105,7 @@ function Signup() {
                     />
 
                     <Input
-                        placeholder={'Username'}
+                        placeholder={t('username')}
                         name={'username'}
                         autoComplete={'username'}
                         {...register('username', valid.userName)}
@@ -111,7 +121,7 @@ function Signup() {
                     />
 
                     <Input
-                        placeholder={'Password'}
+                        placeholder={t('password')}
                         name={'password'}
                         type={'password'}
                         autoComplete={'new-password'}
@@ -120,7 +130,7 @@ function Signup() {
                     />
 
                     <Input
-                        placeholder={'Repeat Password'}
+                        placeholder={t('repeat_password')}
                         name={'passwordConfirm'}
                         type={'password'}
                         autoComplete={'new-password'}
@@ -129,11 +139,11 @@ function Signup() {
                     />
 
                     <Button className={cx('btn')} primary rounded>
-                        Sign up
+                        {t('signup')}
                     </Button>
                 </form>
                 <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.LOGIN}>You have account? Login</Link>
+                    <Link to={config.routes.auth.LOGIN}>{t('you_have_account_login')}</Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

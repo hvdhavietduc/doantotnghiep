@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +12,21 @@ import Menu from '../Menu';
 import Loading from '~/components/Loading';
 import { logout } from '~/services/authServices';
 import notify from '~/utils/notify';
+import i18next from '~/utils/i18n';
 import config from '~/config';
-import { MENU_ITEMS, userMenu } from '../Constant';
+import { getMENU_ITEMS, getUserMenu } from '../Constant';
 const cx = classNames.bind(styles);
 
 function Action() {
     const [currentUser, setCurrentUser] = useState(false);
     const [inforUser, setInforUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const { i18n } = useTranslation();
 
     const navigate = useNavigate();
+
+    const MENU_ITEMS = getMENU_ITEMS();
+    const userMenu = getUserMenu();
 
     // Handle logic
 
@@ -41,7 +47,7 @@ function Action() {
                 setLoading(false);
                 console.log(error);
                 if (!error.response) {
-                    notify.error(config.errorMesseage.ERROR_NETWORD);
+                    notify.error(config.errorMesseage.getMesseageNotify().ERROR_NETWORD);
                     return;
                 }
 
@@ -49,15 +55,37 @@ function Action() {
             });
     };
 
-    const handleMenuChange = (menuItem) => {
+    const changeLanguage = (la) => {
+        i18n.changeLanguage(la);
+    };
+
+    const handleChangeLanguage = (menuItem) => {
         switch (menuItem.title) {
-            case 'Log out':
+            case i18next.t('Header.english'):
+                changeLanguage(config.language.ENGLISH);
+                localStorage.setItem('language', config.language.ENGLISH);
+                break;
+            case i18next.t('Header.vietnam'):
+                changeLanguage(config.language.VIETNAM);
+                localStorage.setItem('language', config.language.VIETNAM);
+                break;
+            default:
+        }
+    };
+
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                handleChangeLanguage(menuItem);
+                break;
+            default:
+        }
+
+        //item in the outermost layer
+        switch (menuItem.title) {
+            case i18next.t('Header.log_out'):
                 handleLogout();
                 break;
-
-            // case 'language':
-            //     // Handle change language
-            //     break;
             default:
         }
     };

@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Footer.module.scss';
 import { Link } from 'react-router-dom';
@@ -7,13 +8,14 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-const inforFooter = [
-    { title: 'About website', item: ['Introduce', 'Rules', 'Security'] },
-    { title: 'Support', item: ['User manual', 'Customer area', 'Respond to complain', 'Contact'] },
-    { title: 'Social media', item: ['Facebook', 'Youtube', 'Tiktok', 'Instagram'] },
-];
-
 function Footer() {
+    const { t } = useTranslation('translation', { keyPrefix: 'Footer' });
+
+    const inforFooter = [
+        { title: t('about_website'), item: [t('introduce'), t('rules'), t('security')] },
+        { title: t('support'), item: [t('user_manual'), t('customer_area'), t('respond_to_complain'), t('contact')] },
+        { title: t('social_media'), item: ['Facebook', 'Youtube', 'Tiktok', 'Instagram'] },
+    ];
     return (
         <div className={cx('footer')}>
             {inforFooter.map((item) => {

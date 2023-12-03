@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './ForgetPassword.module.scss';
@@ -22,11 +23,13 @@ function ForgetPassword() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
 
     const {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
@@ -47,24 +50,30 @@ function ForgetPassword() {
             })
             .catch((error) => {
                 setLoading(false);
-
+                const messeageNotify = config.errorMesseage.getMesseageNotify();
                 if (!error.response) {
-                    notify.error(config.errorMesseage.ERROR_NETWORD);
+                    notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
 
-                notify.error(error.response.data.message);
-                if (error.response.status === 404) {
-                    const { message } = error.response.data;
-                    setError('email', { type: 'custom', message: message });
+                const { messeageLogic } = config.errorMesseage;
+                if (
+                    error.response.status === 404 &&
+                    error.response.data.message.includes(messeageLogic.USER_NOT_FOUND)
+                ) {
+                    setError('email', { type: 'custom', message: messeageNotify.USER_NOT_FOUND });
+                    notify.error(messeageNotify.USER_NOT_FOUND);
+                    return;
                 }
+
+                notify.error(error.response.data?.message);
                 return;
             });
     };
 
     return (
         <Fragment>
-            <WrapperAuth title="Forget Password" BackLoginPage>
+            <WrapperAuth title={t('forgot_password')} BackLoginPage clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         placeholder={'Email'}
@@ -73,7 +82,7 @@ function ForgetPassword() {
                         errolMesseage={errors.email?.message}
                     />
                     <Button className={cx('btn')} primary rounded>
-                        Send email
+                        {t('send_email')}
                     </Button>
                 </form>
             </WrapperAuth>
