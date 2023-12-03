@@ -14,6 +14,7 @@ function App() {
                         const Page = route.element;
                         return (
                             <Route
+                                exact
                                 key={index}
                                 path={route.path}
                                 element={

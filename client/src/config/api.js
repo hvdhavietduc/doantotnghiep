@@ -11,6 +11,9 @@ const api = {
     user: {
         GETME: 'user/me',
     },
+    lookup: {
+        SEARCH: 'words/name',
+    }
 };
 
 export default api;
