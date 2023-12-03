@@ -29,6 +29,7 @@ function ForgetPassword() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
@@ -49,13 +50,13 @@ function ForgetPassword() {
             })
             .catch((error) => {
                 setLoading(false);
-
+                const messeageNotify = config.errorMesseage.getMesseageNotify();
                 if (!error.response) {
-                    notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
+                    notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
 
-                const { messeageLogic, messeageNotify } = config.errorMesseage;
+                const { messeageLogic } = config.errorMesseage;
                 if (
                     error.response.status === 404 &&
                     error.response.data.message.includes(messeageLogic.USER_NOT_FOUND)
@@ -72,7 +73,7 @@ function ForgetPassword() {
 
     return (
         <Fragment>
-            <WrapperAuth title={t('forgot_password')} BackLoginPage>
+            <WrapperAuth title={t('forgot_password')} BackLoginPage clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         placeholder={'Email'}

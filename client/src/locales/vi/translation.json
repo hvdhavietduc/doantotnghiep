@@ -43,7 +43,24 @@
         "login_success": "Đăng nhập thành công",
         "verify_success": "Xác thực thành công",
         "create_new_password_success": "Tạo mật khẩu mới thành công",
-        "cannot_access_this_page": "Không thể truy cập vài trang này"
+        "cannot_access_this_page": "Không thể truy cập vài trang này",
+        "change_language": "Thay đổi ngôn ngữ"
     },
-    "Header": {}
+    "Header": {
+        "translation": "Dịch",
+        "wordbooks": "Từ vựng",
+        "video": "Video",
+        "news": "Tin tức",
+        "text_online": "Thi thử online",
+        "forum": "Forum",
+        "chat_AI": "Chat AI",
+        "game": "Game",
+        "search_dictionary": "Nhập từ muốn tìm kiếm",
+        "language": "Ngôn ngữ",
+        "english": "Tiếng anh",
+        "vietnam": "Tiếng Việt",
+        "feedback_and_help": "Phản hồi và trợ giúp",
+        "view_profile": "Trang cá nhân",
+        "log_out": "Đăng xuất"
+    }
 }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import Cookies from 'universal-cookie';
+import { useCookies } from 'react-cookie';
 
 import Input from '~/components/Input';
 import styles from './VerifyRegister.module.scss';
@@ -25,6 +25,8 @@ function VerifyRegister() {
 
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
+    // eslint-disable-next-line no-unused-vars
+    const [cookies, setCookies] = useCookies(['token']);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,6 +36,7 @@ function VerifyRegister() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
@@ -75,13 +78,9 @@ function VerifyRegister() {
             const response = await verify(data).then((response) => {
                 setLoading(false);
                 const { token } = response;
-                const cookies = new Cookies();
-                cookies.set('token', response.token, {
-                    path: '/',
-                    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-                });
+                setCookies('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
                 dispatch(deleteInforVerify());
-                notify.success(config.notification.VERIFY_SUCCESS);
+                notify.success(config.notification().VERIFY_SUCCESS);
                 navigate(config.routes.HOME);
                 return token;
             });
@@ -97,12 +96,13 @@ function VerifyRegister() {
         handleVerify().catch((error) => {
             setLoading(false);
 
+            const messeageNotify = config.errorMesseage.getMesseageNotify();
             if (!error.response) {
-                notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
+                notify.error(messeageNotify.ERROR_NETWORD);
                 return;
             }
 
-            const { messeageLogic, messeageNotify } = config.errorMesseage;
+            const { messeageLogic } = config.errorMesseage;
             if (
                 error.response.status === 400 &&
                 error.response.data.message.includes(messeageLogic.WRONG_VERIFY_CODE)
@@ -120,7 +120,7 @@ function VerifyRegister() {
 
     return (
         <Fragment>
-            <WrapperAuth title={t('verify_register')} BackLoginPage>
+            <WrapperAuth title={t('verify_register')} BackLoginPage clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={cx('message')}>
                         {t('we_have_send_code_to')}

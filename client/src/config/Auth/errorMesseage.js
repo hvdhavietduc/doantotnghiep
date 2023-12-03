@@ -1,6 +1,6 @@
 import i18next from '~/utils/i18n';
 
-const messeageNotify = {
+const getMesseageNotify = () => ({
     PASSWORD_NOT_MATCH: i18next.t('Auth.password_not_match'),
     USERNAME_EXIST: i18next.t('Auth.username_exist'),
     EMAIL_EXIST: i18next.t('Auth.email_exist'),
@@ -10,7 +10,7 @@ const messeageNotify = {
     USER_ALREADY_VERIFIED: i18next.t('Auth.user_already_verified'),
     WRONG_VERIFY_CODE: i18next.t('Auth.wrong_verify_code'),
     ERROR_NETWORD: i18next.t('Auth.error_network'),
-};
+});
 
 const messeageLogic = {
     USERNAME_EXIST: 'Username already exist',
@@ -22,6 +22,6 @@ const messeageLogic = {
     WRONG_VERIFY_CODE: 'Wrong verify code',
 };
 
-const errorMesseage = { messeageNotify, messeageLogic };
+const errorMesseage = { getMesseageNotify, messeageLogic };
 
 export default errorMesseage;

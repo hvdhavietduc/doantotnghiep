@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -17,30 +18,32 @@ function Search({ showBoxSearch }) {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    //const debouncedValue = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
     const boxSearchRef = useRef();
 
+    const { t } = useTranslation('translation', { keyPrefix: 'Header' });
+
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
-    // useEffect(() => {
-    //     if (!debouncedValue.trim()) {
-    //         setSearchResult([]);
-    //         return;
-    //     }
+    useEffect(() => {
+        if (!debouncedValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
 
-    //     const fetchApi = async () => {
-    //         setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-    //         const result = await searchServices.search(debouncedValue);
+            const result = await searchServices.search(debouncedValue);
 
-    //         setSearchResult(result);
-    //         setLoading(false);
-    //     };
+            setSearchResult(result);
+            setLoading(false);
+        };
 
-    //     fetchApi();
-    // }, [debouncedValue]);
+        fetchApi();
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -88,7 +91,7 @@ function Search({ showBoxSearch }) {
                     <input
                         ref={inputRef}
                         value={searchValue}
-                        placeholder="Search dictionary"
+                        placeholder={t('search_dictionary')}
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}

@@ -31,6 +31,7 @@ function CreateNewPassword() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
@@ -49,7 +50,7 @@ function CreateNewPassword() {
         if (isValid === false) {
             setError('passwordConfirm', {
                 type: 'custom',
-                message: config.errorMesseage.messeageNotify.PASSWORD_NOT_MATCH,
+                message: config.errorMesseage.getMesseageNotify().PASSWORD_NOT_MATCH,
             });
             return;
         }
@@ -63,19 +64,21 @@ function CreateNewPassword() {
         resetPassword(data)
             .then(() => {
                 setLoading(false);
-                notify.success(config.notification.CREATE_NEW_PASSWORD_SUCCESS);
+                notify.success(config.notification().CREATE_NEW_PASSWORD_SUCCESS);
                 dispatch(deleteInforVerify());
                 navigate(config.routes.auth.LOGIN);
                 return true;
             })
             .catch((error) => {
                 setLoading(false);
+
+                const messeageNotify = config.errorMesseage.getMesseageNotify();
                 if (!error.response) {
-                    notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
+                    notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
 
-                const { messeageLogic, messeageNotify } = config.errorMesseage;
+                const { messeageLogic } = config.errorMesseage;
                 if (
                     error.response.status === 404 &&
                     error.response.data.message.includes(messeageLogic.WRONG_VERIFY_CODE)
@@ -92,7 +95,7 @@ function CreateNewPassword() {
 
     return (
         <Fragment>
-            <WrapperAuth title={t('create_new_password')} BackLoginPage>
+            <WrapperAuth title={t('create_new_password')} BackLoginPage clearErrors={clearErrors}>
                 <div className={cx('message')}>
                     {t('we_have_send_code_to')}
                     {hideEmail(inforVerify.email)}

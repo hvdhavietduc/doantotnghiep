@@ -43,7 +43,24 @@
         "login_success": "Log in success",
         "verify_success": "Verify success",
         "create_new_password_success": "Create new password success",
-        "cannot_access_this_page": "Cannot access this page"
+        "cannot_access_this_page": "Cannot access this page",
+        "change_language": "Change language"
     },
-    "Header": {}
+    "Header": {
+        "translation": "Translation",
+        "wordbooks": "WordBooks",
+        "video": "Video",
+        "news": "News",
+        "text_online": "Text online",
+        "forum": "Forum",
+        "chat_AI": "Chat AI",
+        "game": "Game",
+        "search_dictionary": "Search dictionary",
+        "language": "Language",
+        "english": "English",
+        "vietnam": "VietNames",
+        "feedback_and_help": "Feedback and help",
+        "view_profile": "View profile",
+        "log_out": "Log out"
+    }
 }

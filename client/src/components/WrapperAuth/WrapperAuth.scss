@@ -75,6 +75,20 @@
             text-decoration: underline;
         }
     }
+
+    .btn-changeLanguage {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+
+        &:hover {
+            color: var(--text-color-link-hightlight);
+        }
+
+        .icon {
+            font-size: 30px;
+        }
+    }
 }
 
 //background

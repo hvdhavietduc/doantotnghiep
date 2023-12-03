@@ -26,6 +26,7 @@ function Signup() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
@@ -36,12 +37,13 @@ function Signup() {
     const onSubmit = (data, e) => {
         e.preventDefault();
 
+        const messeageNotify = config.errorMesseage.getMesseageNotify();
         //valid comfim password
         const isValid = data.password === data.passwordConfirm;
         if (isValid === false) {
             setError('passwordConfirm', {
                 type: 'custom',
-                message: config.errorMesseage.messeageNotify.PASSWORD_NOT_MATCH,
+                message: messeageNotify.PASSWORD_NOT_MATCH,
             });
             return;
         }
@@ -58,7 +60,7 @@ function Signup() {
             .then(() => {
                 setLoading(false);
                 dispatch(addInforVerify(data));
-                notify.success(config.notification.SIGNUP_SUCCESS);
+                notify.success(config.notification().SIGNUP_SUCCESS);
                 navigate(config.routes.auth.VERIFYREGISTER);
                 return;
             })
@@ -66,13 +68,13 @@ function Signup() {
                 setLoading(false);
 
                 if (!error.response) {
-                    notify.error(config.errorMesseage.messeageNotify.ERROR_NETWORD);
+                    notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
 
                 if (error.response.status === 400) {
                     const { message } = error.response.data;
-                    const { messeageLogic, messeageNotify } = config.errorMesseage;
+                    const { messeageLogic } = config.errorMesseage;
 
                     if (message.includes(messeageLogic.USERNAME_EXIST)) {
                         setError('username', { type: 'custom', message: messeageNotify.USERNAME_EXIST });
@@ -92,7 +94,7 @@ function Signup() {
 
     return (
         <Fragment>
-            <WrapperAuth title={t('signup')}>
+            <WrapperAuth title={t('signup')} clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         placeholder={t('full_name')}
