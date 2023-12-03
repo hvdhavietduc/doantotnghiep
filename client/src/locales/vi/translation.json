@@ -62,5 +62,17 @@
         "feedback_and_help": "Phản hồi và trợ giúp",
         "view_profile": "Trang cá nhân",
         "log_out": "Đăng xuất"
+    },
+    "Footer": {
+        "about_website": "Giới thiệu về trang web",
+        "introduce": "Giới thiệu",
+        "rules": "Quy tắc",
+        "security": "Bảo mật",
+        "support": "Hỗ trợ",
+        "user_manual": "Hướng dẫn người dùng",
+        "customer_area": "Khu vực khách hàng",
+        "respond_to_complain": "Phản hồi ",
+        "contact": "Liên lạc",
+        "social_media": "Mạng xã hội"
     }
 }

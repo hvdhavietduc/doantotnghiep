@@ -62,5 +62,17 @@
         "feedback_and_help": "Feedback and help",
         "view_profile": "View profile",
         "log_out": "Log out"
+    },
+    "Footer": {
+        "about_website": "About website",
+        "introduce": "Introduce",
+        "rules": "Rules",
+        "security": "Security",
+        "support": "Support",
+        "user_manual": "User manual",
+        "customer_area": "Customer area",
+        "respond_to_complain": "Respond to complain",
+        "contact": "Contact",
+        "social_media": "Social media"
     }
 }
