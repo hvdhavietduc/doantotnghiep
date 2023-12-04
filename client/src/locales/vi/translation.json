@@ -44,7 +44,8 @@
         "verify_success": "Xác thực thành công",
         "create_new_password_success": "Tạo mật khẩu mới thành công",
         "cannot_access_this_page": "Không thể truy cập vài trang này",
-        "change_language": "Thay đổi ngôn ngữ"
+        "change_language": "Thay đổi ngôn ngữ",
+        "user_loged_in": "Đã có tài khoản đăng nhập"
     },
     "Header": {
         "translation": "Dịch",
@@ -74,5 +75,9 @@
         "respond_to_complain": "Phản hồi ",
         "contact": "Liên lạc",
         "social_media": "Mạng xã hội"
+    },
+    "NotExistedPage": {
+        "you_seem_lost": "Bạn dường như lạc lối",
+        "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
     }
 }
