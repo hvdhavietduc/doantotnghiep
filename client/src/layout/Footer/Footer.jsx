@@ -18,14 +18,14 @@ function Footer() {
     ];
     return (
         <div className={cx('footer')}>
-            {inforFooter.map((item) => {
+            {inforFooter.map((item, indexItem) => {
                 return (
-                    <div className={cx('list-item')}>
+                    <div className={cx('list-item')} key={indexItem}>
                         <span className={cx('list-title')}>{item.title}</span>
                         <ul className={cx('container-list')}>
-                            {item.item.map((itemList) => {
+                            {item.item.map((itemList, indexItemList) => {
                                 return (
-                                    <li className={cx('item')}>
+                                    <li className={cx('item')} key={indexItemList}>
                                         <Link>{itemList}</Link>
                                     </li>
                                 );
