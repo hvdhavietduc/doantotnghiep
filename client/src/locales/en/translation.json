@@ -44,7 +44,8 @@
         "verify_success": "Verify success",
         "create_new_password_success": "Create new password success",
         "cannot_access_this_page": "Cannot access this page",
-        "change_language": "Change language"
+        "change_language": "Change language",
+        "user_loged_in": "User loged in"
     },
     "Header": {
         "translation": "Translation",
@@ -74,5 +75,9 @@
         "respond_to_complain": "Respond to complain",
         "contact": "Contact",
         "social_media": "Social media"
+    },
+    "NotExistedPage": {
+        "you_seem_lost": "You seem lost",
+        "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
     }
 }
