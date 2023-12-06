@@ -79,5 +79,13 @@
     "NotExistedPage": {
         "you_seem_lost": "You seem lost",
         "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
+    },
+    "WordBooks": {
+        "my_folder": "My folder",
+        "explore": "Explore",
+        "create_folder": "Create folder",
+        "words": " words",
+        "edit": "Edit",
+        "delete": "Delete"
     }
 }

@@ -79,5 +79,13 @@
     "NotExistedPage": {
         "you_seem_lost": "Bạn dường như lạc lối",
         "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
+    },
+    "WordBooks": {
+        "my_folder": "Bộ từ vựng của tôi",
+        "explore": "Khám phá",
+        "create_folder": "Tạo thư mục mới",
+        "words": " từ",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa"
     }
 }
