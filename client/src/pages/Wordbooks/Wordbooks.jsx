@@ -11,17 +11,19 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Wordbooks.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
 import Loading from '~/components/Loading';
+import Itembox from './Itembox';
 import { getFolderAll } from '~/services/folderService';
 import { initialListFolder } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import config from '~/config';
-import Itembox from './Itembox';
+import CreateFolder from './CreateFolder';
 
 const cx = classNames.bind(styles);
 
 function Wordbooks() {
     const [listFolder, setListFolder] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isPoperCreateFolder, setIsPoperCreateFolder] = useState(false);
 
     const listFolderRedux = useSelector((state) => state.wordBooks);
 
@@ -29,6 +31,11 @@ function Wordbooks() {
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookies] = useCookies(['token']);
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
+
+    const showPoperCreateFolder = () => {
+        setIsPoperCreateFolder(true);
+        document.body.style.overflow = 'hidden';
+    };
     useEffect(() => {}, [cookies]);
 
     useEffect(() => {
@@ -69,7 +76,7 @@ function Wordbooks() {
                     menuFilter={paramater.menuFilter}
                 />
                 <div className={cx('wrapper')}>
-                    <div className={cx('item-box', 'create-folder')}>
+                    <div className={cx('item-box', 'create-folder')} onClick={showPoperCreateFolder}>
                         <FontAwesomeIcon icon={faPlus} />
                         <span className={cx('content')}>{t('create_folder')}</span>
                     </div>
@@ -86,6 +93,7 @@ function Wordbooks() {
                     ))}
                 </div>
             </div>
+            {isPoperCreateFolder && <CreateFolder setIsPoperCreateFolder={setIsPoperCreateFolder} />}
             {loading && <Loading />}
         </Fragment>
     );
