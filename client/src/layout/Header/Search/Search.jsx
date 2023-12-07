@@ -26,24 +26,6 @@ function Search({ showBoxSearch }) {
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
-    // useEffect(() => {
-    //     if (!debouncedValue.trim()) {
-    //         setSearchResult([]);
-    //         return;
-    //     }
-
-    //     const fetchApi = async () => {
-    //         setLoading(true);
-
-    //         const result = await searchServices.search(debouncedValue);
-
-    //         setSearchResult(result);
-    //         setLoading(false);
-    //     };
-
-    //     fetchApi();
-    // }, [debouncedValue]);
-
     const handleClear = () => {
         setSearchValue('');
         setSearchResult([]);
