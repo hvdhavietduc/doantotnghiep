@@ -4,7 +4,8 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 
 import styles from './Login.module.scss';
 import Input from '~/components/Input';
@@ -27,11 +28,15 @@ function Login() {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: { errors },
     } = useForm();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    // eslint-disable-next-line no-unused-vars
+    const [cookies, setCookies] = useCookies(['token']);
+    const { t } = useTranslation('translation', { keyPrefix: 'Auth' });
 
     const onSubmit = (formData, e) => {
         e.preventDefault();
@@ -46,13 +51,9 @@ function Login() {
             const response = await login(data).then((response) => {
                 setLoading(false);
                 const { token } = response;
-                const cookies = new Cookies();
-                cookies.set('token', response.token, {
-                    path: '/',
-                    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-                });
+                setCookies('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
                 dispatch(deleteInforVerify());
-                notify.success(config.notification.LOGIN_SUCCESS);
+                notify.success(config.notification().LOGIN_SUCCESS);
                 navigate(config.routes.HOME);
                 return token;
             });
@@ -65,60 +66,65 @@ function Login() {
         handleLogin().catch((error) => {
             setLoading(false);
 
+            const messeageNotify = config.errorMesseage.getMesseageNotify();
             if (!error.response) {
-                notify.error(config.errorMesseage.ERROR_NETWORD);
+                notify.error(messeageNotify.ERROR_NETWORD);
                 return;
             }
 
-            notify.error(error.response.data.message);
             if (error.response.status === 400) {
                 const { message } = error.response.data;
-                if (message.includes(config.errorMesseage.USER_NOT_VERIFY)) {
-                    setError('code', { type: 'custom', message: message });
+                const { messeageLogic } = config.errorMesseage;
+
+                if (message.includes(messeageLogic.USER_NOT_VERIFY)) {
+                    setError('code', { type: 'custom', message: messeageNotify.USER_NOT_VERIFY });
+                    notify.error(messeageNotify.USER_NOT_VERIFY);
                     dispatch(addInforVerify(data));
                     navigate(config.routes.auth.VERIFYREGISTER);
                     return;
                 }
 
-                if (message.includes(config.errorMesseage.WRONG_NAME_OR_PASSWORD)) {
-                    setError('username', { type: 'custom', message: message });
-                    setError('password', { type: 'custom', message: message });
+                if (message.includes(messeageLogic.WRONG_NAME_OR_PASSWORD)) {
+                    setError('username', { type: 'custom', message: messeageNotify.WRONG_NAME_OR_PASSWORD });
+                    setError('password', { type: 'custom', message: messeageNotify.WRONG_NAME_OR_PASSWORD });
+                    notify.error(messeageNotify.WRONG_NAME_OR_PASSWORD);
                     return;
                 }
             }
+            notify.error(error.response.data?.message);
             return;
         });
     };
 
     return (
         <Fragment>
-            <WrapperAuth title="Login">
+            <WrapperAuth title={t('login')} clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         name={'username'}
-                        placeholder={'Username'}
+                        placeholder={t('username')}
                         autoComplete={'username'}
                         {...register('username', valid.userName)}
                         errolMesseage={errors.username?.message}
                     />
                     <Input
                         name={'password'}
-                        placeholder={'Password'}
+                        placeholder={t('password')}
                         type={'password'}
                         autoComplete={'current-password'}
                         {...register('password', valid.password)}
                         errolMesseage={errors.password?.message}
                     />
                     <Button className={cx('btn')} primary rounded>
-                        Login
+                        {t('login')}
                     </Button>
                 </form>
                 <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
-                    Login with google
+                    {t('login_with_google')}
                 </Button>
                 <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.FORGETPASSWORD}>Forgot password?</Link>
-                    <Link to={config.routes.auth.SIGNUP}>Sign up</Link>
+                    <Link to={config.routes.auth.FORGETPASSWORD}>{t('forgot_password')}</Link>
+                    <Link to={config.routes.auth.SIGNUP}>{t('signup')}</Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

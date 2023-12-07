@@ -7,6 +7,8 @@ import classNames from 'classnames/bind';
 import TypeWord from '~/components/TypeWord';
 import { set } from 'react-hook-form';
 import SynonymOrAntonym from '~/components/SynonymOrAntonym';
+import { useTranslation } from 'react-i18next';
+import notify from '~/utils/notify';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +20,7 @@ function Lookup() {
     const [loading, setLoading] = useState(false);
     const [haveSynonyms, setHaveSynonyms] = useState(false);
     const [haveAntonyms, setHaveAntonyms] = useState(false);
+    const { t } = useTranslation('translation', { keyPrefix: 'Lookup' });
 
     useEffect(() => {
         setLoading(true);
@@ -26,11 +29,15 @@ function Lookup() {
             setLoading(false);
             setHaveSynonyms(response.synonyms.length > 0);
             setHaveAntonyms(response.antonyms.length > 0);
-        });
+        }).catch(error=>{
+            setLoading(false);
+            const { message } = error.response.data;
+            notify.error(message);
+            });
     }, [word]);
 
     return (
-        <div className={cx('lookup p-16 md:px-[100px] w-full flex gap-5')}>
+        <div className={cx('lookup p-16 lg:px-[100px] w-full flex gap-5')}>
             {data && (
                 <div className={cx('w-full md:flex gap-10')}>
                     <div className={cx(` ${haveAntonyms || haveSynonyms ? 'md:w-4/5' : 'w-full'}`)}>
@@ -50,7 +57,7 @@ function Lookup() {
                         </div>
                         <div className={cx('border-t-2 border-t-blue-100 w-full flex flex-col gap-3')}>
                             <div className={cx('w-full border-l-2 border-l-black py-3 px-4 mt-10 bg-blue-100')}>
-                                Definition
+                                {t('Definition')}
                             </div>
                             {data.types.map((type, index) => {
                                 return <TypeWord typeWord={type} index={index + 1} key={index + 1} />;
@@ -59,8 +66,8 @@ function Lookup() {
                     </div>
                     {(haveSynonyms || haveAntonyms) && (
                         <div className={cx(` md:w-1/5`)}>
-                            {data.synonyms.length > 0 && <SynonymOrAntonym type="Synonyms" datas={data.synonyms} />}
-                            {data.antonyms.length > 0 && <SynonymOrAntonym type="Antonyms" datas={data.antonyms} />}
+                            {data.synonyms.length > 0 && <SynonymOrAntonym type={t('Synonyms')} datas={data.synonyms} key={"Synonyms"}/>}
+                            {data.antonyms.length > 0 && <SynonymOrAntonym type={t('Antonyms')} datas={data.antonyms} key={"Antonyms"} />}
                         </div>
                     )}
                 </div>

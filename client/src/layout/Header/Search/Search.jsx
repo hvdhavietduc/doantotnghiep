@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -23,6 +24,8 @@ function Search({ showBoxSearch }) {
 
     const inputRef = useRef();
     const boxSearchRef = useRef();
+
+    const { t } = useTranslation('translation', { keyPrefix: 'Header' });
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
@@ -76,7 +79,7 @@ function Search({ showBoxSearch }) {
                     <input
                         ref={inputRef}
                         value={searchValue}
-                        placeholder="Search dictionary"
+                        placeholder={t('search_dictionary')}
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}

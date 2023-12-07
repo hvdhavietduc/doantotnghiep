@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -9,17 +10,22 @@ import Search from './Search';
 import Action from './Action';
 import logo from '~/assets/img/logo.png';
 import config from '~/config';
-import { navigation } from './Constant';
+import { getNavigation } from './Constant';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    // const currentLanguage = useSelector((state) => state.language.currentLanguage);
+
     const [showMenu, setShowMenu] = useState(false);
     const [showBoxSearch, setShowBoxSearch] = useState(false);
 
     const location = useLocation();
+    const { i18n } = useTranslation('translation', { keyPrefix: 'Header' });
 
     const currentPath = location.pathname;
+    const navigation = getNavigation();
+    const currentLanguage = localStorage.getItem('language');
 
     const handleClickBtnMenu = () => {
         if (showMenu === false) {
@@ -36,6 +42,14 @@ function Header() {
     const closeSearch = () => {
         setShowBoxSearch(false);
     };
+
+    const changeLanguage = (la) => {
+        i18n.changeLanguage(la);
+    };
+
+    useLayoutEffect(() => {
+        changeLanguage(currentLanguage);
+    }, []);
 
     return (
         <div className={cx('header')}>
