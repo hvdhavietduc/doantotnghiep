@@ -19,4 +19,13 @@ const createFolder = async (data, token) => {
     return res.data;
 };
 
-export { getFolderAll, createFolder };
+const editFolder = async (data, token) => {
+    const res = await httpRequest.put(config.api.wordbooks.EDITFOLDER, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export { getFolderAll, createFolder, editFolder };

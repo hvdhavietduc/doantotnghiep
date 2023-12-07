@@ -12,11 +12,11 @@ import styles from './Wordbooks.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
 import Loading from '~/components/Loading';
 import Itembox from './Itembox';
+import CreateFolder from './CreateFolder';
 import { getFolderAll } from '~/services/folderService';
 import { updateListFolder } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import config from '~/config';
-import CreateFolder from './CreateFolder';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +36,7 @@ function Wordbooks() {
         setIsPoperCreateFolder(true);
         document.body.style.overflow = 'hidden';
     };
+
     useEffect(() => {
         if (listFolderRedux.listFolder) setListFolder(listFolderRedux.listFolder);
     }, [listFolderRedux.listFolder]);
@@ -87,6 +88,7 @@ function Wordbooks() {
                             key={index}
                             className={cx('item-box')}
                             nameFolder={value.name}
+                            description={value.description}
                             numberWords={value.wordIds?.length}
                             nameAuthor={localStorage.getItem('name')}
                             avatarAuthor={localStorage.getItem('avatar')}

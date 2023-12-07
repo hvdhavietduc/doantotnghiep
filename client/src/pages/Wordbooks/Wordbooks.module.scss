@@ -52,6 +52,7 @@ $margin-left-right-box: 20px;
     color: var(--text-color-link);
 }
 
+//responsive
 @media (max-width: $width-ipad) {
     .wrapper {
         padding-left: calc((100% - 4 * $width-box - 8 * $margin-left-right-box) / 2);

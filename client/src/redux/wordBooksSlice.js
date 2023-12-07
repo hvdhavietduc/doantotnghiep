@@ -15,9 +15,19 @@ const wordBooksSlice = createSlice({
         clearListFolder: (state) => {
             state.listFolder = null;
         },
+
+        updateFolder: (state, action) => {
+            const newListFolder = state.listFolder.map((folder) => {
+                if (folder.id === action.payload.id) {
+                    folder = action.payload;
+                }
+                return folder;
+            });
+            state.listFolder = newListFolder;
+        },
     },
 });
 
-export const { updateListFolder, addFolder, clearListFolder } = wordBooksSlice.actions;
+export const { updateListFolder, addFolder, clearListFolder, updateFolder } = wordBooksSlice.actions;
 
 export default wordBooksSlice.reducer;

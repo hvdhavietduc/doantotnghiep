@@ -14,6 +14,7 @@ const api = {
     wordbooks: {
         GETALL: '/folders/all',
         CREATEFOLDER: '/folders',
+        EDITFOLDER: '/folders',
     },
 };
 

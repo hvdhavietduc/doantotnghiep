@@ -102,6 +102,8 @@
         "description": "Mô tả",
         "create_folder_success": "Tạo folder thành công",
         "contain_only_letters_number_and_spaces": " chỉ có thể chứa kí tự, chữ số và khoảng trắng",
-        "folder_already_exist": "Folder đã tồn tại"
+        "folder_already_exist": "Folder đã tồn tại",
+        "edit_folder": "Chỉnh sửa folder",
+        "edit_folder_success": "Chỉnh sửa folder thành công"
     }
 }

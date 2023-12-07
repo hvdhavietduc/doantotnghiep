@@ -10,7 +10,7 @@ import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function PopperForm({ children, onClose, onSave, handleSubmitForm }) {
+function PopperForm({ children, onClose, onSave, handleSubmitForm, title }) {
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
     return (
         <div className={cx('container-wrapper')}>
@@ -18,7 +18,7 @@ function PopperForm({ children, onClose, onSave, handleSubmitForm }) {
                 <button className={cx('btn-close')} onClick={onClose}>
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
-                <div className={cx('title')}> {t('create_folder')}</div>
+                <div className={cx('title')}> {title}</div>
                 <form className={cx('form')} onSubmit={handleSubmitForm(onSave)}>
                     {children}
                     <div className={cx('container-btn')}>

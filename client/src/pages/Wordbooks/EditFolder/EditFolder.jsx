@@ -1,61 +1,63 @@
 import PropTypes from 'prop-types';
 // import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
-// import styles from './CreateFolder.module.scss';
+// import styles from './EditFolder.module.scss';
 import PopperForm from '~/components/PopperForm';
 import Loading from '~/components/Loading';
 import Input from '~/components/Input';
-import { createFolder } from '~/services/folderService';
-import { addFolder } from '~/redux/wordBooksSlice';
+import { editFolder } from '~/services/folderService';
+import { updateFolder } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import config from '~/config';
 import getValid from '../validateForm';
 
 // const cx = classNames.bind(styles);
 
-function CreateFolders({ setIsPoperCreateFolder }) {
+function EditFolder({ setIsPoperEditFolder, inforFolder }) {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
-    // eslint-disable-next-line no-unused-vars
+    //eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
 
     const {
         register,
         handleSubmit,
         setError,
+        setValue,
         formState: { errors },
     } = useForm();
 
     const valid = getValid();
 
     const closePoper = () => {
-        setIsPoperCreateFolder(false);
+        setIsPoperEditFolder(false);
         document.body.style.overflow = 'visible';
     };
 
-    const handleCreateFolder = (formData, e) => {
+    const handleEditFolder = (formData, e) => {
         e.preventDefault();
         const data = {
             name: formData.title,
             description: formData.description,
+            id: inforFolder.idFolder,
         };
 
         const messeageNotify = config.wordsbooks.errorMesseage.getMesseageNotify();
 
         setLoading(true);
-        createFolder(data, cookies.token)
+        editFolder(data, cookies.token)
             .then((response) => {
                 setLoading(false);
-                setIsPoperCreateFolder(false);
-                dispatch(addFolder(response));
-                notify.success(config.wordsbooks.notification().CREATE_FOLDER_SUCCESS);
+                setIsPoperEditFolder(false);
+                dispatch(updateFolder(response));
+                notify.success(config.wordsbooks.notification().EDIT_FOLDER_SUCCESS);
                 return;
             })
             .catch((error) => {
@@ -77,13 +79,20 @@ function CreateFolders({ setIsPoperCreateFolder }) {
                 return;
             });
     };
+
+    useEffect(() => {
+        setValue('title', inforFolder.nameFolder);
+        setValue('description', inforFolder.description);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <Fragment>
             <PopperForm
                 onClose={closePoper}
-                onSave={handleCreateFolder}
+                onSave={handleEditFolder}
                 handleSubmitForm={handleSubmit}
-                title={t('create_folder')}
+                title={t('edit_folder')}
             >
                 <Input
                     name={'title'}
@@ -104,8 +113,9 @@ function CreateFolders({ setIsPoperCreateFolder }) {
     );
 }
 
-CreateFolders.propTypes = {
-    setIsPoperCreateFolder: PropTypes.func.isRequired,
+EditFolder.propTypes = {
+    setIsPoperEditFolder: PropTypes.func.isRequired,
+    inforFolder: PropTypes.object.isRequired,
 };
 
-export default CreateFolders;
+export default EditFolder;
