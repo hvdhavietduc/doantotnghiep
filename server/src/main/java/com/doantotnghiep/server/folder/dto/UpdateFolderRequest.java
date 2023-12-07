@@ -27,7 +27,6 @@ public class UpdateFolderRequest {
 
     @Valid
     @NotNull(message = "Description must not be null")
-    @NotEmpty(message = "Description must not be empty")
     @Size(min = 0, max = 1000, message = "Description must be between 0 and 1000 characters")
     private String description;
 

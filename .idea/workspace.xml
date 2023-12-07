@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="change response update folder and news">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/CrawWord/CrawWordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/config/SecurityConfiguration.java" afterDir="false" />
-    </list>
+    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="change response update folder and news" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,6 +159,7 @@
       <workItem from="1701653452148" duration="176000" />
       <workItem from="1701702457594" duration="1202000" />
       <workItem from="1701866138189" duration="13000" />
+      <workItem from="1701913872289" duration="965000" />
     </task>
     <servers />
   </component>
