@@ -26,13 +26,12 @@ function TypeWord({ word ,typeWord, index }) {
                             <div className={cx('flex flex-col gap-5 p-10')}>
                                 {mean.examples.map((example, index) => {
                                     return (
-                                        <div className={cx('flex gap-5')} key={index}>
+                                        <div className={cx('md:flex gap-5')} key={index}>
                                             <span className={cx('text-5xl')}>.</span>
-                                            <span className={cx('italic p-3 ')}>{example.example}</span>
-                                            <span className={cx('italic p-3 bg-yellow-50')}>
-                                                {' '}
+                                            <span className={cx('italic p-3 ')}>{example.example} </span>
+                                            <p className={cx('italic p-3 bg-yellow-50')}>
                                                 ("đây là nghĩa tiếng việt sẽ sửa sau khi có api")
-                                            </span>
+                                            </p>
                                         </div>
                                     );
                                 })}
