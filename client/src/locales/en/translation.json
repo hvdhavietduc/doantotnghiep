@@ -1,4 +1,13 @@
 {
+    "Valid": {
+        "is_required": " is required",
+        "must_least": " must least ",
+        "must_most": " must most ",
+        "characters": " characters"
+    },
+    "Error": {
+        "error_network": "Error network"
+    },
     "Auth": {
         "login": "Login",
         "username": "Username",
@@ -23,8 +32,8 @@
         "back_to_home_page": "Back to Home page",
         "back_to_login_page": "Back to Login page",
         "is_required": " is required",
-        "must_least": " must least",
-        "must_most": " must most",
+        "must_least": " must least ",
+        "must_most": " must most ",
         "characters": " characters",
         "contain_only_letters_and_spaces": " contain only letters and spaces",
         "include_letters_numbers_and_underscores": " include letters, numbers, and underscores",
@@ -90,6 +99,8 @@
         "save": "Save",
         "cancel": "Cancel",
         "title": "Title*",
-        "decreption": "Decreption"
+        "description": "Decreption",
+        "create_folder_success": "Create folder success",
+        "contain_only_letters_number_and_spaces": " contain only letters, number and spaces"
     }
 }

@@ -1,4 +1,13 @@
 {
+    "Valid": {
+        "is_required": " là bắt buột",
+        "must_least": " bắt buột ít nhất ",
+        "must_most": " bắt buột nhiều nhất ",
+        "characters": " kí tự"
+    },
+    "Error": {
+        "error_network": "Lỗi kết nối mạng"
+    },
     "Auth": {
         "login": "Đăng nhập",
         "username": "Tên người dùng",
@@ -23,8 +32,8 @@
         "back_to_home_page": "Quay lại trang chủ",
         "back_to_login_page": "Quay lại trang đăng nhập",
         "is_required": " là bắt buột",
-        "must_least": " bắt buột ít nhất",
-        "must_most": " bắt buột nhiều nhất",
+        "must_least": " bắt buột ít nhất ",
+        "must_most": " bắt buột nhiều nhất ",
         "characters": " kí tự",
         "contain_only_letters_and_spaces": " chỉ có thể chứa kí tự và khoảng trắng",
         "include_letters_numbers_and_underscores": " bao gồm các chữ cái,số và dấu gạch dưới",
@@ -90,6 +99,8 @@
         "save": "Lưu",
         "cancel": "Hủy",
         "title": "Tiêu đề*",
-        "decreption": "Mô tả"
+        "description": "Mô tả",
+        "create_folder_success": "Tạo folder thành công",
+        "contain_only_letters_number_and_spaces": " chỉ có thể chứa kí tự, chữ số và khoảng trắng"
     }
 }
