@@ -99,8 +99,9 @@
         "save": "Save",
         "cancel": "Cancel",
         "title": "Title*",
-        "description": "Decreption",
+        "description": "Description",
         "create_folder_success": "Create folder success",
-        "contain_only_letters_number_and_spaces": " contain only letters, number and spaces"
+        "contain_only_letters_number_and_spaces": " contain only letters, number and spaces",
+        "folder_already_exist": "Folder already exist"
     }
 }

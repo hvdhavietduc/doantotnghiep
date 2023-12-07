@@ -13,7 +13,7 @@ import HeaderSecondnary from '~/components/HeaderSecondnary';
 import Loading from '~/components/Loading';
 import Itembox from './Itembox';
 import { getFolderAll } from '~/services/folderService';
-import { initialListFolder } from '~/redux/wordBooksSlice';
+import { updateListFolder } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import config from '~/config';
 import CreateFolder from './CreateFolder';
@@ -36,7 +36,9 @@ function Wordbooks() {
         setIsPoperCreateFolder(true);
         document.body.style.overflow = 'hidden';
     };
-    useEffect(() => {}, [cookies]);
+    useEffect(() => {
+        if (listFolderRedux.listFolder) setListFolder(listFolderRedux.listFolder);
+    }, [listFolderRedux.listFolder]);
 
     useEffect(() => {
         //if listFolder is existed in redux, not call API
@@ -50,7 +52,7 @@ function Wordbooks() {
         getFolderAll(token)
             .then((result) => {
                 setLoading(false);
-                dispatch(initialListFolder(result.folders));
+                dispatch(updateListFolder(result.folders));
                 setListFolder(result.folders);
                 return;
             })
@@ -85,7 +87,7 @@ function Wordbooks() {
                             key={index}
                             className={cx('item-box')}
                             nameFolder={value.name}
-                            numberWords={value.wordIds.length}
+                            numberWords={value.wordIds?.length}
                             nameAuthor={localStorage.getItem('name')}
                             avatarAuthor={localStorage.getItem('avatar')}
                             idFolder={value.id}

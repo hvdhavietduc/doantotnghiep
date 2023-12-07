@@ -10,4 +10,13 @@ const getFolderAll = async (token) => {
     return res.data;
 };
 
-export { getFolderAll };
+const createFolder = async (data, token) => {
+    const res = await httpRequest.post(config.api.wordbooks.CREATEFOLDER, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export { getFolderAll, createFolder };
