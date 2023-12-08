@@ -11,12 +11,16 @@ const api = {
     user: {
         GETME: 'user/me',
     },
+    lookup: {
+        SEARCH: 'words/name',
+    },
     wordbooks: {
         GETALL: '/folders/all',
         CREATEFOLDER: '/folders',
         EDITFOLDER: '/folders',
         DELETEFOLDER: '/folders',
     },
+
 };
 
 export default api;

@@ -9,6 +9,7 @@ import * as searchServices from '~/services/lookupServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import useDebounce from '~/utils/useDebounce';
 import styles from './Search.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -17,8 +18,9 @@ function Search({ showBoxSearch }) {
     const [searchResult, setSearchResult] = useState([1, 2, 3]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const debouncedValue = useDebounce(searchValue, 500);
+    //const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
     const boxSearchRef = useRef();
@@ -26,6 +28,8 @@ function Search({ showBoxSearch }) {
     const { t } = useTranslation('translation', { keyPrefix: 'Header' });
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
+
+
 
     // useEffect(() => {
     //     if (!debouncedValue.trim()) {
@@ -61,6 +65,10 @@ function Search({ showBoxSearch }) {
             setSearchValue(searchValue);
         }
     };
+    
+    const search = ()=>{
+        navigate(`/lookup/${searchValue}`)
+    }
 
     return (
         // Using a wrapper <div> tag around the reference element solves
@@ -103,7 +111,7 @@ function Search({ showBoxSearch }) {
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()} onClick={search} disabled={searchValue===''}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>

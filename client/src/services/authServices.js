@@ -36,8 +36,8 @@ const resetPassword = async (data) => {
     return res.data;
 };
 
-const logout = async (data, token) => {
-    const res = await httpRequest.post(config.api.auth.LOGOUT, data, {
+const logout = async ( token) => {
+    const res = await httpRequest.post(config.api.auth.LOGOUT, null, {
         headers: {
             Authorization: `Bearer ${token}`,
         },

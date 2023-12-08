@@ -89,6 +89,12 @@
         "you_seem_lost": "You seem lost",
         "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
     },
+
+    "Lookup":{
+        "Definition": "Definition",
+        "Synonyms": "Synonyms",
+        "Antonyms": "Antonyms"
+    },
     "WordBooks": {
         "my_folder": "My folder",
         "explore": "Explore",
@@ -109,5 +115,6 @@
         "no": "no",
         "Are_you_sure_to_delete_folder": "Are you sure to delete folder ",
         "delete_folder_success": "Delete folder success"
+
     }
 }

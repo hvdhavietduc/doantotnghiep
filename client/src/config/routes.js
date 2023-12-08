@@ -34,6 +34,9 @@ const routes = {
     game: {
         GAME: '/game',
     },
+    lookup: {
+        LOOKUP: '/lookup/:word',
+    },
 };
 
 export default routes;

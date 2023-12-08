@@ -9,6 +9,7 @@ import Translation from '~/pages/Translation';
 import Wordbooks from '~/pages/Wordbooks';
 import config from '~/config';
 import { DefautLayout } from '~/layout';
+import Lookup from '~/pages/Lookup';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -19,7 +20,11 @@ const publicRoutes = [
     { path: config.routes.auth.VERIFYREGISTER, element: VerifyRegister, layout: null },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
     { path: config.routes.error.ERROR, element: Error, layout: DefautLayout },
+
+    { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout},
+
     { path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout },
+
 ];
 
 const privateRoutes = [];

@@ -89,6 +89,12 @@
         "you_seem_lost": "Bạn dường như lạc lối",
         "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
     },
+
+    "Lookup":{
+        "Definition": "Định nghĩa",
+        "Synonyms": "Từ đồng nghĩa",
+        "Antonyms": "Từ trái nghĩa"
+},
     "WordBooks": {
         "my_folder": "Bộ từ vựng của tôi",
         "explore": "Khám phá",
@@ -109,5 +115,6 @@
         "no": "không",
         "Are_you_sure_to_delete_folder": "Bạn có chắc chắn muốn xóa folder ",
         "delete_folder_success": "Xóa folder thành công"
+
     }
 }

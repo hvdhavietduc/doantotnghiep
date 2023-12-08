@@ -36,11 +36,9 @@ function Action() {
     // Handle logic
 
     const handleLogout = () => {
-        const token = cookies.token;
-        const name = localStorage.getItem('name');
-        const data = { name };
-        setLoading(true);
-        logout(data, token)
+    const token = cookies.token;
+    setLoading(true);
+        logout(token)
             .then(() => {
                 setLoading(false);
                 localStorage.clear();
