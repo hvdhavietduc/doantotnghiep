@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 function Search({ showBoxSearch }) {
     const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState([1, 2, 3]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,6 +28,26 @@ function Search({ showBoxSearch }) {
     const { t } = useTranslation('translation', { keyPrefix: 'Header' });
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
+
+
+
+    // useEffect(() => {
+    //     if (!debouncedValue.trim()) {
+    //         setSearchResult([]);
+    //         return;
+    //     }
+
+    //     const fetchApi = async () => {
+    //         setLoading(true);
+
+    //         const result = await searchServices.search(debouncedValue);
+
+    //         setSearchResult(result);
+    //         setLoading(false);
+    //     };
+
+    //     fetchApi();
+    // }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');

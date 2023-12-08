@@ -1,4 +1,13 @@
 {
+    "Valid": {
+        "is_required": " là bắt buột",
+        "must_least": " bắt buột ít nhất ",
+        "must_most": " bắt buột nhiều nhất ",
+        "characters": " kí tự"
+    },
+    "Error": {
+        "error_network": "Lỗi kết nối mạng"
+    },
     "Auth": {
         "login": "Đăng nhập",
         "username": "Tên người dùng",
@@ -23,8 +32,8 @@
         "back_to_home_page": "Quay lại trang chủ",
         "back_to_login_page": "Quay lại trang đăng nhập",
         "is_required": " là bắt buột",
-        "must_least": " bắt buột ít nhất",
-        "must_most": " bắt buột nhiều nhất",
+        "must_least": " bắt buột ít nhất ",
+        "must_most": " bắt buột nhiều nhất ",
         "characters": " kí tự",
         "contain_only_letters_and_spaces": " chỉ có thể chứa kí tự và khoảng trắng",
         "include_letters_numbers_and_underscores": " bao gồm các chữ cái,số và dấu gạch dưới",
@@ -80,9 +89,32 @@
         "you_seem_lost": "Bạn dường như lạc lối",
         "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
     },
+
     "Lookup":{
         "Definition": "Định nghĩa",
         "Synonyms": "Từ đồng nghĩa",
         "Antonyms": "Từ trái nghĩa"
+},
+    "WordBooks": {
+        "my_folder": "Bộ từ vựng của tôi",
+        "explore": "Khám phá",
+        "create_folder": "Tạo thư mục mới",
+        "words": " từ",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "title": "Tiêu đề*",
+        "description": "Mô tả",
+        "create_folder_success": "Tạo folder thành công",
+        "contain_only_letters_number_and_spaces": " chỉ có thể chứa kí tự, chữ số và khoảng trắng",
+        "folder_already_exist": "Folder đã tồn tại",
+        "edit_folder": "Chỉnh sửa folder",
+        "edit_folder_success": "Chỉnh sửa folder thành công",
+        "yes": "có",
+        "no": "không",
+        "Are_you_sure_to_delete_folder": "Bạn có chắc chắn muốn xóa folder ",
+        "delete_folder_success": "Xóa folder thành công"
+
     }
 }

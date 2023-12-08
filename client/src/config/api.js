@@ -13,7 +13,14 @@ const api = {
     },
     lookup: {
         SEARCH: 'words/name',
-    }
+    },
+    wordbooks: {
+        GETALL: '/folders/all',
+        CREATEFOLDER: '/folders',
+        EDITFOLDER: '/folders',
+        DELETEFOLDER: '/folders',
+    },
+
 };
 
 export default api;
