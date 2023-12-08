@@ -65,7 +65,6 @@ function Wordbooks() {
                     notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
-                console.log(error);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

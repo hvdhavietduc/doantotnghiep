@@ -51,7 +51,6 @@ function VerifyRegister() {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
                 return false;
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
