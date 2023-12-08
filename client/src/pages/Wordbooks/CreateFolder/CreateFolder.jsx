@@ -55,6 +55,7 @@ function CreateFolders({ setIsPoperCreateFolder }) {
                 setLoading(false);
                 setIsPoperCreateFolder(false);
                 dispatch(addFolder(response));
+                document.body.style.overflow = 'visible';
                 notify.success(config.wordsbooks.notification().CREATE_FOLDER_SUCCESS);
                 return;
             })

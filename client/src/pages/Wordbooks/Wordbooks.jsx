@@ -42,14 +42,15 @@ function Wordbooks() {
     }, [listFolderRedux.listFolder]);
 
     useEffect(() => {
+        setLoading(true);
         //if listFolder is existed in redux, not call API
         if (listFolderRedux.listFolder) {
             setListFolder(listFolderRedux.listFolder);
+            setLoading(false);
             return;
         }
 
         const token = cookies.token;
-        setLoading(true);
         getFolderAll(token)
             .then((result) => {
                 setLoading(false);

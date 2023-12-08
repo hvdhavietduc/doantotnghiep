@@ -3,13 +3,17 @@ const wordBooksSlice = createSlice({
     name: 'wordBooks',
     initialState: {
         listFolder: null,
+        folderEachPage: 10,
     },
     reducers: {
         updateListFolder: (state, action) => {
             state.listFolder = action.payload;
         },
         addFolder: (state, action) => {
-            const previousListFolder = state.listFolder;
+            let previousListFolder = state.listFolder;
+            if (previousListFolder.length > state.folderEachPage - 1) {
+                previousListFolder = previousListFolder.slice(0, state.folderEachPage - 1);
+            }
             state.listFolder = [action.payload, ...previousListFolder];
         },
         clearListFolder: (state) => {

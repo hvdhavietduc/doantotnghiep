@@ -15,6 +15,7 @@ const api = {
         GETALL: '/folders/all',
         CREATEFOLDER: '/folders',
         EDITFOLDER: '/folders',
+        DELETEFOLDER: '/folders',
     },
 };
 

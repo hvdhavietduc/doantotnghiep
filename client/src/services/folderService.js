@@ -28,4 +28,16 @@ const editFolder = async (data, token) => {
     return res.data;
 };
 
-export { getFolderAll, createFolder, editFolder };
+const deleteFolder = async (data, token) => {
+    const res = await httpRequest.delete(config.api.wordbooks.DELETEFOLDER, {
+        params: {
+            id: data.id,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export { getFolderAll, createFolder, editFolder, deleteFolder };

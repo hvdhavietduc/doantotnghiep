@@ -8,11 +8,13 @@ import Tippy from '@tippyjs/react/headless';
 import styles from './Itembox.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import EditFolder from '../EditFolder';
+import DeleteFolder from '../DeleteFolder';
 
 const cx = classNames.bind(styles);
 
 function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAuthor, idFolder, className }) {
     const [isPoperEditFolder, setIsPoperEditFolder] = useState(false);
+    const [isPoperDeleteFolder, setIsPoperDeleteFolder] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
 
@@ -28,13 +30,20 @@ function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAutho
                 <div className={cx('menu-item')} onClick={showPoperEditFolder}>
                     {t('edit')}
                 </div>
-                <div className={cx('menu-item')}>{t('delete')}</div>
+                <div className={cx('menu-item')} onClick={showPoperDeleteFolder}>
+                    {t('delete')}
+                </div>
             </PopperWrapper>
         </div>
     );
 
     const showPoperEditFolder = () => {
         setIsPoperEditFolder(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const showPoperDeleteFolder = () => {
+        setIsPoperDeleteFolder(true);
         document.body.style.overflow = 'hidden';
     };
 
@@ -48,7 +57,7 @@ function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAutho
                 </div>
 
                 <div className={cx('description')}>
-                    {description.length < 50 ? description : description.substr(0, 50) + '...'}
+                    {description && (description.length < 50 ? description : description.substr(0, 50) + '...')}
                 </div>
 
                 <div className={cx('user')}>
@@ -58,13 +67,23 @@ function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAutho
                     </div>
                 </div>
 
-                <Tippy interactive delay={[0, 700]} offset={[12, 8]} placement="top-end" render={renderResult}>
+                <Tippy
+                    interactive
+                    delay={[0, 700]}
+                    offset={[12, 8]}
+                    placement="top-end"
+                    zIndex={9}
+                    render={renderResult}
+                >
                     <div className={cx('menu')}>
                         <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                 </Tippy>
             </div>
             {isPoperEditFolder && <EditFolder setIsPoperEditFolder={setIsPoperEditFolder} inforFolder={inforFolder} />}
+            {isPoperDeleteFolder && (
+                <DeleteFolder setIsPoperDeleteFolder={setIsPoperDeleteFolder} inforFolder={inforFolder} />
+            )}
         </Fragment>
     );
 }

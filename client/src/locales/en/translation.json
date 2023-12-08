@@ -104,6 +104,10 @@
         "contain_only_letters_number_and_spaces": " contain only letters, number and spaces",
         "folder_already_exist": "Folder already exist",
         "edit_folder": "Edit folder",
-        "edit_folder_success": "Edit folder success"
+        "edit_folder_success": "Edit folder success",
+        "yes": "yes",
+        "no": "no",
+        "Are_you_sure_to_delete_folder": "Are you sure to delete folder ",
+        "delete_folder_success": "Delete folder success"
     }
 }
