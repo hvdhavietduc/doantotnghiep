@@ -1,4 +1,13 @@
 {
+    "Valid": {
+        "is_required": " is required",
+        "must_least": " must least ",
+        "must_most": " must most ",
+        "characters": " characters"
+    },
+    "Error": {
+        "error_network": "Error network"
+    },
     "Auth": {
         "login": "Login",
         "username": "Username",
@@ -23,8 +32,8 @@
         "back_to_home_page": "Back to Home page",
         "back_to_login_page": "Back to Login page",
         "is_required": " is required",
-        "must_least": " must least",
-        "must_most": " must most",
+        "must_least": " must least ",
+        "must_most": " must most ",
         "characters": " characters",
         "contain_only_letters_and_spaces": " contain only letters and spaces",
         "include_letters_numbers_and_underscores": " include letters, numbers, and underscores",
@@ -79,5 +88,26 @@
     "NotExistedPage": {
         "you_seem_lost": "You seem lost",
         "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
+    },
+    "WordBooks": {
+        "my_folder": "My folder",
+        "explore": "Explore",
+        "create_folder": "Create folder",
+        "words": " words",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "title": "Title*",
+        "description": "Description",
+        "create_folder_success": "Create folder success",
+        "contain_only_letters_number_and_spaces": " contain only letters, number and spaces",
+        "folder_already_exist": "Folder already exist",
+        "edit_folder": "Edit folder",
+        "edit_folder_success": "Edit folder success",
+        "yes": "yes",
+        "no": "no",
+        "Are_you_sure_to_delete_folder": "Are you sure to delete folder ",
+        "delete_folder_success": "Delete folder success"
     }
 }

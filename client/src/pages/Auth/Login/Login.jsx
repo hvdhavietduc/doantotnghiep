@@ -52,9 +52,6 @@ function Login() {
                 setLoading(false);
                 const { token } = response;
                 setCookies('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
-                dispatch(deleteInforVerify());
-                notify.success(config.notification().LOGIN_SUCCESS);
-                navigate(config.routes.HOME);
                 return token;
             });
             const user = await getMe(response);
@@ -62,6 +59,9 @@ function Login() {
             localStorage.setItem('name', user.name);
             localStorage.setItem('username', user.username);
             localStorage.setItem('avatar', user.avatar);
+            dispatch(deleteInforVerify());
+            notify.success(config.notification().LOGIN_SUCCESS);
+            navigate(config.routes.HOME);
         };
         handleLogin().catch((error) => {
             setLoading(false);

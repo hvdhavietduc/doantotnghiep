@@ -11,6 +11,12 @@ const api = {
     user: {
         GETME: 'user/me',
     },
+    wordbooks: {
+        GETALL: '/folders/all',
+        CREATEFOLDER: '/folders',
+        EDITFOLDER: '/folders',
+        DELETEFOLDER: '/folders',
+    },
 };
 
 export default api;

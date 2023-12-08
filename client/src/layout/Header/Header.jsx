@@ -49,6 +49,7 @@ function Header() {
 
     useLayoutEffect(() => {
         changeLanguage(currentLanguage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

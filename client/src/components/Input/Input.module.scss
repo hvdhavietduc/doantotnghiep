@@ -2,7 +2,14 @@
     position: relative;
     margin-bottom: 20px;
 
-    input {
+    .label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500px;
+    }
+
+    input,
+    textarea {
         width: 100%;
         padding: 0 15px;
         background-color: var(--background-color);
@@ -13,6 +20,11 @@
         &:focus-visible {
             outline: #39a7ff 3px solid;
         }
+    }
+
+    textarea {
+        height: 70px;
+        padding-top: 3px;
     }
 
     .messeage {
@@ -26,8 +38,4 @@
     .hide {
         display: none;
     }
-}
-
-.label {
-    font-weight: 500px;
 }

@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 
 function Search({ showBoxSearch }) {
     const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState([1, 2, 3]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -27,23 +27,23 @@ function Search({ showBoxSearch }) {
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
-    useEffect(() => {
-        if (!debouncedValue.trim()) {
-            setSearchResult([]);
-            return;
-        }
+    // useEffect(() => {
+    //     if (!debouncedValue.trim()) {
+    //         setSearchResult([]);
+    //         return;
+    //     }
 
-        const fetchApi = async () => {
-            setLoading(true);
+    //     const fetchApi = async () => {
+    //         setLoading(true);
 
-            const result = await searchServices.search(debouncedValue);
+    //         const result = await searchServices.search(debouncedValue);
 
-            setSearchResult(result);
-            setLoading(false);
-        };
+    //         setSearchResult(result);
+    //         setLoading(false);
+    //     };
 
-        fetchApi();
-    }, [debouncedValue]);
+    //     fetchApi();
+    // }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
