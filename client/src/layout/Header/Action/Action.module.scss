@@ -1,0 +1,39 @@
+@import '/src/components/GlobalStyles/GlobalStyles';
+//action
+
+.action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-login,
+.btn-signup {
+    height: 36px;
+}
+
+.btn-login {
+    margin-right: 10px;
+}
+
+.more-btn {
+    font-size: 2rem;
+    margin-left: 12px;
+    padding: 4px 8px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 14px;
+    cursor: pointer;
+}
+
+@media (max-width: $width-mobile) {
+    .btn-signup {
+        display: none;
+    }
+}

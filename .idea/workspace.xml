@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="change response update folder and news" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hvdhavietduc&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="13a60aef-d4f6-4dcb-88c9-7dd8784694ff" />
+        <option name="url" value="https://github.com/hvdhavietduc/doantotnghiep.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadAnnotationsAutomatically" value="true" />
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2XnrixQqO153b4M7EiwNqLow5Mz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;server&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/d003024/HVD/Doantotnghiep/doantotnghiep&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="cloud_api_key" value="125998247333392" />
+        <env name="cloud_name" value="dyc5vrfyd" />
+        <env name="db_url" value="mongodb+srv://ducvietha82:doantotnghiep@cluster0.2t7itdx.mongodb.net/doantotnghiep?retryWrites=true&amp;w=majority" />
+        <env name="email" value="duc.ha000412@hcmut.edu.vn" />
+        <env name="password" value="doantotnghiep" />
+        <env name="password_mail" value="zqclafxvftjqthum" />
+        <env name="SECRET_KEY" value="404E635266556A586E3272357538782F413F442847284B6250645367566B5970" />
+        <env name="TOKEN_TTL" value="86400000" />
+        <env name="username" value="doantotnghiep" />
+        <env name="cloud_api_secret" value="ZbdQNtI-P-hP6b0uRwIey9_67iE" />
+      </envs>
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.doantotnghiep.server.ServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5073f111-e4c2-4910-a420-bfdb7ce25eb6" name="Changes" comment="" />
+      <created>1699275817064</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699275817064</updated>
+      <workItem from="1699275818126" duration="1210000" />
+      <workItem from="1699278288853" duration="914000" />
+      <workItem from="1699284321186" duration="1276000" />
+      <workItem from="1699361389852" duration="5939000" />
+      <workItem from="1699405071657" duration="28000" />
+      <workItem from="1699405107741" duration="56000" />
+      <workItem from="1699456511858" duration="434000" />
+      <workItem from="1699457490160" duration="598000" />
+      <workItem from="1699619874927" duration="2610000" />
+      <workItem from="1699622494165" duration="230000" />
+      <workItem from="1699622730418" duration="753000" />
+      <workItem from="1699623490779" duration="104000" />
+      <workItem from="1699623877482" duration="5741000" />
+      <workItem from="1699966549480" duration="531000" />
+      <workItem from="1699967227786" duration="11180000" />
+      <workItem from="1700052148959" duration="2523000" />
+      <workItem from="1700095184729" duration="16620000" />
+      <workItem from="1700308596856" duration="402000" />
+      <workItem from="1700309208048" duration="6000" />
+      <workItem from="1700314229902" duration="18000" />
+      <workItem from="1700362093459" duration="779000" />
+      <workItem from="1700383183877" duration="1311000" />
+      <workItem from="1700571557435" duration="540000" />
+      <workItem from="1700573258758" duration="7697000" />
+      <workItem from="1700657479991" duration="105000" />
+      <workItem from="1700661100089" duration="1443000" />
+      <workItem from="1700663854809" duration="4954000" />
+      <workItem from="1700669257118" duration="7195000" />
+      <workItem from="1700715679639" duration="933000" />
+      <workItem from="1700716836741" duration="8879000" />
+      <workItem from="1700842725705" duration="2133000" />
+      <workItem from="1700880657416" duration="1513000" />
+      <workItem from="1700910828432" duration="1688000" />
+      <workItem from="1700970247137" duration="3319000" />
+      <workItem from="1701004396819" duration="3503000" />
+      <workItem from="1701089605984" duration="1280000" />
+      <workItem from="1701175587629" duration="6743000" />
+      <workItem from="1701262786934" duration="1161000" />
+      <workItem from="1701263960383" duration="12927000" />
+      <workItem from="1701351987992" duration="1054000" />
+      <workItem from="1701355042678" duration="484000" />
+      <workItem from="1701392460200" duration="734000" />
+      <workItem from="1701416587943" duration="430000" />
+      <workItem from="1701420234449" duration="2458000" />
+      <workItem from="1701519618716" duration="11114000" />
+      <workItem from="1701567657994" duration="3209000" />
+      <workItem from="1701653452148" duration="176000" />
+      <workItem from="1701702457594" duration="1202000" />
+      <workItem from="1701866138189" duration="13000" />
+      <workItem from="1701913872289" duration="965000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change response update folder and news" />
+    <option name="LAST_COMMIT_MESSAGE" value="change response update folder and news" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/server/src/main/java/com/doantotnghiep/server/news/NewsRepository.java</url>
+          <line>19</line>
+          <properties class="com.doantotnghiep.server.news.NewsRepository">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
