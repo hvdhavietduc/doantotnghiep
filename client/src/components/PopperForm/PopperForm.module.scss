@@ -1,0 +1,58 @@
+@import '/src/components/GlobalStyles/GlobalStyles';
+
+.container-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wrapper {
+    position: relative;
+    width: 700px;
+    padding: 40px 70px;
+    animation: slip 0.2s ease-in-out;
+}
+
+.btn-close {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.container-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+@keyframes slip {
+    from {
+        opacity: 0;
+        transform: translateY(-500px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: $width-mobile) {
+    .wrapper {
+        width: 500px;
+        padding: 40px 50px;
+    }
+}
