@@ -25,4 +25,17 @@ public class LoginRequest {
     @NotNull(message = "Password must not be null")
     @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
+
+    public void setUsername(String username){
+        if(username != null){
+            username = username.trim();
+        }
+        this.username = username;
+    }
+    public void setPassword(String password){
+        if(password != null){
+            password = password.trim();
+        }
+        this.password = password;
+    }
 }

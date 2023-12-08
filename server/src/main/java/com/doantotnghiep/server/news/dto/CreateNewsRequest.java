@@ -25,4 +25,17 @@ public class CreateNewsRequest {
     @NotEmpty(message = "Content must not be empty")
     @Size(min = 1, max = 5000, message = "Content must be between 1 and 5000 characters")
     private String content;
+
+    public void setTitle(String title){
+        if(title != null){
+            title = title.trim();
+        }
+        this.title = title;
+    }
+    public void setContent(String content){
+        if(content != null){
+            content = content.trim();
+        }
+        this.content = content;
+    }
 }

@@ -2,6 +2,7 @@ package com.doantotnghiep.server.auth;
 
 import com.doantotnghiep.server.auth.dto.LoginRequest;
 import com.doantotnghiep.server.auth.dto.RegisterRequest;
+import com.doantotnghiep.server.auth.dto.ResetPasswordRequest;
 import com.doantotnghiep.server.auth.dto.VerifyRequest;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.common.ErrorEnum.AuthErrorEnum;
@@ -74,7 +75,7 @@ public class AuthenticationService {
                 throw new ResponseException(AuthErrorEnum.WRONG_VERIFY_CODE, HttpStatus.BAD_REQUEST, 400);
             }
             user.setIsVerified(true);
-            user.setVerifyCode(null);
+            user.setVerifyCode("");
             userRepository.save(user);
             var token = jwtService.generateToken(user);
 
@@ -98,16 +99,17 @@ public class AuthenticationService {
             if (user == null) {
                 throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
-            if(!user.getIsVerified()){
+
+            String password = user.getPassword();
+            if (!passwordEncoder.matches(request.getPassword(), password)) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+            if (!user.getIsVerified()) {
                 String codeVerified = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
                 user.setVerifyCode(codeVerified);
                 userRepository.save(user);
                 mailService.sendMail(user.getEmail(), MailMessage.VERIFY_SUBJECT, MailMessage.VERIFY_CONTENT + codeVerified);
                 throw new ResponseException(AuthErrorEnum.USER_NOT_VERIFIED, HttpStatus.BAD_REQUEST, 400);
-            }
-            String password = user.getPassword();
-            if (!passwordEncoder.matches(request.getPassword(), password)) {
-                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
             }
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -125,6 +127,24 @@ public class AuthenticationService {
                     .avatar(user.getAvatar())
                     .build();
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    public ResponseEntity<String> getEmailOfUser(String username, String password) throws ResponseException {
+        try {
+            User user = userRepository.findUserByUsername(username);
+            if (user == null) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+
+            String passwordOfUser = user.getPassword();
+            if (!passwordEncoder.matches(password, passwordOfUser)) {
+                throw new ResponseException(AuthErrorEnum.WRONG_USERNAME_OR_PASSWORD, HttpStatus.BAD_REQUEST, 400);
+            }
+
+            return new ResponseEntity<>(user.getEmail(), HttpStatus.OK);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
@@ -158,11 +178,29 @@ public class AuthenticationService {
                 throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
 
-            String newPassword = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
-            user.setPassword(passwordEncoder.encode(newPassword));
+            String code = RandomStringUtils.randomAlphanumeric(MailMessage.LENGTH_OF_RANDOM_STRING);
+            user.setVerifyCode(code);
             userRepository.save(user);
+            mailService.sendMail(email, MailMessage.FORGORT_PASSWORD_SUBJECT, MailMessage.FORGORT_PASSWORD_CONTENT + code);
+            return ResponseEntity.ok(true);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
 
-            mailService.sendMail(email, MailMessage.FORGORT_PASSWORD_SUBJECT, MailMessage.FORGORT_PASSWORD_CONTENT + newPassword);
+
+    public ResponseEntity<Boolean> resetPassword(ResetPasswordRequest request) throws ResponseException {
+        try {
+            User user = userRepository.findUserByEmail(request.getEmail());
+            if (user == null) {
+                throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
+            }
+            if (!user.getVerifyCode().equals(request.getCode())) {
+                throw new ResponseException(AuthErrorEnum.WRONG_VERIFY_CODE, HttpStatus.NOT_FOUND, 404);
+            }
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            user.setVerifyCode("");
+            userRepository.save(user);
             return ResponseEntity.ok(true);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());

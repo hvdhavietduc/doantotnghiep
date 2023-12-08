@@ -37,6 +37,7 @@ public class FolderService {
             folder.setWordIds(new ArrayList<>());
             folder.setCreatedAt(new Date());
             folder.setUpdatedAt(new Date());
+            folder.setDescription(request.getDescription());
             folderRepository.save(folder);
             return ResponseEntity.ok(folder);
 
@@ -49,8 +50,11 @@ public class FolderService {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         List<Folder> folders = folderRepository.getAllByUserId(userId, paging).getContent();
         Integer total = folderRepository.countAllByUserId(userId);
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
+
         AllFolderResponse response = AllFolderResponse.builder()
                 .total(total)
+                .totalPage(totalPage)
                 .folders(folders)
                 .build();
         return ResponseEntity.ok(response);
@@ -69,29 +73,32 @@ public class FolderService {
         }
     }
 
-    public ResponseEntity<Boolean> updateFolder(String userId, UpdateFolderRequest request) throws ResponseException {
+    public ResponseEntity<Folder> updateFolder(String userId, UpdateFolderRequest request) throws ResponseException {
         try {
             String folderId = request.getId();
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
             if (folder == null) {
                 throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
+
             String nameFolder = request.getName();
             Folder folderExist = folderRepository.findByNameAndUserId(nameFolder, userId);
             if (folderExist == null) {
                 folder.setName(request.getName());
+                folder.setDescription(request.getDescription());
                 folder.setUpdatedAt(new Date());
                 folderRepository.save(folder);
-                return ResponseEntity.ok(true);
+                return ResponseEntity.ok(folder);
             } else if (!folderExist.getId().equals(folderId)) {
                 throw new ResponseException(FolderErrorEnum.FOLDER_ALREADY_EXIST, HttpStatus.BAD_REQUEST, 400);
             }
             else{
                 folder.setName(request.getName());
                 folder.setUpdatedAt(new Date());
+                folder.setDescription(request.getDescription());
                 folderRepository.save(folder);
             }
-            return ResponseEntity.ok(true);
+            return ResponseEntity.ok(folder);
 
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());

@@ -28,7 +28,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getMe(HttpServletRequest request) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
-            return userService.getMe(user.getId());
+            return userService.getUserById(user.getId());
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }

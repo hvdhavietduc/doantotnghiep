@@ -47,7 +47,7 @@ public class NewsController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Boolean> updateNews(@RequestBody @Valid UpdateNewsRequest request, BindingResult bindingResult) throws ResponseException {
+    public ResponseEntity<News> updateNews(@RequestBody @Valid UpdateNewsRequest request, BindingResult bindingResult) throws ResponseException {
         try {
             validateExceptionHandle.handleException(bindingResult);
             return newsService.updateNews(request);

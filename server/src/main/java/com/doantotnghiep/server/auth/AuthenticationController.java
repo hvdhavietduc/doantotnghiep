@@ -1,9 +1,6 @@
 package com.doantotnghiep.server.auth;
 
-import com.doantotnghiep.server.auth.dto.ForgotPasswordRequest;
-import com.doantotnghiep.server.auth.dto.LoginRequest;
-import com.doantotnghiep.server.auth.dto.RegisterRequest;
-import com.doantotnghiep.server.auth.dto.VerifyRequest;
+import com.doantotnghiep.server.auth.dto.*;
 import com.doantotnghiep.server.auth.response.AuthenticationResponse;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
@@ -16,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -82,10 +76,30 @@ public class AuthenticationController {
 
     @PostMapping("/forgot-password")
     public ResponseEntity<Boolean> forgotPassword(
-            @RequestBody ForgotPasswordRequest request
+            @Valid @RequestBody ForgotPasswordRequest request, BindingResult bindingResult
     ) throws ResponseException {
         try {
+            validateExceptionHandle.handleException(bindingResult);
             return authenticationService.forgotPassword(request.getEmail());
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Boolean> resetPassword(@Valid @RequestBody ResetPasswordRequest request, BindingResult bindingResult) throws ResponseException {
+        try {
+            validateExceptionHandle.handleException(bindingResult);
+            return authenticationService.resetPassword(request);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<String> getEmailOfUser(@RequestParam String username, @RequestParam String password) throws ResponseException {
+        try {
+            return authenticationService.getEmailOfUser(username, password);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }

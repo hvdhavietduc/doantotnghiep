@@ -55,7 +55,7 @@ public class FolderConttroller {
     }
 
     @PutMapping("")
-    public ResponseEntity<Boolean> updateFolder(HttpServletRequest request, @Valid @RequestBody UpdateFolderRequest updateFolderRequest, BindingResult bindingResult) throws ResponseException {
+    public ResponseEntity<Folder> updateFolder(HttpServletRequest request, @Valid @RequestBody UpdateFolderRequest updateFolderRequest, BindingResult bindingResult) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
             validateExceptionHandle.handleException(bindingResult);

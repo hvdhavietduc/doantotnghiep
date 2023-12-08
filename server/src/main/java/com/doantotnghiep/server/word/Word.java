@@ -18,24 +18,34 @@ public class Word {
     @Indexed(unique = true)
     public String name;
     @Field
+    public String pronunciationUKAudio;
+    @Field
     public String pronunciationUK;
+    @Field
+    public String pronunciationUSAudio;
     @Field
     public String pronunciationUS;
     @Field
     public List<Type> types;
+    @Field
+    public List<String> synonyms;
+    @Field
+    public List<String> antonyms;
 
     public Word() {
         this.name = "";
-        this.pronunciationUK = "";
-        this.pronunciationUS = "";
+        this.pronunciationUKAudio = "";
+        this.pronunciationUSAudio = "";
         this.types = new ArrayList<>();
     }
 
-    public Word(String name, String pronunciationUK, String pronunciationUS, List<Type> types) {
+    public Word(String name, String pronunciationUK, String pronunciationUS, List<Type> types, List<String> synonyms, List<String> antonyms) {
         this.name = name;
-        this.pronunciationUK = pronunciationUK;
-        this.pronunciationUS = pronunciationUS;
+        this.pronunciationUKAudio = pronunciationUK;
+        this.pronunciationUSAudio = pronunciationUS;
         this.types = types;
+        this.synonyms = synonyms;
+        this.antonyms = antonyms;
     }
 
     public void appendType(Type type) {

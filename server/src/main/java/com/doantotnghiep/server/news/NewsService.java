@@ -45,7 +45,7 @@ public class NewsService {
 
     }
 
-    public ResponseEntity<Boolean> updateNews(UpdateNewsRequest request) throws ResponseException {
+    public ResponseEntity<News> updateNews(UpdateNewsRequest request) throws ResponseException {
         try {
             String id = request.getId();
             News news = newsRepository.findById(id).orElse(null);
@@ -55,8 +55,8 @@ public class NewsService {
             news.setTitle(request.getTitle());
             news.setContent(request.getContent());
             news.setUpdatedAt(new Date());
-            newsRepository.save(news);
-            return ResponseEntity.ok(true);
+            News response = newsRepository.save(news);
+            return ResponseEntity.ok(response);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
@@ -79,8 +79,10 @@ public class NewsService {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Integer total = newsRepository.countAllBy();
         List<News> listNews = newsRepository.findAll(paging).getContent();
+        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
         AllNewsResponse response = AllNewsResponse.builder()
                 .total(total)
+                .totalPage(totalPage)
                 .listNews(listNews)
                 .build();
         return ResponseEntity.ok(response);

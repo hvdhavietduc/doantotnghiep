@@ -39,6 +39,7 @@ public class WordService {
 
     public ResponseEntity<Word> getWordByName(String name) throws ResponseException, IOException {
         try {
+            name = name.trim();
             Word word = wordRepository.findByName(name);
             if (word != null) {
                 return ResponseEntity.ok(word);
@@ -60,8 +61,12 @@ public class WordService {
             List<String> wordIds = folder.getWordIds();
             Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
             Page<Word> words = wordRepository.findAllByIdIn(wordIds, paging);
+
+            Integer total = wordIds.size();
+            Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
             AllWordByFolder response = AllWordByFolder.builder()
-                    .total(wordIds.size())
+                    .total(total)
+                    .totalPage(totalPage)
                     .words(words.getContent())
                     .build();
             return ResponseEntity.ok(response);
@@ -176,8 +181,11 @@ public class WordService {
             List<String> wordIds = category.getWordIds();
             Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
             Page<Word> words = wordRepository.findAllByIdIn(wordIds, paging);
+            Integer total = wordIds.size();
+            Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
             AllWordByCategory response = AllWordByCategory.builder()
-                    .total(wordIds.size())
+                    .total(total)
+                    .totalPage(totalPage)
                     .words(words.getContent())
                     .build();
             return ResponseEntity.ok(response);
@@ -185,5 +193,4 @@ public class WordService {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
-
 }
