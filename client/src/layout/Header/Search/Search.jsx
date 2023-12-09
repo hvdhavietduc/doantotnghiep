@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 
 function Search({ showBoxSearch }) {
     const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([1, 2, 3]);
+    const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,8 +28,6 @@ function Search({ showBoxSearch }) {
     const { t } = useTranslation('translation', { keyPrefix: 'Header' });
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
-
-
 
     // useEffect(() => {
     //     if (!debouncedValue.trim()) {
@@ -65,10 +63,10 @@ function Search({ showBoxSearch }) {
             setSearchValue(searchValue);
         }
     };
-    
-    const search = ()=>{
-        navigate(`/lookup/${searchValue}`)
-    }
+
+    const search = () => {
+        navigate(`/lookup/${searchValue}`);
+    };
 
     return (
         // Using a wrapper <div> tag around the reference element solves
@@ -111,7 +109,12 @@ function Search({ showBoxSearch }) {
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()} onClick={search} disabled={searchValue===''}>
+                    <button
+                        className={cx('search-btn')}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={search}
+                        disabled={searchValue === ''}
+                    >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>

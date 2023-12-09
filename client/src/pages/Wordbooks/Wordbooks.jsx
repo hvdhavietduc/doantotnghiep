@@ -1,13 +1,11 @@
 import classNames from 'classnames/bind';
 import { useState, useEffect, Fragment } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-// import Input from '~/components/Input';
 import styles from './Wordbooks.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
 import Loading from '~/components/Loading';
