@@ -48,7 +48,6 @@ function Action() {
             })
             .catch((error) => {
                 setLoading(false);
-                console.log(error);
                 if (!error.response) {
                     notify.error(config.errorMesseage.getMesseageNotify().ERROR_NETWORD);
                     return;
