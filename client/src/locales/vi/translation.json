@@ -9,7 +9,8 @@
         "error_network": "Lỗi kết nối mạng"
     },
     "OtherPage": {
-        "requires_login": "Tính năng này yêu cầu người dùng đăng nhập để truy cập. "
+        "requires_login": "Tính năng này yêu cầu người dùng đăng nhập để truy cập. ",
+        "not_access": "Tài khoản đã đăng nhập không thể truy cập trang này"
     },
     "Auth": {
         "login": "Đăng nhập",

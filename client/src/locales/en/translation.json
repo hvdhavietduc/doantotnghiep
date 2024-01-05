@@ -9,7 +9,8 @@
         "error_network": "Error network"
     },
     "OtherPage": {
-        "requires_login": "This page requires login to access. Please login first"
+        "requires_login": "This page requires login to access. Please login first",
+        "not_access": "Logged in accounts cannot access this page"
     },
     "Auth": {
         "login": "Login",
