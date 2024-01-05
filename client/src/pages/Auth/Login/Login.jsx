@@ -49,12 +49,12 @@ function Login() {
         setLoading(true);
         const handleLogin = async () => {
             const response = await login(data).then((response) => {
-                setLoading(false);
-                const { token } = response;
-                setCookies('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
-                return token;
+                return response;
             });
-            const user = await getMe(response);
+            setLoading(false);
+            const { token } = response;
+            const user = await getMe(token);
+            setCookies('token', response.token, { path: '/', expires: new Date(Date.now() + 24 * 60 * 60 * 1000) });
             localStorage.setItem('email', user.email);
             localStorage.setItem('name', user.name);
             localStorage.setItem('username', user.username);

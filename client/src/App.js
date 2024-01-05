@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Fragment, useEffect } from 'react';
 
-import { publicRoutes, privateRoutes } from './routes';
+import { publicRoutes, privateRoutes, authenticationRoutes } from './routes';
 import RequiredLogin from './pages/OtherPage/RequiredLogin';
+import NotAccess from './pages/OtherPage/NotAccess';
 
 function App() {
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
+
     const token = cookies.token;
     useEffect(() => {}, [token]);
     return (
@@ -35,6 +37,23 @@ function App() {
                         const Layout = route.layout == null ? Fragment : route.layout;
 
                         const Page = token ? route.element : RequiredLogin;
+                        return (
+                            <Route
+                                exact
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                    {authenticationRoutes.map((route, index) => {
+                        const Layout = route.layout == null ? Fragment : route.layout;
+
+                        const Page = token ? NotAccess : route.element;
                         return (
                             <Route
                                 exact

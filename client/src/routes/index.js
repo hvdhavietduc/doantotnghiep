@@ -13,11 +13,6 @@ import Lookup from '~/pages/Lookup';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
-    { path: config.routes.auth.LOGIN, element: Login, layout: null },
-    { path: config.routes.auth.SIGNUP, element: Signup, layout: null },
-    { path: config.routes.auth.FORGETPASSWORD, element: ForgetPassword, layout: null },
-    { path: config.routes.auth.CREATENEWPASSWORD, element: CreateNewPassword, layout: null },
-    { path: config.routes.auth.VERIFYREGISTER, element: VerifyRegister, layout: null },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
     { path: config.routes.otherPage.ERROR, element: Error, layout: DefautLayout },
 
@@ -26,4 +21,12 @@ const publicRoutes = [
 
 const privateRoutes = [{ path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout }];
 
-export { publicRoutes, privateRoutes };
+const authenticationRoutes = [
+    { path: config.routes.auth.LOGIN, element: Login, layout: null },
+    { path: config.routes.auth.SIGNUP, element: Signup, layout: null },
+    { path: config.routes.auth.FORGETPASSWORD, element: ForgetPassword, layout: null },
+    { path: config.routes.auth.CREATENEWPASSWORD, element: CreateNewPassword, layout: null },
+    { path: config.routes.auth.VERIFYREGISTER, element: VerifyRegister, layout: null },
+];
+
+export { publicRoutes, privateRoutes, authenticationRoutes };
