@@ -24,7 +24,7 @@ const getValid = () => ({
         },
         pattern: {
             value: constantsValid.pattern.TITLE,
-            message: i18next.t('WordBooks.title') + i18next.t('WordBooks.contain_only_letters_and_spaces'),
+            message: i18next.t('WordBooks.title') + i18next.t('WordBooks.contain_only_letters_number_and_spaces'),
         },
     },
     description: {

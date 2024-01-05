@@ -1,6 +1,6 @@
 const routes = {
     HOME: '/',
-    error: {
+    otherPage: {
         ERROR: '*',
     },
     auth: {

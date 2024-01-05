@@ -4,7 +4,7 @@ import Signup from '~/pages/Auth/Signup';
 import ForgetPassword from '~/pages/Auth/ForgetPassword';
 import VerifyRegister from '~/pages/Auth/VerifyRegister';
 import CreateNewPassword from '~/pages/Auth/CreateNewPassword';
-import Error from '~/pages/Error';
+import Error from '~/pages/OtherPage/NotExist';
 import Translation from '~/pages/Translation';
 import Wordbooks from '~/pages/Wordbooks';
 import config from '~/config';
@@ -19,14 +19,11 @@ const publicRoutes = [
     { path: config.routes.auth.CREATENEWPASSWORD, element: CreateNewPassword, layout: null },
     { path: config.routes.auth.VERIFYREGISTER, element: VerifyRegister, layout: null },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
-    { path: config.routes.error.ERROR, element: Error, layout: DefautLayout },
+    { path: config.routes.otherPage.ERROR, element: Error, layout: DefautLayout },
 
-    { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout},
-
-    { path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout },
-
+    { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [{ path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout }];
 
 export { publicRoutes, privateRoutes };

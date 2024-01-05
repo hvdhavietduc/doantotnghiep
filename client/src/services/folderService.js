@@ -1,10 +1,14 @@
 import httpRequest from '~/utils/httpRequest';
 import config from '~/config';
 
-const getFolderAll = async (token) => {
+const getFolderAll = async (token, page = 0, size = 11) => {
     const res = await httpRequest.get(config.api.wordbooks.GETALL, {
         headers: {
             Authorization: `Bearer ${token}`,
+        },
+        params: {
+            size: size,
+            page: page,
         },
     });
     return res.data;

@@ -3,7 +3,7 @@ const wordBooksSlice = createSlice({
     name: 'wordBooks',
     initialState: {
         listFolder: null,
-        folderEachPage: 10,
+        folderEachPage: 11,
     },
     reducers: {
         updateListFolder: (state, action) => {

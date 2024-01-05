@@ -8,6 +8,9 @@
     "Error": {
         "error_network": "Lỗi kết nối mạng"
     },
+    "OtherPage": {
+        "requires_login": "Tính năng này yêu cầu người dùng đăng nhập để truy cập. "
+    },
     "Auth": {
         "login": "Đăng nhập",
         "username": "Tên người dùng",
@@ -90,11 +93,11 @@
         "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
     },
 
-    "Lookup": {
+    "Lookup":{
         "Definition": "Định nghĩa",
         "Synonyms": "Từ đồng nghĩa",
         "Antonyms": "Từ trái nghĩa"
-    },
+},
     "WordBooks": {
         "my_folder": "Bộ từ vựng của tôi",
         "explore": "Khám phá",

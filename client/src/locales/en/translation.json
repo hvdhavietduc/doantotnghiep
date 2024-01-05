@@ -8,6 +8,9 @@
     "Error": {
         "error_network": "Error network"
     },
+    "OtherPage": {
+        "requires_login": "This page requires login to access. Please login first"
+    },
     "Auth": {
         "login": "Login",
         "username": "Username",
@@ -90,7 +93,7 @@
         "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
     },
 
-    "Lookup": {
+    "Lookup":{
         "Definition": "Definition",
         "Synonyms": "Synonyms",
         "Antonyms": "Antonyms"

@@ -49,7 +49,7 @@ function Wordbooks() {
         }
 
         const token = cookies.token;
-        getFolderAll(token)
+        getFolderAll(token,0,listFolder.size)
             .then((result) => {
                 setLoading(false);
                 dispatch(updateListFolder(result.folders));
