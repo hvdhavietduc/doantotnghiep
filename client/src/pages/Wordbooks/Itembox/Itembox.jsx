@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +13,16 @@ import DeleteFolder from '../DeleteFolder';
 
 const cx = classNames.bind(styles);
 
-function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAuthor, idFolder, className }) {
+function Itembox({
+    nameFolder,
+    numberWords,
+    nameAuthor,
+    description,
+    avatarAuthor,
+    idFolder,
+    className,
+    onPageChange,
+}) {
     const [isPoperEditFolder, setIsPoperEditFolder] = useState(false);
     const [isPoperDeleteFolder, setIsPoperDeleteFolder] = useState(false);
 
@@ -80,12 +90,33 @@ function Itembox({ nameFolder, numberWords, nameAuthor, description, avatarAutho
                     </div>
                 </Tippy>
             </div>
-            {isPoperEditFolder && <EditFolder setIsPoperEditFolder={setIsPoperEditFolder} inforFolder={inforFolder} />}
+            {isPoperEditFolder && (
+                <EditFolder
+                    setIsPoperEditFolder={setIsPoperEditFolder}
+                    inforFolder={inforFolder}
+                    onPageChange={onPageChange}
+                />
+            )}
             {isPoperDeleteFolder && (
-                <DeleteFolder setIsPoperDeleteFolder={setIsPoperDeleteFolder} inforFolder={inforFolder} />
+                <DeleteFolder
+                    setIsPoperDeleteFolder={setIsPoperDeleteFolder}
+                    inforFolder={inforFolder}
+                    onPageChange={onPageChange}
+                />
             )}
         </Fragment>
     );
 }
+
+Itembox.propTypes = {
+    nameFolder: PropTypes.string.isRequired,
+    numberWords: PropTypes.number.isRequired,
+    nameAuthor: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    avatarAuthor: PropTypes.string.isRequired,
+    idFolder: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    onPageChange: PropTypes.func.isRequired,
+};
 
 export default Itembox;

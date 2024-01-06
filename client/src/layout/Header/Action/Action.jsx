@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +11,6 @@ import Button from '~/components/Button';
 import Menu from '../Menu';
 import Loading from '~/components/Loading';
 import { logout } from '~/services/authServices';
-import { clearListFolder } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import i18next from '~/utils/i18n';
 import config from '~/config';
@@ -27,7 +25,6 @@ function Action() {
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const { i18n } = useTranslation();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const MENU_ITEMS = getMENU_ITEMS();
@@ -36,14 +33,13 @@ function Action() {
     // Handle logic
 
     const handleLogout = () => {
-    const token = cookies.token;
-    setLoading(true);
+        const token = cookies.token;
+        setLoading(true);
         logout(token)
             .then(() => {
                 setLoading(false);
                 localStorage.clear();
                 removeCookie('token');
-                dispatch(clearListFolder());
                 navigate(config.routes.auth.LOGIN);
             })
             .catch((error) => {
