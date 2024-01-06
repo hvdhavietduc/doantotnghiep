@@ -1,0 +1,31 @@
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.item {
+    display: block;
+    width: 35px;
+    height: 35px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+
+    &:hover {
+        color: var(--text-color);
+        background-color: var(--background-button);
+    }
+}
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.active {
+    color: var(--text-color-secondnary);
+    background-color: var(--primary);
+}
