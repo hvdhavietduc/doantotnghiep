@@ -8,6 +8,10 @@
     "Error": {
         "error_network": "Error network"
     },
+    "OtherPage": {
+        "requires_login": "This page requires login to access. Please login first",
+        "not_access": "Logged in accounts cannot access this page"
+    },
     "Auth": {
         "login": "Login",
         "username": "Username",
@@ -93,7 +97,8 @@
     "Lookup":{
         "Definition": "Definition",
         "Synonyms": "Synonyms",
-        "Antonyms": "Antonyms"
+        "Antonyms": "Antonyms",
+        "ClickToShow": "Click to show all meaning"
     },
     "WordBooks": {
         "my_folder": "My folder",
@@ -115,6 +120,9 @@
         "no": "no",
         "Are_you_sure_to_delete_folder": "Are you sure to delete folder ",
         "delete_folder_success": "Delete folder success"
-
+    },
+    "Home": {
+        "title": "Learning English Better With ENGMATESDD",
+        "content": "Welcome to our English language enhancement platform, where we provide you with a comprehensive learning experience. Our website offers an array of resources designed to boost your English language proficiency. These resources encompass grammar and vocabulary exercises, reading and listening comprehension activities. The advantages of utilizing our English learning platform are multifaceted, ranging from the flexibility to tailor your learning pace to accessing an extensive repository of educational materials. Additionally, our platform enables you to monitor your progress and receive prompt feedback on your performance. To make the learning journey even more enjoyable, we offer an assortment of interactive games and quizzes that add an element of fun to your language learning endeavors."
     }
 }
