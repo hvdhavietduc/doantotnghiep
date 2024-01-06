@@ -1,22 +1,21 @@
 import classNames from 'classnames/bind';
 import { useState, useEffect, Fragment } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-// import Input from '~/components/Input';
 import styles from './Wordbooks.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
 import Loading from '~/components/Loading';
 import Itembox from './Itembox';
 import CreateFolder from './CreateFolder';
 import { getFolderAll } from '~/services/folderService';
-import { updateListFolder } from '~/redux/wordBooksSlice';
+import { updateCurrentPage } from '~/redux/wordBooksSlice';
 import notify from '~/utils/notify';
 import config from '~/config';
+import Pagination from '~/components/Pagination';
 
 const cx = classNames.bind(styles);
 
@@ -24,8 +23,10 @@ function Wordbooks() {
     const [listFolder, setListFolder] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isPoperCreateFolder, setIsPoperCreateFolder] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
 
-    const listFolderRedux = useSelector((state) => state.wordBooks);
+    const paramater = config.getParamaterHeaderSecondnary().wordbooks;
 
     const dispatch = useDispatch();
     // eslint-disable-next-line no-unused-vars
@@ -37,25 +38,35 @@ function Wordbooks() {
         document.body.style.overflow = 'hidden';
     };
 
-    useEffect(() => {
-        if (listFolderRedux.listFolder) setListFolder(listFolderRedux.listFolder);
-    }, [listFolderRedux.listFolder]);
+    const onPageChange = async (value) => {
+        setLoading(true);
+        const token = cookies.token;
+        await getFolderAll(token, value - 1)
+            .then((result) => {
+                dispatch(updateCurrentPage(value));
+                setListFolder(result.folders);
+                setCurrentPage(value);
+                setLoading(false);
+                return;
+            })
+            .catch((error) => {
+                setLoading(false);
+                const messeageNotify = config.errorMesseage.getMesseageNotify();
+                if (!error.response) {
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    return;
+                }
+            });
+    };
 
     useEffect(() => {
         setLoading(true);
-        //if listFolder is existed in redux, not call API
-        if (listFolderRedux.listFolder) {
-            setListFolder(listFolderRedux.listFolder);
-            setLoading(false);
-            return;
-        }
-
         const token = cookies.token;
-        getFolderAll(token)
+        getFolderAll(token, 0, listFolder.size)
             .then((result) => {
                 setLoading(false);
-                dispatch(updateListFolder(result.folders));
                 setListFolder(result.folders);
+                setTotalPage(result.totalPage);
                 return;
             })
             .catch((error) => {
@@ -68,7 +79,6 @@ function Wordbooks() {
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const paramater = config.getParamaterHeaderSecondnary().wordbooks;
     return (
         <Fragment>
             <div className={cx('wordbooks')}>
@@ -93,11 +103,17 @@ function Wordbooks() {
                             nameAuthor={localStorage.getItem('name')}
                             avatarAuthor={localStorage.getItem('avatar')}
                             idFolder={value.id}
+                            onPageChange={onPageChange}
                         />
                     ))}
                 </div>
+                <div className={cx('pagination')}>
+                    <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
+                </div>
             </div>
-            {isPoperCreateFolder && <CreateFolder setIsPoperCreateFolder={setIsPoperCreateFolder} />}
+            {isPoperCreateFolder && (
+                <CreateFolder setIsPoperCreateFolder={setIsPoperCreateFolder} onPageChange={onPageChange} />
+            )}
             {loading && <Loading />}
         </Fragment>
     );

@@ -10,8 +10,8 @@ $margin-left-right-box: 20px;
 
 .wrapper {
     width: 100%;
-    padding-left: calc((100% - 5 * $width-box - 10 * $margin-left-right-box) / 2);
-    padding-right: calc((100% - 5 * $width-box - 10 * $margin-left-right-box) / 2);
+    padding-left: calc((100% - 4 * ($width-box + 2 * $margin-left-right-box)) / 2);
+    padding-right: calc((100% - 4 * ($width-box + 2 * $margin-left-right-box)) / 2);
     margin-top: 80px;
     display: flex;
     flex-wrap: wrap;
@@ -53,24 +53,17 @@ $margin-left-right-box: 20px;
 }
 
 //responsive
-@media (max-width: $width-ipad) {
-    .wrapper {
-        padding-left: calc((100% - 4 * $width-box - 8 * $margin-left-right-box) / 2);
-        padding-right: calc((100% - 4 * $width-box - 8 * $margin-left-right-box) / 2);
-    }
-}
 
 @media (max-width: 980px) {
     .wrapper {
-        padding-left: calc((100% - 3 * $width-box - 6 * $margin-left-right-box) / 2);
-        padding-right: calc((100% - 3 * $width-box - 6 * $margin-left-right-box) / 2);
+        padding-left: calc((100% - 3 * ($width-box + 2 * $margin-left-right-box)) / 2);
+        padding-right: calc((100% - 3 * ($width-box + 2 * $margin-left-right-box)) / 2);
     }
 }
 
 @media (max-width: $width-mobile) {
     .wrapper {
-        padding-left: auto;
-        padding-right: auto;
-        justify-content: center;
+        padding-left: calc((100% - 2 * ($width-box + 2 * $margin-left-right-box)) / 2);
+        padding-right: calc((100% - 2 * ($width-box + 2 * $margin-left-right-box)) / 2);
     }
 }
