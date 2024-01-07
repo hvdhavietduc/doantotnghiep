@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Home.module.scss';
 import imgHome from '~/assets/img/Home.png';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ function Home() {
                     <div className={cx('content')}>{t('content')}</div>
                 </div>
                 <div className={cx('image-home')}>
-                    <img alt="abc" src={imgHome} />
+                    <Image src={imgHome} />
                 </div>
             </div>
         </div>
