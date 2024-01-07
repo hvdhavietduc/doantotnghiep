@@ -42,7 +42,7 @@
         "contain_only_letters_and_spaces": " chỉ có thể chứa kí tự và khoảng trắng",
         "include_letters_numbers_and_underscores": " bao gồm các chữ cái,số và dấu gạch dưới",
         "invalid_email_address": "Email không hợp lệ",
-        "include_at_least_one_letter_number_and_special_character": "bao gồm ít nhất một chữ cái, một số và một ký tự đặc biệt",
+        "include_at_least_one_letter_number_and_special_character": " bao gồm ít nhất một chữ cái, một số và một ký tự đặc biệt",
         "password_not_match": "Mât khẩu xác nhận không khớp",
         "username_exist": "Tên người dùng đã tồn tại",
         "email_exist": "Email đã tồn tại",
@@ -94,11 +94,11 @@
         "the_page_you_are_trying_to_reach_not_exist": "Trang bạn đang cố truy cập không tồn tại"
     },
 
-    "Lookup":{
+    "Lookup": {
         "Definition": "Định nghĩa",
         "Synonyms": "Từ đồng nghĩa",
         "Antonyms": "Từ trái nghĩa"
-},
+    },
     "WordBooks": {
         "my_folder": "Bộ từ vựng của tôi",
         "explore": "Khám phá",

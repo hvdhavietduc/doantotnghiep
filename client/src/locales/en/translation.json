@@ -42,7 +42,7 @@
         "contain_only_letters_and_spaces": " contain only letters and spaces",
         "include_letters_numbers_and_underscores": " include letters, numbers, and underscores",
         "invalid_email_address": "Invalid email address",
-        "include_at_least_one_letter_number_and_special_character": "include at least one letter, one number, and one special character",
+        "include_at_least_one_letter_number_and_special_character": " include at least one letter, one number, and one special character",
         "password_not_match": "Passwords do not match",
         "username_exist": "Username already exist",
         "email_exist": "Email already exist",
@@ -94,7 +94,7 @@
         "the_page_you_are_trying_to_reach_not_exist": "The page you are trying to reach doesn't exist"
     },
 
-    "Lookup":{
+    "Lookup": {
         "Definition": "Definition",
         "Synonyms": "Synonyms",
         "Antonyms": "Antonyms"
