@@ -97,7 +97,8 @@
     "Lookup": {
         "Definition": "Definition",
         "Synonyms": "Synonyms",
-        "Antonyms": "Antonyms"
+        "Antonyms": "Antonyms",
+        "ClickToShow": "Click to show all meaning"
     },
     "WordBooks": {
         "my_folder": "My folder",
