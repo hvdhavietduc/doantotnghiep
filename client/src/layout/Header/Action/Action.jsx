@@ -9,6 +9,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import styles from './Action.module.scss';
 import Button from '~/components/Button';
 import Menu from '../Menu';
+import Image from '~/components/Image';
 import Loading from '~/components/Loading';
 import { logout } from '~/services/authServices';
 import notify from '~/utils/notify';
@@ -118,7 +119,7 @@ function Action() {
                 )}
                 <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                     {currentUser ? (
-                        <img className={cx('user-avatar')} src={inforUser.avatar} alt={inforUser.name} />
+                        <Image className={cx('user-avatar')} src={inforUser.avatar} alt={inforUser.name} />
                     ) : (
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />

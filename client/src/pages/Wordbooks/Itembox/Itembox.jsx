@@ -10,6 +10,7 @@ import styles from './Itembox.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import EditFolder from '../EditFolder';
 import DeleteFolder from '../DeleteFolder';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -72,7 +73,7 @@ function Itembox({
 
                 <div className={cx('user')}>
                     <div className={cx('inner-user')}>
-                        <img className={cx('avatar')} alt={'NoImage'} src={avatarAuthor} />
+                        <Image className={cx('avatar')} src={avatarAuthor} />
                         <span className={cx('name-user')}>{nameAuthor}</span>
                     </div>
                 </div>
