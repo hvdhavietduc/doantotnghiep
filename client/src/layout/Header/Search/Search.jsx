@@ -64,6 +64,13 @@ function Search({ showBoxSearch }) {
         }
     };
 
+    const handleKeyDown = (event) => {
+        // Check if the keycode is 13 (Enter)
+        if (event.keyCode === 13) {
+            search();
+        }
+    };
+
     const search = () => {
         navigate(`/lookup/${searchValue}`);
     };
@@ -101,6 +108,7 @@ function Search({ showBoxSearch }) {
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}
+                        onKeyDown={handleKeyDown}
                     />
                     {!!searchValue && !loading && (
                         <button className={cx('clear')} onClick={handleClear}>

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.scss';
 import { Link } from 'react-router-dom';
 import logo from '~/assets/img/logo.png';
+import Image from '~/components/Image';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
@@ -35,7 +36,7 @@ function Footer() {
                 );
             })}
             <Link to={config.routes.HOME} className={cx('logo-link')}>
-                <img src={logo} alt="NoImage" />
+                <Image src={logo} />
             </Link>
         </div>
     );

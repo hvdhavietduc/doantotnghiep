@@ -9,6 +9,7 @@ import styles from './Header.module.scss';
 import Search from './Search';
 import Action from './Action';
 import logo from '~/assets/img/logo.png';
+import Image from '~/components/Image';
 import config from '~/config';
 import { getNavigation } from './Constant';
 
@@ -60,7 +61,7 @@ function Header() {
                 </button>
 
                 <Link to={config.routes.HOME} className={cx('logo-link')}>
-                    <img src={logo} alt="NoImage" />
+                    <Image src={logo} />
                 </Link>
 
                 <Search showBoxSearch={showBoxSearch} />

@@ -63,7 +63,7 @@ public class WordService {
             Page<Word> words = wordRepository.findAllByIdIn(wordIds, paging);
 
             Integer total = wordIds.size();
-            Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
+            Integer totalPage = words.getTotalPages();
             AllWordByFolder response = AllWordByFolder.builder()
                     .total(total)
                     .totalPage(totalPage)
