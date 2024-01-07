@@ -9,6 +9,7 @@ import com.doantotnghiep.server.post.response.PostResponse;
 import com.doantotnghiep.server.user.Response.UserResponse;
 import com.doantotnghiep.server.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -149,7 +150,8 @@ public class PostService {
 
     public ResponseEntity<AllPostResponse> getAllPostByUserId(String userId, Integer page, Integer size) throws ResponseException {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        List<Post> posts = postRepository.findAllByAuthorId(userId, paging).getContent();
+        Page<Post> postPage = postRepository.findAllByAuthorId(userId, paging);
+        List<Post> posts = postPage.getContent();
 
         List<PostResponse> postResponses = new ArrayList<>();
         UserResponse user = userService.getUserById(userId).getBody();
@@ -168,7 +170,7 @@ public class PostService {
         }
 
         Integer total = postResponses.size();
-        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
+        Integer totalPage = postPage.getTotalPages();
         AllPostResponse response = AllPostResponse.builder()
                 .listPost(postResponses)
                 .total(total)
