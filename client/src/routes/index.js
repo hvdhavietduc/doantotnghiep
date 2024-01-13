@@ -1,21 +1,20 @@
-import Home from '~/pages/Home';
 import Login from '~/pages/Auth/Login/Login';
 import Signup from '~/pages/Auth/Signup';
 import ForgetPassword from '~/pages/Auth/ForgetPassword';
 import VerifyRegister from '~/pages/Auth/VerifyRegister';
 import CreateNewPassword from '~/pages/Auth/CreateNewPassword';
 import Error from '~/pages/OtherPage/NotExist';
-import Translation from '~/pages/Translation';
-import Wordbooks from '~/pages/Wordbooks';
+import Home from '~/pages/User/Home';
+import Translation from '~/pages/User/Translation';
+import Wordbooks from '~/pages/User/Wordbooks';
+import Lookup from '~/pages/User/Lookup';
 import config from '~/config';
 import { DefautLayout } from '~/layout';
-import Lookup from '~/pages/Lookup';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
     { path: config.routes.otherPage.ERROR, element: Error, layout: DefautLayout },
-
     { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
 ];
 
