@@ -37,6 +37,14 @@ const routes = {
     lookup: {
         LOOKUP: '/lookup/:word',
     },
+    admin: {
+        MANAGEUSER: '/manage_user',
+        MANAGEFORUM: '/manage_forum',
+        MANAGEQUIZZES: '/manage_quizzes',
+        MANAGECATEGORIES: '/manage_categories',
+        MANAGENEWS: '/manage_news',
+        MANAGEVIDEOS: '/manage_videos',
+    },
 };
 
 export default routes;

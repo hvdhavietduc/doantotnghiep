@@ -75,7 +75,17 @@
         "vietnam": "VietNames",
         "feedback_and_help": "Feedback and help",
         "view_profile": "View profile",
-        "log_out": "Log out"
+        "log_out": "Log out",
+        "Admin": "Admin"
+    },
+    "HeaderAdmin": {
+        "manage_forum": "Manage Forum",
+        "manage_user": "Manage User",
+        "manage_quizzes": "Manage Quizzes",
+        "manage_categories": "Manage Categories",
+        "manage_news": "Manage Manage news",
+        "manage_videos": "Manage videos",
+        "user": "User"
     },
     "Footer": {
         "about_website": "About website",

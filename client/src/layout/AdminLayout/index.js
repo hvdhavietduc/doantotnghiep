@@ -1,19 +1,17 @@
 import classNames from 'classnames/bind';
 
-import styles from './DefautLayout.module.scss';
-import Header from '../Header/HeaderDefault';
-import Footer from '../Footer';
+import styles from './AdminLayout.module.scss';
+import Header from '../Header/HeaderAdmin';
 
 const cx = classNames.bind(styles);
 
-function DefautLayout({ children }) {
+function AdminLayout({ children }) {
     return (
         <div className={cx('wrapper')}>
             <Header />
             <div className={cx('content')}>{children}</div>
-            <Footer />
         </div>
     );
 }
 
-export default DefautLayout;
+export default AdminLayout;

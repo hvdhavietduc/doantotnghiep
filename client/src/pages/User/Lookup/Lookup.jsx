@@ -1,11 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { search } from '~/services/lookupServices';
 import Loading from '~/components/Loading';
 import styles from './Lookup.module.scss';
 import classNames from 'classnames/bind';
 import TypeWord from '~/components/TypeWord';
-import { set } from 'react-hook-form';
 import SynonymOrAntonym from '~/components/SynonymOrAntonym';
 import { useTranslation } from 'react-i18next';
 import notify from '~/utils/notify';
