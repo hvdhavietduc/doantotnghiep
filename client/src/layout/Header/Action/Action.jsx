@@ -15,10 +15,10 @@ import { logout } from '~/services/authServices';
 import notify from '~/utils/notify';
 import i18next from '~/utils/i18n';
 import config from '~/config';
-import { getMENU_ITEMS, getUserMenu } from '../Constant';
+import { getMENU_ITEMS } from '../Constant';
 const cx = classNames.bind(styles);
 
-function Action() {
+function Action({ userMenu }) {
     const [currentUser, setCurrentUser] = useState(false);
     const [inforUser, setInforUser] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -29,7 +29,6 @@ function Action() {
     const navigate = useNavigate();
 
     const MENU_ITEMS = getMENU_ITEMS();
-    const userMenu = getUserMenu();
 
     // Handle logic
 

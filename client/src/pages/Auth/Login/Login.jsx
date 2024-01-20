@@ -59,9 +59,11 @@ function Login() {
             localStorage.setItem('name', user.name);
             localStorage.setItem('username', user.username);
             localStorage.setItem('avatar', user.avatar);
+            localStorage.setItem('role', user.role);
             dispatch(deleteInforVerify());
             notify.success(config.notification().LOGIN_SUCCESS);
-            navigate(config.routes.HOME);
+            if (user.role === 'USER') navigate(config.routes.HOME);
+            if (user.role === 'ADMIN') navigate(config.routes.admin.MANAGEUSER);
         };
         handleLogin().catch((error) => {
             setLoading(false);

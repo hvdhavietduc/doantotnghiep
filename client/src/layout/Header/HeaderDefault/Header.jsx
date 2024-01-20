@@ -7,11 +7,12 @@ import { faBars, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-
 
 import styles from './Header.module.scss';
 import Search from './Search';
-import Action from './Action';
+import Action from '~/layout/Header/Action';
 import logo from '~/assets/img/logo.png';
 import Image from '~/components/Image';
 import config from '~/config';
-import { getNavigation } from './Constant';
+import { getNavigation } from '~/layout/Header/Constant';
+import { getUserMenu } from '../Constant';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +28,10 @@ function Header() {
     const currentPath = location.pathname;
     const navigation = getNavigation();
     const currentLanguage = localStorage.getItem('language');
+    const isAdmin = localStorage.getItem('role') === 'ADMIN';
+    let userMenu = isAdmin
+        ? getUserMenu()
+        : getUserMenu().filter((value) => value.to !== config.routes.admin.MANAGEUSER);
 
     const handleClickBtnMenu = () => {
         if (showMenu === false) {
@@ -99,7 +104,7 @@ function Header() {
                     </button>
                 )}
 
-                <Action />
+                <Action userMenu={userMenu} />
             </div>
         </div>
     );
