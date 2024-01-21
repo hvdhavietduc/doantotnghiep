@@ -13,6 +13,7 @@ const api = {
     },
     lookup: {
         SEARCH: 'words/name',
+        WORDCONTAIN: 'words/search'
     },
     wordbooks: {
         GETALL: '/folders/all',

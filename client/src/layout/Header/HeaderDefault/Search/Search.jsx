@@ -20,7 +20,7 @@ function Search({ showBoxSearch }) {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    //const debouncedValue = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
     const boxSearchRef = useRef();
@@ -29,23 +29,22 @@ function Search({ showBoxSearch }) {
 
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
-    // useEffect(() => {
-    //     if (!debouncedValue.trim()) {
-    //         setSearchResult([]);
-    //         return;
-    //     }
+    useEffect(() => {
+        if (!debouncedValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
 
-    //     const fetchApi = async () => {
-    //         setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-    //         const result = await searchServices.search(debouncedValue);
+            const result = await searchServices.filetWordContain(debouncedValue);
+            setSearchResult(result);
+            setLoading(false);
+        };
 
-    //         setSearchResult(result);
-    //         setLoading(false);
-    //     };
-
-    //     fetchApi();
-    // }, [debouncedValue]);
+        fetchApi();
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -67,12 +66,12 @@ function Search({ showBoxSearch }) {
     const handleKeyDown = (event) => {
         // Check if the keycode is 13 (Enter)
         if (event.keyCode === 13) {
-            search();
+            search(searchValue);
         }
     };
 
-    const search = () => {
-        navigate(`/lookup/${searchValue}`);
+    const search = (value) => {
+        navigate(`/lookup/${value}`);
     };
 
     return (
@@ -86,7 +85,7 @@ function Search({ showBoxSearch }) {
                     <div className={cx('search-result')} style={styleTagSearchResult} tabIndex="-1" {...attrs}>
                         <PopperWrapper className={cx('padding-wrapper')}>
                             {searchResult.map((result, index) => (
-                                <div key={index} className={cx('result-item')}>
+                                <div key={index} className={cx('result-item')} onClick={()=>search(result)}>
                                     {result}
                                 </div>
                             ))}
@@ -120,7 +119,7 @@ function Search({ showBoxSearch }) {
                     <button
                         className={cx('search-btn')}
                         onMouseDown={(e) => e.preventDefault()}
-                        onClick={search}
+                        onClick={()=>search(searchValue)}
                         disabled={searchValue === ''}
                     >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
