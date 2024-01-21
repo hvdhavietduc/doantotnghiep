@@ -6,4 +6,9 @@ const search = async (data) => {
     return res.data;
 };
 
-export { search };
+const filetWordContain = async (key) => {
+    const res = await httpRequest.get(`${config.api.lookup.WORDCONTAIN}/${key}`);
+    return res.data;
+}
+
+export { search, filetWordContain };
