@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -118,4 +119,14 @@ public class WordController {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
+
+    @GetMapping("/search/{key}")
+    public ResponseEntity<List<String>> searchWordHave(@PathVariable String key) throws ResponseException {
+        try {
+            return wordService.searchWordHave(key);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
 }

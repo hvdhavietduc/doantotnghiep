@@ -193,4 +193,16 @@ public class WordService {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
+
+    public ResponseEntity<List<String>> searchWordHave(String key) throws ResponseException{
+        int maxList = 10;
+        List<Word> wordListContain = wordRepository.findAllByNameContains(key);
+
+        if(wordListContain.size() > maxList){
+            wordListContain = wordListContain.subList(0, maxList);
+        }
+
+        List<String> wordList = wordListContain.stream().map(word -> word.getName()).toList();
+        return ResponseEntity.ok(wordList);
+     }
 }

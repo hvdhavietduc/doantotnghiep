@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/v3/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/words/name/**").permitAll()
+                                .requestMatchers("/api/words/search/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->
