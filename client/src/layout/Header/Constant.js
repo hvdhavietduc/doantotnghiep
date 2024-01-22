@@ -58,7 +58,7 @@ export const getUserMenu = () => [
     ...getMENU_ITEMS(),
     {
         icon: faUserGear,
-        title: i18next.t('Header.admin'),
+        title: i18next.t('Header.Admin'),
         to: config.routes.admin.MANAGEUSER,
     },
     {
