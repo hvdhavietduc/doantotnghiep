@@ -1,6 +1,6 @@
-package com.doantotnghiep.server.word.Response;
+package com.doantotnghiep.server.wordFolder.Response;
 
-import com.doantotnghiep.server.word.Word;
+import com.doantotnghiep.server.wordFolder.WordFolder;
 import lombok.Builder;
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 public class AllWordByFolder {
     public Integer total;
     public Integer totalPage;
-    public List<Word> words;
-    public AllWordByFolder(Integer total, Integer totalPage, List<Word> words) {
+    public List<WordFolder> words;
+    public AllWordByFolder(Integer total, Integer totalPage, List<WordFolder> words) {
         this.total = total;
         this.totalPage = totalPage;
         this.words = words;

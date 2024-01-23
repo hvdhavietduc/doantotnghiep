@@ -12,4 +12,6 @@ public interface WordRepository extends MongoRepository<Word, String> {
     Word findByName(String name);
     Page<Word> findAllByIdIn(List<String> ids, Pageable pageable);
     List<Word> findAllByNameContains(String key);
+
+    Word findAllById(String id);
 }
