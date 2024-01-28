@@ -134,5 +134,14 @@
     "Home": {
         "title": "Learning English Better With ENGMATESDD",
         "content": "Welcome to our English language enhancement platform, where we provide you with a comprehensive learning experience. Our website offers an array of resources designed to boost your English language proficiency. These resources encompass grammar and vocabulary exercises, reading and listening comprehension activities. The advantages of utilizing our English learning platform are multifaceted, ranging from the flexibility to tailor your learning pace to accessing an extensive repository of educational materials. Additionally, our platform enables you to monitor your progress and receive prompt feedback on your performance. To make the learning journey even more enjoyable, we offer an assortment of interactive games and quizzes that add an element of fun to your language learning endeavors."
+    },
+    "ManageUser": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "username": "Username",
+        "action": "Action",
+        "are_you_sure_to_delete_user": "Are you sure to delete user ?",
+        "delete_user_success": "Delete user success"
     }
 }

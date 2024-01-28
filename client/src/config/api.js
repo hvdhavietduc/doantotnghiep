@@ -10,6 +10,8 @@ const api = {
     },
     user: {
         GETME: 'user/me',
+        GETALLUSER: 'user/all',
+        DELETEUSER: 'user'
     },
     lookup: {
         SEARCH: 'words/name',
