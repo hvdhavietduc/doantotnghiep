@@ -38,7 +38,7 @@ const routes = {
         LOOKUP: '/lookup/:word',
     },
     admin: {
-        MANAGEUSER: '/manage_user/1',
+        MANAGEUSER: '/manage_user/:page',
         MANAGEFORUM: '/manage_forum',
         MANAGEQUIZZES: '/manage_quizzes',
         MANAGECATEGORIES: '/manage_categories',

@@ -8,25 +8,33 @@ import config from '~/config';
 import Loading from '~/components/Loading';
 import DeleteUser from './DeleteUser';
 import { useTranslation } from 'react-i18next';
+import Pagination from '~/components/Pagination';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function ManageUser() {
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const currentPage = currentPath.split('/')[2];
     const [allUser, setAllUser] = useState([]);
     const [data, setData] = useState();
     const [cookies, setCookies] = useCookies(['token']);
     const [loading, setLoading] = useState(false);
     const [isPoperDeleteUser, setIsPoperDeleteUser] = useState(false);
+    const [totalPage, setTotalPage] = useState(0);
     const [userIdToDelete, setUserIdToDelete] = useState();
     const { t } = useTranslation('translation', { keyPrefix: 'ManageUser' });
+    const navigate = useNavigate();
 
-    const getAllUserAPI = async () => {
-        const page = window.location.pathname.split('/')[2] - 1;
+    const getAllUserAPI = async (page) => {
         const token = cookies.token;
         setLoading(true);
 
-        await getAllUser(token, page)
+        await getAllUser(token, page - 1)
             .then((result) => {
                 setAllUser(result.users);
                 setData(result);
+                setTotalPage(result.totalPage);
                 setLoading(false);
             })
             .catch((error) => {
@@ -40,9 +48,16 @@ function ManageUser() {
             });
     };
 
+    const onPageChange = async (value) => {
+        navigate(`/manage_user/${value}`);
+    };
+
     useEffect(() => {
-        getAllUserAPI();
-    }, []);
+        if (currentPage < 1) {
+            navigate('/manage_user/1');
+        }
+        getAllUserAPI(currentPage);
+    }, [currentPage]);
 
     const showPoperDeleteUser = (userId) => {
         setUserIdToDelete(userId);
@@ -92,6 +107,9 @@ function ManageUser() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
             </div>
             {loading && <Loading />}
             {isPoperDeleteUser && <DeleteUser setIsPoperDeleteUser={setIsPoperDeleteUser} userId={userIdToDelete} />}
