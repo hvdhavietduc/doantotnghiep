@@ -32,7 +32,7 @@ function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
             id: inforFolder.idFolder,
         };
         await deleteFolder(data, cookies.token);
-        await onPageChange(currentPage);
+        onPageChange(currentPage, true);
         setIsPoperDeleteFolder(false);
         document.body.style.overflow = 'visible';
         setLoading(false);
