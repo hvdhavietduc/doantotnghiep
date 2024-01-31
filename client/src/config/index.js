@@ -6,6 +6,7 @@ import notification from './Auth/notification';
 import language from './language';
 import getParamaterHeaderSecondnary from './paramaterHeaderSecondnary';
 import wordsbooks from './WordsBooks';
+import manageUser from './ManageUser';
 
 const config = {
     routes,
@@ -16,6 +17,7 @@ const config = {
     language,
     getParamaterHeaderSecondnary,
     wordsbooks,
+    manageUser
 };
 
 export default config;
