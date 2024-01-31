@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { search, getListFolderToAdd } from '~/services/lookupServices';
+import { useEffect, useRef, useState } from 'react';
+import { search, getListFolderToAdd, addWordToFolder } from '~/services/lookupServices';
 import Loading from '~/components/Loading';
 import styles from './Lookup.module.scss';
 import classNames from 'classnames/bind';
@@ -11,6 +11,8 @@ import notify from '~/utils/notify';
 import { useCookies } from 'react-cookie';
 import Menu from '~/layout/Header/Menu';
 import { set } from 'react-hook-form';
+import Dropdown from '~/components/Dropdown';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -23,9 +25,9 @@ function Lookup() {
     const [haveSynonyms, setHaveSynonyms] = useState(false);
     const [haveAntonyms, setHaveAntonyms] = useState(false);
     const [isOpenAllMean, setIsOpenAllMean] = useState(false);
-    const [isOpenListFolder, setIsOpenListFolder] = useState(false);
     const [folders, setFolders] = useState([]);
     const [cookies, setCookies] = useCookies(['token']);
+    const [wordId, setWordId] = useState();
 
     const { t } = useTranslation('translation', { keyPrefix: 'Lookup' });
 
@@ -37,6 +39,7 @@ function Lookup() {
                 setLoading(false);
                 setHaveSynonyms(response.synonyms.length > 0);
                 setHaveAntonyms(response.antonyms.length > 0);
+                setWordId(response.id);
             })
             .catch((error) => {
                 setLoading(false);
@@ -45,63 +48,78 @@ function Lookup() {
             });
     }, [word]);
 
-    const openListFolder = async () => {
-        console.log(folders);
+    const getListFolder = async () => {
         await getListFolderToAdd(cookies.token).then((result) => {
-            const folders = result.map((folder) => {
-                return {
-                    title: folder.name,
-                };
-            });
-            console.log(folders);
-            setFolders(folders);
-            setIsOpenListFolder(!isOpenListFolder);
+            setFolders(result);
         });
     };
 
-    // const listFolder = () => {
-    //     return (
-    //         <div
-    //             className="absolute right-0 z-10mt-2 w-1/3 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-    //             role="menu"
-    //             aria-orientation="vertical"
-    //             aria-labelledby="menu-button"
-    //             tabindex="-1"
-    //         >
-    //             {folders.map((folder) => (
-    //                 <div className="py-1  p-2 px-4  hover:bg-slate-300" role="none" key={folder.id}>
-    //                     {folder.name}
-    //                 </div>
-    //             ))}
-    //         </div>
-    //     );
-    // };
+    useEffect(() => {
+        if (cookies.token) {
+            getListFolder();
+        }
+    }, []);
+
+    const handleAddToFolder = async (folderId) => {
+        setLoading(true);
+        const data = {
+            wordId: wordId,
+            folderId: folderId,
+        };
+        const messeageNotify = config.lookup.notification();
+        const messeageError = config.lookup.errorMesseage;
+
+        await addWordToFolder(data, cookies.token)
+            .then((result) => {
+                notify.success(messeageNotify.ADD_WORD_SUCCESS);
+                setLoading(false);
+            })
+            .catch((error) => {
+                if (!error.response) {
+                    const messeageNotify = config.errorMesseage.getMesseageNotify();
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    setLoading(false);
+                    return;
+                }
+                const { message } = error.response.data;
+                if (message === messeageError.messeageLogic.WORD_ADREADY_EXIST_IN_FOLDER) {
+                    notify.error(messeageError.getMesseageNotify().WORD_ADREADY_EXIST_IN_FOLDER);
+                    setLoading(false);
+                    return;
+                }
+            });
+    };
 
     return (
         <div className={cx('lookup p-16 lg:px-[200px] w-full flex gap-5')}>
             {data && (
                 <div className={cx('w-full md:flex gap-10')}>
                     <div className={cx(` ${haveAntonyms || haveSynonyms ? 'md:w-4/5' : 'w-full'}`)}>
-                        <div className={cx('border-t-2 border-t-blue-100 w-full flex flex-col gap-3')}>
-                            <h1 className={cx('text-5xl pt-5')}>{data.name}</h1>
-                            <h2 className={cx('font-bold')}>{data.types[0]?.type}</h2>
-                            <div className={cx('flex gap-5')}>
-                                <div className={cx('pronunciationUS flex gap-3')}>
-                                    <span className={cx('font-bold')}>US</span>
-                                    <span>{data.pronunciationUS}</span>
+                        <div className={cx('border-t-2 border-t-blue-100 w-full flex ')}>
+                            <div className="w-2/3 flex flex-col gap-3">
+                                <h1 className={cx('text-5xl pt-5')}>{data.name}</h1>
+                                <h2 className={cx('font-bold')}>{data.types[0]?.type}</h2>
+                                <div className={cx('flex gap-5')}>
+                                    <div className={cx('pronunciationUS flex gap-3')}>
+                                        <span className={cx('font-bold')}>US</span>
+                                        <span>{data.pronunciationUS}</span>
+                                    </div>
+                                    <div className={cx('pronunciationUK flex gap-3')}>
+                                        <span className={cx('font-bold')}>UK</span>
+                                        <span>{data.pronunciationUK}</span>
+                                    </div>
                                 </div>
-                                <div className={cx('pronunciationUK flex gap-3')}>
-                                    <span className={cx('font-bold')}>UK</span>
-                                    <span>{data.pronunciationUK}</span>
-                                </div>
+                            </div>
+                            <div className={cx('w-1/3 flex items-end justify-end')}>
+                                {cookies.token && (
+                                    <Dropdown
+                                        options={folders}
+                                        handleFunction={handleAddToFolder}
+                                        title={t('add_to_folder')}
+                                    ></Dropdown>
+                                )}
                             </div>
                         </div>
-                        {cookies.token && (
-                            <div class="relative inline-block text-left w-full right-0">
-                                <button onClick={openListFolder}>click vao</button>
-                                {isOpenListFolder ? <Menu items={folders} onClick={openListFolder}></Menu> : ''}
-                            </div>
-                        )}
                         <div className={cx('border-t-2 border-t-blue-100 w-full flex flex-col gap-3')}>
                             <div
                                 className={cx(

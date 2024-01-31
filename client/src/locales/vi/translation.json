@@ -108,7 +108,10 @@
         "Definition": "Định nghĩa",
         "Synonyms": "Từ đồng nghĩa",
         "Antonyms": "Từ trái nghĩa",
-        "ClickToShow": "Click để hiện tất cả nghĩa"
+        "ClickToShow": "Click để hiện tất cả nghĩa",
+        "word_aldready_exist_in_folder": "Từ đã tồn tại trong folder",
+        "add_word_success": "Thêm từ thành công",
+        "add_to_folder": "Thêm vào folder"
     },
     "WordBooks": {
         "my_folder": "Bộ từ vựng của tôi",

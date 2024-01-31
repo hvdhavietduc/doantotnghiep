@@ -108,7 +108,10 @@
         "Definition": "Definition",
         "Synonyms": "Synonyms",
         "Antonyms": "Antonyms",
-        "ClickToShow": "Click to show all meaning"
+        "ClickToShow": "Click to show all meaning",
+        "word_aldready_exist_in_folder": "Word aldready exist in folder",
+        "add_word_success": "Add word success",
+        "add_to_folder": "Add to folder"
     },
     "WordBooks": {
         "my_folder": "My folder",

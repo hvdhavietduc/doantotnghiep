@@ -16,13 +16,15 @@ const api = {
     lookup: {
         SEARCH: 'words/name',
         WORDCONTAIN: 'words/search',
+        ADDWORDTOFOLDER: '/words/folder',
+
     },
     wordbooks: {
         GETALL: '/folders/all',
         CREATEFOLDER: '/folders',
         EDITFOLDER: '/folders',
         DELETEFOLDER: '/folders',
-        GETALLTOADD: '/folders/all/toAdd'
+        GETALLTOADD: '/folders/all/toAdd',
     },
 
 };

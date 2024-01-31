@@ -20,4 +20,13 @@ const getListFolderToAdd = async (token) => {
     return res.data;
 }
 
-export { search, filetWordContain, getListFolderToAdd };
+const addWordToFolder = async (data, token) => {
+    const res = await httpRequest.post(`${config.api.lookup.ADDWORDTOFOLDER}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    return res.data;
+}
+
+export { search, filetWordContain, getListFolderToAdd, addWordToFolder};
