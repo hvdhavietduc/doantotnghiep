@@ -39,7 +39,7 @@ function CreateFolders({ setIsPoperCreateFolder, onPageChange }) {
 
     const handleMiddleCreateFolder = async (data) => {
         await createFolder(data, cookies.token);
-        await onPageChange(1);
+        await onPageChange(1, true);
         setIsPoperCreateFolder(false);
         document.body.style.overflow = 'visible';
         setLoading(false);

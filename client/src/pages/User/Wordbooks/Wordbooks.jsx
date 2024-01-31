@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -23,50 +24,43 @@ function Wordbooks() {
     const [listFolder, setListFolder] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isPoperCreateFolder, setIsPoperCreateFolder] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
+    const [isDeleteorEdit, setIsDeleteorEdit] = useState(false);
 
-    const paramater = config.getParamaterHeaderSecondnary().wordbooks;
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookies] = useCookies(['token']);
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
+
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const currentPage = Number(currentPath.split('/')[2]);
+
+    const paramater = config.getParamaterHeaderSecondnary().wordbooks;
 
     const showPoperCreateFolder = () => {
         setIsPoperCreateFolder(true);
         document.body.style.overflow = 'hidden';
     };
 
-    const onPageChange = async (value) => {
-        setLoading(true);
-        const token = cookies.token;
-        await getFolderAll(token, value - 1)
-            .then((result) => {
-                dispatch(updateCurrentPage(value));
-                setListFolder(result.folders);
-                setCurrentPage(value);
-                setLoading(false);
-                return;
-            })
-            .catch((error) => {
-                setLoading(false);
-                const messeageNotify = config.errorMesseage.getMesseageNotify();
-                if (!error.response) {
-                    notify.error(messeageNotify.ERROR_NETWORD);
-                    return;
-                }
-            });
+    const onPageChange = (value, isChanged = false) => {
+        dispatch(updateCurrentPage(value));
+        if (isChanged === true) {
+            setIsDeleteorEdit(true);
+        }
+        navigate(config.routes.wordbooks.WORDBOOK + `/${value}`);
     };
 
     useEffect(() => {
         setLoading(true);
         const token = cookies.token;
-        getFolderAll(token, 0, listFolder.size)
+        getFolderAll(token, currentPage - 1, listFolder.size)
             .then((result) => {
                 setLoading(false);
                 setListFolder(result.folders);
                 setTotalPage(result.totalPage);
+                setIsDeleteorEdit(false);
                 return;
             })
             .catch((error) => {
@@ -78,7 +72,7 @@ function Wordbooks() {
                 }
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [currentPage, isDeleteorEdit]);
     return (
         <Fragment>
             <div className={cx('wordbooks')}>
@@ -112,7 +106,11 @@ function Wordbooks() {
                 </div>
             </div>
             {isPoperCreateFolder && (
-                <CreateFolder setIsPoperCreateFolder={setIsPoperCreateFolder} onPageChange={onPageChange} />
+                <CreateFolder
+                    setIsPoperCreateFolder={setIsPoperCreateFolder}
+                    onPageChange={onPageChange}
+                    setListFolder={setListFolder}
+                />
             )}
             {loading && <Loading />}
         </Fragment>
