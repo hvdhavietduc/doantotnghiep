@@ -11,4 +11,13 @@ const filetWordContain = async (key) => {
     return res.data;
 }
 
-export { search, filetWordContain };
+const getListFolderToAdd = async (token) => {
+    const res = await httpRequest.get(`${config.api.wordbooks.GETALLTOADD}`,{
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    return res.data;
+}
+
+export { search, filetWordContain, getListFolderToAdd };

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { search } from '~/services/lookupServices';
+import { search, getListFolderToAdd } from '~/services/lookupServices';
 import Loading from '~/components/Loading';
 import styles from './Lookup.module.scss';
 import classNames from 'classnames/bind';
@@ -8,6 +8,9 @@ import TypeWord from '~/components/TypeWord';
 import SynonymOrAntonym from '~/components/SynonymOrAntonym';
 import { useTranslation } from 'react-i18next';
 import notify from '~/utils/notify';
+import { useCookies } from 'react-cookie';
+import Menu from '~/layout/Header/Menu';
+import { set } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +23,10 @@ function Lookup() {
     const [haveSynonyms, setHaveSynonyms] = useState(false);
     const [haveAntonyms, setHaveAntonyms] = useState(false);
     const [isOpenAllMean, setIsOpenAllMean] = useState(false);
+    const [isOpenListFolder, setIsOpenListFolder] = useState(false);
+    const [folders, setFolders] = useState([]);
+    const [cookies, setCookies] = useCookies(['token']);
+
     const { t } = useTranslation('translation', { keyPrefix: 'Lookup' });
 
     useEffect(() => {
@@ -37,6 +44,38 @@ function Lookup() {
                 notify.error(message);
             });
     }, [word]);
+
+    const openListFolder = async () => {
+        console.log(folders);
+        await getListFolderToAdd(cookies.token).then((result) => {
+            const folders = result.map((folder) => {
+                return {
+                    title: folder.name,
+                };
+            });
+            console.log(folders);
+            setFolders(folders);
+            setIsOpenListFolder(!isOpenListFolder);
+        });
+    };
+
+    // const listFolder = () => {
+    //     return (
+    //         <div
+    //             className="absolute right-0 z-10mt-2 w-1/3 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+    //             role="menu"
+    //             aria-orientation="vertical"
+    //             aria-labelledby="menu-button"
+    //             tabindex="-1"
+    //         >
+    //             {folders.map((folder) => (
+    //                 <div className="py-1  p-2 px-4  hover:bg-slate-300" role="none" key={folder.id}>
+    //                     {folder.name}
+    //                 </div>
+    //             ))}
+    //         </div>
+    //     );
+    // };
 
     return (
         <div className={cx('lookup p-16 lg:px-[200px] w-full flex gap-5')}>
@@ -57,6 +96,12 @@ function Lookup() {
                                 </div>
                             </div>
                         </div>
+                        {cookies.token && (
+                            <div class="relative inline-block text-left w-full right-0">
+                                <button onClick={openListFolder}>click vao</button>
+                                {isOpenListFolder ? <Menu items={folders} onClick={openListFolder}></Menu> : ''}
+                            </div>
+                        )}
                         <div className={cx('border-t-2 border-t-blue-100 w-full flex flex-col gap-3')}>
                             <div
                                 className={cx(
