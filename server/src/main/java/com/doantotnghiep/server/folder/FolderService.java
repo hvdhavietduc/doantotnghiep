@@ -64,6 +64,11 @@ public class FolderService {
         return ResponseEntity.ok(response);
     }
 
+    public ResponseEntity<List<Folder>> getAllFolderToAdd(String userId){
+        List<Folder> response = folderRepository.findAllByUserId(userId);
+        return ResponseEntity.ok(response);
+    }
+
     public ResponseEntity<Boolean> deleteFolder(String userId, String folderId) throws ResponseException {
         try {
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);

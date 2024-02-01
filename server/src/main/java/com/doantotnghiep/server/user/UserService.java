@@ -49,8 +49,17 @@ public class UserService {
         Page<User> userPage = userRepository.findAll(paging);
         List<User> users = userPage.getContent();
         List<UserResponse> allUsers = users.stream()
-                .map(user->new UserResponse(user.getId(),user.getUsername(),user.getName(), user.getEmail(), user.getAvatar(),user.getRole()))
+                .filter(user -> user.getRole() != Role.ADMIN)
+                .map(user -> new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAvatar(),
+                        user.getRole()
+                ))
                 .toList();
+
         long total = userRepository.count();
         Integer totalPage = userPage.getTotalPages();
 
