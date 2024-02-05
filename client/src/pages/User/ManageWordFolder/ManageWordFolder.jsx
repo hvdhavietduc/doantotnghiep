@@ -1,19 +1,42 @@
-import { useEffect, useState } from 'react';
-import Loading from '~/components/Loading';
-import styles from './ManageWordFolder.module.scss';
 import classNames from 'classnames/bind';
-
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Button from '~/components/Button';
+
+import styles from './ManageWordFolder.module.scss';
 import ItemWord from './ItemWord';
+import AddWord from './AddWord';
+import Button from '~/components/Button';
 import Pagination from '~/components/Pagination';
+import Loading from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
 function ManageWordFolder() {
+    const [listWord, setListWord] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isPoperAddWord, setIsPoperAddWord] = useState(false);
+    const [totalPage, setTotalPage] = useState(1);
+    const [isDeleteorEdit, setIsDeleteorEdit] = useState(false);
+
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const currentPage = Number(currentPath.split('/')[4]);
 
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordFolder' });
+
+    const showPoperAddWord = () => {
+        setIsPoperAddWord(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const onPageChange = (value, isChanged = false) => {
+        //(updateCurrentPage(value));
+        if (isChanged === true) {
+            setIsDeleteorEdit(true);
+        }
+        //(config.routes.wordbooks.WORDBOOK + `/${value}`);
+    };
 
     return (
         <div className={cx('ManageWordFolder')}>
@@ -22,7 +45,7 @@ function ManageWordFolder() {
                     <div className={cx('nameFolder')}>
                         Folder: <span>Communicate</span>
                     </div>
-                    <Button primary className={cx('btn-add')}>
+                    <Button primary className={cx('btn-add')} onClick={showPoperAddWord}>
                         {t('add_new_word')}
                     </Button>
                 </div>
@@ -38,9 +61,12 @@ function ManageWordFolder() {
                     </div>
                 </div>
                 <div className={cx('pagination')}>
-                    <Pagination totalPage={10} currentPage={1} onPageChange={() => {}} />
+                    <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={() => {}} />
                 </div>
             </div>
+            {isPoperAddWord && (
+                <AddWord setIsPoperAddWord={setIsPoperAddWord} onPageChange={onPageChange} setListWord={setListWord} />
+            )}
             {loading && <Loading />}
         </div>
     );

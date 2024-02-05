@@ -3,7 +3,8 @@
         "is_required": " là bắt buột",
         "must_least": " bắt buột ít nhất ",
         "must_most": " bắt buột nhiều nhất ",
-        "characters": " kí tự"
+        "characters": " kí tự",
+        "contain_only_letters_number_and_spaces": " chỉ có thể chứa kí tự, chữ số và khoảng trắng"
     },
     "Error": {
         "error_network": "Lỗi kết nối mạng"
@@ -136,7 +137,19 @@
         "add_new_word": "Thêm từ mới",
         "example": "Ví dụ: ",
         "edit": "Chỉnh sửa",
-        "delete": "Xóa"
+        "delete": "Xóa",
+        "title": "Tiêu đề*",
+        "picture": "Ảnh",
+        "word_type": "Loại từ* (N, V, ADJ,..) ",
+        "spell": "Đánh vần",
+        "no_file_chosen": "Không có file được chọn",
+        "note": "Lưu ý",
+        "save": "Lưu",
+        "cancel": "Hủy",
+        "word_already_exist": "Từ này đã tồn tại",
+        "add_new_word_success": "Thêm từ mới thành công",
+        "edit_word_success": "Chỉnh sửa từ thành công",
+        "delete_word_success": "Xóa từ thành công"
     },
     "Home": {
         "title": "Học tiếng anh cùng với ENGMATESDD",
