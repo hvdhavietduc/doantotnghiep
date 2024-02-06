@@ -135,6 +135,8 @@
     "ManageWordFolder": {
         "definition": "Definition",
         "add_new_word": "Add new word",
+        "edit_word": "Edit word",
+        "delete_word": "Delete new word",
         "example": "Example",
         "edit": "Edit",
         "delete": "Delete",

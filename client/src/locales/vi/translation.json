@@ -135,6 +135,8 @@
     "ManageWordFolder": {
         "definition": "Định nghĩa:",
         "add_new_word": "Thêm từ mới",
+        "edit_word": "Chỉnh sửa từ",
+        "delete_word": "Xóa từ",
         "example": "Ví dụ: ",
         "edit": "Chỉnh sửa",
         "delete": "Xóa",
