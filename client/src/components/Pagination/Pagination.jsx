@@ -28,7 +28,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
         <div className={cx('pagination')}>
             <button
                 className={cx('item', {
-                    disabled: currentPage === 1,
+                    disabled: currentPage == 1,
                 })}
                 onClick={() => onPageChange(currentPage - 1)}
             >
@@ -39,7 +39,8 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
                 <button
                     key={index}
                     className={cx('item', {
-                        active: currentPage === value,
+                        active: currentPage == value,
+                        disabled: currentPage == value,
                     })}
                     onClick={() => onPageChange(value)}
                 >
@@ -49,7 +50,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
 
             <button
                 className={cx('item', {
-                    disabled: currentPage === totalPage,
+                    disabled: currentPage == totalPage,
                 })}
                 onClick={() => onPageChange(currentPage + 1)}
             >

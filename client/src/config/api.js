@@ -10,16 +10,21 @@ const api = {
     },
     user: {
         GETME: 'user/me',
+        GETALLUSER: 'user/all',
+        DELETEUSER: 'user'
     },
     lookup: {
         SEARCH: 'words/name',
-        WORDCONTAIN: 'words/search'
+        WORDCONTAIN: 'words/search',
+        ADDWORDTOFOLDER: '/words/folder',
+
     },
     wordbooks: {
         GETALL: '/folders/all',
         CREATEFOLDER: '/folders',
         EDITFOLDER: '/folders',
         DELETEFOLDER: '/folders',
+        GETALLTOADD: '/folders/all/toAdd',
     },
 
 };

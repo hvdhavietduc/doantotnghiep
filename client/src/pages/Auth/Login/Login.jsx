@@ -63,7 +63,7 @@ function Login() {
             dispatch(deleteInforVerify());
             notify.success(config.notification().LOGIN_SUCCESS);
             if (user.role === 'USER') navigate(config.routes.HOME);
-            if (user.role === 'ADMIN') navigate(config.routes.admin.MANAGEUSER);
+            if (user.role === 'ADMIN') navigate('/manage_user/1');
         };
         handleLogin().catch((error) => {
             setLoading(false);

@@ -7,6 +7,8 @@ import language from './language';
 import getParamaterHeaderSecondnary from './paramaterHeaderSecondnary';
 import wordsbooks from './WordsBooks';
 import manageWordFolder from './ManageWordFolder';
+import manageUser from './ManageUser';
+import lookup from './Lookup';
 
 const config = {
     routes,
@@ -18,6 +20,8 @@ const config = {
     getParamaterHeaderSecondnary,
     wordsbooks,
     manageWordFolder,
+    manageUser,
+    lookup,
 };
 
 export default config;

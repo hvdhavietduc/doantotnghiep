@@ -15,7 +15,7 @@ export const getNavigation = () => [
 
 export const getNavigationAdmin = () => [
     { title: i18next.t('HeaderAdmin.manage_forum'), link: config.routes.admin.MANAGEFORUM },
-    { title: i18next.t('HeaderAdmin.manage_user'), link: config.routes.admin.MANAGEUSER },
+    { title: i18next.t('HeaderAdmin.manage_user'), link: "/manage_user/1" },
     { title: i18next.t('HeaderAdmin.manage_quizzes'), link: config.routes.admin.MANAGEQUIZZES },
     { title: i18next.t('HeaderAdmin.manage_categories'), link: config.routes.admin.MANAGECATEGORIES },
     { title: i18next.t('HeaderAdmin.manage_news'), link: config.routes.admin.MANAGENEWS },
@@ -59,7 +59,7 @@ export const getUserMenu = () => [
     {
         icon: faUserGear,
         title: i18next.t('Header.Admin'),
-        to: config.routes.admin.MANAGEUSER,
+        to: "/manage_user/1",
     },
     {
         icon: faSignOut,
