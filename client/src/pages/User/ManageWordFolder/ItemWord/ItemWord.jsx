@@ -9,6 +9,7 @@ import Tippy from '@tippyjs/react/headless';
 import styles from './ItemWord.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import EditWord from '../EditWord';
+import DeleteWord from '../DeleteWord';
 import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
@@ -98,13 +99,13 @@ function ItemWord({ inforWord, onPageChange }) {
             {isPoperEditWord && (
                 <EditWord setIsPoperEditWord={setIsPoperEditWord} inforWord={inforWord} onPageChange={onPageChange} />
             )}
-            {/* {isPoperDeleteWord && (
+            {isPoperDeleteWord && (
                 <DeleteWord
                     setIsPoperDeleteWord={setIsPoperDeleteWord}
                     inforWord={inforWord}
                     onPageChange={onPageChange}
                 />
-            )} */}
+            )}
         </Fragment>
     );
 }
