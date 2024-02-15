@@ -8,6 +8,7 @@ import java.util.List;
 @Builder
 public class AllWordByFolder {
     public Integer total;
+    public String folder;
     public Integer totalPage;
     public List<WordFolder> words;
     public AllWordByFolder(Integer total, Integer totalPage, List<WordFolder> words) {

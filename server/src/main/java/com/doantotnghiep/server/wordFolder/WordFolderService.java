@@ -39,6 +39,7 @@ public class WordFolderService {
             Integer total = wordIds.size();
             Integer totalPage = words.getTotalPages();
             AllWordByFolder response = AllWordByFolder.builder()
+                    .folder(folder.getName())
                     .total(total)
                     .totalPage(totalPage)
                     .words(words.getContent())
