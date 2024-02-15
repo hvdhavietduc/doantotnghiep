@@ -11,9 +11,4 @@ public class AllWordByFolder {
     public String folder;
     public Integer totalPage;
     public List<WordFolder> words;
-    public AllWordByFolder(Integer total, Integer totalPage, List<WordFolder> words) {
-        this.total = total;
-        this.totalPage = totalPage;
-        this.words = words;
-    }
 }
