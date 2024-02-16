@@ -22,7 +22,7 @@ const publicRoutes = [
 
 const privateRoutes = [
     { path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout },
-    { path: config.routes.wordbooks.WORDFOLDER, element: ManageWordFolder, layout: DefautLayout },
+    { path: config.routes.wordbooks.WORDFOLDERS, element: ManageWordFolder, layout: DefautLayout },
 ];
 
 const adminRoutes = [{ path: config.routes.admin.MANAGEUSER, element: ManageUser, layout: AdminLayout }];

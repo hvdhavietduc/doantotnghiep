@@ -44,4 +44,18 @@ const deleteFolder = async (data, token) => {
     return res.data;
 };
 
-export { getFolderAll, createFolder, editFolder, deleteFolder };
+const getWordAllByIdFolder = async (token, folderId, page = 0, size = 5) => {
+    const res = await httpRequest.get(config.api.wordbooks.GETALLWORDINFOLDER, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        params: {
+            folderId: folderId,
+            size: size,
+            page: page,
+        },
+    });
+    return res.data;
+};
+
+export { getFolderAll, createFolder, editFolder, deleteFolder, getWordAllByIdFolder };

@@ -16,7 +16,8 @@ const routes = {
     wordbooks: {
         WORDBOOK: '/wordbooks',
         WORDBOOKS: '/wordbooks/:page',
-        WORDFOLDER: '/wordbooks/:page/:idFolder',
+        WORDFOLDER: '/wordbooks/:pageFolder/:idFolder',
+        WORDFOLDERS: '/wordbooks/:pageFolder/:idFolder/:pageWord',
     },
     video: {
         VIDEO: '/video',

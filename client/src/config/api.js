@@ -25,6 +25,7 @@ const api = {
         EDITFOLDER: '/folders',
         DELETEFOLDER: '/folders',
         GETALLTOADD: '/folders/all/toAdd',
+        GETALLWORDINFOLDER:"/wordFolder/folder"
     },
 
 };

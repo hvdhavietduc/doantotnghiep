@@ -155,7 +155,8 @@
         "word_already_exist": "Từ này đã tồn tại",
         "add_new_word_success": "Thêm từ mới thành công",
         "edit_word_success": "Chỉnh sửa từ thành công",
-        "delete_word_success": "Xóa từ thành công"
+        "delete_word_success": "Xóa từ thành công",
+        "no_have_word": "Chưa có từ vựng nào được thêm trong folder này"
     },
     "Home": {
         "title": "Học tiếng anh cùng với ENGMATESDD",

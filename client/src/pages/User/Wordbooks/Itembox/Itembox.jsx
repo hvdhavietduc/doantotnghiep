@@ -63,7 +63,7 @@ function Itembox({
     };
 
     const openDetailFolder = () => {
-        navigate(String(idFolder));
+        navigate(String(idFolder) + '/1');
     };
 
     return (

@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import useSound from 'use-sound';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
@@ -10,7 +11,7 @@ import styles from './ItemWord.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import EditWord from '../EditWord';
 import DeleteWord from '../DeleteWord';
-import Image from '~/components/Image';
+//import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +20,8 @@ function ItemWord({ inforWord, onPageChange }) {
     const [isPoperDeleteWord, setIsPoperDeleteWord] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordFolder' });
-    // const navigate = useNavigate();
+    const [playSoundUK] = useSound(inforWord.pronunciationUKAudio);
+    const [playSoundUS] = useSound(inforWord.pronunciationUSAudio);
 
     const renderResult = (attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
@@ -52,36 +54,44 @@ function ItemWord({ inforWord, onPageChange }) {
                 <div className={cx('section1')}>
                     <div>
                         <div className={cx('title')}>
-                            <div className={cx('name-word')}>abandon /əˈbændən/</div>
+                            <div className={cx('name-word')}>
+                                {inforWord.name + ' '}
+                                {inforWord.pronunciationUK}
+                            </div>
                             <div className={cx('sound')}>
                                 <span>US</span>
-                                <FontAwesomeIcon icon={faVolumeLow} />
+                                <FontAwesomeIcon icon={faVolumeLow} onClick={playSoundUS} />
                                 <span>UK</span>
-                                <FontAwesomeIcon icon={faVolumeLow} />
+                                <FontAwesomeIcon icon={faVolumeLow} onClick={playSoundUK} />
                             </div>
                         </div>
                         <div className={cx('Definition')}>
                             <div className={cx('title')}>{t('definition')}</div>
                             <div className={cx('content')}>
-                                <div>to stop doing an activity before you have finished it</div>
-                                <div>từ bỏ, đầu hàng, không làm nữa dù chưa xong</div>
+                                <div>{inforWord.types[0].means[0].conceptEnglish.slice(0, -1)}</div>
+                                <div className={cx('bg-blue-200')}>
+                                    {inforWord.types[0].means[0].conceptVietnamese || 'Sẽ có khi có API'}
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <Image
+                        {/* <Image
                             className={cx('image')}
                             src="https://tse4.mm.bing.net/th?id=OIP.RgAVXeYE3WsnWQFzNkf2RwHaEK&pid=Api&P=0&h=220"
-                        />
+                        /> */}
                     </div>
                 </div>
-                <div className={cx('Example')}>
-                    <div className={cx('title')}>{t('example')}</div>
-                    <ul className={cx('content')}>
-                        <li>The game was abandoned at half-time because of the poor weather conditions.</li>
-                        <li>The game was abandoned at half-time because of the poor weather conditions.</li>
-                    </ul>
-                </div>
+                {inforWord.types[0].means[0].examples.length !== 0 && (
+                    <div className={cx('Example')}>
+                        <div className={cx('title')}>{t('example')}</div>
+                        <ul className={cx('content')}>
+                            {inforWord.types[0].means[0].examples.map((value, index) => (
+                                <li key={index}>{value.example}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
 
                 <Tippy
                     interactive
@@ -111,7 +121,7 @@ function ItemWord({ inforWord, onPageChange }) {
 }
 
 ItemWord.propTypes = {
-    infordWord: PropTypes.object.isRequired,
+    inforWord: PropTypes.object.isRequired,
     onPageChange: PropTypes.func.isRequired,
 };
 

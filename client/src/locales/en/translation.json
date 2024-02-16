@@ -155,7 +155,8 @@
         "word_already_exist": "Word already exist",
         "add_new_word_success": "Add new word success",
         "edit_word_success": "Edit word success",
-        "delete_word_success": "Delete word success"
+        "delete_word_success": "Delete word success",
+        "no_have_word": "There are no vocabulary words in this folder yet"
     },
     "Home": {
         "title": "Learning English Better With ENGMATESDD",
