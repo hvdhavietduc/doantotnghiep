@@ -127,7 +127,7 @@ function CreateNewPassword() {
                         {...register('passwordConfirm', valid.passwordConfirm)}
                         errolMesseage={errors.passwordConfirm?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         Confirm
                     </Button>
                 </form>

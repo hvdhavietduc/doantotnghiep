@@ -30,7 +30,7 @@ function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, onCha
                 {menuFilter.map((item, index) => (
                     <Button
                         key={index}
-                        className={cx('btn-filter', { 'btn-active': indexFilter === index })}
+                        className={cx('mr-5 py-1 px-4', 'btn-filter', { 'btn-active': indexFilter === index })}
                         rounded
                         onClick={() => handleFilter(item, index)}
                     >

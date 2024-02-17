@@ -138,7 +138,7 @@ function Signup() {
                         errolMesseage={errors.passwordConfirm?.message}
                     />
 
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('signup')}
                     </Button>
                 </form>

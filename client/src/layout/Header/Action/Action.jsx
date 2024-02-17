@@ -108,10 +108,10 @@ function Action({ userMenu }) {
                     <></>
                 ) : (
                     <Fragment>
-                        <Button className={cx('btn-login')} primary to={config.routes.auth.LOGIN}>
+                        <Button className={cx('mr-2 h-9')} primary to={config.routes.auth.LOGIN}>
                             Log in
                         </Button>
-                        <Button className={cx('btn-signup')} primary to={config.routes.auth.SIGNUP}>
+                        <Button className={cx('h-9')} primary to={config.routes.auth.SIGNUP}>
                             Sign up
                         </Button>
                     </Fragment>

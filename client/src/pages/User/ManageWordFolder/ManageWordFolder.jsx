@@ -80,7 +80,7 @@ function ManageWordFolder() {
                     <div className={cx('nameFolder')}>
                         Folder: <span>{nameFolder}</span>
                     </div>
-                    <Button primary className={cx('btn-add')} onClick={showPoperAddWord}>
+                    <Button primary className={cx('px-[6px]')} onClick={showPoperAddWord}>
                         {t('add_new_word')}
                     </Button>
                 </div>

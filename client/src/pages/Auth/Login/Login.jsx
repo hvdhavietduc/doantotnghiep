@@ -117,11 +117,11 @@ function Login() {
                         {...register('password', valid.password)}
                         errolMesseage={errors.password?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('login')}
                     </Button>
                 </form>
-                <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
+                <Button className={cx('btn-google')} red rounded leftIcon={faGoogle}>
                     {t('login_with_google')}
                 </Button>
                 <div className={cx('modifer')} id="modifer">

@@ -81,7 +81,7 @@ function ForgetPassword() {
                         {...register('email', valid.email)}
                         errolMesseage={errors.email?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('send_email')}
                     </Button>
                 </form>

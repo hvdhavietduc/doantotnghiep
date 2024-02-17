@@ -133,7 +133,7 @@ function VerifyRegister() {
                         {...register('code', valid.code)}
                         errolMesseage={errors.code?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('confirm')}
                     </Button>
                 </form>
