@@ -11,13 +11,12 @@ const api = {
     user: {
         GETME: 'user/me',
         GETALLUSER: 'user/all',
-        DELETEUSER: 'user'
+        DELETEUSER: 'user',
     },
     lookup: {
         SEARCH: 'words/name',
         WORDCONTAIN: 'words/search',
         ADDWORDTOFOLDER: '/words/folder',
-
     },
     wordbooks: {
         GETALL: '/folders/all',
@@ -25,9 +24,8 @@ const api = {
         EDITFOLDER: '/folders',
         DELETEFOLDER: '/folders',
         GETALLTOADD: '/folders/all/toAdd',
-        GETALLWORDINFOLDER:"/wordFolder/folder"
+        WORDINFOLDER: '/wordFolder/folder',
     },
-
 };
 
 export default api;

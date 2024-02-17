@@ -45,7 +45,7 @@ const deleteFolder = async (data, token) => {
 };
 
 const getWordAllByIdFolder = async (token, folderId, page = 0, size = 5) => {
-    const res = await httpRequest.get(config.api.wordbooks.GETALLWORDINFOLDER, {
+    const res = await httpRequest.get(config.api.wordbooks.WORDINFOLDER, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -58,4 +58,23 @@ const getWordAllByIdFolder = async (token, folderId, page = 0, size = 5) => {
     return res.data;
 };
 
-export { getFolderAll, createFolder, editFolder, deleteFolder, getWordAllByIdFolder };
+const editWord = async (data, token) => {
+    const res = await httpRequest.put(config.api.wordbooks.WORDINFOLDER, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+const deleteWord = async (data, token) => {
+    console.log('data: ', data);
+    const res = await httpRequest.delete(config.api.wordbooks.WORDINFOLDER, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export { getFolderAll, createFolder, editFolder, deleteFolder, getWordAllByIdFolder, editWord, deleteWord };

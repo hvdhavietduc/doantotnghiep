@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 // import styles from './Delete.module.scss';
 import Loading from '~/components/Loading';
 import PopperConfirm from '~/components/PopperConfirm';
-import { deleteFolder } from '~/services/folderService';
+import { deleteWord } from '~/services/folderService';
 import notify from '~/utils/notify';
 import config from '~/config';
 
@@ -22,6 +22,8 @@ function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
     const [cookies, setCookie] = useCookies(['token']);
     const { currentPage } = useSelector((state) => state.wordBooks);
 
+    console.log(inforWord);
+
     const closePoper = () => {
         setIsPoperDeleteWord(false);
         document.body.style.overflow = 'visible';
@@ -29,14 +31,15 @@ function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
 
     const handleMiddleDeletetFolder = async () => {
         const data = {
-            id: inforWord.idFolder,
+            wordId: inforWord.id,
+            folderId: inforWord.folderId,
         };
-        await deleteFolder(data, cookies.token);
+        await deleteWord(data, cookies.token);
         onPageChange(currentPage, true);
         setIsPoperDeleteWord(false);
         document.body.style.overflow = 'visible';
         setLoading(false);
-        notify.success(config.wordsbooks.notification().DELETE_FOLDER_SUCCESS);
+        notify.success(config.manageWordFolder.notification().DELETE_WORD_SUCCESS);
     };
 
     const handleDeletetFolder = async () => {
@@ -56,7 +59,7 @@ function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
             <PopperConfirm
                 onClose={closePoper}
                 onSave={handleDeletetFolder}
-                content={t('Are_you_sure_to_delete_word') + '[' + inforWord + '] ?'}
+                content={t('Are_you_sure_to_delete_word') + ' [' + inforWord.name + '] ?'}
             />
 
             {loading && <Loading />}
@@ -66,7 +69,7 @@ function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
 
 DeleteWord.propTypes = {
     setIsPoperDeleteWord: PropTypes.func.isRequired,
-    inforFolder: PropTypes.object.isRequired,
+    inforWord: PropTypes.object.isRequired,
     onPageChange: PropTypes.func.isRequired,
 };
 

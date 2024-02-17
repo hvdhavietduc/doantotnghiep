@@ -99,7 +99,7 @@ function ManageWordFolder() {
                     )}
                 </div>
                 <div className={cx('pagination')}>
-                    <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={() => {}} />
+                    <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
                 </div>
             </div>
             {isPoperAddWord && (
