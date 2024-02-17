@@ -1,0 +1,86 @@
+.itemWord {
+    width: 100%;
+    position: relative;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: rgba(0, 0, 0, 0.2) 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.5px 2.5px 2.6px;
+    padding: 28px;
+}
+
+.section1 {
+    display: flex;
+    justify-content: space-between;
+}
+.title {
+    display: flex;
+}
+.name-word {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.sound {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+
+    span {
+        margin: 0 4px 0 10px;
+    }
+}
+.Definition {
+    margin-top: 10px;
+    .title {
+        font-weight: 600;
+    }
+}
+
+.Example {
+    margin-top: 10px;
+    .title {
+        font-weight: 600;
+    }
+
+    .content {
+        list-style: inside;
+    }
+}
+
+.image {
+    width: 160px;
+    border-radius: 8px;
+}
+.menu {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.menu-list {
+    margin-right: 8px;
+}
+
+.menu-popper {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    overflow: hidden;
+}
+
+.menu-item {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 6px 16px;
+    line-height: 1.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+
+    &:hover {
+        background-color: var(--background-color-secondnary);
+    }
+}

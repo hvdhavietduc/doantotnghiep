@@ -7,6 +7,7 @@ import Error from '~/pages/OtherPage/NotExist';
 import Home from '~/pages/User/Home';
 import Translation from '~/pages/User/Translation';
 import Wordbooks from '~/pages/User/Wordbooks';
+import ManageWordFolder from '~/pages/User/ManageWordFolder';
 import Lookup from '~/pages/User/Lookup';
 import ManageUser from '~/pages/Admin/ManageUser';
 import config from '~/config';
@@ -19,7 +20,10 @@ const publicRoutes = [
     { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
 ];
 
-const privateRoutes = [{ path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout }];
+const privateRoutes = [
+    { path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout },
+    { path: config.routes.wordbooks.WORDFOLDERS, element: ManageWordFolder, layout: DefautLayout },
+];
 
 const adminRoutes = [{ path: config.routes.admin.MANAGEUSER, element: ManageUser, layout: AdminLayout }];
 

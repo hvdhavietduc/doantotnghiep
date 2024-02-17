@@ -25,16 +25,15 @@ function DeleteUser({ setIsPoperDeleteUser, userId }) {
     };
 
     const handleMiddleDeletetUser = async () => {
-        await deleteUser(cookies.token, userId)
-            .then((result) => {
-                setIsPoperDeleteUser(false);
-                document.body.style.overflow = 'visible';
-                setLoading(false);
-                notify.success(config.manageUser.notification().DELETE_USER_SUCCESS);
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            })
+        await deleteUser(cookies.token, userId).then((result) => {
+            setIsPoperDeleteUser(false);
+            document.body.style.overflow = 'visible';
+            setLoading(false);
+            notify.success(config.manageUser.notification().DELETE_USER_SUCCESS);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
     };
 
     const handleDeletetUser = async () => {
@@ -51,7 +50,9 @@ function DeleteUser({ setIsPoperDeleteUser, userId }) {
 
     return (
         <Fragment>
-            <PopperConfirm onClose={closePoper} onSave={handleDeletetUser} content={t('are_you_sure_to_delete_user')} />
+            <PopperConfirm onClose={closePoper} onSave={handleDeletetUser}>
+                {t('are_you_sure_to_delete_user')}
+            </PopperConfirm>
 
             {loading && <Loading />}
         </Fragment>

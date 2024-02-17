@@ -5,38 +5,41 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
-import styles from './DeleteFolder.module.scss';
+import styles from './DeleteWord.module.scss';
 import Loading from '~/components/Loading';
 import PopperConfirm from '~/components/PopperConfirm';
-import { deleteFolder } from '~/services/folderService';
+import { deleteWord } from '~/services/folderService';
 import notify from '~/utils/notify';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
+function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
     const [loading, setLoading] = useState(false);
 
-    const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
+    const { t } = useTranslation('translation', { keyPrefix: 'ManageWordFolder' });
     //eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
     const { currentPage } = useSelector((state) => state.wordBooks);
 
+    console.log(inforWord);
+
     const closePoper = () => {
-        setIsPoperDeleteFolder(false);
+        setIsPoperDeleteWord(false);
         document.body.style.overflow = 'visible';
     };
 
     const handleMiddleDeletetFolder = async () => {
         const data = {
-            id: inforFolder.idFolder,
+            wordId: inforWord.id,
+            folderId: inforWord.folderId,
         };
-        await deleteFolder(data, cookies.token);
+        await deleteWord(data, cookies.token);
         onPageChange(currentPage, true);
-        setIsPoperDeleteFolder(false);
+        setIsPoperDeleteWord(false);
         document.body.style.overflow = 'visible';
         setLoading(false);
-        notify.success(config.wordsbooks.notification().DELETE_FOLDER_SUCCESS);
+        notify.success(config.manageWordFolder.notification().DELETE_WORD_SUCCESS);
     };
 
     const handleDeletetFolder = async () => {
@@ -54,8 +57,8 @@ function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
     return (
         <Fragment>
             <PopperConfirm onClose={closePoper} onSave={handleDeletetFolder}>
-                {t('Are_you_sure_to_delete_folder') + '['}
-                <span className={cx('text-red-600')}> {inforFolder.nameFolder}</span> {'] ?'}
+                {t('Are_you_sure_to_delete_word') + ' ['}
+                <span className={cx('text-red-600')}> {inforWord.name}</span> {'] ?'}
             </PopperConfirm>
 
             {loading && <Loading />}
@@ -63,10 +66,10 @@ function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
     );
 }
 
-DeleteFolder.propTypes = {
-    setIsPoperDeleteFolder: PropTypes.func.isRequired,
-    inforFolder: PropTypes.object.isRequired,
+DeleteWord.propTypes = {
+    setIsPoperDeleteWord: PropTypes.func.isRequired,
+    inforWord: PropTypes.object.isRequired,
     onPageChange: PropTypes.func.isRequired,
 };
 
-export default DeleteFolder;
+export default DeleteWord;

@@ -3,7 +3,8 @@
         "is_required": " is required",
         "must_least": " must least ",
         "must_most": " must most ",
-        "characters": " characters"
+        "characters": " characters",
+        "contain_only_letters_number_and_spaces": " contain only letters, number and spaces"
     },
     "Error": {
         "error_network": "Error network"
@@ -133,6 +134,29 @@
         "no": "no",
         "Are_you_sure_to_delete_folder": "Are you sure to delete folder ",
         "delete_folder_success": "Delete folder success"
+    },
+    "ManageWordFolder": {
+        "definition": "Definition",
+        "add_new_word": "Add new word",
+        "edit_word": "Edit word",
+        "delete_word": "Delete new word",
+        "example": "Example",
+        "edit": "Edit",
+        "delete": "Delete",
+        "Are_you_sure_to_delete_word": "Are you sure to delete word",
+        "title": "Title*",
+        "picture": "Picture",
+        "word_type": "Word type* (N, V, ADJ,..) ",
+        "spell": "Spell",
+        "no_file_chosen": "No file chosen",
+        "note": "Note",
+        "save": "Save",
+        "cancel": "Cancel",
+        "word_already_exist": "Word already exist",
+        "add_new_word_success": "Add new word success",
+        "edit_word_success": "Edit word success",
+        "delete_word_success": "Delete word success",
+        "no_have_word": "There are no vocabulary words in this folder yet"
     },
     "Home": {
         "title": "Learning English Better With ENGMATESDD",

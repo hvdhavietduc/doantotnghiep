@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
@@ -28,6 +29,7 @@ function Itembox({
     const [isPoperDeleteFolder, setIsPoperDeleteFolder] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'WordBooks' });
+    const navigate = useNavigate();
 
     const inforFolder = { nameFolder, idFolder, description };
 
@@ -38,29 +40,35 @@ function Itembox({
     const renderResult = (attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
             <PopperWrapper className={cx('menu-popper')}>
-                <div className={cx('menu-item')} onClick={showPoperEditFolder}>
+                <div className={cx('menu-item')} onClick={(e) => showPoperEditFolder(e)}>
                     {t('edit')}
                 </div>
-                <div className={cx('menu-item')} onClick={showPoperDeleteFolder}>
+                <div className={cx('menu-item')} onClick={(e) => showPoperDeleteFolder(e)}>
                     {t('delete')}
                 </div>
             </PopperWrapper>
         </div>
     );
 
-    const showPoperEditFolder = () => {
+    const showPoperEditFolder = (e) => {
+        e.stopPropagation();
         setIsPoperEditFolder(true);
         document.body.style.overflow = 'hidden';
     };
 
-    const showPoperDeleteFolder = () => {
+    const showPoperDeleteFolder = (e) => {
+        e.stopPropagation();
         setIsPoperDeleteFolder(true);
         document.body.style.overflow = 'hidden';
     };
 
+    const openDetailFolder = () => {
+        navigate(String(idFolder) + '/1');
+    };
+
     return (
         <Fragment>
-            <div className={classes}>
+            <div className={classes} onClick={openDetailFolder}>
                 <div className={cx('title')}>{nameFolder || 'No name'}</div>
                 <div className={cx('count-word')}>
                     <FontAwesomeIcon className={cx('icon')} icon={faBookOpen} />

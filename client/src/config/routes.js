@@ -14,8 +14,10 @@ const routes = {
         TRANSLATION: '/translation',
     },
     wordbooks: {
-        WORDBOOKS: '/wordbooks/:page',
         WORDBOOK: '/wordbooks',
+        WORDBOOKS: '/wordbooks/:page',
+        WORDFOLDER: '/wordbooks/:pageFolder/:idFolder',
+        WORDFOLDERS: '/wordbooks/:pageFolder/:idFolder/:pageWord',
     },
     video: {
         VIDEO: '/video',
