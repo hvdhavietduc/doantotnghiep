@@ -1,5 +1,5 @@
 .title {
-    font-size: 1.5rem;
+    font-size: 0.9375rem;
     font-weight: 600;
 }
 
@@ -19,7 +19,7 @@
 .description {
     flex: 1;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 0.75rem;
     color: #1a1a1a;
 }
 
@@ -67,7 +67,7 @@
     width: 100%;
     justify-content: flex-start;
     padding: 6px 16px;
-    line-height: 1.8rem;
+    line-height: 1.125rem;
     font-weight: 600;
 
     &.separate {
