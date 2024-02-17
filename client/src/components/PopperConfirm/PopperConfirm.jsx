@@ -10,7 +10,7 @@ import Button from '../Button';
 
 const cx = classNames.bind(styles);
 
-function PopperConfirm({ content, onClose, onSave }) {
+function PopperConfirm({ children, onClose, onSave }) {
     const { t } = useTranslation('translation');
     return (
         <div className={cx('container-wrapper')}>
@@ -19,7 +19,7 @@ function PopperConfirm({ content, onClose, onSave }) {
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
 
-                <div className={cx('text-confirm')}>{content}</div>
+                <div className={cx('text-confirm')}>{children}</div>
                 <div className={cx('container-btn')}>
                     <Button type={'submit'} primary onClick={onSave}>
                         {t('WordBooks.yes')}
@@ -34,7 +34,7 @@ function PopperConfirm({ content, onClose, onSave }) {
 }
 
 PopperConfirm.propTypes = {
-    content: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     onClose: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
 };

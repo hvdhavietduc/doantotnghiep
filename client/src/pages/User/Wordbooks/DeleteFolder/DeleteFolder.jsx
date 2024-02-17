@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
-// import classNames from 'classnames/bind';
+import classNames from 'classnames/bind';
 import { useState, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
-// import styles from './Delete.module.scss';
+import styles from './DeleteFolder.module.scss';
 import Loading from '~/components/Loading';
 import PopperConfirm from '~/components/PopperConfirm';
 import { deleteFolder } from '~/services/folderService';
 import notify from '~/utils/notify';
 import config from '~/config';
 
-// const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
 
 function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
     const [loading, setLoading] = useState(false);
@@ -53,11 +53,10 @@ function DeleteFolder({ setIsPoperDeleteFolder, inforFolder, onPageChange }) {
 
     return (
         <Fragment>
-            <PopperConfirm
-                onClose={closePoper}
-                onSave={handleDeletetFolder}
-                content={t('Are_you_sure_to_delete_folder') + '[' + inforFolder.nameFolder + '] ?'}
-            />
+            <PopperConfirm onClose={closePoper} onSave={handleDeletetFolder}>
+                {t('Are_you_sure_to_delete_folder') + '['}
+                <span className={cx('text-red-600')}> {inforFolder.nameFolder}</span> {'] ?'}
+            </PopperConfirm>
 
             {loading && <Loading />}
         </Fragment>
