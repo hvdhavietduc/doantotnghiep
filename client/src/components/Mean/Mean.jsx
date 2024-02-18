@@ -20,16 +20,16 @@ function Mean({ isOpenAllMean, mean, index }) {
 
     return (
         <div className={cx('m-5 my-10 justify-center')} key={index}>
-            {mean.level !== '' && <span className={cx('p-5 bg-blue-100 rounded-full')}>{mean.level}</span>}
+            {mean.level !== '' && <span className={cx('rounded-full bg-blue-100 p-5')}>{mean.level}</span>}
             <span className={cx(' font-bold')}> {mean.conceptEnglish} </span>
-            <button onClick={() => toggle()} className=" hover:bg-blue-100 hover:rounded-lg">
+            <button onClick={() => toggle()} className=" hover:rounded-lg hover:bg-blue-100">
                 <FontAwesomeIcon icon={faCaretUp} className={`mx-3 text-2xl ${isOpenVietnamese ? 'hidden' : ''}`} />
                 <FontAwesomeIcon icon={faCaretDown} className={`mx-3 text-2xl ${isOpenVietnamese ? '' : 'hidden'}`} />
             </button>
             <br />
             <span
                 className={cx(
-                    `italic p-3  bg-yellow-100 ${isOpenVietnamese ? '' : 'hidden'} ${mean.level !== '' ? 'mx-20' : ''}`,
+                    `bg-yellow-100 p-3  italic ${isOpenVietnamese ? '' : 'hidden'} ${mean.level !== '' ? 'mx-20' : ''}`,
                 )}
             >
                 ("đây là nghĩa tiếng việt sẽ sửa sau khi có api")
