@@ -16,6 +16,7 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import valid from '../validateAuth';
 
+// eslint-disable-next-line no-unused-vars
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {

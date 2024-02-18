@@ -128,7 +128,7 @@ function CreateNewPassword() {
                         errolMesseage={errors.passwordConfirm?.message}
                     />
                     <Button primary rounded>
-                        Confirm
+                        {t('confirm')}
                     </Button>
                 </form>
             </WrapperAuth>

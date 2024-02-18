@@ -12,6 +12,7 @@ const defaultFn = () => {};
 
 function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, onChange = defaultFn }) {
     const [indexFilter, setIndexFilder] = useState(0);
+
     const styles = {
         background: 'linear-gradient(' + backgroundColor[0] + ',' + backgroundColor[1] + ')',
     };
@@ -20,17 +21,18 @@ function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, onCha
         setIndexFilder(index);
         onChange(item);
     };
+
     return (
-        <div className={cx('wrapper')} style={styles}>
-            <div className={cx('title')}>
-                <FontAwesomeIcon icon={iconTitle} className={cx('icon')} />
-                <span className={cx('content')}>{title}</span>
+        <div className={cx('relative h-44 w-full pt-10', 'wrapper')} style={styles}>
+            <div className={cx('text-3xl')}>
+                <FontAwesomeIcon icon={iconTitle} className={cx('mr-3', 'icon')} />
+                <span className={cx('font-semibold')}>{title}</span>
             </div>
-            <div className={cx('menu')}>
+            <div className={cx('absolute bottom-5 flex flex-wrap overflow-x-auto')}>
                 {menuFilter.map((item, index) => (
                     <Button
                         key={index}
-                        className={cx('mr-5 py-1 px-4', 'btn-filter', { 'btn-active': indexFilter === index })}
+                        className={cx('mr-5 px-4 py-1', 'btn-filter', { 'btn-active': indexFilter === index })}
                         rounded
                         onClick={() => handleFilter(item, index)}
                     >
