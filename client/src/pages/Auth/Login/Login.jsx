@@ -121,12 +121,16 @@ function Login() {
                         {t('login')}
                     </Button>
                 </form>
-                <Button className={cx('btn-google')} red rounded leftIcon={faGoogle}>
+                <Button className={cx('mt-5')} red rounded leftIcon={faGoogle}>
                     {t('login_with_google')}
                 </Button>
-                <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.FORGETPASSWORD}>{t('forgot_password')}</Link>
-                    <Link to={config.routes.auth.SIGNUP}>{t('signup')}</Link>
+                <div className={cx('mt-5 flex justify-between ')}>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.FORGETPASSWORD}>
+                        {t('forgot_password')}
+                    </Link>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.SIGNUP}>
+                        {t('signup')}
+                    </Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

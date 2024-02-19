@@ -142,8 +142,10 @@ function Signup() {
                         {t('signup')}
                     </Button>
                 </form>
-                <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.LOGIN}>{t('you_have_account_login')}</Link>
+                <div className={cx('mt-5 flex !justify-center ')}>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.LOGIN}>
+                        {t('you_have_account_login')}
+                    </Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

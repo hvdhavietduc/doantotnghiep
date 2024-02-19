@@ -96,7 +96,7 @@ function CreateNewPassword() {
     return (
         <Fragment>
             <WrapperAuth title={t('create_new_password')} BackLoginPage clearErrors={clearErrors}>
-                <div className={cx('message')}>
+                <div className={cx('mb-5 ml-[50%] w-[300px] translate-x-[-50%] text-center text-green-500')}>
                     {t('we_have_send_code_to')}
                     {hideEmail(inforVerify.email)}
                     {t('successfully')}
