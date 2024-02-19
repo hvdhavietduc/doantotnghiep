@@ -1,44 +1,4 @@
-@import '/src/components/GlobalStyles/GlobalStyles.scss';
-
-.wrapper {
-    background-color: #2e4374;
-    padding: 160px 120px;
-}
-.containerHome {
-    display: flex;
-    flex-wrap: wrap;
-}
 .text {
-    flex: 1.5;
+    //flex: 1.5;
     color: var(--text-color-secondnary);
-}
-.title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-.content {
-    text-align: justify;
-}
-.image-home {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    transform: translateY(-20px);
-
-    img {
-        width: 400px;
-    }
-}
-
-//responsive
-@media (max-width: $width-ipad) {
-    .containerHome {
-        flex-direction: column-reverse;
-    }
-
-    .image-home {
-        justify-content: center;
-    }
 }
