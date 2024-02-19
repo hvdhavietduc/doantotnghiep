@@ -59,28 +59,37 @@ function Header() {
     }, []);
 
     return (
-        <div className={cx('header')}>
-            <div className={cx('inner')}>
-                <button className={cx('menu-btn')} onClick={handleClickBtnMenu}>
+        <div className={cx('fixed left-0 top-0 z-10 flex w-full justify-center ', 'header')}>
+            <div className={cx('flex h-full w-full items-center justify-between', 'max-xl:relative', 'inner')}>
+                <button className={cx('invisible', 'max-xl:visible max-xl:pr-4')} onClick={handleClickBtnMenu}>
                     <FontAwesomeIcon icon={faBars} />
                 </button>
 
-                <Link to={config.routes.HOME} className={cx('logo-link')}>
+                <Link to={config.routes.HOME} className={cx('flex', 'logo-link')}>
                     <Image src={logo} />
                 </Link>
 
                 <Search showBoxSearch={showBoxSearch} />
 
                 <ul
-                    className={cx('navigation', {
-                        'navigation-active': showMenu,
-                    })}
+                    className={cx(
+                        'mr-4 flex h-full flex-1 items-center justify-end',
+                        'max-xl:invisible max-xl:absolute max-xl:left-0 max-xl:flex max-xl:h-auto max-xl:w-full ',
+                        'max-xl:translate-x-[-100%] max-xl:flex-col max-xl:overflow-hidden',
+                        'navigation',
+                        {
+                            'max-xl:!visible max-xl:!translate-x-0': showMenu,
+                            'navigation-active': showMenu,
+                        },
+                    )}
                 >
                     {navigation.map((value, index) => {
                         return (
                             <li
                                 key={index}
                                 className={cx(
+                                    'flex h-full cursor-pointer items-center px-2 py-0 text-[0.90625rem] font-semibold',
+                                    'max-xl:w-full max-xl:!py-3 max-xl:!text-[0.9375rem]',
                                     'navigation-item',
                                     currentPath.includes(value.link) && 'navigation-item-curent',
                                 )}

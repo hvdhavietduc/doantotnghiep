@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -77,15 +78,19 @@ function Search({ showBoxSearch }) {
     return (
         // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
-        <div className={cx('wrapper')}>
+        <div className={cx('max-xl:flex-1')}>
             <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
-                    <div className={cx('search-result')} style={styleTagSearchResult} tabIndex="-1" {...attrs}>
-                        <PopperWrapper className={cx('padding-wrapper')}>
+                    <div style={styleTagSearchResult} tabIndex="-1" {...attrs}>
+                        <PopperWrapper className={cx('pb-2')}>
                             {searchResult.map((result, index) => (
-                                <div key={index} className={cx('result-item')} onClick={()=>search(result)}>
+                                <div
+                                    key={index}
+                                    className={cx('cursor-pointer px-4 py-[6px] hover:underline', 'result-item')}
+                                    onClick={() => search(result)}
+                                >
                                     {result}
                                 </div>
                             ))}
@@ -95,9 +100,14 @@ function Search({ showBoxSearch }) {
                 onClickOutside={handleHideResult}
             >
                 <div
-                    className={cx('search', {
-                        'search-active': showBoxSearch,
-                    })}
+                    className={cx(
+                        'relative ml-4 flex w-[300px] border-[1.5px] border-solid border-transparent pl-4',
+                        'max-md:invisible max-md:!absolute max-md:!left-0 max-md:!ml-0 max-md:!w-full',
+                        'search',
+                        {
+                            '!visible': showBoxSearch,
+                        },
+                    )}
                     ref={boxSearchRef}
                 >
                     <input
@@ -117,9 +127,14 @@ function Search({ showBoxSearch }) {
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                     <button
-                        className={cx('search-btn')}
+                        className={cx(
+                            'search-btn',
+                            'flex h-full items-center justify-center text-[1.125rem] text-gray-900/[.34]',
+                            'hover:cursor-pointer hover:bg-gray-900/[.03]',
+                            'active:cursor-pointer active:bg-gray-900/[.06]',
+                        )}
                         onMouseDown={(e) => e.preventDefault()}
-                        onClick={()=>search(searchValue)}
+                        onClick={() => search(searchValue)}
                         disabled={searchValue === ''}
                     >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -129,5 +144,9 @@ function Search({ showBoxSearch }) {
         </div>
     );
 }
+
+Search.propTypes = {
+    showBoxSearch: PropTypes.bool.isRequired,
+};
 
 export default Search;
