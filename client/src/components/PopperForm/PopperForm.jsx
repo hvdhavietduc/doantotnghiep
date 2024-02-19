@@ -16,8 +16,8 @@ function PopperForm({ children, onClose, onSave, handleSubmitForm, title }) {
         <div className={cx('fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-600/50')}>
             <Wrapper
                 className={cx(
-                    'relative w-[700px] px-[70px] py-10',
-                    'max-md:w-[500px] max-md:px-12 max-md:py-10',
+                    'relative !w-[700px] px-[70px] py-10',
+                    'max-md:!w-[500px] max-md:px-12 max-md:py-10',
                     'wrapper',
                 )}
             >
