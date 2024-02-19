@@ -1,48 +1,5 @@
-@media (max-width: 650px) {
-    .container {
-        height: 100%;
-        width: 100% !important;
-    }
-}
-
 .WrapperAuth {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #91d8e4;
-    overflow: hidden;
-    z-index: 10;
-
-    //main
-
-    .container {
-        width: 420px;
-        // height: 430px;
-        border-radius: 8px;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(234, 253, 252, 0.6);
-        z-index: 5;
-    }
-
-    .title {
-        color: #b799ff;
-        text-align: center;
-        font-size: 1.875rem;
-        font-weight: 700;
-        margin-bottom: 40px;
-    }
-
     .form {
-        width: 260px;
-
         button {
             width: 100%;
             height: 38px;
@@ -62,11 +19,7 @@
         }
     }
 
-    .footer {
-        margin-top: 25px;
-        width: 240px;
-        flex: 1;
-
+    footer {
         a {
             margin-left: 10px;
         }
@@ -77,16 +30,8 @@
     }
 
     .btn-changeLanguage {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-
         &:hover {
             color: var(--text-color-link-hightlight);
-        }
-
-        .icon {
-            font-size: 30px;
         }
     }
 }

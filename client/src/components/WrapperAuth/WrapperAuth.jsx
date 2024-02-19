@@ -1,8 +1,6 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-// import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-//import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faGlobe } from '@fortawesome/free-solid-svg-icons';
@@ -10,16 +8,12 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import styles from './WrapperAuth.scss';
-// import notify from '~/utils/notify';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function WrapperAuth({ title, children, BackLoginPage, clearErrors = () => {} }) {
     const { t, i18n } = useTranslation('translation', { keyPrefix: 'Auth' });
-    // eslint-disable-next-line no-unused-vars
-    // const [cookies, setCookies] = useCookies(['token']);
-    // const navigate = useNavigate();
 
     const handleChangeLanguage = () => {
         if (i18n.language === config.language.ENGLISH) {
@@ -36,23 +30,26 @@ function WrapperAuth({ title, children, BackLoginPage, clearErrors = () => {} })
         }
     };
 
-    // useEffect(() => {
-    //     if (cookies.token) {
-    //         notify.error(config.notification().USER_LOGED_IN);
-    //         navigate(config.routes.HOME);
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
     return (
-        <div className={cx('WrapperAuth')}>
+        <div
+            className={cx(
+                'relative z-10 flex h-screen w-full items-center  justify-center overflow-hidden bg-teal-200 ',
+                'max-sm: max-sm: h-full !w-full',
+                'WrapperAuth',
+            )}
+        >
             <div className={cx('wave wave1')}></div>
             <div className={cx('wave wave2')}></div>
             <div className={cx('wave wave3')}></div>
             <div className={cx('wave wave4')}></div>
-            <div className={cx('container')}>
-                <div className={cx('title')}>{title}</div>
-                <div className={cx('form')}>{children}</div>
-                <footer className={cx('footer')}>
+            <div
+                className={cx(
+                    'z-[5] flex w-[420px] flex-col items-center justify-center rounded-lg bg-cyan-50/60 py-10',
+                )}
+            >
+                <div className={cx('mb-10 text-center text-3xl font-bold text-violet-500')}>{title}</div>
+                <div className={cx('w-[260px]', 'form')}>{children}</div>
+                <footer className={cx('mt-[25px] w-[240px] flex-1')}>
                     <FontAwesomeIcon icon={faArrowLeftLong} />
                     {BackLoginPage ? (
                         <Link to={config.routes.auth.LOGIN}>{t('back_to_login_page')}</Link>
@@ -62,8 +59,11 @@ function WrapperAuth({ title, children, BackLoginPage, clearErrors = () => {} })
                 </footer>
             </div>
             <Tippy delay={[0, 50]} content={t('change_language')} placement="bottom">
-                <button className={cx('btn-changeLanguage')} onClick={handleChangeLanguage}>
-                    <FontAwesomeIcon className={cx('icon')} icon={faGlobe} />
+                <button
+                    className={cx('absolute right-7 top-7 z-20', 'btn-changeLanguage')}
+                    onClick={handleChangeLanguage}
+                >
+                    <FontAwesomeIcon className={cx('text-3xl')} icon={faGlobe} />
                 </button>
             </Tippy>
         </div>
