@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 import Input from '~/components/Input';
 import styles from './VerifyRegister.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import { getEmail, verify } from '~/services/authServices';

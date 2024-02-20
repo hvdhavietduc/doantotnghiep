@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 
 import styles from './Login.module.scss';
 import Input from '~/components/Input';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import { login } from '~/services/authServices';

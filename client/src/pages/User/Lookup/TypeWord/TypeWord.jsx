@@ -1,12 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './TypeWord.module.scss';
-import Mean from '../Mean';
+import Mean from '../../../../components/Mean';
 
 const cx = classNames.bind(styles);
 
-function TypeWord({ isOpenAllMean ,typeWord, index }) {
-
-
+function TypeWord({ isOpenAllMean, typeWord, index }) {
     return (
         <div className={cx('flex flex-col')}>
             <span className={cx(' font-bold')}>
@@ -14,9 +12,7 @@ function TypeWord({ isOpenAllMean ,typeWord, index }) {
             </span>
             <div>
                 {typeWord.means.map((mean, index) => {
-                    return (
-                        <Mean mean={mean} index={index} isOpenAllMean={isOpenAllMean}></Mean>
-                    );
+                    return <Mean mean={mean} index={index} isOpenAllMean={isOpenAllMean}></Mean>;
                 })}
             </div>
         </div>

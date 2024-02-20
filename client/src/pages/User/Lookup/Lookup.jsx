@@ -1,16 +1,14 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { search, getListFolderToAdd, addWordToFolder } from '~/services/lookupServices';
 import Loading from '~/components/Loading';
 import styles from './Lookup.module.scss';
 import classNames from 'classnames/bind';
-import TypeWord from '~/components/TypeWord';
-import SynonymOrAntonym from '~/components/SynonymOrAntonym';
+import TypeWord from '~/pages/User/Lookup/TypeWord';
+import SynonymOrAntonym from '~/pages/User/Lookup/SynonymOrAntonym';
 import { useTranslation } from 'react-i18next';
 import notify from '~/utils/notify';
 import { useCookies } from 'react-cookie';
-import Menu from '~/layout/Header/Menu';
-import { set } from 'react-hook-form';
 import Dropdown from '~/components/Dropdown';
 import config from '~/config';
 
@@ -26,6 +24,7 @@ function Lookup() {
     const [haveAntonyms, setHaveAntonyms] = useState(false);
     const [isOpenAllMean, setIsOpenAllMean] = useState(false);
     const [folders, setFolders] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [cookies, setCookies] = useCookies(['token']);
     const [wordId, setWordId] = useState();
 
@@ -58,6 +57,7 @@ function Lookup() {
         if (cookies.token) {
             getListFolder();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleAddToFolder = async (folderId) => {
@@ -91,13 +91,13 @@ function Lookup() {
     };
 
     return (
-        <div className={cx('lookup p-16 lg:px-[200px] w-full flex gap-5')}>
+        <div className={cx('lookup flex w-full gap-5 p-16 lg:px-[200px]')}>
             {data && (
-                <div className={cx('w-full md:flex gap-10')}>
+                <div className={cx('w-full gap-10 md:flex')}>
                     <div className={cx(` ${haveAntonyms || haveSynonyms ? 'md:w-4/5' : 'w-full'}`)}>
-                        <div className={cx('border-t-2 border-t-blue-100 w-full flex ')}>
-                            <div className="w-2/3 flex flex-col gap-3">
-                                <h1 className={cx('text-5xl pt-5')}>{data.name}</h1>
+                        <div className={cx('flex w-full border-t-2 border-t-blue-100 ')}>
+                            <div className="flex w-2/3 flex-col gap-3">
+                                <h1 className={cx('pt-5 text-5xl')}>{data.name}</h1>
                                 <h2 className={cx('font-bold')}>{data.types[0]?.type}</h2>
                                 <div className={cx('flex gap-5')}>
                                     <div className={cx('pronunciationUS flex gap-3')}>
@@ -110,7 +110,7 @@ function Lookup() {
                                     </div>
                                 </div>
                             </div>
-                            <div className={cx('w-1/3 flex items-end justify-end')}>
+                            <div className={cx('flex w-1/3 items-end justify-end')}>
                                 {cookies.token && (
                                     <Dropdown
                                         options={folders}
@@ -120,10 +120,10 @@ function Lookup() {
                                 )}
                             </div>
                         </div>
-                        <div className={cx('border-t-2 border-t-blue-100 w-full flex flex-col gap-3')}>
+                        <div className={cx('flex w-full flex-col gap-3 border-t-2 border-t-blue-100')}>
                             <div
                                 className={cx(
-                                    'w-full border-l-2 border-l-black py-3 px-4 mt-10 bg-blue-100 flex justify-between',
+                                    'mt-10 flex w-full justify-between border-l-2 border-l-black bg-blue-100 px-4 py-3',
                                 )}
                             >
                                 {t('Definition')}
@@ -132,16 +132,16 @@ function Lookup() {
                                         {t('ClickToShow')}
                                     </span>
 
-                                    <label className="relative inline-flex items-center cursor-pointer ">
+                                    <label className="relative inline-flex cursor-pointer items-center ">
                                         <input
                                             type="checkbox"
                                             value={isOpenAllMean}
-                                            className="sr-only peer"
+                                            className="peer sr-only"
                                             onClick={() => {
                                                 setIsOpenAllMean(!isOpenAllMean);
                                             }}
                                         />
-                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none ring-2 ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <div className="peer h-6 w-11 rounded-full bg-gray-200 ring-2 ring-blue-300 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
                                     </label>
                                 </div>
                             </div>

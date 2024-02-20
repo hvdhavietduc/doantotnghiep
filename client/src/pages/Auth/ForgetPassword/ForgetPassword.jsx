@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './ForgetPassword.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Loading from '~/components/Loading';
 import Button from '~/components/Button';
 import { forgotPassword } from '~/services/authServices';
