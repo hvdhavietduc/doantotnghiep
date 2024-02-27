@@ -1,79 +1,12 @@
-.title {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.count-word {
-    margin-top: 10px;
-}
-
 .icon {
     color: var(--text-color-link);
-    margin-right: 8px;
-}
-
-.content {
-    font-weight: 500;
-}
-
-.description {
-    flex: 1;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: #1a1a1a;
-}
-
-.user {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 20px;
-}
-
-.inner-user {
-    display: flex;
-    align-items: center;
-}
-
-.avatar {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 8px;
-}
-
-.name-user {
-    color: #677788;
-}
-
-.menu {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-}
-
-.menu-list {
-    margin-right: 8px;
 }
 
 .menu-popper {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    overflow: hidden;
 }
 
 .menu-item {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 6px 16px;
-    line-height: 1.8rem;
-    font-weight: 600;
-
-    &.separate {
-        border-top: 1px solid rgba(22, 24, 35, 0.12);
-    }
-
     &:hover {
         background-color: var(--background-color-secondnary);
     }

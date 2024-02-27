@@ -38,12 +38,18 @@ function Itembox({
     });
 
     const renderResult = (attrs) => (
-        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-            <PopperWrapper className={cx('menu-popper')}>
-                <div className={cx('menu-item')} onClick={(e) => showPoperEditFolder(e)}>
+        <div className={cx('mr-2')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper', 'overflow-hidden py-[2px]')}>
+                <div
+                    className={cx('menu-item', 'w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem]')}
+                    onClick={(e) => showPoperEditFolder(e)}
+                >
                     {t('edit')}
                 </div>
-                <div className={cx('menu-item')} onClick={(e) => showPoperDeleteFolder(e)}>
+                <div
+                    className={cx('menu-item', 'w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem]')}
+                    onClick={(e) => showPoperDeleteFolder(e)}
+                >
                     {t('delete')}
                 </div>
             </PopperWrapper>
@@ -69,20 +75,20 @@ function Itembox({
     return (
         <Fragment>
             <div className={classes} onClick={openDetailFolder}>
-                <div className={cx('title')}>{nameFolder || 'No name'}</div>
-                <div className={cx('count-word')}>
-                    <FontAwesomeIcon className={cx('icon')} icon={faBookOpen} />
-                    <span className={cx('content')}>{numberWords + t('words')}</span>
+                <div className={cx('text-[0.9375rem] font-semibold')}>{nameFolder || 'No name'}</div>
+                <div className={cx('mt-[10px]')}>
+                    <FontAwesomeIcon className={cx('icon', 'mr-2')} icon={faBookOpen} />
+                    <span className={cx('font-medium')}>{numberWords + t('words')}</span>
                 </div>
 
-                <div className={cx('description')}>
+                <div className={cx('flex-1 text-[0.75rem] italic text-zinc-900')}>
                     {description && (description.length < 50 ? description : description.substr(0, 50) + '...')}
                 </div>
 
-                <div className={cx('user')}>
-                    <div className={cx('inner-user')}>
-                        <Image className={cx('avatar')} src={avatarAuthor} />
-                        <span className={cx('name-user')}>{nameAuthor}</span>
+                <div className={cx('mb-5 flex flex-1 items-end')}>
+                    <div className={cx('flex items-center')}>
+                        <Image className={cx('mr-2 h-5 w-5 rounded-full')} src={avatarAuthor} />
+                        <span className={cx('text-slate-500')}>{nameAuthor}</span>
                     </div>
                 </div>
 
@@ -94,7 +100,7 @@ function Itembox({
                     zIndex={9}
                     render={renderResult}
                 >
-                    <div className={cx('menu')}>
+                    <div className={cx('absolute bottom-[5px] right-[10px]')}>
                         <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                 </Tippy>

@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 import Input from '~/components/Input';
 import styles from './VerifyRegister.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import { getEmail, verify } from '~/services/authServices';
@@ -121,7 +121,7 @@ function VerifyRegister() {
         <Fragment>
             <WrapperAuth title={t('verify_register')} BackLoginPage clearErrors={clearErrors}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className={cx('message')}>
+                    <div className={cx('mb-5 ml-[50%] w-[300px] translate-x-[-50%] text-center text-green-500')}>
                         {t('we_have_send_code_to')}
                         {hideEmail(email)}
                         {t('successfully')}
@@ -133,7 +133,7 @@ function VerifyRegister() {
                         {...register('code', valid.code)}
                         errolMesseage={errors.code?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('confirm')}
                     </Button>
                 </form>

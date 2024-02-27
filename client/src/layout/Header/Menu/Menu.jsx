@@ -45,10 +45,10 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
     };
 
     const renderResult = (attrs) => (
-        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-            <PopperWrapper className={cx('menu-popper')}>
+        <div className={cx('w-[224px]')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('pb-2')}>
                 {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
-                <div className={cx('menu-body')}>{renderItems()}</div>
+                <div className={cx('overflow-y-auto')}>{renderItems()}</div>
             </PopperWrapper>
         </div>
     );

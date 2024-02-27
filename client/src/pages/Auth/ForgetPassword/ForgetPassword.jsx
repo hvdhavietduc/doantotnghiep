@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './ForgetPassword.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Loading from '~/components/Loading';
 import Button from '~/components/Button';
 import { forgotPassword } from '~/services/authServices';
@@ -16,6 +16,7 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import valid from '../validateAuth';
 
+// eslint-disable-next-line no-unused-vars
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {
@@ -81,7 +82,7 @@ function ForgetPassword() {
                         {...register('email', valid.email)}
                         errolMesseage={errors.email?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('send_email')}
                     </Button>
                 </form>

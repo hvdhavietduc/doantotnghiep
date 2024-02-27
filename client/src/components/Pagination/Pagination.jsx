@@ -25,11 +25,15 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
     const arrPagination = Array.from({ length: lastIndex - firstIndex + 1 }, (_, index) => index + firstIndex);
 
     return (
-        <div className={cx('pagination')}>
+        <div className={cx('mt-10 flex flex-row justify-center')}>
             <button
-                className={cx('item', {
-                    disabled: currentPage == 1,
-                })}
+                className={cx(
+                    'ml-[6px] mr-[6px] block h-[35px] w-[35px] rounded-[3px] border border-solid border-blue-950',
+                    'item',
+                    {
+                        disabled: currentPage === 1,
+                    },
+                )}
                 onClick={() => onPageChange(currentPage - 1)}
             >
                 <FontAwesomeIcon icon={faChevronLeft} />
@@ -39,8 +43,8 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
                 <button
                     key={index}
                     className={cx('item', {
-                        active: currentPage == value,
-                        disabled: currentPage == value,
+                        active: currentPage === value,
+                        disabled: currentPage === value,
                     })}
                     onClick={() => onPageChange(value)}
                 >
@@ -50,7 +54,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
 
             <button
                 className={cx('item', {
-                    disabled: currentPage == totalPage,
+                    disabled: currentPage === totalPage,
                 })}
                 onClick={() => onPageChange(currentPage + 1)}
             >

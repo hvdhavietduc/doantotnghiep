@@ -75,22 +75,30 @@ function Wordbooks() {
     }, [currentPage, isDeleteorEdit]);
     return (
         <Fragment>
-            <div className={cx('wordbooks')}>
+            <div className={cx('mb-[100px] w-full')}>
                 <HeaderSecondnary
                     iconTitle={paramater.iconTitle}
                     title={paramater.title}
                     backgroundColor={paramater.backgroundColor}
                     menuFilter={paramater.menuFilter}
                 />
-                <div className={cx('wrapper')}>
-                    <div className={cx('item-box', 'create-folder')} onClick={showPoperCreateFolder}>
+                <div className={cx('mt-20 flex w-full flex-wrap', 'wrapper')}>
+                    <div
+                        className={cx(
+                            'relative mb-[25px] flex cursor-pointer flex-col rounded-lg p-4',
+                            'items-center justify-center text-[1.5625rem]',
+                            'item-box',
+                            'create-folder',
+                        )}
+                        onClick={showPoperCreateFolder}
+                    >
                         <FontAwesomeIcon icon={faPlus} />
-                        <span className={cx('content')}>{t('create_folder')}</span>
+                        <span className={cx('text-base')}>{t('create_folder')}</span>
                     </div>
                     {listFolder.map((value, index) => (
                         <Itembox
                             key={index}
-                            className={cx('item-box')}
+                            className={cx('relative mb-[25px] flex cursor-pointer flex-col rounded-lg p-4', 'item-box')}
                             nameFolder={value.name}
                             description={value.description}
                             numberWords={value.wordIds?.length}
@@ -101,7 +109,7 @@ function Wordbooks() {
                         />
                     ))}
                 </div>
-                <div className={cx('pagination')}>
+                <div>
                     <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
                 </div>
             </div>

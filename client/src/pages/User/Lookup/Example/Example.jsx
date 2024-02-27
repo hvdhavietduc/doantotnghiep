@@ -18,14 +18,14 @@ function Example({ isOpenAllMean, example, index }) {
     };
 
     return (
-        <div className={cx('md:flex gap-5')} key={index}>
-            <span className={cx('text-5xl')}>.</span>
-            <span className={cx('italic p-3 ')}>{example.example} </span>
-            <button onClick={() => toggle()} className=" hover:bg-blue-100 hover:rounded-lg">
-                <FontAwesomeIcon icon={faCaretLeft} className={`mx-3 text-2xl ${isOpenVietnamese ? 'hidden' : ''}`} />
-                <FontAwesomeIcon icon={faCaretRight} className={`mx-3 text-2xl ${isOpenVietnamese ? '' : 'hidden'}`} />
+        <div className={cx('gap-5 md:flex')} key={index}>
+            <span className={cx('text-3xl leading-5')}>-</span>
+            <span className={cx('pl-1 italic')}>{example.example} </span>
+            <button onClick={() => toggle()} className=" hover:rounded-lg hover:bg-blue-100">
+                <FontAwesomeIcon icon={faCaretLeft} className={`mx-3 text-lg ${isOpenVietnamese ? 'hidden' : ''}`} />
+                <FontAwesomeIcon icon={faCaretRight} className={`mx-3 text-lg ${isOpenVietnamese ? '' : 'hidden'}`} />
             </button>
-            <p className={cx(`italic p-3 bg-yellow-50 ${isOpenVietnamese ? '' : 'hidden'}`)}>
+            <p className={cx(`bg-yellow-50 pl-1 italic ${isOpenVietnamese ? '' : 'hidden'}`)}>
                 ("đây là nghĩa tiếng việt sẽ sửa sau khi có api")
             </p>
         </div>

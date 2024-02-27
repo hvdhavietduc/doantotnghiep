@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './CreateNewPassword.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import { resetPassword } from '~/services/authServices';
@@ -96,7 +96,7 @@ function CreateNewPassword() {
     return (
         <Fragment>
             <WrapperAuth title={t('create_new_password')} BackLoginPage clearErrors={clearErrors}>
-                <div className={cx('message')}>
+                <div className={cx('mb-5 ml-[50%] w-[300px] translate-x-[-50%] text-center text-green-500')}>
                     {t('we_have_send_code_to')}
                     {hideEmail(inforVerify.email)}
                     {t('successfully')}
@@ -127,8 +127,8 @@ function CreateNewPassword() {
                         {...register('passwordConfirm', valid.passwordConfirm)}
                         errolMesseage={errors.passwordConfirm?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
-                        Confirm
+                    <Button primary rounded>
+                        {t('confirm')}
                     </Button>
                 </form>
             </WrapperAuth>

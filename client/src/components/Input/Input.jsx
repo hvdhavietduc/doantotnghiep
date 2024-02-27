@@ -5,33 +5,42 @@ import styles from './Input.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Input = forwardRef(({ label, round, large, type, textArea, className, errolMesseage, ...passProps }, ref) => {
+const Input = forwardRef(({ label, type, textArea, className, errolMesseage, ...passProps }, ref) => {
     const Props = { ...passProps };
 
-    const classes = cx('wrapper', {
-        round,
-        large,
+    const classes = cx('relative mb-5', 'wrapper', {
         [className]: className,
     });
 
     return (
         <div className={classes}>
-            {label && <label className={cx('label')}>{label}</label>}
+            {label && <label className={cx('mt-1 block font-medium')}>{label}</label>}
             {textArea ? (
-                <textarea ref={ref} {...Props}></textarea>
+                <textarea
+                    className={cx(
+                        'h-16 w-full overflow-auto rounded px-4 pt-[3px] outline outline-1 outline-slate-300 focus-visible:outline-2 focus-visible:outline-sky-400',
+                    )}
+                    ref={ref}
+                    {...Props}
+                ></textarea>
             ) : (
-                <input type={type || 'text'} ref={ref} {...Props} />
+                <input
+                    className={cx(
+                        'h-[35px] w-full rounded px-4 outline outline-1 outline-slate-300 focus-visible:outline-2 focus-visible:outline-sky-400',
+                    )}
+                    type={type || 'text'}
+                    ref={ref}
+                    {...Props}
+                />
             )}
 
-            {errolMesseage && <span className={cx('messeage')}>{errolMesseage}</span>}
+            {errolMesseage && <span className={cx('text-sm text-red-600')}>{errolMesseage}</span>}
         </div>
     );
 });
 
 Input.propTypes = {
     label: PropTypes.string,
-    round: PropTypes.bool,
-    large: PropTypes.bool,
     textArea: PropTypes.bool,
     type: PropTypes.string,
     className: PropTypes.string,

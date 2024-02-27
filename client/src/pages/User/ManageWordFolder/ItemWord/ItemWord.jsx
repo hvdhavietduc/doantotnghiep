@@ -24,12 +24,24 @@ function ItemWord({ inforWord, onPageChange }) {
     const [playSoundUS] = useSound(inforWord.pronunciationUSAudio);
 
     const renderResult = (attrs) => (
-        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-            <PopperWrapper className={cx('menu-popper')}>
-                <div className={cx('menu-item')} onClick={(e) => showPoperEditWord(e)}>
+        <div className={cx('mr-2')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper', 'overflow-hidden !py-[2px]')}>
+                <div
+                    className={cx(
+                        'menu-item',
+                        'w-full cursor-pointer justify-start px-4 py-[6px] font-semibold leading-[1.125rem]',
+                    )}
+                    onClick={(e) => showPoperEditWord(e)}
+                >
                     {t('edit')}
                 </div>
-                <div className={cx('menu-item')} onClick={(e) => showPoperDeleteWord(e)}>
+                <div
+                    className={cx(
+                        'menu-item',
+                        'w-full cursor-pointer justify-start px-4 py-[6px] font-semibold leading-[1.125rem]',
+                    )}
+                    onClick={(e) => showPoperDeleteWord(e)}
+                >
                     {t('delete')}
                 </div>
             </PopperWrapper>
@@ -50,24 +62,24 @@ function ItemWord({ inforWord, onPageChange }) {
 
     return (
         <Fragment>
-            <div className={cx('itemWord')}>
-                <div className={cx('section1')}>
+            <div className={cx('itemWord', 'relative mb-6 w-full rounded-lg border-[1px] border-solid p-7 ')}>
+                <div className={cx('flex justify-between')}>
                     <div>
-                        <div className={cx('title')}>
-                            <div className={cx('name-word')}>
+                        <div className={cx('flex')}>
+                            <div className={cx('mr-2 text-xl font-semibold')}>
                                 {inforWord.name + ' '}
                                 {inforWord.pronunciationUK}
                             </div>
-                            <div className={cx('sound')}>
-                                <span>US</span>
+                            <div className={cx('flex items-center font-normal ')}>
+                                <span className={cx('my-0 ml-[10px] mr-1 !text-black')}>US</span>
                                 <FontAwesomeIcon icon={faVolumeLow} onClick={playSoundUS} />
-                                <span>UK</span>
+                                <span className={cx('my-0 ml-[10px] mr-1 !text-black')}>UK</span>
                                 <FontAwesomeIcon icon={faVolumeLow} onClick={playSoundUK} />
                             </div>
                         </div>
-                        <div className={cx('Definition')}>
-                            <div className={cx('title')}>{t('definition')}</div>
-                            <div className={cx('content')}>
+                        <div className={cx('mt-[10px]')}>
+                            <div className={cx('font-semibold')}>{t('definition')}</div>
+                            <div>
                                 <div>{inforWord.types[0].means[0].conceptEnglish.slice(0, -1)}</div>
                                 <div className={cx('bg-blue-200')}>
                                     {inforWord.types[0].means[0].conceptVietnamese || 'Sẽ có khi có API'}
@@ -77,15 +89,15 @@ function ItemWord({ inforWord, onPageChange }) {
                     </div>
                     <div>
                         {/* <Image
-                            className={cx('image')}
+                            className={cx('w-[160px] rounded-lg')}
                             src="https://tse4.mm.bing.net/th?id=OIP.RgAVXeYE3WsnWQFzNkf2RwHaEK&pid=Api&P=0&h=220"
                         /> */}
                     </div>
                 </div>
                 {inforWord.types[0].means[0].examples.length !== 0 && (
-                    <div className={cx('Example')}>
-                        <div className={cx('title')}>{t('example')}</div>
-                        <ul className={cx('content')}>
+                    <div className={cx('mt-[10px]')}>
+                        <div className={cx('font-semibold ')}>{t('example')}</div>
+                        <ul className={cx('list-inside')}>
                             {inforWord.types[0].means[0].examples.map((value, index) => (
                                 <li key={index}>{value.example}</li>
                             ))}
@@ -101,7 +113,7 @@ function ItemWord({ inforWord, onPageChange }) {
                     zIndex={9}
                     render={renderResult}
                 >
-                    <div className={cx('menu')}>
+                    <div className={cx('absolute bottom-[5px] right-[10px] cursor-pointer')}>
                         <FontAwesomeIcon icon={faEllipsis} />
                     </div>
                 </Tippy>
