@@ -13,14 +13,20 @@ const cx = classNames.bind(styles);
 function PopperConfirm({ children, onClose, onSave }) {
     const { t } = useTranslation('translation');
     return (
-        <div className={cx('container-wrapper')}>
-            <Wrapper className={cx('wrapper')}>
-                <button className={cx('btn-close')} onClick={onClose}>
+        <div className={cx('fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-600/50')}>
+            <Wrapper
+                className={cx(
+                    'relative !w-auto translate-y-[-100px] px-[70px] !pt-10 pb-5',
+                    'max-md:!w-[500px] max-md:px-12 max-md:py-10',
+                    'wrapper',
+                )}
+            >
+                <button className={cx('absolute right-[10px] top-[6px] text-2xl font-semibold')} onClick={onClose}>
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
 
-                <div className={cx('text-confirm')}>{children}</div>
-                <div className={cx('container-btn')}>
+                <div className={cx('mb-5 text-center')}>{children}</div>
+                <div className={cx('flex justify-between')}>
                     <Button type={'submit'} primary onClick={onSave}>
                         {t('WordBooks.yes')}
                     </Button>

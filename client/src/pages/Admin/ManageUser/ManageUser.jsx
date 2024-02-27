@@ -17,7 +17,9 @@ function ManageUser() {
     const currentPath = location.pathname;
     const currentPage = currentPath.split('/')[2];
     const [allUser, setAllUser] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [data, setData] = useState();
+    // eslint-disable-next-line no-unused-vars
     const [cookies, setCookies] = useCookies(['token']);
     const [loading, setLoading] = useState(false);
     const [isPoperDeleteUser, setIsPoperDeleteUser] = useState(false);
@@ -57,6 +59,7 @@ function ManageUser() {
             navigate('/manage_user/1');
         }
         getAllUserAPI(currentPage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage]);
 
     const showPoperDeleteUser = (userId) => {
@@ -66,42 +69,45 @@ function ManageUser() {
     };
 
     return (
-        <div className="p-10">
+        <div className="flex flex-col items-center p-10">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xl text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="bg-gray-50 text-base uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-16 py-3">
                                 {t('name')}
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-16 py-3">
                                 {t('username')}
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-16 py-3">
                                 {t('email')}
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-16 py-3">
                                 {t('role')}
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-16 py-3">
                                 {t('action')}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {allUser.map((user) => (
-                            <tr class=" text-xl odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+                            <tr class=" border-b text-base odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800 dark:hover:bg-gray-600">
                                 <th
                                     scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    class="whitespace-nowrap px-16 py-3 font-medium text-gray-900 dark:text-white"
                                 >
                                     {user.name}
                                 </th>
-                                <td class="px-6 py-4">{user.username}</td>
-                                <td class="px-6 py-4">{user.email}</td>
-                                <td class="px-6 py-4">{user.role}</td>
-                                <td class="px-6 py-4 flex cursor-pointer " onClick={() => showPoperDeleteUser(user.id)}>
-                                    <FontAwesomeIcon className=" text-3xl text-red-500" icon={faTrash} />
+                                <td class="px-16 py-3">{user.username}</td>
+                                <td class="px-16 py-3">{user.email}</td>
+                                <td class="px-16 py-3">{user.role}</td>
+                                <td
+                                    class="flex cursor-pointer px-16 py-3 "
+                                    onClick={() => showPoperDeleteUser(user.id)}
+                                >
+                                    <FontAwesomeIcon className=" text-xl text-red-500" icon={faTrash} />
                                 </td>
                             </tr>
                         ))}

@@ -7,9 +7,9 @@ const cx = classNames.bind(styles);
 
 function AdminLayout({ children }) {
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('relative flex min-h-screen flex-col')}>
             <Header />
-            <div className={cx('content')}>{children}</div>
+            <div className={cx('flex w-full justify-center p-[10px]', 'content')}>{children}</div>
         </div>
     );
 }

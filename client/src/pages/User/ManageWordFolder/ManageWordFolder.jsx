@@ -74,23 +74,27 @@ function ManageWordFolder() {
     }, [currentPage, isDeleteorEdit]);
 
     return (
-        <div className={cx('ManageWordFolder')}>
-            <div className={cx('inner')}>
-                <div className={cx('header')}>
-                    <div className={cx('nameFolder')}>
+        <div className={cx('mt-[80px] flex w-full justify-center')}>
+            <div className={cx('w-[600px]')}>
+                <div className={cx('flex w-full justify-start')}>
+                    <div className={cx('mr-6 text-xl font-semibold')}>
                         Folder: <span>{nameFolder}</span>
                     </div>
-                    <Button primary className={cx('btn-add')} onClick={showPoperAddWord}>
+                    <Button primary className={cx('px-[6px] py-0')} onClick={showPoperAddWord}>
                         {t('add_new_word')}
                     </Button>
                 </div>
-                <div className={cx('content')}>
+                <div className={cx('mt-[35px]')}>
                     {listWord.length === 0 ? (
-                        <div className={cx('not-have-word')}>{t('no_have_word')}</div>
+                        <div>{t('no_have_word')}</div>
                     ) : (
-                        <div className={cx('have-word')}>
-                            <div className={cx('header-content')}></div>
-                            <div className={cx('list-word')}>
+                        <div>
+                            <div className={cx('mb-5')}>
+                                {t('list_have') + ' '}
+                                {listWord.length}
+                                {' ' + t('word')}.
+                            </div>
+                            <div>
                                 {listWord.map((word, index) => (
                                     <ItemWord key={index} inforWord={word} onPageChange={onPageChange} />
                                 ))}
@@ -98,7 +102,7 @@ function ManageWordFolder() {
                         </div>
                     )}
                 </div>
-                <div className={cx('pagination')}>
+                <div>
                     <Pagination totalPage={totalPage} currentPage={currentPage} onPageChange={onPageChange} />
                 </div>
             </div>

@@ -1,41 +1,6 @@
 .wrapper {
-    position: relative;
-    margin-bottom: 20px;
-
-    .label {
-        display: block;
-        margin-bottom: 4px;
-        font-weight: 500px;
-    }
-
     input,
     textarea {
-        width: 100%;
-        padding: 0 15px;
         background-color: var(--background-color);
-        border-radius: 4px;
-        outline: #bdc5d1 1px solid;
-        height: 35px;
-
-        &:focus-visible {
-            outline: #39a7ff 3px solid;
-        }
-    }
-
-    textarea {
-        height: 70px;
-        padding-top: 3px;
-    }
-
-    .messeage {
-        // position: absolute;
-        // left: 0;
-        // bottom: -23px;
-        font-size: 1.4rem;
-        color: #d71313;
-    }
-
-    .hide {
-        display: none;
     }
 }

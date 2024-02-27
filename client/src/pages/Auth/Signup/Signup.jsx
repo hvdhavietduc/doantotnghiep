@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import Input from '~/components/Input';
 import styles from './Signup.module.scss';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import valid from '../validateAuth';
@@ -138,12 +138,14 @@ function Signup() {
                         errolMesseage={errors.passwordConfirm?.message}
                     />
 
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('signup')}
                     </Button>
                 </form>
-                <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.LOGIN}>{t('you_have_account_login')}</Link>
+                <div className={cx('mt-5 flex !justify-center ')}>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.LOGIN}>
+                        {t('you_have_account_login')}
+                    </Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}

@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +26,7 @@ function Action({ userMenu }) {
 
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const navigate = useNavigate();
 
     const MENU_ITEMS = getMENU_ITEMS();
@@ -103,24 +104,28 @@ function Action({ userMenu }) {
 
     return (
         <Fragment>
-            <div className={cx('action')}>
+            <div className={cx('flex items-center justify-end')}>
                 {currentUser ? (
                     <></>
                 ) : (
                     <Fragment>
-                        <Button className={cx('btn-login')} primary to={config.routes.auth.LOGIN}>
-                            Log in
+                        <Button className={cx('mr-2 h-9 px-2')} primary to={config.routes.auth.LOGIN}>
+                            {t('Auth.login')}
                         </Button>
-                        <Button className={cx('btn-signup')} primary to={config.routes.auth.SIGNUP}>
-                            Sign up
+                        <Button className={cx('h-9  px-2', 'max-sm:hidden')} primary to={config.routes.auth.SIGNUP}>
+                            {t('Auth.signup')}
                         </Button>
                     </Fragment>
                 )}
                 <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                     {currentUser ? (
-                        <Image className={cx('user-avatar')} src={inforUser.avatar} alt={inforUser.name} />
+                        <Image
+                            className={cx('ml-[14px] h-8 w-8 cursor-pointer rounded-full object-cover')}
+                            src={inforUser.avatar}
+                            alt={inforUser.name}
+                        />
                     ) : (
-                        <button className={cx('more-btn')}>
+                        <button className={cx('ml-3 cursor-pointer bg-transparent px-1 py-2 text-xl')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
                     )}
@@ -130,5 +135,9 @@ function Action({ userMenu }) {
         </Fragment>
     );
 }
+
+Action.propTypes = {
+    userMenu: PropTypes.array.isRequired,
+};
 
 export default Action;

@@ -22,12 +22,12 @@ function Dropdown({ title, options, handleFunction }) {
         };
     }, []);
     return (
-        <div className="relative inline-block text-left w-60">
+        <div className="relative inline-block w-60 text-left">
             <div className="w-full">
-                <span className="rounded-md w-full ">
+                <span className="w-full rounded-md ">
                     <button
                         type="button"
-                        className=" bg-blue-100 h-full text-2xl inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2  font-medium text-gray-700 hover:bg-blue-200 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:bg-gray-800 active:text-white transition ease-in-out duration-150"
+                        className=" inline-flex h-full w-full justify-center rounded-md border border-gray-300 bg-blue-100 px-4 py-2 text-base font-medium text-gray-700 transition duration-150 ease-in-out hover:bg-blue-200 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200 active:bg-gray-800 active:text-white"
                         id="options-menu"
                         aria-haspopup="true"
                         aria-expanded="true"
@@ -40,7 +40,7 @@ function Dropdown({ title, options, handleFunction }) {
 
             {isOpen && (
                 <div
-                    className="origin-top-right absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
+                    className="absolute right-0 z-10 mt-2 max-h-80 w-56 origin-top-right overflow-y-auto rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
@@ -50,7 +50,7 @@ function Dropdown({ title, options, handleFunction }) {
                             <button
                                 key={option.id}
                                 onClick={() => handleFunction(option.id)}
-                                className=" text-2xl block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                                className=" block w-full px-4 py-2 text-left text-base text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                                 role="menuitem"
                             >
                                 {option.name}

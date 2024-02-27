@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 
 import styles from './Login.module.scss';
 import Input from '~/components/Input';
-import WrapperAuth from '~/components/WrapperAuth';
+import WrapperAuth from '../WrapperAuth';
 import Button from '~/components/Button';
 import Loading from '~/components/Loading';
 import { login } from '~/services/authServices';
@@ -117,16 +117,20 @@ function Login() {
                         {...register('password', valid.password)}
                         errolMesseage={errors.password?.message}
                     />
-                    <Button className={cx('btn')} primary rounded>
+                    <Button primary rounded>
                         {t('login')}
                     </Button>
                 </form>
-                <Button className={cx('btn', 'btn-google')} red rounded leftIcon={faGoogle}>
+                <Button className={cx('mt-5')} red rounded leftIcon={faGoogle}>
                     {t('login_with_google')}
                 </Button>
-                <div className={cx('modifer')} id="modifer">
-                    <Link to={config.routes.auth.FORGETPASSWORD}>{t('forgot_password')}</Link>
-                    <Link to={config.routes.auth.SIGNUP}>{t('signup')}</Link>
+                <div className={cx('mt-5 flex justify-between ')}>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.FORGETPASSWORD}>
+                        {t('forgot_password')}
+                    </Link>
+                    <Link className={cx('hover:underline')} to={config.routes.auth.SIGNUP}>
+                        {t('signup')}
+                    </Link>
                 </div>
             </WrapperAuth>
             {loading && <Loading />}
