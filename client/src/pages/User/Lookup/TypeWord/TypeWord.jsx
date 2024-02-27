@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './TypeWord.module.scss';
-import Mean from '../../../../components/Mean';
+import Mean from '../Mean';
 
 const cx = classNames.bind(styles);
 

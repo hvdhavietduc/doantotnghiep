@@ -27,7 +27,7 @@ function Dropdown({ title, options, handleFunction }) {
                 <span className="w-full rounded-md ">
                     <button
                         type="button"
-                        className=" inline-flex h-full w-full justify-center rounded-md border border-gray-300 bg-blue-100 px-4 py-2 text-2xl  font-medium text-gray-700 transition duration-150 ease-in-out hover:bg-blue-200 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200 active:bg-gray-800 active:text-white"
+                        className=" inline-flex h-full w-full justify-center rounded-md border border-gray-300 bg-blue-100 px-4 py-2 text-base font-medium text-gray-700 transition duration-150 ease-in-out hover:bg-blue-200 focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-200 active:bg-gray-800 active:text-white"
                         id="options-menu"
                         aria-haspopup="true"
                         aria-expanded="true"
@@ -50,7 +50,7 @@ function Dropdown({ title, options, handleFunction }) {
                             <button
                                 key={option.id}
                                 onClick={() => handleFunction(option.id)}
-                                className=" block w-full px-4 py-2 text-left text-2xl text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
+                                className=" block w-full px-4 py-2 text-left text-base text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none"
                                 role="menuitem"
                             >
                                 {option.name}

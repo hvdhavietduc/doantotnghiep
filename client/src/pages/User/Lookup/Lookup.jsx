@@ -9,7 +9,7 @@ import SynonymOrAntonym from '~/pages/User/Lookup/SynonymOrAntonym';
 import { useTranslation } from 'react-i18next';
 import notify from '~/utils/notify';
 import { useCookies } from 'react-cookie';
-import Dropdown from '~/components/Dropdown';
+import Dropdown from '~/pages/User/Lookup/Dropdown';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
@@ -91,20 +91,20 @@ function Lookup() {
     };
 
     return (
-        <div className={cx('lookup flex w-full gap-5 p-16 lg:px-[200px]')}>
+        <div className={cx('lookup flex w-full gap-3 p-10 lg:px-[200px]')}>
             {data && (
                 <div className={cx('w-full gap-10 md:flex')}>
                     <div className={cx(` ${haveAntonyms || haveSynonyms ? 'md:w-4/5' : 'w-full'}`)}>
                         <div className={cx('flex w-full border-t-2 border-t-blue-100 ')}>
                             <div className="flex w-2/3 flex-col gap-3">
-                                <h1 className={cx('pt-5 text-5xl')}>{data.name}</h1>
+                                <h1 className={cx('pt-5 text-3xl')}>{data.name}</h1>
                                 <h2 className={cx('font-bold')}>{data.types[0]?.type}</h2>
                                 <div className={cx('flex gap-5')}>
-                                    <div className={cx('pronunciationUS flex gap-3')}>
+                                    <div className={cx('pronunciationUS flex gap-2')}>
                                         <span className={cx('font-bold')}>US</span>
                                         <span>{data.pronunciationUS}</span>
                                     </div>
-                                    <div className={cx('pronunciationUK flex gap-3')}>
+                                    <div className={cx('pronunciationUK flex gap-2')}>
                                         <span className={cx('font-bold')}>UK</span>
                                         <span>{data.pronunciationUK}</span>
                                     </div>

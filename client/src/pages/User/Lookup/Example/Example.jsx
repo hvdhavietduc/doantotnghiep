@@ -19,13 +19,13 @@ function Example({ isOpenAllMean, example, index }) {
 
     return (
         <div className={cx('gap-5 md:flex')} key={index}>
-            <span className={cx('text-5xl')}>.</span>
-            <span className={cx('p-3 italic ')}>{example.example} </span>
+            <span className={cx('text-3xl leading-5')}>-</span>
+            <span className={cx('pl-1 italic')}>{example.example} </span>
             <button onClick={() => toggle()} className=" hover:rounded-lg hover:bg-blue-100">
-                <FontAwesomeIcon icon={faCaretLeft} className={`mx-3 text-2xl ${isOpenVietnamese ? 'hidden' : ''}`} />
-                <FontAwesomeIcon icon={faCaretRight} className={`mx-3 text-2xl ${isOpenVietnamese ? '' : 'hidden'}`} />
+                <FontAwesomeIcon icon={faCaretLeft} className={`mx-3 text-lg ${isOpenVietnamese ? 'hidden' : ''}`} />
+                <FontAwesomeIcon icon={faCaretRight} className={`mx-3 text-lg ${isOpenVietnamese ? '' : 'hidden'}`} />
             </button>
-            <p className={cx(`bg-yellow-50 p-3 italic ${isOpenVietnamese ? '' : 'hidden'}`)}>
+            <p className={cx(`bg-yellow-50 pl-1 italic ${isOpenVietnamese ? '' : 'hidden'}`)}>
                 ("đây là nghĩa tiếng việt sẽ sửa sau khi có api")
             </p>
         </div>
