@@ -9,7 +9,7 @@ function AdminLayout({ children }) {
     return (
         <div className={cx('relative flex min-h-screen flex-col')}>
             <Header />
-            <div className={cx('w-full p-[10px]', 'content')}>{children}</div>
+            <div className={cx('flex w-full justify-center p-[10px]', 'content')}>{children}</div>
         </div>
     );
 }
