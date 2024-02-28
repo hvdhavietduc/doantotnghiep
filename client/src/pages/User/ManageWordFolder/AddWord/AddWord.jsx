@@ -45,9 +45,8 @@ function AddWord({ setIsPoperAddWord, onPageChange }) {
     };
 
     const handleMiddleCreateWord = async (formData) => {
-        console.log(formData);
         const result = await search(formData.title);
-        console.log(result);
+
         const data = {
             name: formData.title,
             pronunciationUKAudio: result.pronunciationUKAudio,
@@ -56,7 +55,7 @@ function AddWord({ setIsPoperAddWord, onPageChange }) {
             pronunciationUS: result.pronunciationUS,
             types: [
                 {
-                    type: '',
+                    type: formData.wordType,
                     means: [
                         {
                             level: '',
@@ -74,7 +73,6 @@ function AddWord({ setIsPoperAddWord, onPageChange }) {
             antonyms: [],
             folderId: folderId,
         };
-        console.log(data);
         await addNewWord(data, cookies.token);
         await onPageChange(1, true);
 
