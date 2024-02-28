@@ -1,15 +1,16 @@
+import classNames from 'classnames/bind';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { search, getListFolderToAdd, addWordToFolder } from '~/services/lookupServices';
-import Loading from '~/components/Loading';
+import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
+
 import styles from './Lookup.module.scss';
-import classNames from 'classnames/bind';
+import Loading from '~/components/Loading';
 import TypeWord from '~/pages/User/Lookup/TypeWord';
 import SynonymOrAntonym from '~/pages/User/Lookup/SynonymOrAntonym';
-import { useTranslation } from 'react-i18next';
-import notify from '~/utils/notify';
-import { useCookies } from 'react-cookie';
 import Dropdown from '~/pages/User/Lookup/Dropdown';
+import { search, getListFolderToAdd, addWordToFolder } from '~/services/lookupServices';
+import notify from '~/utils/notify';
 import config from '~/config';
 
 const cx = classNames.bind(styles);

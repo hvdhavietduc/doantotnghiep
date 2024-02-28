@@ -1,6 +1,6 @@
 const validate = {
     length: {
-        MIN_LENGTH_TITLE: 4,
+        MIN_LENGTH_TITLE: 2,
         MAX_LENGTH_TITLE: 50,
         MIN_LENGTH_DEFINITION: 8,
         MAX_LENGTH_DEFINITION: 100,
