@@ -45,7 +45,7 @@ const routes = {
         MANAGEFORUM: '/manage_forum',
         MANAGEQUIZZES: '/manage_quizzes',
         MANAGECATEGORIES: '/manage_categories',
-        MANAGENEWS: '/manage_news',
+        MANAGENEWS: '/manage_news/:page',
         MANAGEVIDEOS: '/manage_videos',
     },
 };
