@@ -12,6 +12,7 @@ import Lookup from '~/pages/User/Lookup';
 import ManageUser from '~/pages/Admin/ManageUser';
 import config from '~/config';
 import { DefautLayout, AdminLayout } from '~/layout';
+import ManageNews from '~/pages/Admin/ManageNews';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -25,7 +26,10 @@ const privateRoutes = [
     { path: config.routes.wordbooks.WORDFOLDERS, element: ManageWordFolder, layout: DefautLayout },
 ];
 
-const adminRoutes = [{ path: config.routes.admin.MANAGEUSER, element: ManageUser, layout: AdminLayout }];
+const adminRoutes = [
+    { path: config.routes.admin.MANAGEUSER, element: ManageUser, layout: AdminLayout },
+    { path: config.routes.admin.MANAGENEWS, element: ManageNews, layout: AdminLayout },
+];
 
 const authenticationRoutes = [
     { path: config.routes.auth.LOGIN, element: Login, layout: null },

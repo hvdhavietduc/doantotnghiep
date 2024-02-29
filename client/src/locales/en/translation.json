@@ -170,5 +170,20 @@
         "action": "Action",
         "are_you_sure_to_delete_user": "Are you sure to delete user ?",
         "delete_user_success": "Delete user success"
+    },
+    "ManageNews": {
+        "title": "Title",
+        "content": "Content",
+        "author": "Author",
+        "action": "Action",
+        "are_you_sure_to_delete_news": "Are you sure to delete news ?",
+        "delete_news_success": "Delete news success",
+        "add_news": "Add news",
+        "edit_news": "Edit news",
+        "add_news_success": "Add news success",
+        "edit_news_success": "Edit news success",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "news_not_found": "News not found"
     }
 }
