@@ -187,5 +187,23 @@
         "create_at": "Ngày tạo",
         "update_at": "Ngày cập nhật",
         "news_not_found": "Không tìm thấy tin tức hiện tại"
+    },
+    "ManageVideo": {
+        "title": "Tiêu đề",
+        "description": "Mô tả",
+        "action": "Hành động",
+        "add_video": "Thêm video",
+        "edit_video": "Chỉnh sửa video",
+        "delete_video": "Xóa video",
+        "are_you_sure_to_delete_video": "Bạn có chắc chắn muốn xóa video này không",
+        "add_video_success": "Thêm video thành công",
+        "edit_video_success": "Chỉnh sửa video thành công",
+        "delete_video_success": "Xóa video thành công",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "video_not_found": "Không tìm thấy video hiện tại",
+        "video": "Video",
+        "keep_old_video": "Giữ lại video cũ",
+        "file_not_video": "File không phải là video"
     }
 }

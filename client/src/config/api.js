@@ -32,6 +32,12 @@ const api = {
         EDIT: '/news',
         DELETE: '/news',
     },
+    video: {
+        GETALL: '/videos/all',
+        CREATE: '/videos',
+        EDIT: '/videos',
+        DELETE: '/videos',
+    },
 };
 
 export default api;

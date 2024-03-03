@@ -13,6 +13,7 @@ import ManageUser from '~/pages/Admin/ManageUser';
 import config from '~/config';
 import { DefautLayout, AdminLayout } from '~/layout';
 import ManageNews from '~/pages/Admin/ManageNews';
+import ManageVideo from '~/pages/Admin/ManageVideo';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -29,6 +30,7 @@ const privateRoutes = [
 const adminRoutes = [
     { path: config.routes.admin.MANAGEUSER, element: ManageUser, layout: AdminLayout },
     { path: config.routes.admin.MANAGENEWS, element: ManageNews, layout: AdminLayout },
+    { path: config.routes.admin.MANAGEVIDEOS, element: ManageVideo, layout: AdminLayout },
 ];
 
 const authenticationRoutes = [

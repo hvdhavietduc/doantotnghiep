@@ -187,5 +187,23 @@
         "create_at": "Create at",
         "update_at": "Update at",
         "news_not_found": "News not found"
+    },
+    "ManageVideo": {
+        "title": "Title",
+        "description": "Description",
+        "author": "Author",
+        "action": "Action",
+        "are_you_sure_to_delete_video": "Are you sure to delete video ?",
+        "delete_video_success": "Delete video success",
+        "add_video": "Add video",
+        "edit_video": "Edit video",
+        "add_video_success": "Add video success",
+        "edit_video_success": "Edit video success",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "video_not_found": "Video not found",
+        "video": "Video",
+        "keep_old_video": "Keep old video",
+        "file_not_video": "File not video"
     }
 }
