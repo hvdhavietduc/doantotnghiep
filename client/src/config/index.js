@@ -9,6 +9,7 @@ import wordsbooks from './WordsBooks';
 import manageWordFolder from './ManageWordFolder';
 import manageUser from './ManageUser';
 import manageNews from './ManageNews';
+import manageVideo from './ManageVideo';
 import lookup from './Lookup';
 
 const config = {
@@ -23,6 +24,7 @@ const config = {
     manageWordFolder,
     manageUser,
     manageNews,
+    manageVideo,
     lookup,
 };
 
