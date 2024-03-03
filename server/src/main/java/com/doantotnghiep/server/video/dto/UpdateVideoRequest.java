@@ -25,4 +25,9 @@ public class UpdateVideoRequest {
     private String description;
 
     private MultipartFile video;
+
+    @Valid
+    @NotNull(message = "isKeepVideo must not be null")
+    @NotEmpty(message = "isKeepVideo must not be empty")
+    private Boolean isKeepVideo;
 }

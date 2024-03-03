@@ -58,8 +58,7 @@ public class VideoService {
                     .build();
 
             return ResponseEntity.ok(videoRepository.save(video));
-        }
-        catch (ResponseException e) {
+        } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
     }
@@ -71,12 +70,15 @@ public class VideoService {
                 throw new ResponseException(VideoErrorEnum.VIDEO_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
 
-            Boolean isVideo = cloudinaryService.isVideo(request.getVideo());
-            if (!isVideo) {
-                throw new ResponseException(VideoErrorEnum.FILE_NOT_VIDEO, HttpStatus.BAD_REQUEST, 400);
-            }
+            String urlVideo = videoUpdate.getUrl();
 
-            String urlVideo = cloudinaryService.uploadVideo(request.getVideo());
+            if (!request.getIsKeepVideo()) {
+                Boolean isVideo = cloudinaryService.isVideo(request.getVideo());
+                if (!isVideo) {
+                    throw new ResponseException(VideoErrorEnum.FILE_NOT_VIDEO, HttpStatus.BAD_REQUEST, 400);
+                }
+                urlVideo = cloudinaryService.uploadVideo(request.getVideo());
+            }
 
             videoUpdate.setTitle(request.getTitle());
             videoUpdate.setDescription(request.getDescription());
