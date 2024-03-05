@@ -39,7 +39,7 @@ const getValid = () => ({
         maxLength: {
             value: constantsValid.length.MAX_LENGTH_DEFINITION,
             message:
-                i18next.t('ManageWordFolder.description') +
+                i18next.t('ManageWordFolder.definition') +
                 i18next.t('Valid.must_most') +
                 constantsValid.length.MAX_LENGTH_DEFINITION +
                 i18next.t('Valid.characters'),
@@ -57,7 +57,7 @@ const getValid = () => ({
         maxLength: {
             value: constantsValid.length.MAX_LENGTH_NOTE,
             message:
-                i18next.t('ManageWordFolder.description') +
+                i18next.t('ManageWordFolder.definition') +
                 i18next.t('Valid.must_most') +
                 constantsValid.length.MAX_LENGTH_NOTE +
                 i18next.t('Valid.characters'),
@@ -67,7 +67,7 @@ const getValid = () => ({
         minLength: {
             value: constantsValid.length.MIN_LENGTH_WORDTYPE,
             message:
-                i18next.t('ManageWordFolder.definition') +
+                i18next.t('ManageWordFolder.word_type') +
                 i18next.t('Valid.must_least') +
                 constantsValid.length.MIN_LENGTH_WORDTYPE +
                 i18next.t('Valid.characters'),
@@ -75,7 +75,7 @@ const getValid = () => ({
         maxLength: {
             value: constantsValid.length.MAX_LENGTH_WORDTYPE,
             message:
-                i18next.t('ManageWordFolder.description') +
+                i18next.t('ManageWordFolder.word_type') +
                 i18next.t('Valid.must_most') +
                 constantsValid.length.MAX_LENGTH_WORDTYPE +
                 i18next.t('Valid.characters'),
@@ -85,7 +85,7 @@ const getValid = () => ({
         minLength: {
             value: constantsValid.length.MIN_LENGTH_SPELL,
             message:
-                i18next.t('ManageWordFolder.definition') +
+                i18next.t('ManageWordFolder.spell') +
                 i18next.t('Valid.must_least') +
                 constantsValid.length.MIN_LENGTH_SPELL +
                 i18next.t('Valid.characters'),
@@ -93,7 +93,7 @@ const getValid = () => ({
         maxLength: {
             value: constantsValid.length.MAX_LENGTH_SPELL,
             message:
-                i18next.t('ManageWordFolder.description') +
+                i18next.t('ManageWordFolder.spell') +
                 i18next.t('Valid.must_most') +
                 constantsValid.length.MAX_LENGTH_SPELL +
                 i18next.t('Valid.characters'),
@@ -103,17 +103,9 @@ const getValid = () => ({
         minLength: {
             value: constantsValid.length.MIN_LENGTH_EXAMPLES,
             message:
-                i18next.t('ManageWordFolder.definition') +
+                i18next.t('ManageWordFolder.example') +
                 i18next.t('Valid.must_least') +
                 constantsValid.length.MIN_LENGTH_EXAMPLES +
-                i18next.t('Valid.characters'),
-        },
-        maxLength: {
-            value: constantsValid.length.MAX_LENGTH_EXAMPLES,
-            message:
-                i18next.t('ManageWordFolder.description') +
-                i18next.t('Valid.must_most') +
-                constantsValid.length.MAX_LENGTH_EXAMPLES +
                 i18next.t('Valid.characters'),
         },
     },

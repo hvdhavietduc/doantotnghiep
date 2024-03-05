@@ -25,7 +25,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
     const arrPagination = Array.from({ length: lastIndex - firstIndex + 1 }, (_, index) => index + firstIndex);
 
     return (
-        <div className={cx('mt-10 flex flex-row justify-center')}>
+        <div className={cx('mb-10 mt-10 flex flex-row justify-center')}>
             <button
                 className={cx(
                     'ml-[6px] mr-[6px] block h-[35px] w-[35px] rounded-[3px] border border-solid border-blue-950',
