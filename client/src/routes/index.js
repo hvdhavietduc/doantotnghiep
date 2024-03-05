@@ -9,17 +9,19 @@ import Translation from '~/pages/User/Translation';
 import Wordbooks from '~/pages/User/Wordbooks';
 import ManageWordFolder from '~/pages/User/ManageWordFolder';
 import Lookup from '~/pages/User/Lookup';
+import News from '~/pages/User/News';
 import ManageUser from '~/pages/Admin/ManageUser';
-import config from '~/config';
-import { DefautLayout, AdminLayout } from '~/layout';
 import ManageNews from '~/pages/Admin/ManageNews';
 import ManageVideo from '~/pages/Admin/ManageVideo';
+import config from '~/config';
+import { DefautLayout, AdminLayout } from '~/layout';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
     { path: config.routes.otherPage.ERROR, element: Error },
     { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
+    { path: config.routes.news.NEWS, element: News, layout: DefautLayout },
 ];
 
 const privateRoutes = [
