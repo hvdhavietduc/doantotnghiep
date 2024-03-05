@@ -8,6 +8,7 @@ import com.google.cloud.translate.v3.TranslateTextResponse;
 import com.google.cloud.translate.v3.Translation;
 import com.google.cloud.translate.v3.TranslationServiceClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
@@ -19,7 +20,9 @@ import java.io.IOException;
 public class TranslateTextService {
     public String isReleaseTranslateFeatureName = "translate_feature";
     public final TranslateFeatureRepository translateFeatureRepository;
-    public String projectId = "capable-argon-416108";
+
+    @Value("${projectId}")
+    public String projectId;
 
     public String translateText(String text, String targetLanguage) throws IOException {
         Boolean isRelease = this.isReleaseTranslateFeature();
