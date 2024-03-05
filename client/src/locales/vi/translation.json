@@ -172,5 +172,38 @@
         "action": "Hành động",
         "are_you_sure_to_delete_user": "Bạn có chắc chắn muốn xóa người dùng ?",
         "delete_user_success": "Xóa người dùng thành công"
+    },
+    "ManageNews": {
+        "title": "Tiêu đề",
+        "content": "Nội dung",
+        "action": "Hành động",
+        "add_news": "Thêm tin tức",
+        "edit_news": "Chỉnh sửa tin tức",
+        "delete_news": "Xóa tin tức",
+        "are_you_sure_to_delete_news": "Bạn có chắc chắn muốn xóa tin tức này không",
+        "add_news_success": "Thêm tin tức thành công",
+        "edit_news_success": "Chỉnh sửa tin tức thành công",
+        "delete_news_success": "Xóa tin tức thành công",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "news_not_found": "Không tìm thấy tin tức hiện tại"
+    },
+    "ManageVideo": {
+        "title": "Tiêu đề",
+        "description": "Mô tả",
+        "action": "Hành động",
+        "add_video": "Thêm video",
+        "edit_video": "Chỉnh sửa video",
+        "delete_video": "Xóa video",
+        "are_you_sure_to_delete_video": "Bạn có chắc chắn muốn xóa video này không",
+        "add_video_success": "Thêm video thành công",
+        "edit_video_success": "Chỉnh sửa video thành công",
+        "delete_video_success": "Xóa video thành công",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "video_not_found": "Không tìm thấy video hiện tại",
+        "video": "Video",
+        "keep_old_video": "Giữ lại video cũ",
+        "file_not_video": "File không phải là video"
     }
 }

@@ -18,8 +18,8 @@ export const getNavigationAdmin = () => [
     { title: i18next.t('HeaderAdmin.manage_user'), link: "/manage_user/1" },
     { title: i18next.t('HeaderAdmin.manage_quizzes'), link: config.routes.admin.MANAGEQUIZZES },
     { title: i18next.t('HeaderAdmin.manage_categories'), link: config.routes.admin.MANAGECATEGORIES },
-    { title: i18next.t('HeaderAdmin.manage_news'), link: config.routes.admin.MANAGENEWS },
-    { title: i18next.t('HeaderAdmin.manage_videos'), link: config.routes.admin.MANAGEVIDEOS },
+    { title: i18next.t('HeaderAdmin.manage_news'), link: "/manage_news/1" },
+    { title: i18next.t('HeaderAdmin.manage_videos'), link: "/manage_videos/1" },
 ];
 
 export const getMENU_ITEMS = () => [

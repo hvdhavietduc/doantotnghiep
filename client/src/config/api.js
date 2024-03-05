@@ -26,6 +26,18 @@ const api = {
         GETALLTOADD: '/folders/all/toAdd',
         WORDINFOLDER: '/wordFolder/folder',
     },
+    news: {
+        GETALL: '/news/all',
+        CREATE: '/news',
+        EDIT: '/news',
+        DELETE: '/news',
+    },
+    video: {
+        GETALL: '/videos/all',
+        CREATE: '/videos',
+        EDIT: '/videos',
+        DELETE: '/videos',
+    },
 };
 
 export default api;

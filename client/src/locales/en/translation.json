@@ -172,5 +172,38 @@
         "action": "Action",
         "are_you_sure_to_delete_user": "Are you sure to delete user ?",
         "delete_user_success": "Delete user success"
+    },
+    "ManageNews": {
+        "title": "Title",
+        "content": "Content",
+        "author": "Author",
+        "action": "Action",
+        "are_you_sure_to_delete_news": "Are you sure to delete news ?",
+        "delete_news_success": "Delete news success",
+        "add_news": "Add news",
+        "edit_news": "Edit news",
+        "add_news_success": "Add news success",
+        "edit_news_success": "Edit news success",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "news_not_found": "News not found"
+    },
+    "ManageVideo": {
+        "title": "Title",
+        "description": "Description",
+        "author": "Author",
+        "action": "Action",
+        "are_you_sure_to_delete_video": "Are you sure to delete video ?",
+        "delete_video_success": "Delete video success",
+        "add_video": "Add video",
+        "edit_video": "Edit video",
+        "add_video_success": "Add video success",
+        "edit_video_success": "Edit video success",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "video_not_found": "Video not found",
+        "video": "Video",
+        "keep_old_video": "Keep old video",
+        "file_not_video": "File not video"
     }
 }
