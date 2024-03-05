@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.CrawWord;
 
+import com.doantotnghiep.server.Translate.TranslateTextService;
 import com.doantotnghiep.server.common.ErrorEnum.WordErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.word.Example;
@@ -30,6 +31,8 @@ public class CrawWordService {
     private final static String endpointWord = "/dictionary/english/";
 
     private final static String urlThirdPartyApi = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+    private final TranslateTextService translateTextService;
+
 
     public Word crawWord(String word) throws IOException, ResponseException {
         String urlWord = url + endpointWord + word;
@@ -126,7 +129,7 @@ public class CrawWordService {
         return pronunciationUSText.text();
     }
 
-    public List<Type> crawTypes(Document doc) {
+    public List<Type> crawTypes(Document doc) throws IOException {
         List<Type> typesList = new ArrayList<>();
         Element typesElement = doc.select(".entry-body").first();
         if (typesElement == null) {
@@ -152,7 +155,7 @@ public class CrawWordService {
         return typesList;
     }
 
-    public List<Mean> crawMeans(Element body) {
+    public List<Mean> crawMeans(Element body) throws IOException {
         List<Mean> meansList = new ArrayList<>();
         List<Element> meansElement = body.select(".pr.dsense ");
         for (Element meanElement : meansElement) {
@@ -180,6 +183,7 @@ public class CrawWordService {
                 }
 
                 meanCraw.conceptEnglish = conceptEnglish;
+                meanCraw.conceptVietnamese = translateTextService.translateText(conceptEnglish, "vi");
                 meanCraw.level = level;
                 meanCraw.examples = crawExamples(mean);
                 meansList.add(meanCraw);
@@ -188,13 +192,13 @@ public class CrawWordService {
         return meansList;
     }
 
-    public List<Example> crawExamples(Element meanBody) {
+    public List<Example> crawExamples(Element meanBody) throws IOException {
         List<Example> examplesList = new ArrayList<>();
         List<Element> examplesElement = meanBody.select(".eg.deg");
         for (Element exampleElement : examplesElement) {
             Example example = new Example();
             example.example = exampleElement.text();
-            example.meanOfExample = "";
+            example.meanOfExample = translateTextService.translateText(example.example, "vi");
             examplesList.add(example);
         }
         return examplesList;
