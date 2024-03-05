@@ -23,6 +23,7 @@ function ManageWordFolder() {
     const [listWord, setListWord] = useState([]);
     const [isDeleteorEdit, setIsDeleteorEdit] = useState(false);
     const [totalPage, setTotalPage] = useState(1);
+    const [totalWord, setTotalWord] = useState();
     const [nameFolder, setNameFolder] = useState('');
 
     const location = useLocation();
@@ -59,6 +60,7 @@ function ManageWordFolder() {
                 setListWord(result.words);
                 setNameFolder(result.folder);
                 setTotalPage(result.totalPage);
+                setTotalWord(result.total);
                 setIsDeleteorEdit(false);
                 return;
             })
@@ -85,13 +87,13 @@ function ManageWordFolder() {
                     </Button>
                 </div>
                 <div className={cx('mt-[35px]')}>
-                    {listWord.length === 0 ? (
+                    {totalWord === 0 ? (
                         <div>{t('no_have_word')}</div>
                     ) : (
                         <div>
                             <div className={cx('mb-5')}>
                                 {t('list_have') + ' '}
-                                {listWord.length}
+                                {totalWord}
                                 {' ' + t('word')}.
                             </div>
                             <div>

@@ -80,9 +80,9 @@ function ItemWord({ inforWord, onPageChange }) {
                         <div className={cx('mt-[10px]')}>
                             <div className={cx('font-semibold')}>{t('definition')}</div>
                             <div>
-                                <div>{inforWord.types[0].means[0].conceptEnglish.slice(0, -1)}</div>
+                                <div>{inforWord?.types[0]?.means[0]?.conceptEnglish.slice(0, -1)}</div>
                                 <div className={cx('bg-blue-200')}>
-                                    {inforWord.types[0].means[0].conceptVietnamese || 'Sẽ có khi có API'}
+                                    {inforWord?.types[0]?.means[0]?.conceptVietnamese || 'Sẽ có khi có API'}
                                 </div>
                             </div>
                         </div>
@@ -94,11 +94,11 @@ function ItemWord({ inforWord, onPageChange }) {
                         /> */}
                     </div>
                 </div>
-                {inforWord.types[0].means[0].examples.length !== 0 && (
+                {inforWord?.types[0]?.means[0]?.examples?.length !== 0 && (
                     <div className={cx('mt-[10px]')}>
                         <div className={cx('font-semibold ')}>{t('example')}</div>
                         <ul className={cx('list-inside')}>
-                            {inforWord.types[0].means[0].examples.map((value, index) => (
+                            {inforWord?.types[0]?.means[0]?.examples.map((value, index) => (
                                 <li key={index}>{value.example}</li>
                             ))}
                         </ul>
