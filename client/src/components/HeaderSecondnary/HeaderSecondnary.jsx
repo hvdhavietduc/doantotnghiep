@@ -23,12 +23,12 @@ function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, onCha
     };
 
     return (
-        <div className={cx('relative h-44 w-full pt-10', 'wrapper')} style={styles}>
-            <div className={cx('text-3xl')}>
+        <div className={cx('relative h-auto w-full pb-5 pt-10', 'wrapper')} style={styles}>
+            <div className={cx('text-3xl', 'title')}>
                 <FontAwesomeIcon icon={iconTitle} className={cx('mr-3', 'icon')} />
                 <span className={cx('font-semibold')}>{title}</span>
             </div>
-            <div className={cx('absolute bottom-5 flex flex-wrap overflow-x-auto')}>
+            <div className={cx('mt-10 flex flex-wrap gap-3 overflow-x-auto')}>
                 {menuFilter.map((item, index) => (
                     <Button
                         key={index}
