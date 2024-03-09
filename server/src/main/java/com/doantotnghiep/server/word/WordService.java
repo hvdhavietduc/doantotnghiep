@@ -1,8 +1,8 @@
 package com.doantotnghiep.server.word;
 
 import com.doantotnghiep.server.CrawWord.CrawWordService;
-import com.doantotnghiep.server.categoryOfWord.CategoryOfWord;
-import com.doantotnghiep.server.categoryOfWord.CategoryOfWordRepository;
+import com.doantotnghiep.server.wordCategory.WordCategory;
+import com.doantotnghiep.server.wordCategory.WordCategoryRepository;
 import com.doantotnghiep.server.common.ErrorEnum.CategoryOfWordErrorEnum;
 import com.doantotnghiep.server.common.ErrorEnum.FolderErrorEnum;
 import com.doantotnghiep.server.common.ErrorEnum.WordErrorEnum;
@@ -35,7 +35,7 @@ public class WordService {
     private final WordRepository wordRepository;
     private final CrawWordService crawWordService;
     private final FolderRepository folderRepository;
-    private final CategoryOfWordRepository categoryOfWordRepository;
+    private final WordCategoryRepository categoryOfWordRepository;
     private final WordFolderRepository wordFolderRepository;
 
     public ResponseEntity<Word> getWordByName(String name) throws ResponseException, IOException {
@@ -107,7 +107,7 @@ public class WordService {
     public ResponseEntity<Boolean> addWordToCategory(AddWordToCategoryRequest request) throws ResponseException {
         try {
             String categoryId = request.getCategoryId();
-            CategoryOfWord category = categoryOfWordRepository.findById(categoryId).orElse(null);
+            WordCategory category = categoryOfWordRepository.findById(categoryId).orElse(null);
             if (category == null) {
                 throw new ResponseException(CategoryOfWordErrorEnum.CATEGORY_OF_WORD_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
@@ -129,7 +129,7 @@ public class WordService {
     public ResponseEntity<Boolean> removeWordFromCategory(RemoveWordFromCategoryRequest request) throws ResponseException {
         try {
             String categoryId = request.getCategoryId();
-            CategoryOfWord category = categoryOfWordRepository.findById(categoryId).orElse(null);
+            WordCategory category = categoryOfWordRepository.findById(categoryId).orElse(null);
             if (category == null) {
                 throw new ResponseException(CategoryOfWordErrorEnum.CATEGORY_OF_WORD_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
@@ -149,7 +149,7 @@ public class WordService {
 
     public ResponseEntity<AllWordByCategory> getAllWordByCategory(String categoryId, Integer page, Integer size) throws ResponseException {
         try {
-            CategoryOfWord category = categoryOfWordRepository.findById(categoryId).orElse(null);
+            WordCategory category = categoryOfWordRepository.findById(categoryId).orElse(null);
             if (category == null) {
                 throw new ResponseException(CategoryOfWordErrorEnum.CATEGORY_OF_WORD_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
@@ -157,10 +157,9 @@ public class WordService {
             Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
             Page<Word> words = wordRepository.findAllByIdIn(wordIds, paging);
             Integer total = wordIds.size();
-            Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
             AllWordByCategory response = AllWordByCategory.builder()
                     .total(total)
-                    .totalPage(totalPage)
+                    .totalPage(words.getTotalPages())
                     .words(words.getContent())
                     .build();
             return ResponseEntity.ok(response);
