@@ -31,6 +31,7 @@ const api = {
         CREATE: '/news',
         EDIT: '/news',
         DELETE: '/news',
+        GETDETAIL: '/news',
     },
     video: {
         GETALL: '/videos/all',

@@ -23,7 +23,8 @@ const routes = {
         VIDEO: '/video',
     },
     news: {
-        NEWS: '/news',
+        NEW: '/news',
+        NEWS: '/news/:page',
     },
     text_online: {
         TEXT_ONLINE: '/text_online',
