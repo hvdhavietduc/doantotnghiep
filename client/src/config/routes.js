@@ -44,7 +44,7 @@ const routes = {
         MANAGEUSER: '/manage_user/:page',
         MANAGEFORUM: '/manage_forum',
         MANAGEQUIZZES: '/manage_quizzes',
-        MANAGECATEGORIES: '/manage_categories',
+        MANAGEWORDCATEGORIES: '/manage_wcategories/:page',
         MANAGENEWS: '/manage_news/:page',
         MANAGEVIDEOS: '/manage_videos/:page',
     },

@@ -17,7 +17,7 @@ import EditNews from './EditNew.jsx/EditNews';
 function ManageNews() {
     const location = useLocation();
     const currentPath = location.pathname;
-    const currentPage = currentPath.split('/')[2];
+    const currentPage = Number(currentPath.split('/')[2]);
     const [allNews, setAllNews] = useState([]);
     const [data, setData] = useState();
     const [cookies, setCookies] = useCookies(['token']);

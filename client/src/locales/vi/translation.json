@@ -205,5 +205,20 @@
         "video": "Video",
         "keep_old_video": "Giữ lại video cũ",
         "file_not_video": "File không phải là video"
+    },
+    "ManageWordCategory": {
+        "name": "Tên phân loại",
+        "action": "Hành động",
+        "are_you_sure_to_delete_category": "Bạn có chắc chắn muốn xóa phân loại từ này không",
+        "delete_category_success": "Xóa phân loại từ thành công",
+        "add_category": "Thêm phân loại từ",
+        "edit_category": "Chỉnh sửa phân loại từ",
+        "add_category_success": "Thêm phân loại từ thành công",
+        "edit_category_success": "Chỉnh sửa phân loại từ thành công",
+        "category_not_found": "Không tìm thấy phân loại từ hiện tại",
+        "category_already_exist": "Phân loại từ này đã tồn tại",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "manage_word_lists": "Quản lý danh sách từ"
     }
 }

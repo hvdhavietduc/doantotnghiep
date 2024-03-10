@@ -38,6 +38,12 @@ const api = {
         EDIT: '/videos',
         DELETE: '/videos',
     },
+    wordCategory: {
+        GETALL: '/wordCategory/all',
+        CREATE: '/wordCategory',
+        EDIT: '/wordCategory',
+        DELETE: '/wordCategory',
+    },
 };
 
 export default api;
