@@ -1,8 +1,8 @@
 import httpRequest from '~/utils/httpRequest';
 import config from '~/config';
 
-const getAllNews = async (token, page = 0, size = 10) => {
-    const res = await httpRequest.get(config.api.news.GETALL, {
+const getAllCategory = async (token, page = 0, size = 10) => {
+    const res = await httpRequest.get(config.api.wordCategory.GETALL, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -14,11 +14,8 @@ const getAllNews = async (token, page = 0, size = 10) => {
     return res.data;
 };
 
-const deleteNews = async (token, id) => {
-    const res = await httpRequest.delete(config.api.news.DELETE, {
-        params: {
-            id: id,
-        },
+const deleteCategory = async (token, id) => {
+    const res = await httpRequest.delete(config.api.wordCategory.DELETE + `/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -26,8 +23,8 @@ const deleteNews = async (token, id) => {
     return res.data;
 };
 
-const createNews = async (data, token) => {
-    const res = await httpRequest.post(config.api.news.CREATE, data, {
+const createCategory = async (data, token) => {
+    const res = await httpRequest.post(config.api.wordCategory.CREATE, data, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -35,8 +32,8 @@ const createNews = async (data, token) => {
     return res.data;
 };
 
-const editNews = async (data, token) => {
-    const res = await httpRequest.put(config.api.news.EDIT, data, {
+const editCategory = async (data, token) => {
+    const res = await httpRequest.put(config.api.wordCategory.EDIT, data, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
@@ -44,4 +41,4 @@ const editNews = async (data, token) => {
     return res.data;
 };
 
-export { getAllNews, deleteNews, createNews, editNews };
+export { getAllCategory, deleteCategory, createCategory, editCategory };
