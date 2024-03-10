@@ -10,11 +10,13 @@ import Wordbooks from '~/pages/User/Wordbooks';
 import ManageWordFolder from '~/pages/User/ManageWordFolder';
 import Lookup from '~/pages/User/Lookup';
 import News from '~/pages/User/News';
+import NewDetail from '~/pages/User/News/NewDetail';
+
 import ManageUser from '~/pages/Admin/ManageUser';
 import ManageNews from '~/pages/Admin/ManageNews';
 import ManageVideo from '~/pages/Admin/ManageVideo';
-import config from '~/config';
 import { DefautLayout, AdminLayout } from '~/layout';
+import config from '~/config';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -22,6 +24,7 @@ const publicRoutes = [
     { path: config.routes.otherPage.ERROR, element: Error },
     { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
     { path: config.routes.news.NEWS, element: News, layout: DefautLayout },
+    { path: config.routes.news.NEWDEDAIL, element: NewDetail, layout: DefautLayout },
 ];
 
 const privateRoutes = [

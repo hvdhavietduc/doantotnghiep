@@ -25,6 +25,7 @@ const routes = {
     news: {
         NEW: '/news',
         NEWS: '/news/:page',
+        NEWDEDAIL: '/news/:page/:idNew',
     },
     text_online: {
         TEXT_ONLINE: '/text_online',
