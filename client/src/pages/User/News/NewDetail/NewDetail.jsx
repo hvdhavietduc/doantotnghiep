@@ -1,25 +1,61 @@
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 import styles from './NewDetail.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
 import ItemNews from '../ItemNews';
-//import Loading from '~/components/Loading';
+import Loading from '~/components/Loading';
 import Image from '~/components/Image';
-//import { getDetailNews } from '~/services/NewsServices';
-//import notify from '~/utils/notify';
+import { getDetailNews } from '~/services/NewsServices';
+import notify from '~/utils/notify';
 import config from '~/config';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 
 const cx = classNames.bind(styles);
 
 function NewDetail() {
+    const [loading, setLoading] = useState(false);
+    const [inforNews, setInforNews] = useState({});
+
     // eslint-disable-next-line no-unused-vars
-    const { t } = useTranslation('translation', { keyPrefix: 'NewDetail' });
+    const [cookies, setCookies] = useCookies(['token']);
+
+    const location = useLocation();
+    // eslint-disable-next-line no-unused-vars
+    const { t } = useTranslation('translation', { keyPrefix: 'News' });
 
     const paramater = config.getParamaterHeaderSecondnary().News;
 
+    const currentPath = location.pathname;
+    const NewsId = String(currentPath.split('/')[3]);
+
     const listNewsSuggesion = [1, 2, 3, 4, 5, 6];
+    console.log(inforNews);
+
+    useEffect(() => {
+        console.log(NewsId);
+        setLoading(true);
+        const token = cookies.token;
+        getDetailNews(NewsId, token)
+            .then((result) => {
+                setLoading(false);
+                setInforNews(result);
+                return;
+            })
+            .catch((error) => {
+                setLoading(false);
+                const messeageNotify = config.errorMesseage.getMesseageNotify();
+                if (!error.response) {
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    return;
+                }
+            });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPath]);
 
     return (
         <div className={cx('mb-[80px] w-full')}>
@@ -30,7 +66,7 @@ function NewDetail() {
                 menuFilter={paramater.menuFilter}
             />
             <div className={cx('new-container mt-20  px-[18%]', 'max-sm:px-[5%]')}>
-                <div className={cx('text-3xl font-medium')}>Defend and buy time: Russia's new Ukraine strategy?</div>
+                <div className={cx('text-3xl font-medium')}>{inforNews.title}</div>
                 <div className={cx('mt-4 flex flex-wrap items-center justify-start gap-2 text-sm')}>
                     <Image src="" fallback={NoimageAvatar} className={cx(' h-5 w-5 rounded-full')} />
                     <div className={cx('font-semibold')}>Minh Phương</div>
@@ -64,7 +100,7 @@ function NewDetail() {
                     Russian territory and that this was "inevitable".
                 </p>
                 <div className={cx('mt-4 h-[2px] w-full bg-primary-color')}></div>
-                <div className={cx('mt-6 text-xl font-semibold')}>OF INTERESTING</div>
+                <div className={cx('mt-6 text-xl font-semibold')}>{t('of_interesting')}</div>
                 <div
                     className={cx(
                         'mt-[50px] grid w-full grid-cols-3 gap-y-6',
@@ -74,10 +110,11 @@ function NewDetail() {
                     )}
                 >
                     {listNewsSuggesion.map((news, index) => (
-                        <ItemNews key={index} inforNew={news} />
+                        <ItemNews key={index} inforNew={{}} />
                     ))}
                 </div>
             </div>
+            {loading && <Loading />}
         </div>
     );
 }
