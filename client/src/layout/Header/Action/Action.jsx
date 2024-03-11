@@ -13,6 +13,7 @@ import Menu from '../Menu';
 import Image from '~/components/Image';
 import Loading from '~/components/Loading';
 import { logout } from '~/services/authServices';
+import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 import notify from '~/utils/notify';
 import i18next from '~/utils/i18n';
 import config from '~/config';
@@ -123,6 +124,7 @@ function Action({ userMenu }) {
                             className={cx('ml-[14px] h-8 w-8 cursor-pointer rounded-full object-cover')}
                             src={inforUser.avatar}
                             alt={inforUser.name}
+                            fallback={NoimageAvatar}
                         />
                     ) : (
                         <button className={cx('ml-3 cursor-pointer bg-transparent px-1 py-2 text-xl')}>
