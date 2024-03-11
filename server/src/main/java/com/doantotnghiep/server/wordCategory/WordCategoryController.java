@@ -6,6 +6,7 @@ import com.doantotnghiep.server.exception.ValidateExceptionHandle;
 import com.doantotnghiep.server.wordCategory.dto.CreateWordCategoryRequest;
 import com.doantotnghiep.server.wordCategory.dto.UpdateWordCategoryRequest;
 import com.doantotnghiep.server.wordCategory.response.AllWordCategory;
+import com.doantotnghiep.server.wordCategory.response.AllWordInCategory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
@@ -49,6 +50,11 @@ public class WordCategoryController {
     @DeleteMapping("/{id}")
     public WordCategory deleteWordCategory(@PathVariable String id) throws ResponseException {
         return wordCategoryService.deleteWordCategory(id);
+    }
+
+    @GetMapping("/{id}/words")
+    public AllWordInCategory getAllWordInCategory(@PathVariable String id, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
+        return wordCategoryService.getAllWordInCategory(id, page, size);
     }
 
 }

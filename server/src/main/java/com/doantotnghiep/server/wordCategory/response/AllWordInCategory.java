@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.wordCategory.response;
 
+import com.doantotnghiep.server.word.Word;
 import lombok.Builder;
 
 import java.util.List;
@@ -8,5 +9,5 @@ public class AllWordInCategory {
     public String category;
     public Integer total;
     public Integer totalPage;
-    public List<String> words;
+    public List<Word> words;
 }

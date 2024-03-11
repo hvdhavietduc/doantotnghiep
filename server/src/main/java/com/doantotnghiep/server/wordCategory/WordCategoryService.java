@@ -40,10 +40,10 @@ public class WordCategoryService {
 
     public WordCategory createWordCategory(String name) throws ResponseException {
         WordCategory wordCategory = wordCategoryRepository.findByName(name);
-        if(wordCategory != null) {
+        if (wordCategory != null) {
             throw new ResponseException("Category already exists", HttpStatus.BAD_REQUEST, 400);
         }
-        
+
         WordCategory newWordCategory = WordCategory.builder()
                 .name(name)
                 .createdAt(new Date())
@@ -76,7 +76,7 @@ public class WordCategoryService {
         }
 
         WordCategory categoryExist = wordCategoryRepository.findByName(name);
-        if(categoryExist != null && !categoryExist.getId().equals(id)) {
+        if (categoryExist != null && !categoryExist.getId().equals(id)) {
             throw new ResponseException("Category already exists", HttpStatus.BAD_REQUEST, 400);
         }
 
@@ -92,6 +92,25 @@ public class WordCategoryService {
         }
         wordCategoryRepository.delete(wordCategory);
         return wordCategory;
+    }
+
+    public AllWordInCategory getAllWordInCategory(String categoryId, Integer page, Integer size) throws ResponseException {
+        WordCategory wordCategory = wordCategoryRepository.findById(categoryId).orElse(null);
+        if (wordCategory == null) {
+            throw new ResponseException("Category not found", HttpStatus.BAD_REQUEST, 404);
+        }
+
+        Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<Word> words = wordRepository.findAllByIdIn(wordCategory.getWordIds(), paging);
+
+        System.out.println(words);
+
+        return AllWordInCategory.builder()
+                .category(wordCategory.getName())
+                .words(words.getContent())
+                .total((int) words.getTotalElements())
+                .totalPage(words.getTotalPages())
+                .build();
     }
 
 }
