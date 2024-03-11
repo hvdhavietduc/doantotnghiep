@@ -78,7 +78,8 @@ const editWord = async (data, token) => {
 
 const deleteWord = async (data, token) => {
     console.log('data: ', data);
-    const res = await httpRequest.delete(config.api.wordbooks.WORDINFOLDER, data, {
+    const res = await httpRequest.delete(config.api.wordbooks.WORDINFOLDER, {
+        data: data,
         headers: {
             Authorization: `Bearer ${token}`,
         },

@@ -2,10 +2,10 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useSound from 'use-sound';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis, faVolumeLow } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
+import { Howl } from 'howler';
 
 import styles from './ItemWord.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -20,8 +20,19 @@ function ItemWord({ inforWord, onPageChange }) {
     const [isPoperDeleteWord, setIsPoperDeleteWord] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordFolder' });
-    const [playSoundUK] = useSound(inforWord.pronunciationUKAudio);
-    const [playSoundUS] = useSound(inforWord.pronunciationUSAudio);
+
+    const soundPlay = (src) => {
+        const sound = new Howl({ src, html5: true });
+        sound.play();
+    };
+
+    const playSoundUK = () => {
+        soundPlay(inforWord.pronunciationUKAudio);
+    };
+
+    const playSoundUS = () => {
+        soundPlay(inforWord.pronunciationUSAudio);
+    };
 
     const renderResult = (attrs) => (
         <div className={cx('mr-2')} tabIndex="-1" {...attrs}>
