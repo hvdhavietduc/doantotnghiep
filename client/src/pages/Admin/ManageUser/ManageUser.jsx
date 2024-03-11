@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom';
 function ManageUser() {
     const location = useLocation();
     const currentPath = location.pathname;
-    const currentPage = currentPath.split('/')[2];
+    const currentPage = Number(currentPath.split('/')[2]);
     const [allUser, setAllUser] = useState([]);
     // eslint-disable-next-line no-unused-vars
     const [data, setData] = useState();

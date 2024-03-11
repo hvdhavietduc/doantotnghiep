@@ -219,5 +219,20 @@
         "video": "Video",
         "keep_old_video": "Keep old video",
         "file_not_video": "File not video"
+    },
+    "ManageWordCategory": {
+        "name": "Category name",
+        "action": "Action",
+        "are_you_sure_to_delete_category": "Are you sure to delete category ?",
+        "delete_category_success": "Delete category success",
+        "add_category": "Add category",
+        "edit_category": "Edit category",
+        "add_category_success": "Add category success",
+        "edit_category_success": "Edit category success",
+        "category_not_found": "Category not found",
+        "category_already_exist": "Category already exist",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "manage_word_lists": "Manage word lists"
     }
 }
