@@ -31,12 +31,19 @@ const api = {
         CREATE: '/news',
         EDIT: '/news',
         DELETE: '/news',
+        GETDETAIL: '/news',
     },
     video: {
         GETALL: '/videos/all',
         CREATE: '/videos',
         EDIT: '/videos',
         DELETE: '/videos',
+    },
+    wordCategory: {
+        GETALL: '/wordCategory/all',
+        CREATE: '/wordCategory',
+        EDIT: '/wordCategory',
+        DELETE: '/wordCategory',
     },
 };
 

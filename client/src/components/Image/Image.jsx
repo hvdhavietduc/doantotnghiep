@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, forwardRef } from 'react';
 import classNames from 'classnames';
-import noImage from '~/assets/img/noImage.png';
+import noImage from '~/assets/img/NoImg.png';
 import styles from './Image.module.scss';
 
 const Image = forwardRef(({ src, alt = 'noImage', className, fallback: customFallback = noImage, ...props }, ref) => {

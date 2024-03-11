@@ -23,7 +23,9 @@ const routes = {
         VIDEO: '/video',
     },
     news: {
-        NEWS: '/news',
+        NEW: '/news',
+        NEWS: '/news/:page',
+        NEWDEDAIL: '/news/:page/:idNew',
     },
     text_online: {
         TEXT_ONLINE: '/text_online',
@@ -44,7 +46,7 @@ const routes = {
         MANAGEUSER: '/manage_user/:page',
         MANAGEFORUM: '/manage_forum',
         MANAGEQUIZZES: '/manage_quizzes',
-        MANAGECATEGORIES: '/manage_categories',
+        MANAGEWORDCATEGORIES: '/manage_wcategories/:page',
         MANAGENEWS: '/manage_news/:page',
         MANAGEVIDEOS: '/manage_videos/:page',
     },
