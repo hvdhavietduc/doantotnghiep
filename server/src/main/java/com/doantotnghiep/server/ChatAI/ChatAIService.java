@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @ControllerAdvice
 public class ChatAIService {
-    private static final String OPENAI_API_KEY = "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";
+    private static final String OPENAI_API_KEY = "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";
     private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 
     public String getOpenAIResponse(String userInput) throws ResponseException {
@@ -39,7 +39,7 @@ public class ChatAIService {
             List<Map<String, String>> messages = new ArrayList<>();
             messages.add(Map.of("role", "system", "content", "You are a helpful assistant."));
             messages.add(Map.of("role", "user", "content", userInput));
-            requestBody.put("model", "whisper-1");
+            requestBody.put("model", "gpt-3.5-turbo");
             requestBody.put("messages", messages);
 
             HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
@@ -50,7 +50,7 @@ public class ChatAIService {
             // Process the response
             return responseEntity.getBody();
         } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 500);
+            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST, 400);
         }
     }
 
