@@ -44,6 +44,16 @@ public class FolderConttroller {
         }
     }
 
+    @GetMapping("/all/toAdd")
+    public ResponseEntity<List<Folder>> getAllFolderToAdd(HttpServletRequest request) throws ResponseException {
+        try {
+            User user = jwtService.getUserFromHeader(request);
+            return folderService.getAllFolderToAdd(user.getId());
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
     @DeleteMapping("")
     public ResponseEntity<Boolean> deleteFolder(HttpServletRequest request, @RequestParam String id) throws ResponseException {
         try {

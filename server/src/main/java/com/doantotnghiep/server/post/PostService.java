@@ -35,7 +35,7 @@ public class PostService {
         try {
             String urlImage = "";
             if (request.getImage() != null) {
-                urlImage = cloudinaryService.uploadFile(request.getImage());
+                urlImage = cloudinaryService.uploadImage(request.getImage());
             }
 
             Post post = new Post();
@@ -93,7 +93,7 @@ public class PostService {
 
             String urlImage = "";
             if (request.getImage() != null) {
-                urlImage = cloudinaryService.uploadFile(request.getImage());
+                urlImage = cloudinaryService.uploadImage(request.getImage());
             }
 
             post.setTitle(request.getTitle());

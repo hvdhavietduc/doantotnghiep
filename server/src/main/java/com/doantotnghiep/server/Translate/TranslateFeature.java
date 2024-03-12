@@ -1,28 +1,21 @@
-package com.doantotnghiep.server.video;
+package com.doantotnghiep.server.Translate;
 
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.Date;
 
 @Data
 @Document
 @Builder
-public class Video {
+public class TranslateFeature {
     @Id
     public String id;
     @Field
-    public String title;
+    public Boolean isRelease;
     @Field
-    public String description;
-    @Field
-    public String url;
-    @Field
-    public Date createdAt;
-    @Field
-    public Date updatedAt;
-
+    @Indexed(unique = true)
+    public String name;
 }

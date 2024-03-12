@@ -5,6 +5,7 @@ import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.folder.dto.CreateFolderRequest;
 import com.doantotnghiep.server.folder.dto.UpdateFolderRequest;
 import com.doantotnghiep.server.folder.response.AllFolderResponse;
+import com.doantotnghiep.server.wordFolder.WordFolderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,7 @@ import java.util.List;
 @ControllerAdvice
 public class FolderService {
     private final FolderRepository folderRepository;
+    private final WordFolderRepository wordFolderRepository;
 
     public ResponseEntity<Folder> createFolder(String userId, CreateFolderRequest request) throws ResponseException {
         try {
@@ -62,6 +64,11 @@ public class FolderService {
         return ResponseEntity.ok(response);
     }
 
+    public ResponseEntity<List<Folder>> getAllFolderToAdd(String userId){
+        List<Folder> response = folderRepository.findAllByUserId(userId);
+        return ResponseEntity.ok(response);
+    }
+
     public ResponseEntity<Boolean> deleteFolder(String userId, String folderId) throws ResponseException {
         try {
             Folder folder = folderRepository.findByIdAndUserId(folderId, userId);
@@ -69,6 +76,7 @@ public class FolderService {
                 throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
             folderRepository.deleteByIdAndUserId(folderId, userId);
+            wordFolderRepository.deleteAllByFolderId(folderId);
             return ResponseEntity.ok(true);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
