@@ -31,7 +31,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
                     'ml-[6px] mr-[6px] block h-[35px] w-[35px] rounded-[3px] border border-solid border-blue-950',
                     'item',
                     {
-                        disabled: currentPage === 1,
+                        disabled: currentPage === 1 || totalPage === 0,
                     },
                 )}
                 onClick={() => onPageChange(currentPage - 1)}
@@ -54,7 +54,7 @@ function Pagination({ totalPage, currentPage, onPageChange }) {
 
             <button
                 className={cx('item', {
-                    disabled: currentPage === totalPage,
+                    disabled: currentPage === totalPage || totalPage === 0,
                 })}
                 onClick={() => onPageChange(currentPage + 1)}
             >
