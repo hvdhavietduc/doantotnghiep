@@ -14,6 +14,7 @@ import config from '~/config';
 import getValid from '../validateForm';
 import { editNews } from '~/services/manageNewsServices';
 
+// eslint-disable-next-line no-unused-vars
 const cx = classNames.bind(styles);
 
 function EditNews({ setIsPoperEditNews, onPageChange, oldNews }) {
@@ -27,6 +28,7 @@ function EditNews({ setIsPoperEditNews, onPageChange, oldNews }) {
     const {
         register,
         handleSubmit,
+        // eslint-disable-next-line no-unused-vars
         setError,
         formState: { errors },
     } = useForm();

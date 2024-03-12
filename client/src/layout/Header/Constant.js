@@ -20,9 +20,6 @@ export const getNavigationAdmin = () => [
     { title: i18next.t('HeaderAdmin.manage_categories'), link: config.routes.admin.MANAGECATEGORIES },
     { title: i18next.t('HeaderAdmin.manage_news'), link: '/manage_news/1' },
     { title: i18next.t('HeaderAdmin.manage_videos'), link: '/manage_videos/1' },
-    { title: i18next.t('HeaderAdmin.manage_categories'), link: "/manage_wcategories/1" },
-    { title: i18next.t('HeaderAdmin.manage_news'), link: "/manage_news/1" },
-    { title: i18next.t('HeaderAdmin.manage_videos'), link: "/manage_videos/1" },
 ];
 
 export const getMENU_ITEMS = () => [
