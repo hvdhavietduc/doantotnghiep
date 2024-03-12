@@ -14,6 +14,7 @@ import config from '~/config';
 import getValid from '../validateForm';
 import { editVideo } from '~/services/manageVideoServices';
 
+// eslint-disable-next-line no-unused-vars
 const cx = classNames.bind(styles);
 
 function EditVideo({ setIsPoperEditVideo, onPageChange, oldVideo }) {
@@ -28,6 +29,7 @@ function EditVideo({ setIsPoperEditVideo, onPageChange, oldVideo }) {
     const {
         register,
         handleSubmit,
+        // eslint-disable-next-line no-unused-vars
         setError,
         formState: { errors },
     } = useForm();
@@ -77,8 +79,7 @@ function EditVideo({ setIsPoperEditVideo, onPageChange, oldVideo }) {
             if (error.response.status === 404 && message.includes(messeageLogic.VIDEO_NOT_FOUND)) {
                 notify.error(messeageNotify.VIDEO_NOT_FOUND);
                 return;
-            }
-            else if (message === messeageLogic.FILE_NOT_VIDEO) {
+            } else if (message === messeageLogic.FILE_NOT_VIDEO) {
                 notify.error(messeageNotify.FILE_NOT_VIDEO);
                 return;
             }
