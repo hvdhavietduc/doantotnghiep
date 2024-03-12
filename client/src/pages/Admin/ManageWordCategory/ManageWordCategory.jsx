@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { getAllCategory } from '~/services/manageWordCategoryServices';
 import { useCookies } from 'react-cookie';
 import notify from '~/utils/notify';
@@ -27,6 +27,7 @@ function ManageWordCategory() {
     const [totalPage, setTotalPage] = useState(0);
     const [categoryIdToDelete, setCategoryIdToDelete] = useState();
     const [categoryToEdit, setCategoryToEdit] = useState();
+    const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
     const navigate = useNavigate();
 
@@ -60,7 +61,7 @@ function ManageWordCategory() {
             navigate('/manage_wcategories/1');
         }
         getAllCategoryAPI(currentPage);
-    }, [currentPage]);
+    }, [currentPage, reducerValue]);
 
     const showPoperDeleteCategory = (categoryId) => {
         setCategoryIdToDelete(categoryId);
@@ -80,7 +81,7 @@ function ManageWordCategory() {
     };
 
     return (
-        <div className="p-10">
+        <div className="w-full p-10">
             <button
                 onClick={showPoperAddCategory}
                 type="button"
@@ -94,6 +95,9 @@ function ManageWordCategory() {
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 {t('name')}
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                {t('word_count')}
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 {t('create_at')}
@@ -115,11 +119,13 @@ function ManageWordCategory() {
                                 >
                                     {category.name}
                                 </th>
+                                <td class="px-6 py-4">{category.wordIds.length}</td>
                                 <td class="px-6 py-4">{category.createdAt}</td>
                                 <td class="px-6 py-4">{category.updatedAt}</td>
                                 <td class="flex cursor-pointer gap-5 px-6 py-4 ">
                                     <button
                                         type="button"
+                                        onClick={() => navigate(`/manage_wcategories/${category.id}/1`)}
                                         class="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
                                         {t('manage_word_lists')}
@@ -148,16 +154,22 @@ function ManageWordCategory() {
                 <DeleteWordCategory
                     setIsPoperDeleteWordCategory={setIsPoperDeleteCategory}
                     categoryId={categoryIdToDelete}
+                    forceUpdate={forceUpdate}
                 />
             )}
             {isPoperAddCategory && (
-                <AddWordCategory setIsPoperAddWordCategory={setIsPoperAddCategory} onPageChange={onPageChange} />
+                <AddWordCategory
+                    setIsPoperAddWordCategory={setIsPoperAddCategory}
+                    onPageChange={onPageChange}
+                    forceUpdate={forceUpdate}
+                />
             )}
             {isPoperEditCategory && (
                 <EditWordCategory
                     setIsPoperEditWordCategory={setIsPoperEditCategory}
                     onPageChange={onPageChange}
                     oldCategory={categoryToEdit}
+                    forceUpdate={forceUpdate}
                 />
             )}
         </div>

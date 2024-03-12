@@ -12,7 +12,7 @@ import config from '~/config';
 import getValid from '../validateForm';
 import { createCategory } from '~/services/manageWordCategoryServices';
 
-function AddWordCategory({ setIsPoperAddWordCategory, onPageChange }) {
+function AddWordCategory({ setIsPoperAddWordCategory, onPageChange, forceUpdate }) {
     const [loading, setLoading] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
@@ -39,9 +39,10 @@ function AddWordCategory({ setIsPoperAddWordCategory, onPageChange }) {
         document.body.style.overflow = 'visible';
         setLoading(false);
         notify.success(config.ManageWordCategory.notification().ADD_CATEGORY_SUCCESS);
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        // setTimeout(() => {
+        //     window.location.reload();
+        // }, 1000);
+        forceUpdate()
     };
 
     const handleCreateWordCategory = async (formData, e) => {

@@ -12,7 +12,7 @@ import config from '~/config';
 
 // const cx = classNames.bind(styles);
 
-function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId }) {
+function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId, forceUpdate }) {
     const [loading, setLoading] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
@@ -30,9 +30,7 @@ function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId }) {
             document.body.style.overflow = 'visible';
             setLoading(false);
             notify.success(config.ManageWordCategory.notification().DELETE_CATEGORY_SUCCESS);
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            forceUpdate();
         });
     };
 

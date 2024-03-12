@@ -73,7 +73,7 @@
         "search_dictionary": "Search dictionary",
         "language": "Language",
         "english": "English",
-        "vietnam": "VietNames",
+        "vietnam": "Vietnamese",
         "feedback_and_help": "Feedback and help",
         "view_profile": "View profile",
         "log_out": "Log out",
@@ -83,8 +83,8 @@
         "manage_forum": "Manage Forum",
         "manage_user": "Manage User",
         "manage_quizzes": "Manage Quizzes",
-        "manage_categories": "Manage Categories",
-        "manage_news": "Manage Manage news",
+        "manage_categories": "Manage word categories",
+        "manage_news": "Manage news",
         "manage_videos": "Manage videos",
         "user": "User"
     },
@@ -233,6 +233,8 @@
         "category_already_exist": "Category already exist",
         "create_at": "Create at",
         "update_at": "Update at",
-        "manage_word_lists": "Manage word lists"
+        "manage_word_lists": "Manage word lists",
+        "word_count": "Word count",
+        "word": "Word"
     }
 }

@@ -13,7 +13,7 @@ import getValid from '../validateForm';
 import { editCategory } from '~/services/manageWordCategoryServices';
 
 
-function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategory }) {
+function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategory, forceUpdate }) {
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState(oldCategory.name);
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
@@ -40,9 +40,7 @@ function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategor
         document.body.style.overflow = 'visible';
         setLoading(false);
         notify.success(config.ManageWordCategory.notification().EDIT_CATEGORY_SUCCESS);
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        forceUpdate()
     };
 
     const handleEditCategory = async (formData, e) => {
