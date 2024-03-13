@@ -11,9 +11,9 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import getValid from '../validateForm';
 import { editCategory } from '~/services/manageWordCategoryServices';
+import handleError from '~/config/handleError';
 
-
-function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategory }) {
+function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategory, forceUpdate }) {
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState(oldCategory.name);
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
@@ -40,9 +40,7 @@ function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategor
         document.body.style.overflow = 'visible';
         setLoading(false);
         notify.success(config.ManageWordCategory.notification().EDIT_CATEGORY_SUCCESS);
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        forceUpdate();
     };
 
     const handleEditCategory = async (formData, e) => {
@@ -62,17 +60,8 @@ function EditWordCategory({ setIsPoperEditWordCategory, onPageChange, oldCategor
             }
 
             const { message } = error.response.data;
-            const { messeageLogic } = config.ManageWordCategory.errorMesseage;
-            if (error.response.status === 404 && message.includes(messeageLogic.CATEGORY_NOT_FOUND)) {
-                notify.error(messeageNotify.CATEGORY_NOT_FOUND);
-                return;
-            }
-            else if (error.response.status === 400 && message.includes(messeageLogic.CATEGORY_ALREADY_EXIST)) {
-                notify.error(messeageNotify.CATEGORY_ALREADY_EXIST);
-                return;
-            }
-            notify.error(error.response.data.message);
-            return;
+            const configLogic = config.ManageWordCategory;
+            handleError(configLogic, message);
         });
     };
     return (

@@ -41,4 +41,47 @@ const editCategory = async (data, token) => {
     return res.data;
 };
 
-export { getAllCategory, deleteCategory, createCategory, editCategory };
+const getWordAllByIdCategory = async (token, categoryId, page = 0, size = 10) => {
+    const res = await httpRequest.get(config.api.wordCategory.ALLWORD + `/${categoryId}/words`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        params: {
+            size: size,
+            page: page,
+        },
+    });
+    return res.data;
+};
+
+const deleteWord = async (token, categoryId, wordId) => {
+    const res = await httpRequest.delete(config.api.wordCategory.DELETEWORD, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        data: {
+            categoryId: categoryId,
+            wordId: wordId,
+        },
+    });
+    return res.data;
+};
+
+const addWordToCategory = async (token, data) => {
+    const res = await httpRequest.post(config.api.wordCategory.ADDWORD, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export {
+    getAllCategory,
+    deleteCategory,
+    createCategory,
+    editCategory,
+    getWordAllByIdCategory,
+    deleteWord,
+    addWordToCategory,
+};
