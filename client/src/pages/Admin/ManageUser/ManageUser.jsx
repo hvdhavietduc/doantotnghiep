@@ -1,16 +1,16 @@
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import DeleteUser from './DeleteUser';
+import Pagination from '~/components/Pagination';
+import Loading from '~/components/Loading';
 import { getAllUser } from '~/services/userServices';
 import { useCookies } from 'react-cookie';
 import notify from '~/utils/notify';
 import config from '~/config';
-import Loading from '~/components/Loading';
-import DeleteUser from './DeleteUser';
-import { useTranslation } from 'react-i18next';
-import Pagination from '~/components/Pagination';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
 function ManageUser() {
     const location = useLocation();
@@ -70,41 +70,44 @@ function ManageUser() {
 
     return (
         <div className="flex flex-col items-center p-10">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-                    <thead class="bg-gray-50 text-base uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead className="bg-gray-50 text-base uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" className="px-16 py-3">
                                 {t('name')}
                             </th>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" className="px-16 py-3">
                                 {t('username')}
                             </th>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" className="px-16 py-3">
                                 {t('email')}
                             </th>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" className="px-16 py-3">
                                 {t('role')}
                             </th>
-                            <th scope="col" class="px-16 py-3">
+                            <th scope="col" className="px-16 py-3">
                                 {t('action')}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {allUser.map((user) => (
-                            <tr class=" border-b text-base odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800 dark:hover:bg-gray-600">
+                        {allUser.map((user, index) => (
+                            <tr
+                                key={index}
+                                className=" border-b text-base odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800 dark:hover:bg-gray-600"
+                            >
                                 <th
                                     scope="row"
-                                    class="whitespace-nowrap px-16 py-3 font-medium text-gray-900 dark:text-white"
+                                    className="whitespace-nowrap px-16 py-3 font-medium text-gray-900 dark:text-white"
                                 >
                                     {user.name}
                                 </th>
-                                <td class="px-16 py-3">{user.username}</td>
-                                <td class="px-16 py-3">{user.email}</td>
-                                <td class="px-16 py-3">{user.role}</td>
+                                <td className="px-16 py-3">{user.username}</td>
+                                <td className="px-16 py-3">{user.email}</td>
+                                <td className="px-16 py-3">{user.role}</td>
                                 <td
-                                    class="flex cursor-pointer px-16 py-3 "
+                                    className="flex cursor-pointer px-16 py-3 "
                                     onClick={() => showPoperDeleteUser(user.id)}
                                 >
                                     <FontAwesomeIcon className=" text-xl text-red-500" icon={faTrash} />

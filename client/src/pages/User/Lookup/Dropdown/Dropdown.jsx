@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 function Dropdown({ title, options, handleFunction }) {
+    // eslint-disable-next-line no-unused-vars
     const [selectedOption, setSelectedOption] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef();
 
+    // eslint-disable-next-line no-unused-vars
     const handleSelect = (option) => {
         setSelectedOption(option);
     };

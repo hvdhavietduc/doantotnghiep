@@ -9,6 +9,7 @@ import PopperConfirm from '~/components/PopperConfirm';
 import { deleteCategory } from '~/services/manageWordCategoryServices';
 import notify from '~/utils/notify';
 import config from '~/config';
+import handleError from '~/config/handleError';
 
 // const cx = classNames.bind(styles);
 
@@ -46,13 +47,8 @@ function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId, forceUpd
             }
 
             const { message } = error.response.data;
-            const { messeageLogic } = config.ManageWordCategory.errorMesseage;
-            if (error.response.status === 404 && message.includes(messeageLogic.CATEGORY_NOT_FOUND)) {
-                notify.error(messeageNotifyCategory.CATEGORY_NOT_FOUND);
-                return;
-            }
-            notify.error(error.response.data.message);
-            return;
+            const configLogic = config.ManageWordCategory;
+            handleError(configLogic, message);
         });
     };
 

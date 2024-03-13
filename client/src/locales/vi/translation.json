@@ -235,6 +235,13 @@
         "update_at": "Ngày cập nhật",
         "manage_word_lists": "Quản lý danh sách từ",
         "word_count": "Số lượng từ",
-        "word": "Từ vựng"
+        "word": "Từ vựng",
+        "are_you_sure_to_delete_word": "Bạn có chắc chắn muốn xóa từ này không ?",
+        "click_to_add": "Click để thêm từ",
+        "add_word_success": "Thêm từ thành công",
+        "delete_word_success": "Xóa từ thành công",
+        "category_of_word_not_found": "Không tìm thấy phân loại từ của từ này",
+        "word_not_exist": "Từ này không tồn tại",
+        "word_already_exist": "Từ này đã tồn tại"
     }
 }

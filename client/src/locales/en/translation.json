@@ -235,6 +235,13 @@
         "update_at": "Update at",
         "manage_word_lists": "Manage word lists",
         "word_count": "Word count",
-        "word": "Word"
+        "word": "Word",
+        "are_you_sure_to_delete_word": "Are you sure to delete word ?",
+        "click_to_add": "Click to add",
+        "add_word_success": "Add word success",
+        "delete_word_success": "Delete word success",
+        "category_of_word_not_found": "Category of word not found",
+        "word_not_exist": "Word not exist",
+        "word_already_exist": "Word already exist"
     }
 }

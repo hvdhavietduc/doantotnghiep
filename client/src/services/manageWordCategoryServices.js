@@ -52,21 +52,36 @@ const getWordAllByIdCategory = async (token, categoryId, page = 0, size = 10) =>
         },
     });
     return res.data;
-}
+};
 
 const deleteWord = async (token, categoryId, wordId) => {
-    console.log(categoryId, wordId)
     const res = await httpRequest.delete(config.api.wordCategory.DELETEWORD, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
         data: {
             categoryId: categoryId,
-            wordId: wordId
-        }
+            wordId: wordId,
+        },
     });
     return res.data;
-}
+};
 
+const addWordToCategory = async (token, data) => {
+    const res = await httpRequest.post(config.api.wordCategory.ADDWORD, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
 
-export { getAllCategory, deleteCategory, createCategory, editCategory, getWordAllByIdCategory, deleteWord };
+export {
+    getAllCategory,
+    deleteCategory,
+    createCategory,
+    editCategory,
+    getWordAllByIdCategory,
+    deleteWord,
+    addWordToCategory,
+};

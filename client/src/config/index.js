@@ -11,6 +11,7 @@ import manageUser from './ManageUser';
 import manageNews from './ManageNews';
 import manageVideo from './ManageVideo'
 import ManageWordCategory from './ManageWordCategory';
+import ManageWordInCategory from './ManageWordInCategory';
 import lookup from './Lookup';
 
 const config = {
@@ -27,6 +28,7 @@ const config = {
     manageNews,
     manageVideo,
     ManageWordCategory,
+    ManageWordInCategory,
     lookup,
 };
 

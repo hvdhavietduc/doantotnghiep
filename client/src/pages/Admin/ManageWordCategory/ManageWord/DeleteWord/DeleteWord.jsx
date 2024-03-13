@@ -10,16 +10,17 @@ import { deleteWord } from '~/services/manageWordCategoryServices';
 import notify from '~/utils/notify';
 import config from '~/config';
 import { useLocation } from 'react-router-dom';
+import handleError from '~/config/handleError';
 
 // const cx = classNames.bind(styles);
 
-function DeleteWord({ setIsPoperDeleteWOrd, wordId }) {
+function DeleteWord({ setIsPoperDeleteWOrd, wordId, forceUpdate }) {
     const location = useLocation();
     const [loading, setLoading] = useState(false);
     const currentPath = location.pathname;
     const categoryId = currentPath.split('/')[2];
 
-    const { t } = useTranslation('translation', { keyPrefix: 'ManageUser' });
+    const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
     //eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
 
@@ -33,10 +34,8 @@ function DeleteWord({ setIsPoperDeleteWOrd, wordId }) {
             setIsPoperDeleteWOrd(false);
             document.body.style.overflow = 'visible';
             setLoading(false);
-            notify.success(config.manageUser.notification().DELETE_USER_SUCCESS);
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            notify.success(config.ManageWordInCategory.notification().DELETE_WORD_SUCCESS);
+            forceUpdate();
         });
     };
 
@@ -49,13 +48,17 @@ function DeleteWord({ setIsPoperDeleteWOrd, wordId }) {
                 notify.error(messeageNotify.ERROR_NETWORD);
                 return;
             }
+
+            const { message } = error.response.data;
+            const configLogic = config.ManageWordInCategory;
+            handleError(configLogic, message);
         });
     };
 
     return (
         <Fragment>
             <PopperConfirm onClose={closePoper} onSave={handleDeletetWord}>
-                {t('are_you_sure_to_delete_user')}
+                {t('are_you_sure_to_delete_word')}
             </PopperConfirm>
 
             {loading && <Loading />}

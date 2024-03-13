@@ -1,25 +1,23 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
-import * as searchServices from '~/services/lookupServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { filetWordContain } from '~/services/lookupServices';
 import useDebounce from '~/utils/useDebounce';
-import styles from './Search.module.scss';
-import { useNavigate } from 'react-router-dom';
+import styles from './InputSearch.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Search({ showBoxSearch }) {
+function InputSearch({ handleValue, action, className }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const debouncedValue = useDebounce(searchValue, 500);
 
@@ -38,8 +36,7 @@ function Search({ showBoxSearch }) {
 
         const fetchApi = async () => {
             setLoading(true);
-
-            const result = await searchServices.filetWordContain(debouncedValue);
+            const result = await filetWordContain(debouncedValue);
             setSearchResult(result);
             setLoading(false);
         };
@@ -53,6 +50,11 @@ function Search({ showBoxSearch }) {
         inputRef.current.focus();
     };
 
+    const handleValueOnclick = (wordId) => {
+        handleHideResult();
+        handleValue(wordId);
+    };
+
     const handleHideResult = () => {
         setShowResult(false);
     };
@@ -64,21 +66,8 @@ function Search({ showBoxSearch }) {
         }
     };
 
-    const handleKeyDown = (event) => {
-        // Check if the keycode is 13 (Enter)
-        if (event.keyCode === 13) {
-            search(searchValue);
-        }
-    };
-
-    const search = (value) => {
-        navigate(`/lookup/${value}`);
-    };
-
     return (
-        // Using a wrapper <div> tag around the reference element solves
-        // this by creating a new parentNode context.
-        <div className={cx('max-xl:flex-1')}>
+        <div className={cx(`max-xl:flex-1 ${className}`)}>
             <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
@@ -88,10 +77,14 @@ function Search({ showBoxSearch }) {
                             {searchResult.map((word, index) => (
                                 <div
                                     key={index}
-                                    className={cx('cursor-pointer px-4 py-[6px] hover:underline', 'result-item')}
-                                    onClick={() => search(word.name)}
+                                    className={cx('cursor-pointer px-4 py-[6px] flex justify-between', 'result-item')}
+                                    onClick={() => handleValueOnclick(word.id)}
+                                    onMouseEnter={() => setHoveredIndex(index)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
                                 >
-                                    {word.name}
+                                    <span className='hover:underline'>{word.name}</span>
+
+                                    {hoveredIndex === index && action && <span className=' text-gray-300'>{action}</span>}
                                 </div>
                             ))}
                         </PopperWrapper>
@@ -101,12 +94,8 @@ function Search({ showBoxSearch }) {
             >
                 <div
                     className={cx(
-                        'relative ml-4 flex w-[300px] border-[1.5px] border-solid border-transparent pl-4',
-                        'max-md:invisible max-md:!absolute max-md:!left-0 max-md:!ml-0 max-md:!w-full',
+                        'relative ml-4 flex w-[300px] border-[1.5px] border-solid border-transparent pl-4 text-base',
                         'search',
-                        {
-                            '!visible': showBoxSearch,
-                        },
                     )}
                     ref={boxSearchRef}
                 >
@@ -117,7 +106,6 @@ function Search({ showBoxSearch }) {
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}
-                        onKeyDown={handleKeyDown}
                     />
                     {!!searchValue && !loading && (
                         <button className={cx('clear')} onClick={handleClear}>
@@ -125,28 +113,10 @@ function Search({ showBoxSearch }) {
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-
-                    <button
-                        className={cx(
-                            'search-btn',
-                            'flex h-full items-center justify-center text-[1.125rem] text-gray-900/[.34]',
-                            'hover:cursor-pointer hover:bg-gray-900/[.03]',
-                            'active:cursor-pointer active:bg-gray-900/[.06]',
-                        )}
-                        onMouseDown={(e) => e.preventDefault()}
-                        onClick={() => search(searchValue)}
-                        disabled={searchValue === ''}
-                    >
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
                 </div>
             </HeadlessTippy>
         </div>
     );
 }
 
-Search.propTypes = {
-    showBoxSearch: PropTypes.bool.isRequired,
-};
-
-export default Search;
+export default InputSearch;

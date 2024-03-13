@@ -11,6 +11,7 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import getValid from '../validateForm';
 import { createCategory } from '~/services/manageWordCategoryServices';
+import handleError from '~/config/handleError';
 
 function AddWordCategory({ setIsPoperAddWordCategory, onPageChange, forceUpdate }) {
     const [loading, setLoading] = useState(false);
@@ -42,7 +43,7 @@ function AddWordCategory({ setIsPoperAddWordCategory, onPageChange, forceUpdate 
         // setTimeout(() => {
         //     window.location.reload();
         // }, 1000);
-        forceUpdate()
+        forceUpdate();
     };
 
     const handleCreateWordCategory = async (formData, e) => {
@@ -60,8 +61,9 @@ function AddWordCategory({ setIsPoperAddWordCategory, onPageChange, forceUpdate 
                 return;
             }
 
-            notify.error(error.response.data.message);
-            return;
+            const { message } = error.response.data;
+            const configLogic = config.ManageWordCategory;
+            handleError(configLogic, message);
         });
     };
     return (
