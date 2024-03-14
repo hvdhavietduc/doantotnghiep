@@ -45,6 +45,9 @@ const api = {
         CREATE: '/wordCategory',
         EDIT: '/wordCategory',
         DELETE: '/wordCategory',
+        ALLWORD: '/wordCategory',
+        DELETEWORD: '/words/category',
+        ADDWORD: '/words/category',
     },
 };
 

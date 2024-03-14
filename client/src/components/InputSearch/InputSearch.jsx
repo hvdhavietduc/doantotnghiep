@@ -6,16 +6,18 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { filetWordContain } from '~/services/lookupServices';
 import useDebounce from '~/utils/useDebounce';
 import styles from './InputSearch.module.scss';
 
 const cx = classNames.bind(styles);
 
-function InputSearch() {
+function InputSearch({ handleValue, action, className }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
 
     const debouncedValue = useDebounce(searchValue, 500);
 
@@ -34,9 +36,8 @@ function InputSearch() {
 
         const fetchApi = async () => {
             setLoading(true);
-            //call api
-            //const result = await searchServices.filetWordContain(debouncedValue);
-            //setSearchResult(result);
+            const result = await filetWordContain(debouncedValue);
+            setSearchResult(result);
             setLoading(false);
         };
 
@@ -47,6 +48,11 @@ function InputSearch() {
         setSearchValue('');
         setSearchResult([]);
         inputRef.current.focus();
+    };
+
+    const handleValueOnclick = (wordId) => {
+        handleHideResult();
+        handleValue(wordId);
     };
 
     const handleHideResult = () => {
@@ -60,32 +66,25 @@ function InputSearch() {
         }
     };
 
-    const handleKeyDown = (event) => {
-        // Check if the keycode is 13 (Enter)
-        if (event.keyCode === 13) {
-            handleValue(searchValue);
-        }
-    };
-
-    const handleValue = (value) => {};
-
     return (
-        // Using a wrapper <div> tag around the reference element solves
-        // this by creating a new parentNode context.
-        <div className={cx('max-xl:flex-1')}>
+        <div className={cx(`max-xl:flex-1 ${className}`)}>
             <HeadlessTippy
                 interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div style={styleTagSearchResult} tabIndex="-1" {...attrs}>
                         <PopperWrapper className={cx('pb-2')}>
-                            {searchResult.map((result, index) => (
+                            {searchResult.map((word, index) => (
                                 <div
                                     key={index}
-                                    className={cx('cursor-pointer px-4 py-[6px] hover:underline', 'result-item')}
-                                    onClick={() => handleValue(result)}
+                                    className={cx('cursor-pointer px-4 py-[6px] flex justify-between', 'result-item')}
+                                    onClick={() => handleValueOnclick(word.id)}
+                                    onMouseEnter={() => setHoveredIndex(index)}
+                                    onMouseLeave={() => setHoveredIndex(null)}
                                 >
-                                    {result}
+                                    <span className='hover:underline'>{word.name}</span>
+
+                                    {hoveredIndex === index && action && <span className=' text-gray-300'>{action}</span>}
                                 </div>
                             ))}
                         </PopperWrapper>
@@ -96,7 +95,6 @@ function InputSearch() {
                 <div
                     className={cx(
                         'relative ml-4 flex w-[300px] border-[1.5px] border-solid border-transparent pl-4 text-base',
-                        'max-md:invisible max-md:!absolute max-md:!left-0 max-md:!ml-0 max-md:!w-full',
                         'search',
                     )}
                     ref={boxSearchRef}
@@ -108,7 +106,6 @@ function InputSearch() {
                         spellCheck={false}
                         onChange={handleChange}
                         onFocus={() => setShowResult(true)}
-                        onKeyDown={handleKeyDown}
                     />
                     {!!searchValue && !loading && (
                         <button className={cx('clear')} onClick={handleClear}>

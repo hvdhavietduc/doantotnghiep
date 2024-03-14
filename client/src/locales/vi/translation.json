@@ -83,9 +83,9 @@
         "manage_forum": "Quản lý Forum",
         "manage_user": "Quản lý người dùng",
         "manage_quizzes": "Quản lý Quizzes",
-        "manage_categories": "Quản lý từ vựng",
-        "manage_news": "Quản lý news",
-        "manage_videos": "Quản lý videos",
+        "manage_categories": "Quản lý phân loại từ vựng",
+        "manage_news": "Quản lý tin tức",
+        "manage_videos": "Quản lý video",
         "user": "User"
     },
     "Footer": {
@@ -244,6 +244,15 @@
         "category_already_exist": "Phân loại từ này đã tồn tại",
         "create_at": "Ngày tạo",
         "update_at": "Ngày cập nhật",
-        "manage_word_lists": "Quản lý danh sách từ"
+        "manage_word_lists": "Quản lý danh sách từ",
+        "word_count": "Số lượng từ",
+        "word": "Từ vựng",
+        "are_you_sure_to_delete_word": "Bạn có chắc chắn muốn xóa từ này không ?",
+        "click_to_add": "Click để thêm từ",
+        "add_word_success": "Thêm từ thành công",
+        "delete_word_success": "Xóa từ thành công",
+        "category_of_word_not_found": "Không tìm thấy phân loại từ của từ này",
+        "word_not_exist": "Từ này không tồn tại",
+        "word_already_exist": "Từ này đã tồn tại"
     }
 }

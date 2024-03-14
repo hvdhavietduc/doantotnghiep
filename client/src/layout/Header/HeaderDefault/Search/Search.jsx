@@ -85,13 +85,13 @@ function Search({ showBoxSearch }) {
                 render={(attrs) => (
                     <div style={styleTagSearchResult} tabIndex="-1" {...attrs}>
                         <PopperWrapper className={cx('pb-2')}>
-                            {searchResult.map((result, index) => (
+                            {searchResult.map((word, index) => (
                                 <div
                                     key={index}
                                     className={cx('cursor-pointer px-4 py-[6px] hover:underline', 'result-item')}
-                                    onClick={() => search(result)}
+                                    onClick={() => search(word.name)}
                                 >
-                                    {result}
+                                    {word.name}
                                 </div>
                             ))}
                         </PopperWrapper>

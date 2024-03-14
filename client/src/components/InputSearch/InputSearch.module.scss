@@ -63,8 +63,8 @@
     border-bottom-right-radius: var(--search-border-radius);
 }
 
-@media (max-width: $width-mobile) {
-    .search {
-        top: calc(var(--default-layout-header-height) + 3px);
-    }
-}
+// @media (max-width: $width-mobile) {
+//     .search {
+//         top: calc(var(--default-layout-header-height) + 3px);
+//     }
+// }

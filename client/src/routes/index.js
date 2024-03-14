@@ -20,6 +20,7 @@ import ManageVideo from '~/pages/Admin/ManageVideo';
 import ManageWordCategory from '~/pages/Admin/ManageWordCategory';
 import { DefautLayout, AdminLayout } from '~/layout';
 import config from '~/config';
+import ManageWord from '~/pages/Admin/ManageWordCategory/ManageWord';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -42,6 +43,7 @@ const adminRoutes = [
     { path: config.routes.admin.MANAGENEWS, element: ManageNews, layout: AdminLayout },
     { path: config.routes.admin.MANAGEVIDEOS, element: ManageVideo, layout: AdminLayout },
     { path: config.routes.admin.MANAGEWORDCATEGORIES, element: ManageWordCategory, layout: AdminLayout },
+    { path: config.routes.admin.MANAGEWORDINCATEGORY, element: ManageWord, layout: AdminLayout },
 ];
 
 const authenticationRoutes = [
