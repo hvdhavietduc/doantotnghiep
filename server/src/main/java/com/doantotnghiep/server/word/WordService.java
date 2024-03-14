@@ -168,7 +168,7 @@ public class WordService {
         }
     }
 
-    public ResponseEntity<List<String>> searchWordHave(String key) throws ResponseException {
+    public ResponseEntity<List<Word>> searchWordHave(String key) throws ResponseException {
         int maxList = 10;
         List<Word> wordListContain = wordRepository.findAllByNameContains(key);
 
@@ -176,8 +176,7 @@ public class WordService {
             wordListContain = wordListContain.subList(0, maxList);
         }
 
-        List<String> wordList = wordListContain.stream().map(word -> word.getName()).toList();
-        return ResponseEntity.ok(wordList);
+        return ResponseEntity.ok(wordListContain);
     }
 
     public WordFolder changeWordToWordFolder(Word word) {

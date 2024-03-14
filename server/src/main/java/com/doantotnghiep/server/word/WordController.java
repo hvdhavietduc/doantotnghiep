@@ -78,7 +78,7 @@ public class WordController {
     }
 
     @GetMapping("/search/{key}")
-    public ResponseEntity<List<String>> searchWordHave(@PathVariable String key) throws ResponseException {
+    public ResponseEntity<List<Word>> searchWordHave(@PathVariable String key) throws ResponseException {
         try {
             return wordService.searchWordHave(key);
         } catch (ResponseException e) {
