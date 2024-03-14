@@ -6,6 +6,7 @@ import styles from './ItemVideo.module.scss';
 import Image from '~/components/Image';
 import ImgVideo from './imgVideo.jpg';
 import noImageAvatar from '~/assets/img/noImageAvatar.png';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +14,7 @@ function ItemVideo({ inforVideo, pageDetail }) {
     const navigate = useNavigate();
 
     const openNewDetail = () => {
-        navigate(inforVideo.id);
+        navigate(config.routes.video.VIDEO + '/*/' + inforVideo.id);
     };
 
     return (

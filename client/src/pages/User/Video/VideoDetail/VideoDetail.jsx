@@ -10,7 +10,8 @@ import HeaderSecondnary from '~/components/HeaderSecondnary';
 import ItemVideo from '../ItemVideo';
 import Loading from '~/components/Loading';
 import Image from '~/components/Image';
-import { getDetailNews } from '~/services/NewsServices';
+import ReactPlayer from 'react-player';
+import { getDetailVideo } from '~/services/videoService';
 import notify from '~/utils/notify';
 import config from '~/config';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
@@ -32,16 +33,14 @@ function NewDetail() {
     const paramater = config.getParamaterHeaderSecondnary().Video;
 
     const currentPath = location.pathname;
-    const NewsId = String(currentPath.split('/')[3]);
+    const VideoId = String(currentPath.split('/')[3]);
 
     const listVideoSuggesion = [1, 2, 3, 4, 5, 6];
-    console.log(inforVideo);
 
     useEffect(() => {
-        console.log(NewsId);
         setLoading(true);
         const token = cookies.token;
-        getDetailNews(NewsId, token)
+        getDetailVideo(VideoId, token)
             .then((result) => {
                 setLoading(false);
                 setInforVideo(result);
@@ -73,12 +72,16 @@ function NewDetail() {
                     'max-[1350px]:justify-center max-[1350px]:px-[5%]',
                 )}
             >
-                <div className={cx('w-[700px] ')}>
-                    <Image
-                        src={''}
-                        className={cx('h-[430px] w-full rounded-lg', 'max-md:h-[310px] max-md:w-[500px]')}
+                <div className={cx('w-[700px] overflow-hidden')}>
+                    <ReactPlayer
+                        url={inforVideo.url}
+                        controls
+                        className={cx(
+                            '!h-[390px] !w-full overflow-hidden rounded-xl',
+                            'max-md:h-[310px] max-md:w-[500px]',
+                        )}
                     />
-                    <div className={cx('text-3xl font-medium')}>{inforVideo.title}</div>
+                    <div className={cx('mt-1 text-3xl font-medium')}>{inforVideo.title}</div>
                     <div className={cx('mt-4 flex flex-wrap items-center justify-start gap-2 text-base')}>
                         <Image src="" fallback={NoimageAvatar} className={cx(' h-5 w-5 rounded-full')} />
                         <div className={cx('font-semibold')}>Minh Phương</div>
@@ -99,7 +102,7 @@ function NewDetail() {
                 </div>
                 <div className={cx('w-[350px]')}>
                     {listVideoSuggesion.map((video, index) => (
-                        <ItemVideo inforVideo={{}} pageDetail />
+                        <ItemVideo key={index} inforVideo={{}} pageDetail />
                     ))}
                 </div>
             </div>

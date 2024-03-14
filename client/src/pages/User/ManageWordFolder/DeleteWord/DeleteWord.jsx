@@ -22,8 +22,6 @@ function DeleteWord({ setIsPoperDeleteWord, inforWord, onPageChange }) {
     const [cookies, setCookie] = useCookies(['token']);
     const { currentPage } = useSelector((state) => state.wordBooks);
 
-    console.log(inforWord);
-
     const closePoper = () => {
         setIsPoperDeleteWord(false);
         document.body.style.overflow = 'visible';

@@ -44,7 +44,6 @@ function News() {
         const token = cookies.token;
         getAllNews(token, currentPage - 1, listNews.size)
             .then((result) => {
-                console.log(result);
                 setLoading(false);
                 setListNew(result.listNews);
                 setTotalPage(result.totalPage);
