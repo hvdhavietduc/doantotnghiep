@@ -11,6 +11,8 @@ import ManageWordFolder from '~/pages/User/ManageWordFolder';
 import Lookup from '~/pages/User/Lookup';
 import News from '~/pages/User/News';
 import NewDetail from '~/pages/User/News/NewDetail';
+import Video from '~/pages/User/Video';
+import VideoDetail from '~/pages/User/Video/VideoDetail';
 
 import ManageUser from '~/pages/Admin/ManageUser';
 import ManageNews from '~/pages/Admin/ManageNews';
@@ -19,9 +21,6 @@ import ManageWordCategory from '~/pages/Admin/ManageWordCategory';
 import { DefautLayout, AdminLayout } from '~/layout';
 import config from '~/config';
 
-
-
-
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
     { path: config.routes.translation.TRANSLATION, element: Translation, layout: DefautLayout },
@@ -29,6 +28,8 @@ const publicRoutes = [
     { path: config.routes.lookup.LOOKUP, element: Lookup, layout: DefautLayout },
     { path: config.routes.news.NEWS, element: News, layout: DefautLayout },
     { path: config.routes.news.NEWDEDAIL, element: NewDetail, layout: DefautLayout },
+    { path: config.routes.video.VIDEOS, element: Video, layout: DefautLayout },
+    { path: config.routes.video.VIDEODEDAIL, element: VideoDetail, layout: DefautLayout },
 ];
 
 const privateRoutes = [

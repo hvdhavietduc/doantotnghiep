@@ -30,9 +30,9 @@ function Button({ children, primary, red, rounded, leftIcon, rightIcon, classNam
 
     return (
         <Comp className={classes} {...Props}>
-            {leftIcon && <FontAwesomeIcon className={cx('w-4 mr-2')} icon={leftIcon} />}
+            {leftIcon && <FontAwesomeIcon className={cx('mr-2 w-4')} icon={leftIcon} />}
             {children}
-            {rightIcon && <FontAwesomeIcon className={cx('w-4 ml-2')} icon={leftIcon} />}
+            {rightIcon && <FontAwesomeIcon className={cx('ml-2 w-4')} icon={rightIcon} />}
         </Comp>
     );
 }
