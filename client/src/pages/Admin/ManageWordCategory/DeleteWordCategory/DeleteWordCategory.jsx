@@ -37,6 +37,7 @@ function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId, forceUpd
 
     const handleDeleteCategory = async () => {
         setLoading(true);
+        // eslint-disable-next-line no-unused-vars
         const messeageNotifyCategory = config.ManageWordCategory.errorMesseage.getMesseageNotify();
         handleMiddleDeletetCategory().catch((error) => {
             setLoading(false);

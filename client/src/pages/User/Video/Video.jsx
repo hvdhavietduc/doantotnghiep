@@ -1,29 +1,25 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-import styles from './News.module.scss';
+import styles from './Video.module.scss';
 import HeaderSecondnary from '~/components/HeaderSecondnary';
-import ItemNews from './ItemNews';
+import ItemVideo from './ItemVideo';
 import Pagination from '~/components/Pagination';
 import Loading from '~/components/Loading';
-import { getAllNews } from '~/services/NewsServices';
+import { getAllVideos } from '~/services/videoService';
 import notify from '~/utils/notify';
 import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function News() {
+function Video() {
     const [loading, setLoading] = useState(false);
-    const [listNews, setListNew] = useState([]);
+    const [listVideo, setListVideo] = useState([]);
     const [totalPage, setTotalPage] = useState(1);
 
-    // eslint-disable-next-line no-unused-vars
-    const [cookies, setCookies] = useCookies(['token']);
-    // eslint-disable-next-line no-unused-vars
-    const { t } = useTranslation('translation', { keyPrefix: 'News' });
+    const [cookies] = useCookies(['token']);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -31,7 +27,7 @@ function News() {
     const currentPath = location.pathname;
     const currentPage = Number(currentPath.split('/')[2]);
 
-    const paramater = config.getParamaterHeaderSecondnary().News;
+    const paramater = config.getParamaterHeaderSecondnary().Video;
 
     const onPageChange = (value) => {
         const index = currentPath.lastIndexOf('/');
@@ -42,10 +38,10 @@ function News() {
     useEffect(() => {
         setLoading(true);
         const token = cookies.token;
-        getAllNews(token, currentPage - 1, listNews.size)
+        getAllVideos(token, currentPage - 1, listVideo.size)
             .then((result) => {
                 setLoading(false);
-                setListNew(result.listNews);
+                setListVideo(result.videos);
                 setTotalPage(result.totalPage);
                 return;
             })
@@ -76,8 +72,8 @@ function News() {
                     'wrapper',
                 )}
             >
-                {listNews.map((news, index) => (
-                    <ItemNews key={index} inforNew={news} />
+                {listVideo.map((video, index) => (
+                    <ItemVideo key={index} inforVideo={video} />
                 ))}
             </div>
             <div>
@@ -88,4 +84,4 @@ function News() {
     );
 }
 
-export default News;
+export default Video;

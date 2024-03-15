@@ -21,6 +21,8 @@ const routes = {
     },
     video: {
         VIDEO: '/video',
+        VIDEOS: '/video/:page',
+        VIDEODEDAIL: '/video/:page/:idVideo',
     },
     news: {
         NEW: '/news',
