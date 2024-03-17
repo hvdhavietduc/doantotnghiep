@@ -27,6 +27,15 @@ const getParamaterHeaderSecondnary = () => ({
             { label: 'Law', title: i18next.t('News.Law') },
         ],
     },
+    Forum: {
+        iconTitle: faNewspaper,
+        title: i18next.t('Forum.forum'),
+        backgroundColor: ['rgba(204, 238, 188, 0.8)', 'rgba(191, 234, 245, 0.8)'],
+        menuFilter: [
+            { label: 'My post', title: i18next.t('Forum.my_post'), namePage: 'my_post'},
+            { label: 'Comunity', title: i18next.t('Forum.comunity'), namePage: 'comunity' },
+        ],
+    },
 });
 
 export default getParamaterHeaderSecondnary;

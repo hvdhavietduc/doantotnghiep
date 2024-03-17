@@ -8,7 +8,7 @@ export const getNavigation = () => [
     { title: i18next.t('Header.video'), link: config.routes.video.VIDEO },
     { title: i18next.t('Header.news'), link: config.routes.news.NEW + '/1' },
     { title: i18next.t('Header.text_online'), link: config.routes.text_online.TEXT_ONLINE },
-    { title: i18next.t('Header.forum'), link: config.routes.forum.FORUM },
+    { title: i18next.t('Header.forum'), link: config.routes.forum.MYPOST },
     { title: i18next.t('Header.chat_AI'), link: config.routes.chat_ai.CHAT_AI },
     { title: i18next.t('Header.game'), link: config.routes.game.GAME },
 ];
@@ -17,9 +17,9 @@ export const getNavigationAdmin = () => [
     { title: i18next.t('HeaderAdmin.manage_forum'), link: config.routes.admin.MANAGEFORUM },
     { title: i18next.t('HeaderAdmin.manage_user'), link: '/manage_user/1' },
     { title: i18next.t('HeaderAdmin.manage_quizzes'), link: config.routes.admin.MANAGEQUIZZES },
-    { title: i18next.t('HeaderAdmin.manage_categories'), link: "/manage_wcategories/1" },
-    { title: i18next.t('HeaderAdmin.manage_news'), link: "/manage_news/1" },
-    { title: i18next.t('HeaderAdmin.manage_videos'), link: "/manage_videos/1" },
+    { title: i18next.t('HeaderAdmin.manage_categories'), link: '/manage_wcategories/1' },
+    { title: i18next.t('HeaderAdmin.manage_news'), link: '/manage_news/1' },
+    { title: i18next.t('HeaderAdmin.manage_videos'), link: '/manage_videos/1' },
 ];
 
 export const getMENU_ITEMS = () => [

@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
-import styles from './AddVideo.module.scss';
 import PopperForm from '~/components/PopperForm';
 import Loading from '~/components/Loading';
 import Input from '~/components/Input';
@@ -13,7 +11,6 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import getValid from '../validateForm';
 import { createVideo } from '~/services/manageVideoServices';
-const cx = classNames.bind(styles);
 
 function AddVideo({ setIsPoperAddVideo, onPageChange }) {
     const [loading, setLoading] = useState(false);
