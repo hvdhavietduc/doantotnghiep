@@ -187,7 +187,8 @@ public class PostService {
 
     public ResponseEntity<AllPostResponse> getAllPost(Integer page, Integer size) throws ResponseException {
         Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        List<Post> posts = postRepository.findAll(paging).getContent();
+        Page<Post> postPaging = postRepository.findAll(paging);
+        List<Post> posts = postPaging.getContent();
 
         List<PostResponse> postResponses = new ArrayList<>();
         for (Post post : posts) {
@@ -206,7 +207,7 @@ public class PostService {
         }
 
         Integer total = postResponses.size();
-        Integer totalPage = Math.toIntExact(Math.round((double) total / size + 0.5));
+        Integer totalPage = postPaging.getTotalPages();
         AllPostResponse response = AllPostResponse.builder()
                 .listPost(postResponses)
                 .total(total)
