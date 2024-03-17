@@ -35,6 +35,7 @@ const api = {
     },
     video: {
         GETALL: '/videos/all',
+        GET: '/videos',
         CREATE: '/videos',
         EDIT: '/videos',
         DELETE: '/videos',

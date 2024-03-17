@@ -25,8 +25,8 @@ function ManageWordCategory() {
     const [categoryToEdit, setCategoryToEdit] = useState();
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
     const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
-    // eslint-disable-next-line no-unused-vars
-    const [cookies, setCookies] = useCookies(['token']);
+
+    const [cookies] = useCookies(['token']);
 
     const navigate = useNavigate();
 
@@ -64,6 +64,7 @@ function ManageWordCategory() {
             navigate('/manage_wcategories/1');
         }
         getAllCategoryAPI(currentPage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage, reducerValue]);
 
     const showPoperDeleteCategory = (categoryId) => {

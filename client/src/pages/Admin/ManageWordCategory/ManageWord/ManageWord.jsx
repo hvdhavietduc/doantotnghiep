@@ -22,7 +22,7 @@ function ManageWord() {
     const categoryId = currentPath.split('/')[2];
     const currentPage = Number(currentPath.split('/')[3]);
     const [allWord, setAllWord] = useState([]);
-    const [cookies, setCookies] = useCookies(['token']);
+    const [cookies] = useCookies(['token']);
     const [loading, setLoading] = useState(false);
     const [isPoperDeleteWord, setIsPoperDeleteWord] = useState(false);
     const [totalPage, setTotalPage] = useState(0);
