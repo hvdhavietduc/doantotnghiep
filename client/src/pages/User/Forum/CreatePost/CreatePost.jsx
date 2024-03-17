@@ -15,6 +15,7 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import getValid from '../validateForm';
 import { createPostReducer } from '~/redux/myPostSlice';
+import { createPostReducer as createPostForumReducer } from '~/redux/allPostForumSlice';
 import handleError from '~/config/handleError';
 
 function CreatePost({ setIsPoperCreatePost, onPageChange }) {
@@ -56,6 +57,7 @@ function CreatePost({ setIsPoperCreatePost, onPageChange }) {
         const token = cookies.token;
         await createPost(data, token).then((res) => {
             dispatch(createPostReducer(res));
+            dispatch(createPostForumReducer(res));
         });
         setIsPoperCreatePost(false);
         document.body.style.overflow = 'visible';

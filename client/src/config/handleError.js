@@ -23,6 +23,8 @@ function handleError(configLogic, errorResponse) {
  * @returns {null|String}
  */
 function detectMessageError(configLogic, errorResponse) {
+    if (!errorResponse) return null;
+
     const { messeageLogic } = configLogic.errorMesseage;
 
     for (let key in messeageLogic) {

@@ -44,4 +44,17 @@ const editPost = async (data, token) => {
     return res.data;
 };
 
-export { getAllMyPost, createPost, deletePost, editPost };
+const getAllPostForum = async (token, page = 0, size = 5) => {
+    const res = await httpRequest.get(config.api.forum.GETALL, {
+        params: {
+            size: size,
+            page: page,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export { getAllMyPost, createPost, deletePost, editPost, getAllPostForum };

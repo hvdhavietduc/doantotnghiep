@@ -1,12 +1,12 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllMyPost } from '~/services/forumService';
+import { getAllPostForum } from '~/services/forumService';
 import Post from '../Post';
 import { useCookies } from 'react-cookie';
 import Loading from '~/components/Loading';
 import Spinner from '~/components/Spinner';
-import { setAllPostReducer } from '~/redux/myPostSlice';
+import { setAllPostReducer } from '~/redux/allPostForumSlice';
 import config from '~/config';
 import handleError from '~/config/handleError';
 import notify from '~/utils/notify';
@@ -21,12 +21,12 @@ function MyPost() {
 
     const dispatch = useDispatch();
 
-    const allPost = useSelector((state) => state.myPost.allPost);
+    const allPost = useSelector((state) => state.comunityPost.allPost);
 
-    const getAllMyPostAPI = async () => {
+    const getAllPostForumAPI = async () => {
         setLoading(true);
         const token = cookie.token;
-        await getAllMyPost(token)
+        await getAllPostForum(token)
             .then((result) => {
                 dispatch(setAllPostReducer(result.listPost));
                 setTotalPage(result.totalPage);
@@ -39,15 +39,11 @@ function MyPost() {
                     notify.error(messeageNotify.ERROR_NETWORD);
                     return;
                 }
-                const { message } = error.response.data;
-                const configLogic = config.forum;
-
-                handleError(configLogic, message);
             });
     };
 
     useEffect(() => {
-        getAllMyPostAPI();
+        getAllPostForumAPI();
     }, []);
 
     const handleScroll = async () => {
@@ -57,7 +53,7 @@ function MyPost() {
             setCurentPage(curentPage + 1);
             if (curentPage < totalPage) {
                 setIsLoadingSpinner(true);
-                await getAllMyPost(token, curentPage)
+                await getAllPostForum(token, curentPage)
                     .then((result) => {
                         dispatch(setAllPostReducer([...allPost, ...result.listPost]));
                         setTotalPage(result.totalPage);
