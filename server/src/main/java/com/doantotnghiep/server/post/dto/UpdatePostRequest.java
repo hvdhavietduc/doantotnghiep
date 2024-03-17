@@ -26,13 +26,17 @@ public class UpdatePostRequest {
     @Size(min = 1, max = 50, message = "Title must be between 1 and 50 characters")
     private String title;
 
-    private MultipartFile image;
+    private Object image;
 
     @Valid
     @NotNull(message = "Content must be not null")
     @NotEmpty(message = "Content must be not empty")
     @Size(min = 1, max = 1000, message = "Content must be between 1 and 1000 characters")
     private String content;
+
+    @Valid
+    @NotNull(message = "Keep old image must be not null")
+    private Boolean keepOldImage;
 
     public void setTitle(String title){
         if(title != null){

@@ -75,11 +75,11 @@ public class PostController {
         }
     }
 
-    @GetMapping("/all/{userId}")
-    public ResponseEntity<AllPostResponse> getAllPostByUserId(HttpServletRequest request, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size, @PathVariable String userId) throws ResponseException {
+    @GetMapping("/all/myPost")
+    public ResponseEntity<AllPostResponse> getAllPostByUserId(HttpServletRequest request, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
-            return postService.getAllPostByUserId(userId, page, size);
+            return postService.getAllPostByUserId(user.getId(), page, size);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }

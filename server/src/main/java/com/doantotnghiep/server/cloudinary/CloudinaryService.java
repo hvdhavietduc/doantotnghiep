@@ -30,6 +30,11 @@ public class CloudinaryService {
 
     public String uploadImage(MultipartFile file) throws ResponseException, IOException {
         try {
+
+            if (!isImage(file)) {
+                throw new ResponseException(CloudinaryErrorEnum.FILE_NOT_IMAGE, HttpStatus.BAD_REQUEST, 400);
+            }
+
             Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
                     "cloud_name", cloudName,
                     "api_key", apiKey,
@@ -53,6 +58,10 @@ public class CloudinaryService {
 
     public String uploadVideo(MultipartFile file) throws ResponseException, IOException {
         try {
+            if (!isVideo(file)) {
+                throw new ResponseException(CloudinaryErrorEnum.FILE_NOT_VIDEO, HttpStatus.BAD_REQUEST, 400);
+            }
+
             Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
                     "cloud_name", cloudName,
                     "api_key", apiKey,

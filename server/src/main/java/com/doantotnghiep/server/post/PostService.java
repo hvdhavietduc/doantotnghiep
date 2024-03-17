@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class PostService {
     public ResponseEntity<PostResponse> createPost(String userId, CreatePostRequest request) throws ResponseException {
         try {
             String urlImage = "";
-            if (request.getImage() != null) {
-                urlImage = cloudinaryService.uploadImage(request.getImage());
+            if (request.getImage() != null && (request.getImage() instanceof MultipartFile image)) {
+                urlImage = cloudinaryService.uploadImage(image);
             }
 
             Post post = new Post();
@@ -92,8 +93,12 @@ public class PostService {
             }
 
             String urlImage = "";
-            if (request.getImage() != null) {
-                urlImage = cloudinaryService.uploadImage(request.getImage());
+            if (!request.getKeepOldImage()) {
+                if (request.getImage() != null && (request.getImage() instanceof MultipartFile image)) {
+                    urlImage = cloudinaryService.uploadImage(image);
+                }
+            } else {
+                urlImage = post.getImage();
             }
 
             post.setTitle(request.getTitle());
