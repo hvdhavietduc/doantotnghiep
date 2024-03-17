@@ -10,6 +10,7 @@ import DeletePost from '../DeletePost';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 
 function Post({ post }) {
+    const usernameUserCurrent = localStorage.getItem('username');
     const [isPoperEditPost, setIsPoperEditPost] = useState(false);
     const [isPoperDeletePost, setIsPoperDeletePost] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
@@ -66,18 +67,20 @@ function Post({ post }) {
                         <p className="truncate text-xl font-medium text-gray-900 dark:text-white">{post.author.name}</p>
                         <p className="text-sm font-normal text-gray-400 dark:text-gray-400">{formattedDate}</p>
                     </div>
-                    <Tippy
-                        interactive
-                        delay={[0, 700]}
-                        offset={[12, 8]}
-                        placement="top-end"
-                        zIndex={9}
-                        render={renderResult}
-                    >
-                        <div className={' bottom-[5px] right-[10px]'}>
-                            <FontAwesomeIcon icon={faEllipsis} />
-                        </div>
-                    </Tippy>
+                    {usernameUserCurrent === post.author.username && (
+                        <Tippy
+                            interactive
+                            delay={[0, 700]}
+                            offset={[12, 8]}
+                            placement="top-end"
+                            zIndex={9}
+                            render={renderResult}
+                        >
+                            <div className={' bottom-[5px] right-[10px]'}>
+                                <FontAwesomeIcon icon={faEllipsis} />
+                            </div>
+                        </Tippy>
+                    )}
                 </div>
 
                 <div className="p-2">

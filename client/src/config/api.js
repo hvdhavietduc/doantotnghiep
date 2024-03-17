@@ -54,6 +54,7 @@ const api = {
         CREATEPOST: '/posts',
         EDITPOST: '/posts',
         DELETEPOST: '/posts',
+        GETALL: '/posts/all'
     },
 };
 

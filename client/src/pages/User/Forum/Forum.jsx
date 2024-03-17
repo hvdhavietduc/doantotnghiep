@@ -8,11 +8,13 @@ import config from '~/config';
 import MyPost from './MyPost';
 import CreatePost from './CreatePost';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
+import Comunity from './Comunity';
 
 function Forum() {
     const location = useLocation();
     const currentPageName = location.pathname.split('/')[2];
     const isMyPost = currentPageName === 'my_post';
+    const isComunity = currentPageName === 'comunity';
     const [isPoperCreatePost, setIsPoperCreatePost] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
     const avatar = localStorage.getItem('avatar');
@@ -37,6 +39,7 @@ function Forum() {
                     backgroundColor={paramater.backgroundColor}
                     menuFilter={paramater.menuFilter}
                     onChange={onChangePage}
+                    currenPageName={currentPageName}
                 />
                 <div className="mt-5 flex w-full justify-center">
                     <div
@@ -57,7 +60,9 @@ function Forum() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-5 flex w-full flex-col items-center gap-6">{isMyPost && <MyPost />}</div>
+                <div className="mt-5 flex w-full flex-col items-center gap-6">
+                    {isMyPost ? <MyPost /> : isComunity ? <Comunity /> : <></>}
+                </div>
             </div>
             {isPoperCreatePost && <CreatePost setIsPoperCreatePost={setIsPoperCreatePost} />}
         </Fragment>

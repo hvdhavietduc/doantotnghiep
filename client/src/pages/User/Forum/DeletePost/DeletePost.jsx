@@ -10,6 +10,7 @@ import { deletePost } from '~/services/forumService';
 import notify from '~/utils/notify';
 import config from '~/config';
 import { deletePostByIdReducer } from '~/redux/myPostSlice';
+import { deletePostByIdReducer as deletePostByIdForumReducer } from '~/redux/allPostForumSlice';
 import handleError from '~/config/handleError';
 
 function DeletePost({ setIsPoperDeletePost, postId }) {
@@ -29,6 +30,7 @@ function DeletePost({ setIsPoperDeletePost, postId }) {
     const handleMiddleDeletetPost = async () => {
         await deletePost(cookies.token, postId);
         dispatch(deletePostByIdReducer(postId));
+        dispatch(deletePostByIdForumReducer(postId));
         setIsPoperDeletePost(false);
         document.body.style.overflow = 'visible';
         setLoading(false);

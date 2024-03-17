@@ -16,6 +16,7 @@ import config from '~/config';
 import getValid from '../validateForm';
 import handleError from '~/config/handleError';
 import { editPostReducer } from '~/redux/myPostSlice';
+import { editPostReducer as editPostForumReducer } from '~/redux/allPostForumSlice';
 
 function EditPost({ setIsPoperEditPost, oldPost }) {
     const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ function EditPost({ setIsPoperEditPost, oldPost }) {
         const token = cookies.token;
         await editPost(data, token).then((res) => {
             dispatch(editPostReducer(res));
+            dispatch(editPostForumReducer(res));
         });
         setIsPoperEditPost(false);
         document.body.style.overflow = 'visible';
