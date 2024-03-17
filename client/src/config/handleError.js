@@ -2,37 +2,35 @@ import notify from '~/utils/notify';
 import config from '~/config';
 
 /**
- * @param {Object-Config Logic} configLogic 
- * @param {String} errorResponse 
+ * @param {Object-Config Logic} configLogic
+ * @param {String} errorResponse
  * @returns {Show error notify}
  */
-function handleError(configLogic, errorResponse){
+function handleError(configLogic, errorResponse) {
     const messageError = detectMessageError(configLogic, errorResponse);
     const messageNotifyGetting = configLogic.errorMesseage.getMesseageNotify();
-    if (messageError){
+    if (messageError) {
         notify.error(messageNotifyGetting[messageError]);
         return;
     }
-    notify.error(config.errorMesseage.getMesseageNotify().ERROR_NETWORD)
-    return
+    notify.error(config.errorMesseage.getMesseageNotify().ERROR_NETWORD);
+    return;
 }
 
-
 /**
- * @param {Object-Config Logic} configLogic 
- * @param {String} errorResponse 
+ * @param {Object-Config Logic} configLogic
+ * @param {String} errorResponse
  * @returns {null|String}
  */
-function detectMessageError(configLogic, errorResponse){
-    const {messeageLogic} = configLogic.errorMesseage;
+function detectMessageError(configLogic, errorResponse) {
+    const { messeageLogic } = configLogic.errorMesseage;
 
-    for (let key in messeageLogic){
-        if (errorResponse.includes(messeageLogic[key])){
+    for (let key in messeageLogic) {
+        if (errorResponse.includes(messeageLogic[key])) {
             return key;
         }
     }
 
     return null;
-
 }
 export default handleError;

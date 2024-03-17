@@ -49,6 +49,12 @@ const api = {
         DELETEWORD: '/words/category',
         ADDWORD: '/words/category',
     },
+    forum: {
+        GETALLMYPOST: '/posts/all/myPost',
+        CREATEPOST: '/posts',
+        EDITPOST: '/posts',
+        DELETEPOST: '/posts',
+    },
 };
 
 export default api;

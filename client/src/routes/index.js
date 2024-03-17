@@ -21,6 +21,7 @@ import ManageWordCategory from '~/pages/Admin/ManageWordCategory';
 import { DefautLayout, AdminLayout } from '~/layout';
 import config from '~/config';
 import ManageWord from '~/pages/Admin/ManageWordCategory/ManageWord';
+import Forum from '~/pages/User/Forum';
 
 const publicRoutes = [
     { path: config.routes.HOME, element: Home, layout: DefautLayout },
@@ -36,6 +37,9 @@ const publicRoutes = [
 const privateRoutes = [
     { path: config.routes.wordbooks.WORDBOOKS, element: Wordbooks, layout: DefautLayout },
     { path: config.routes.wordbooks.WORDFOLDERS, element: ManageWordFolder, layout: DefautLayout },
+    { path: config.routes.forum.FORUM, element: Forum, layout: DefautLayout },
+    { path: config.routes.forum.MYPOST, element: Forum, layout: DefautLayout },
+    { path: config.routes.forum.COMUNITY, element: Forum, layout: DefautLayout },
 ];
 
 const adminRoutes = [

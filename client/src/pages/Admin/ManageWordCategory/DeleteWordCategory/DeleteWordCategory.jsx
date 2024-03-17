@@ -1,9 +1,7 @@
-// import classNames from 'classnames/bind';
 import { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
-// import styles from './Delete.module.scss';
 import Loading from '~/components/Loading';
 import PopperConfirm from '~/components/PopperConfirm';
 import { deleteCategory } from '~/services/manageWordCategoryServices';
@@ -11,7 +9,6 @@ import notify from '~/utils/notify';
 import config from '~/config';
 import handleError from '~/config/handleError';
 
-// const cx = classNames.bind(styles);
 
 function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId, forceUpdate }) {
     const [loading, setLoading] = useState(false);
@@ -37,8 +34,6 @@ function DeleteWordCategory({ setIsPoperDeleteWordCategory, categoryId, forceUpd
 
     const handleDeleteCategory = async () => {
         setLoading(true);
-        // eslint-disable-next-line no-unused-vars
-        const messeageNotifyCategory = config.ManageWordCategory.errorMesseage.getMesseageNotify();
         handleMiddleDeletetCategory().catch((error) => {
             setLoading(false);
             const messeageNotify = config.errorMesseage.getMesseageNotify();
