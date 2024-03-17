@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-//import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeLow, faCopy } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,6 +9,14 @@ import HeaderTranslation from './HeaderTranslation';
 const cx = classNames.bind(styles);
 
 function Translation() {
+    const [inputTranslation, setInputTranslation] = useState('');
+    const [outputTranslation, setOutputTranslation] = useState('');
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, []);
+
     return (
         <div className={cx('mb-[150px] mt-[50px] flex w-full justify-center')}>
             <div
@@ -25,7 +33,12 @@ function Translation() {
                             'max-md:!w-full',
                         )}
                     >
-                        <textarea className={cx('h-[200px] w-full border-none pl-5 pt-5 text-lg outline-none')} />
+                        <textarea
+                            className={cx('h-[200px] w-full border-none pl-5 pt-5 text-lg outline-none')}
+                            ref={inputRef}
+                            value={inputTranslation}
+                            onChange={(e) => setInputTranslation(e.target.value)}
+                        />
                         <div>
                             <FontAwesomeIcon
                                 className={cx(
@@ -46,7 +59,7 @@ function Translation() {
                         </div>
                     </div>
                     <div className={cx('relative w-1/2 bg-background-color-secondnary', 'max-md:!w-full')}>
-                        <div className={cx('h-[200px] w-full pl-5 pt-5 text-lg ')}></div>
+                        <div className={cx('h-[200px] w-full pl-5 pt-5 text-lg ')}> {outputTranslation}</div>
                         <div>
                             <FontAwesomeIcon
                                 className={cx(

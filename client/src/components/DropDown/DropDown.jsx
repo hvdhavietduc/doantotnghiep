@@ -9,7 +9,7 @@ import styles from './DropDown.module.scss';
 
 const cx = classNames.bind(styles);
 
-function DropDown({ children, handleChange, data, className, showResult, setShowResult }) {
+function DropDown({ children, handleChange = () => {}, data, className, showResult, setShowResult }) {
     const boxSearchRef = useRef();
     const styleTagSearchResult = { width: boxSearchRef.current?.clientWidth };
 
@@ -30,12 +30,12 @@ function DropDown({ children, handleChange, data, className, showResult, setShow
                 visible={showResult && data.length > 0}
                 render={(attrs) => (
                     <div className={cx('h-20')} style={styleTagSearchResult} tabIndex="-1" {...attrs}>
-                        <PopperWrapper className={cx('z-20 h-[150px] pb-2')}>
+                        <PopperWrapper className={cx('z-20 max-h-[150px] overflow-y-auto pb-2')}>
                             {data.map((item, index) => (
                                 <div
                                     key={index}
                                     className={cx('cursor-pointer px-4 py-[6px] hover:underline', 'result-item')}
-                                    onClick={(item) => handleChange(item)}
+                                    onClick={() => handleChange(item)}
                                 >
                                     {item}
                                 </div>
@@ -52,7 +52,12 @@ function DropDown({ children, handleChange, data, className, showResult, setShow
 }
 
 DropDown.propTypes = {
-    // showBoxSearch: PropTypes.bool.isRequired,
+    children: PropTypes.node.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    data: PropTypes.array.isRequired,
+    className: PropTypes.string,
+    showResult: PropTypes.bool.isRequired,
+    setShowResult: PropTypes.func.isRequired,
 };
 
 export default DropDown;

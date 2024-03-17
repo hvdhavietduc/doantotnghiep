@@ -9,11 +9,9 @@ import SearchLanguage from './SearchLanguage';
 
 const cx = classNames.bind(styles);
 
-//const data = [];
-
 function HeaderTranslation() {
-    const [inputLanguage, setInputLanguage] = useState('ENGLISH');
-    const [ouputLanguage, setOutputLanguage] = useState('VIETNAMESE');
+    const [inputLanguage, setInputLanguage] = useState({ title: 'English', code: 'en' });
+    const [ouputLanguage, setOutputLanguage] = useState({ title: 'Vietnamese', code: 'vi' });
 
     // eslint-disable-next-line no-unused-vars
     const { t } = useTranslation('translation', { keyPrefix: 'HeaderTranslation' });
@@ -27,17 +25,17 @@ function HeaderTranslation() {
     return (
         <div
             className={cx(
-                'flex h-[50px] w-full items-center rounded-t-xl border-[1px] border-solid border-b-slate-400/50  ',
+                'flex h-[55px] w-full items-center rounded-t-xl border-[1px] border-solid border-b-slate-400/50  ',
             )}
         >
-            <SearchLanguage language={inputLanguage} />
+            <SearchLanguage language={inputLanguage.title.toUpperCase()} setLanguage={setInputLanguage} />
 
             <FontAwesomeIcon
                 icon={faRepeat}
                 className={cx('cursor-pointer', 'hover:text-text-color-link')}
                 onClick={handleSwitchLanguage}
             />
-            <SearchLanguage language={ouputLanguage} />
+            <SearchLanguage language={ouputLanguage.title.toUpperCase()} setLanguage={setOutputLanguage} />
         </div>
     );
 }
