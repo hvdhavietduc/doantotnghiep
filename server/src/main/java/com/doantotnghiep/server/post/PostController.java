@@ -6,6 +6,7 @@ import com.doantotnghiep.server.exception.ValidateExceptionHandle;
 import com.doantotnghiep.server.post.dto.CreatePostRequest;
 import com.doantotnghiep.server.post.dto.UpdatePostRequest;
 import com.doantotnghiep.server.post.response.AllPostResponse;
+import com.doantotnghiep.server.post.response.CommentPostResponse;
 import com.doantotnghiep.server.post.response.PostResponse;
 import com.doantotnghiep.server.user.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -80,6 +81,15 @@ public class PostController {
         try {
             User user = jwtService.getUserFromHeader(request);
             return postService.getAllPostByUserId(user.getId(), page, size);
+        } catch (ResponseException e) {
+            throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
+        }
+    }
+
+    @GetMapping("/comments")
+    public ResponseEntity<CommentPostResponse> getAllCommentOfPost(@RequestParam String postId, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
+        try {
+            return postService.getCommentOfPost(postId, page, size);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }

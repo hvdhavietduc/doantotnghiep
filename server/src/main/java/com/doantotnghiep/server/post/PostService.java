@@ -1,10 +1,13 @@
 package com.doantotnghiep.server.post;
 
 import com.doantotnghiep.server.cloudinary.CloudinaryService;
+import com.doantotnghiep.server.comment.Comment;
+import com.doantotnghiep.server.comment.CommentRepository;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.post.dto.CreatePostRequest;
 import com.doantotnghiep.server.post.dto.UpdatePostRequest;
 import com.doantotnghiep.server.post.response.AllPostResponse;
+import com.doantotnghiep.server.post.response.CommentPostResponse;
 import com.doantotnghiep.server.post.response.PostResponse;
 import com.doantotnghiep.server.user.Response.UserResponse;
 import com.doantotnghiep.server.user.UserService;
@@ -31,6 +34,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CloudinaryService cloudinaryService;
     private final UserService userService;
+    private final CommentRepository commentRepository;
 
     public ResponseEntity<PostResponse> createPost(String userId, CreatePostRequest request) throws ResponseException {
         try {
@@ -212,6 +216,27 @@ public class PostService {
                 .listPost(postResponses)
                 .total(total)
                 .totalPage(totalPage)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<CommentPostResponse> getCommentOfPost(String postId, Integer page, Integer size) throws ResponseException {
+        Post post = postRepository.findPostById(postId);
+        if (post == null) {
+            throw new ResponseException("Post not found", HttpStatus.NOT_FOUND, 404);
+        }
+
+        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").ascending());
+        Page<Comment> commentPage = commentRepository.findAllByIdIn(post.getCommentIds(), paging);
+
+        List<Comment> comments = commentPage.getContent();
+        Integer total = comments.size();
+        Integer totalPage = commentPage.getTotalPages();
+        CommentPostResponse response = CommentPostResponse.builder()
+                .total(total)
+                .totalPage(totalPage)
+                .comments(comments)
                 .build();
 
         return ResponseEntity.ok(response);
