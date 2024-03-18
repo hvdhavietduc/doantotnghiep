@@ -49,6 +49,11 @@ const api = {
         DELETEWORD: '/words/category',
         ADDWORD: '/words/category',
     },
+    translation: {
+        GETTRANSLATE: '/translate/isRelease',
+        SETTRANSLATE: '/translate/isRelease',
+        TRANSLATE: '/translate',
+    },
 };
 
 export default api;

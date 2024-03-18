@@ -1,21 +1,67 @@
 import classNames from 'classnames/bind';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeLow, faCopy } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Translation.module.scss';
 import HeaderTranslation from './HeaderTranslation';
+import useDebounce from '~/utils/useDebounce';
+import { setTranslate, translate } from '~/services/translationSevice';
+import notify from '~/utils/notify';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Translation() {
     const [inputTranslation, setInputTranslation] = useState('');
     const [outputTranslation, setOutputTranslation] = useState('');
+
+    const [cookies] = useCookies(['token']);
+    // eslint-disable-next-line no-unused-vars
+    const { inputLanguage, ouputLanguage } = useSelector((state) => state.translate);
+    const { t } = useTranslation('translation', { keyPrefix: 'Translation' });
+
+    const debouncedValue = useDebounce(inputTranslation, 500);
     const inputRef = useRef(null);
 
     useEffect(() => {
         inputRef.current.focus();
     }, []);
+
+    useEffect(() => {
+        if (!debouncedValue.trim()) {
+            setOutputTranslation('');
+            return;
+        }
+
+        const handleTranslate = async () => {
+            const token = cookies.token;
+            setOutputTranslation(t('translating'));
+            await setTranslate({ isRelease: true }, token);
+            const data = {
+                text: debouncedValue,
+                to: ouputLanguage.code,
+            };
+            const resultTranslate = await translate(data, token);
+            setOutputTranslation(resultTranslate);
+            await setTranslate({ isRelease: false }, token);
+        };
+
+        handleTranslate().catch((error) => {
+            const messeageNotify = config.errorMesseage.getMesseageNotify();
+            if (!error.response) {
+                notify.error(messeageNotify.ERROR_NETWORD);
+                return;
+            }
+            console.log(error);
+        });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debouncedValue]);
 
     return (
         <div className={cx('mb-[150px] mt-[50px] flex w-full justify-center')}>
@@ -49,13 +95,15 @@ function Translation() {
                             />
                         </div>
                         <div>
-                            <FontAwesomeIcon
-                                className={cx(
-                                    'absolute bottom-5 left-[60px] cursor-pointer text-2xl',
-                                    'hover:text-text-color-link',
-                                )}
-                                icon={faCopy}
-                            />
+                            <CopyToClipboard text={inputTranslation} onCopy={() => notify.success('coppied')}>
+                                <FontAwesomeIcon
+                                    className={cx(
+                                        'absolute bottom-5 left-[60px] cursor-pointer text-2xl',
+                                        'hover:text-text-color-link',
+                                    )}
+                                    icon={faCopy}
+                                />
+                            </CopyToClipboard>
                         </div>
                     </div>
                     <div className={cx('relative w-1/2 bg-background-color-secondnary', 'max-md:!w-full')}>
@@ -70,13 +118,15 @@ function Translation() {
                             />
                         </div>
                         <div>
-                            <FontAwesomeIcon
-                                className={cx(
-                                    'absolute bottom-5 left-[60px] cursor-pointer text-2xl',
-                                    'hover:text-text-color-link',
-                                )}
-                                icon={faCopy}
-                            />
+                            <CopyToClipboard text={outputTranslation} onCopy={() => notify.success('coppied')}>
+                                <FontAwesomeIcon
+                                    className={cx(
+                                        'absolute bottom-5 left-[60px] cursor-pointer text-2xl',
+                                        'hover:text-text-color-link',
+                                    )}
+                                    icon={faCopy}
+                                />
+                            </CopyToClipboard>
                         </div>
                     </div>
                 </div>
