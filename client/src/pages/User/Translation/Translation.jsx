@@ -61,7 +61,7 @@ function Translation() {
         });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debouncedValue]);
+    }, [debouncedValue, inputLanguage, ouputLanguage]);
 
     return (
         <div className={cx('mb-[150px] mt-[50px] flex w-full justify-center')}>
@@ -71,7 +71,12 @@ function Translation() {
                     'max-xl:!w-[90%]',
                 )}
             >
-                <HeaderTranslation />
+                <HeaderTranslation
+                    inputTranslation={inputTranslation}
+                    outputTranslation={outputTranslation}
+                    setInputTranslation={setInputTranslation}
+                    setOutputTranslation={setOutputTranslation}
+                />
                 <div className={cx('flex w-full flex-1 flex-wrap ')}>
                     <div
                         className={cx(
