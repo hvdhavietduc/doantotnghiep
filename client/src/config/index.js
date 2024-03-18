@@ -13,6 +13,7 @@ import manageVideo from './ManageVideo'
 import ManageWordCategory from './ManageWordCategory';
 import ManageWordInCategory from './ManageWordInCategory';
 import lookup from './Lookup';
+import forum from './Forum';
 
 const config = {
     routes,
@@ -29,6 +30,7 @@ const config = {
     manageVideo,
     ManageWordCategory,
     ManageWordInCategory,
+    forum,
     lookup,
 };
 

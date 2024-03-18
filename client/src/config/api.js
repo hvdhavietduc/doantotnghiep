@@ -54,6 +54,13 @@ const api = {
         SETTRANSLATE: '/translate/isRelease',
         TRANSLATE: '/translate',
     },
+    forum: {
+        GETALLMYPOST: '/posts/all/myPost',
+        CREATEPOST: '/posts',
+        EDITPOST: '/posts',
+        DELETEPOST: '/posts',
+        GETALL: '/posts/all'
+    },
 };
 
 export default api;

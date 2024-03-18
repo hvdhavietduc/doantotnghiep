@@ -34,6 +34,8 @@ const routes = {
     },
     forum: {
         FORUM: '/forum',
+        MYPOST: '/forum/my_post',
+        COMUNITY: '/forum/comunity',
     },
     chat_ai: {
         CHAT_AI: '/chat_ai',
