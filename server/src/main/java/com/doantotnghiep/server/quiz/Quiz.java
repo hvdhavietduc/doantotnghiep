@@ -1,5 +1,6 @@
 package com.doantotnghiep.server.quiz;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @Document
+@Builder
 public class Quiz {
     @Id
     public String id;
@@ -18,7 +20,7 @@ public class Quiz {
     @Field
     public String description;
     @Field
-    public Integer point;
+    public Integer totalPoint;
     @Field
     public Integer time;
     @Field
@@ -30,21 +32,4 @@ public class Quiz {
     @Field
     public Date updatedAt;
 
-    public Quiz() {
-    }
-
-    public Quiz(String name, String description, Integer point, Integer time, String image, List<String> questionIds, Date createdAt, Date updatedAt) {
-        this.name = name;
-        this.description = description;
-        this.point = point;
-        this.time = time;
-        this.image = image;
-        this.questionIds = questionIds;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public void appendQuestionId(String questionId) {
-        this.questionIds.add(questionId);
-    }
 }
