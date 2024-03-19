@@ -76,7 +76,7 @@ public class FolderService {
                 throw new ResponseException(FolderErrorEnum.FOLDER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
             folderRepository.deleteByIdAndUserId(folderId, userId);
-            wordFolderRepository.deleteAllByFolderId(folderId);
+            this.deleteAllObjectRelatedFolder(folderId);
             return ResponseEntity.ok(true);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
@@ -125,5 +125,9 @@ public class FolderService {
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
+    }
+
+    public void deleteAllObjectRelatedFolder(String folderId) {
+        wordFolderRepository.deleteAllByFolderId(folderId);
     }
 }

@@ -21,4 +21,7 @@ public interface FolderRepository extends MongoRepository<Folder, String> {
     Integer countAllByUserId(String userId);
 
     List<Folder> findAllByUserId(String userId);
+
+    void deleteAllByUserId(String userId);
+
 }

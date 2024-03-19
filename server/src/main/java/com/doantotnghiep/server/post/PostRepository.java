@@ -11,4 +11,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
     Page<Post> findAllByAuthorId(String authorId, Pageable pageable);
     Page<Post> getAllBy(Pageable pageable);
     Post findPostById(String postId);
+
+    void deleteAllByAuthorId(String authorId);
 }

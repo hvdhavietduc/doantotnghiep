@@ -82,6 +82,7 @@ public class CommentService {
             throw new ResponseException("Comment not found", HttpStatus.NOT_FOUND, 404);
         }
         commentRepository.delete(comment);
+        this.deleteAllObjectRelatedComment(commentId);
 
         Post post = postRepository.findPostById(postId);
         if (post == null) {
@@ -128,5 +129,9 @@ public class CommentService {
                 .build();
 
         return ResponseEntity.ok(response);
+    }
+
+    public void deleteAllObjectRelatedComment(String parentCommentId) {
+        commentRepository.deleteAllByParentId(parentCommentId);
     }
 }

@@ -82,6 +82,7 @@ public class PostService {
             }
 
             postRepository.deleteById(id);
+            this.deleteAllObjectRelatedPost(id);
             return ResponseEntity.ok(true);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
@@ -240,6 +241,10 @@ public class PostService {
                 .build();
 
         return ResponseEntity.ok(response);
+    }
+
+    public void deleteAllObjectRelatedPost(String postId) {
+        commentRepository.deleteAllByPostId(postId);
     }
 
 }

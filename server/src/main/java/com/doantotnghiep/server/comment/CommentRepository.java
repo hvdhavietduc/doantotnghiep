@@ -12,4 +12,7 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
     Comment findCommentById(String parentId);
     Comment findCommentByIdAndAuthorId(String id, String authorId);
     Page<Comment> findAllByIdIn(List<String> ids, Pageable pageable);
+    void deleteAllByAuthorId(String authorId);
+    void deleteAllByPostId(String postId);
+    void deleteAllByParentId(String parentId);
 }

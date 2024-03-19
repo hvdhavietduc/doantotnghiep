@@ -8,9 +8,8 @@ import java.util.List;
 
 public interface WordFolderRepository extends MongoRepository<WordFolder, String> {
     Page<WordFolder> findAllByIdIn(List<String> ids, Pageable pageable);
-
     void deleteById(String id);
     void deleteAllByFolderId(String folderId);
-
     WordFolder findAllByNameAndFolderId(String name, String folderId);
+    void deleteAllByAuthorId(String authorId);
 }

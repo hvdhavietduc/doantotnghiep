@@ -1,9 +1,14 @@
 package com.doantotnghiep.server.user;
 
+import com.doantotnghiep.server.comment.CommentRepository;
 import com.doantotnghiep.server.common.ErrorEnum.AuthErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
+import com.doantotnghiep.server.folder.FolderRepository;
+import com.doantotnghiep.server.folder.FolderService;
+import com.doantotnghiep.server.post.PostRepository;
 import com.doantotnghiep.server.user.Response.AllUserResponse;
 import com.doantotnghiep.server.user.Response.UserResponse;
+import com.doantotnghiep.server.wordFolder.WordFolderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +28,10 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class UserService {
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final FolderRepository folderRepository;
+    private final CommentRepository commentRepository;
+    private final WordFolderRepository wordFolderRepository;
 
     public ResponseEntity<UserResponse> getUserById(String userId) throws ResponseException {
         try {
@@ -74,6 +83,7 @@ public class UserService {
     public ResponseEntity<Boolean> deleteUser(String id) throws ResponseException {
         try {
             User user = userRepository.findUsersById(id);
+            this.deleteAllObjectRelatedUser(id);
             if (user == null) {
                 throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
             }
@@ -82,6 +92,13 @@ public class UserService {
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
+    }
+
+    public void deleteAllObjectRelatedUser(String userId) {
+        postRepository.deleteAllByAuthorId(userId);
+        folderRepository.deleteAllByUserId(userId);
+        commentRepository.deleteAllByAuthorId(userId);
+        wordFolderRepository.deleteAllByAuthorId(userId);
     }
 
 }
