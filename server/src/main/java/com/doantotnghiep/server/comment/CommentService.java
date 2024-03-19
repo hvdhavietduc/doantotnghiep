@@ -88,6 +88,7 @@ public class CommentService {
             throw new ResponseException("Post not found", HttpStatus.NOT_FOUND, 404);
         }
         post.getCommentIds().remove(commentId);
+        postRepository.save(post);
         return ResponseEntity.ok(comment);
     }
 
@@ -102,7 +103,10 @@ public class CommentService {
         if (commentParent == null) {
             throw new ResponseException("Comment not found", HttpStatus.NOT_FOUND, 404);
         }
+
         commentParent.getChildIds().remove(commentId);
+        commentRepository.save(commentParent);
+
         return ResponseEntity.ok(comment);
     }
 
