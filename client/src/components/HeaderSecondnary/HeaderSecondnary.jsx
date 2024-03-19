@@ -10,23 +10,16 @@ const cx = classNames.bind(styles);
 
 const defaultFn = () => {};
 
-function HeaderSecondnary({
-    iconTitle,
-    title,
-    backgroundColor,
-    menuFilter,
-    currenPageName = '',
-    onChange = defaultFn,
-}) {
+function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, onChange = defaultFn }) {
     const [indexFilter, setIndexFilder] = useState(0);
 
     const styles = {
         background: 'linear-gradient(' + backgroundColor[0] + ',' + backgroundColor[1] + ')',
     };
 
-    const handleFilter = (namePage, index) => {
+    const handleFilter = (index) => {
         setIndexFilder(index);
-        onChange(namePage);
+        onChange(index);
     };
 
     return (
@@ -40,10 +33,10 @@ function HeaderSecondnary({
                     <Button
                         key={index}
                         className={cx('mr-5 px-4 py-1', 'btn-filter', {
-                            'btn-active': indexFilter === index || currenPageName === item.namePage,
+                            'btn-active': indexFilter === index,
                         })}
                         rounded
-                        onClick={() => handleFilter(item.namePage, index)}
+                        onClick={() => handleFilter(index)}
                     >
                         {item.title}
                     </Button>
