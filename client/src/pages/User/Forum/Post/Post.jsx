@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Tippy from '@tippyjs/react/headless';
@@ -8,6 +9,8 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import EditPost from '../EditPost';
 import DeletePost from '../DeletePost';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
+
+const cx = classNames;
 
 function Post({ post }) {
     const usernameUserCurrent = localStorage.getItem('username');
@@ -35,15 +38,19 @@ function Post({ post }) {
         <div className={'mr-2'} tabIndex="-1" {...attrs}>
             <PopperWrapper className={'menu-popper overflow-hidden py-[2px]'}>
                 <div
-                    className="menu-item w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem] hover:cursor-pointer hover:bg-gray-200"
+                    className={cx(
+                        'menu-item w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem]',
+                        'hover:cursor-pointer hover:bg-background-color-secondnary',
+                    )}
                     onClick={(e) => showPoperEditPost(e)}
                 >
                     {t('edit_post')}
                 </div>
                 <div
-                    className={
-                        'menu-item w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem] hover:cursor-pointer hover:bg-gray-200'
-                    }
+                    className={cx(
+                        'menu-item w-full justify-start px-4 py-[6px] font-semibold leading-[1.125rem]',
+                        'hover:cursor-pointer hover:bg-background-color-secondnary',
+                    )}
                     onClick={(e) => showPoperDeletePost(e)}
                 >
                     {t('delete_post')}
@@ -54,8 +61,13 @@ function Post({ post }) {
 
     return (
         <Fragment>
-            <div className=" w-3/4 rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800 lg:w-1/2">
-                <div className="flex items-center p-4">
+            <div
+                className={cx(
+                    ' w-3/4 rounded-lg border border-gray-200 bg-white shadow',
+                    'dark:border-gray-700 dark:bg-gray-800 lg:w-1/2',
+                )}
+            >
+                <div className="relative flex items-center p-4">
                     <div className="flex-shrink-0">
                         <img
                             className=" h-12 w-12 rounded-full"
@@ -68,35 +80,35 @@ function Post({ post }) {
                         <p className="text-sm font-normal text-gray-400 dark:text-gray-400">{formattedDate}</p>
                     </div>
                     {usernameUserCurrent === post.author.username && (
-                        <Tippy
-                            interactive
-                            delay={[0, 700]}
-                            offset={[12, 8]}
-                            placement="top-end"
-                            zIndex={9}
-                            render={renderResult}
-                        >
-                            <div className={' bottom-[5px] right-[10px]'}>
+                        <Tippy interactive delay={[0, 700]} offset={[12, 8]} zIndex={9} render={renderResult}>
+                            <div className={'absolute right-[10px] top-[5px] cursor-pointer'}>
                                 <FontAwesomeIcon icon={faEllipsis} />
                             </div>
                         </Tippy>
                     )}
                 </div>
 
-                <div className="p-2">
+                <div className="p-4">
                     <p className="mb-3 font-bold text-gray-700 dark:text-gray-400">{post.title}</p>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.content}</p>
                 </div>
                 <img className=" w-full" src={post.image} alt="" />
-                <div className="flex items-center justify-center border-b border-t p-2">
-                    <div className="flex h-full w-1/3 items-center justify-center">
-                        <p className="font-normal text-gray-700 dark:text-gray-400">{t('like')}</p>
+                <div className={cx('flex items-center justify-center border-b border-t font-normal text-gray-700')}>
+                    <div
+                        className={cx(
+                            'flex h-full w-1/3 flex-1 cursor-pointer items-center justify-center py-2',
+                            'hover:bg-background-color-secondnary',
+                        )}
+                    >
+                        <p className=" dark:text-gray-400">{t('like')}</p>
                     </div>
-                    <div className="flex w-1/3 items-center justify-center">
-                        <p className="font-normal text-gray-700 dark:text-gray-400">{t('comment')}</p>
-                    </div>
-                    <div className="flex w-1/3 items-center justify-center">
-                        <p className="font-normal text-gray-700 dark:text-gray-400">{t('share')}</p>
+                    <div
+                        className={cx(
+                            'flex h-full w-1/3 flex-1 cursor-pointer items-center justify-center py-2',
+                            'hover:bg-background-color-secondnary',
+                        )}
+                    >
+                        <p className=" dark:text-gray-400">{t('comment')}</p>
                     </div>
                 </div>
             </div>

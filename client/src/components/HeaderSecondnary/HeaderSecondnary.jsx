@@ -10,7 +10,14 @@ const cx = classNames.bind(styles);
 
 const defaultFn = () => {};
 
-function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, currenPageName = '', onChange = defaultFn }) {
+function HeaderSecondnary({
+    iconTitle,
+    title,
+    backgroundColor,
+    menuFilter,
+    currenPageName = '',
+    onChange = defaultFn,
+}) {
     const [indexFilter, setIndexFilder] = useState(0);
 
     const styles = {
@@ -32,7 +39,9 @@ function HeaderSecondnary({ iconTitle, title, backgroundColor, menuFilter, curre
                 {menuFilter.map((item, index) => (
                     <Button
                         key={index}
-                        className={cx('mr-5 px-4 py-1', 'btn-filter', { 'btn-active': indexFilter === index || currenPageName === item.namePage})}
+                        className={cx('mr-5 px-4 py-1', 'btn-filter', {
+                            'btn-active': indexFilter === index || currenPageName === item.namePage,
+                        })}
                         rounded
                         onClick={() => handleFilter(item.namePage, index)}
                     >

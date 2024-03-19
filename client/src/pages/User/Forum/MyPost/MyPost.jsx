@@ -15,7 +15,7 @@ function MyPost() {
     const [loading, setLoading] = useState(false);
     const [isLoadingSpinner, setIsLoadingSpinner] = useState(false);
 
-    const [cookie, setCookie] = useCookies(['token']);
+    const [cookie] = useCookies(['token']);
     const [totalPage, setTotalPage] = useState(0);
     const [curentPage, setCurentPage] = useState(1);
 
@@ -48,6 +48,7 @@ function MyPost() {
 
     useEffect(() => {
         getAllMyPostAPI();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleScroll = async () => {
