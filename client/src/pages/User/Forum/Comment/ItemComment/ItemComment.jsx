@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,6 +9,7 @@ import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 const cx = classNames;
 
 function ItemComment({ inforComment, inforPost, isHaveChild }) {
+    const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
     return (
         <div className={cx('mt-3 flex')}>
             <div className="flex-shrink-0">
@@ -31,8 +33,8 @@ function ItemComment({ inforComment, inforPost, isHaveChild }) {
                 </div>
                 <div className="flex justify-start gap-2 pl-4 text-[12px] font-semibold text-black/70">
                     <span className="font-medium">1 tuần</span>
-                    <span>Thích</span>
-                    <span>Phản hồi</span>
+                    <span className={'cursor-pointer hover:underline'}>{t('like')}</span>
+                    <span className={'cursor-pointer hover:underline'}>{t('feedback')}</span>
                 </div>
                 {isHaveChild && (
                     <Fragment>
@@ -50,7 +52,7 @@ function ItemComment({ inforComment, inforPost, isHaveChild }) {
                             </div>
                             <input
                                 className="ml-4 w-full rounded-xl bg-background-color-secondnary px-4 py-2"
-                                placeholder={'Viết bình luận'}
+                                placeholder={t('write_feedback')}
                             />
                             <div className="absolute right-3 cursor-pointer hover:text-text-color-link">
                                 <FontAwesomeIcon icon={faPaperPlane} />

@@ -57,4 +57,76 @@ const getAllPostForum = async (token, page = 0, size = 5) => {
     return res.data;
 };
 
-export { getAllMyPost, createPost, deletePost, editPost, getAllPostForum };
+const getAllCommentByPostId = async (token, page = 0, size = 3) => {
+    const res = await httpRequest.get(config.api.forum.GETALLCMT, {
+        params: {
+            size: size,
+            page: page,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+const createComment = async (data, token) => {
+    const res = await httpRequest.post(config.api.forum.CREATECMT, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+const deleteCommentOfComment = async (token, parentId, commentId) => {
+    const res = await httpRequest.delete(config.api.forum.DELETECMTOFCMT, {
+        params: {
+            parentId: parentId,
+            commentId: commentId,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+const deleteCommentOfPost = async (token, postId, commentId) => {
+    const res = await httpRequest.delete(config.api.forum.DELETECMTOFCMT, {
+        params: {
+            postId: postId,
+            commentId: commentId,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+const getCommentOfComment = async (token, page = 0, size = 3) => {
+    const res = await httpRequest.get(config.api.forum.GETCMTBYCMT, {
+        params: {
+            size: size,
+            page: page,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return res.data;
+};
+
+export {
+    getAllMyPost,
+    createPost,
+    deletePost,
+    editPost,
+    getAllPostForum,
+    getAllCommentByPostId,
+    createComment,
+    deleteCommentOfComment,
+    deleteCommentOfPost,
+    getCommentOfComment,
+};
