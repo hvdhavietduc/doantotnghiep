@@ -1,10 +1,16 @@
-export default function Spinner() {
+import classNames from 'classnames';
+
+const cx = classNames;
+export default function Spinner({ className }) {
+    const classes = cx('inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600', {
+        [className]: className,
+    });
     return (
         <div className="text-center">
             <div role="status">
                 <svg
                     aria-hidden="true"
-                    className="inline h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+                    className={classes}
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"

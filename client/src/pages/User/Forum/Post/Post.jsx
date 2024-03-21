@@ -8,6 +8,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 
 import EditPost from '../EditPost';
 import DeletePost from '../DeletePost';
+import Comment from '../Comment';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 
 const cx = classNames;
@@ -63,7 +64,7 @@ function Post({ post }) {
         <Fragment>
             <div
                 className={cx(
-                    ' w-3/4 rounded-lg border border-gray-200 bg-white shadow',
+                    'w-3/4 rounded-lg border border-gray-200 bg-white pb-4 shadow',
                     'dark:border-gray-700 dark:bg-gray-800 lg:w-1/2',
                 )}
             >
@@ -111,6 +112,7 @@ function Post({ post }) {
                         <p className=" dark:text-gray-400">{t('comment')}</p>
                     </div>
                 </div>
+                <Comment inforPost={post} />
             </div>
             {isPoperDeletePost && <DeletePost setIsPoperDeletePost={setIsPoperDeletePost} postId={post.id} />}
             {isPoperEditPost && <EditPost setIsPoperEditPost={setIsPoperEditPost} oldPost={post} />}
