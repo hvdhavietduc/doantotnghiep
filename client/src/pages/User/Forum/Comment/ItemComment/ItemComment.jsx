@@ -10,6 +10,44 @@ const cx = classNames;
 
 function ItemComment({ inforComment, inforPost, isHaveChild }) {
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
+
+    const nowDate = new Date();
+    const commentDate = new Date(inforComment.createdAt);
+    const differenceInTime = nowDate.getTime() - commentDate.getTime();
+
+    const convertTime = (time) => {
+        let timeconverted = time / (1000 * 3600 * 24 * 365);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('year');
+        }
+
+        timeconverted = time / (1000 * 3600 * 24 * 30);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('month');
+        }
+
+        timeconverted = time / (1000 * 3600 * 24 * 7);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('week');
+        }
+
+        timeconverted = time / (1000 * 3600 * 24);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('day');
+        }
+
+        timeconverted = time / (1000 * 3600);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('hour');
+        }
+
+        timeconverted = time / (1000 * 60);
+        if (timeconverted >= 1) {
+            return String(Math.floor(timeconverted)) + ' ' + t('minutes');
+        }
+
+        return String(Math.floor(timeconverted)) + ' ' + t('just_finished');
+    };
     return (
         <div className={cx('mt-3 flex')}>
             <div className="flex-shrink-0">
@@ -26,13 +64,10 @@ function ItemComment({ inforComment, inforPost, isHaveChild }) {
             <div className="ml-2 text-sm">
                 <div className="rounded-2xl bg-background-color-secondnary px-3 py-2">
                     <div className="font-semibold">Trái Cà tím</div>
-                    <div>
-                        Quá tuyệt vời a ơi, nữa đi a ơi e rung động mất rồi Quá tuyệt vời a ơi, nữa đi a ơi e rung động
-                        mất rồi
-                    </div>
+                    <div>{inforComment.content}</div>
                 </div>
                 <div className="flex justify-start gap-2 pl-4 text-[12px] font-semibold text-black/70">
-                    <span className="font-medium">1 tuần</span>
+                    <span className="font-medium">{convertTime(differenceInTime)}</span>
                     <span className={'cursor-pointer hover:underline'}>{t('like')}</span>
                     <span className={'cursor-pointer hover:underline'}>{t('feedback')}</span>
                 </div>

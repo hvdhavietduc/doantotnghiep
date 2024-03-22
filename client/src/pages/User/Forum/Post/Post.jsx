@@ -17,6 +17,7 @@ function Post({ post }) {
     const usernameUserCurrent = localStorage.getItem('username');
     const [isPoperEditPost, setIsPoperEditPost] = useState(false);
     const [isPoperDeletePost, setIsPoperDeletePost] = useState(false);
+    const [isInputComment, setIsInputComment] = useState(false);
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
 
     const originalDate = new Date(post.createdAt);
@@ -33,6 +34,10 @@ function Post({ post }) {
         e.stopPropagation();
         setIsPoperDeletePost(true);
         document.body.style.overflow = 'hidden';
+    };
+
+    const showInputComment = () => {
+        setIsInputComment(true);
     };
 
     const renderResult = (attrs) => (
@@ -108,11 +113,12 @@ function Post({ post }) {
                             'flex h-full w-1/3 flex-1 cursor-pointer items-center justify-center py-2',
                             'hover:bg-background-color-secondnary',
                         )}
+                        onClick={showInputComment}
                     >
                         <p className=" dark:text-gray-400">{t('comment')}</p>
                     </div>
                 </div>
-                <Comment inforPost={post} />
+                <Comment inforPost={post} isInputComment={isInputComment} setIsInputComment={setIsInputComment} />
             </div>
             {isPoperDeletePost && <DeletePost setIsPoperDeletePost={setIsPoperDeletePost} postId={post.id} />}
             {isPoperEditPost && <EditPost setIsPoperEditPost={setIsPoperEditPost} oldPost={post} />}

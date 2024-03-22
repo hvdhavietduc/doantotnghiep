@@ -290,6 +290,13 @@
         "write_cmt": "Write comment",
         "feedback": "feedback",
         "write_feedback": "Write feedback",
-        "see_more": "See more..."
+        "see_more": "See more...",
+        "year": "years",
+        "month": "months",
+        "week": "week",
+        "day": "days",
+        "hour": "hours",
+        "minute": "minutes",
+        "just_finished": "just finished"
     }
 }

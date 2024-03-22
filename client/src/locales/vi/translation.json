@@ -290,6 +290,13 @@
         "write_cmt": "Viết bình luận",
         "feedback": "Phản hồi",
         "write_feedback": "Viết phản hồi",
-        "see_more": "Xem thêm bình luận..."
+        "see_more": "Xem thêm bình luận...",
+        "year": "năm",
+        "month": "tháng",
+        "week": "tuần",
+        "day": "ngày",
+        "hour": "giờ",
+        "minute": "phút",
+        "just_finished": "vừa xong"
     }
 }

@@ -57,11 +57,12 @@ const getAllPostForum = async (token, page = 0, size = 5) => {
     return res.data;
 };
 
-const getAllCommentByPostId = async (token, page = 0, size = 3) => {
+const getAllCommentByPostId = async (token, postId, page = 0, size = 3) => {
     const res = await httpRequest.get(config.api.forum.GETALLCMT, {
         params: {
             size: size,
             page: page,
+            postId: postId,
         },
         headers: {
             Authorization: `Bearer ${token}`,

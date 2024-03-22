@@ -1,11 +1,11 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { getAllMyPost } from '~/services/forumService';
-import Post from '../Post';
 import { useCookies } from 'react-cookie';
+
+import Post from '../Post';
 import Loading from '~/components/Loading';
 import Spinner from '~/components/Spinner';
+import { getAllMyPost } from '~/services/forumService';
 import { setAllPostReducer } from '~/redux/myPostSlice';
 import config from '~/config';
 import handleError from '~/config/handleError';
