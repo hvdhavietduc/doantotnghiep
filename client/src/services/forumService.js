@@ -106,11 +106,12 @@ const deleteCommentOfPost = async (token, postId, commentId) => {
     return res.data;
 };
 
-const getCommentOfComment = async (token, page = 0, size = 3) => {
+const getCommentOfComment = async (token, commentId, page = 0, size = 3) => {
     const res = await httpRequest.get(config.api.forum.GETCMTBYCMT, {
         params: {
             size: size,
             page: page,
+            commentId: commentId,
         },
         headers: {
             Authorization: `Bearer ${token}`,

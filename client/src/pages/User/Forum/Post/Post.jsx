@@ -118,7 +118,7 @@ function Post({ post }) {
                         <p className=" dark:text-gray-400">{t('comment')}</p>
                     </div>
                 </div>
-                <Comment inforPost={post} isInputComment={isInputComment} setIsInputComment={setIsInputComment} />
+                <Comment inforPost={post} isInputComment={isInputComment} />
             </div>
             {isPoperDeletePost && <DeletePost setIsPoperDeletePost={setIsPoperDeletePost} postId={post.id} />}
             {isPoperEditPost && <EditPost setIsPoperEditPost={setIsPoperEditPost} oldPost={post} />}

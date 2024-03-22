@@ -15,7 +15,7 @@ import notify from '~/utils/notify';
 
 const cx = classNames;
 
-function Comment({ inforPost, isInputComment, setIsInputComment }) {
+function Comment({ inforPost, isInputComment }) {
     const [totalPage, setTotalPage] = useState(0);
     const [curentPage, setCurentPage] = useState(0);
     const [listComment, setListComment] = useState([]);
