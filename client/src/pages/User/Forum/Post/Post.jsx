@@ -18,6 +18,7 @@ function Post({ post }) {
     const [isPoperEditPost, setIsPoperEditPost] = useState(false);
     const [isPoperDeletePost, setIsPoperDeletePost] = useState(false);
     const [isInputComment, setIsInputComment] = useState(false);
+    const [focusInputComment, setFocusInputComment] = useState(0);
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
 
     const originalDate = new Date(post.createdAt);
@@ -38,6 +39,7 @@ function Post({ post }) {
 
     const showInputComment = () => {
         setIsInputComment(true);
+        setFocusInputComment(focusInputComment + 1);
     };
 
     const renderResult = (attrs) => (
@@ -74,6 +76,7 @@ function Post({ post }) {
                 )}
             >
                 <div className="relative flex items-center p-4">
+                    {/* avatar */}
                     <div className="flex-shrink-0">
                         <img
                             className=" h-12 w-12 rounded-full"
@@ -81,10 +84,12 @@ function Post({ post }) {
                             alt="Avatar"
                         />
                     </div>
+                    {/* title */}
                     <div className="ms-4 min-w-0 flex-1">
                         <p className="truncate text-xl font-medium text-gray-900 dark:text-white">{post.author.name}</p>
                         <p className="text-sm font-normal text-gray-400 dark:text-gray-400">{formattedDate}</p>
                     </div>
+                    {/* more */}
                     {usernameUserCurrent === post.author.username && (
                         <Tippy interactive delay={[0, 700]} offset={[12, 8]} zIndex={9} render={renderResult}>
                             <div className={'absolute right-[10px] top-[5px] cursor-pointer'}>
@@ -93,12 +98,13 @@ function Post({ post }) {
                         </Tippy>
                     )}
                 </div>
-
+                {/* content post */}
                 <div className="p-4">
                     <p className="mb-3 font-bold text-gray-700 dark:text-gray-400">{post.title}</p>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.content}</p>
                 </div>
                 <img className=" w-full" src={post.image} alt="" />
+                {/* action to post */}
                 <div className={cx('flex items-center justify-center border-b border-t font-normal text-gray-700')}>
                     <div
                         className={cx(
@@ -118,7 +124,8 @@ function Post({ post }) {
                         <p className=" dark:text-gray-400">{t('comment')}</p>
                     </div>
                 </div>
-                <Comment inforPost={post} isInputComment={isInputComment} />
+                {/* comment */}
+                <Comment inforPost={post} isInputComment={isInputComment} focusInputComment={focusInputComment} />
             </div>
             {isPoperDeletePost && <DeletePost setIsPoperDeletePost={setIsPoperDeletePost} postId={post.id} />}
             {isPoperEditPost && <EditPost setIsPoperEditPost={setIsPoperEditPost} oldPost={post} />}

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,18 +9,22 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import ItemComment from './ItemComment';
 import Spinner from '~/components/Spinner';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
-import { getAllCommentByPostId } from '~/services/forumService';
+import Loading from '~/components/Loading';
+import { getAllCommentByPostId, createComment } from '~/services/forumService';
 import config from '~/config';
 import handleError from '~/config/handleError';
 import notify from '~/utils/notify';
 
 const cx = classNames;
 
-function Comment({ inforPost, isInputComment }) {
+function Comment({ inforPost, isInputComment, focusInputComment }) {
     const [totalPage, setTotalPage] = useState(0);
     const [curentPage, setCurentPage] = useState(0);
     const [listComment, setListComment] = useState([]);
+    const [valueComment, setValueComment] = useState('');
     const [loading, setLoading] = useState(false);
+    const [loadingGeneral, setLoadingGeneral] = useState(false);
+    const [loadingCreateComment, setLoadingCreateComment] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
     const [cookie] = useCookies(['token']);
@@ -27,10 +32,47 @@ function Comment({ inforPost, isInputComment }) {
 
     const getAllCommentByPostIdAPI = async () => {
         const token = cookie.token;
+        setLoadingGeneral(true);
         await getAllCommentByPostId(token, inforPost.id)
             .then((result) => {
                 setTotalPage(result.totalPage);
                 setListComment(result.comments);
+                setLoadingGeneral(false);
+            })
+            .catch((error) => {
+                setLoadingGeneral(false);
+                const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
+                if (!error.response) {
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    return;
+                }
+                const { message } = error.response.data;
+                const configLogic = config.forum;
+                handleError(configLogic, message);
+            });
+    };
+
+    const postCommentAPI = async () => {
+        if (!valueComment.trim()) {
+            return;
+        }
+        setLoadingCreateComment(true);
+        const token = cookie.token;
+        const data = { postId: inforPost.id, content: valueComment, parentId: null };
+
+        await createComment(data, token).catch((error) => {
+            const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
+            if (!error.response) {
+                notify.error(messeageNotify.ERROR_NETWORD);
+                return;
+            }
+            const { message } = error.response.data;
+            const configLogic = config.forum;
+            handleError(configLogic, message);
+        });
+        await getAllCommentByPostId(token, inforPost.id)
+            .then((result) => {
+                setListComment([result.comments[0], ...listComment]);
             })
             .catch((error) => {
                 const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
@@ -42,6 +84,8 @@ function Comment({ inforPost, isInputComment }) {
                 const configLogic = config.forum;
                 handleError(configLogic, message);
             });
+        setLoadingCreateComment(false);
+        setValueComment('');
     };
 
     const seeMoreComment = async () => {
@@ -65,6 +109,13 @@ function Comment({ inforPost, isInputComment }) {
             });
     };
 
+    const handleKeyDown = (event) => {
+        // Check if the keycode is 13 (Enter)
+        if (event.keyCode === 13) {
+            postCommentAPI();
+        }
+    };
+
     useEffect(() => {
         getAllCommentByPostIdAPI();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,17 +125,19 @@ function Comment({ inforPost, isInputComment }) {
         if (isInputComment === true) {
             inputRef.current.focus();
         }
-    }, [isInputComment]);
+    }, [isInputComment, focusInputComment]);
 
     return (
         <Fragment>
             <div className={cx('mt-2 w-full px-4')}>
+                {/* item comment */}
                 <div className={cx('mt-2')}>
                     {listComment.map((comment, index) => (
-                        <ItemComment inforComment={comment} key={index} />
+                        <ItemComment inforPost={inforPost} inforComment={comment} key={index} />
                     ))}
                 </div>
 
+                {/* buttom see more cmt */}
                 {totalPage !== 0 && totalPage !== curentPage + 1 && (
                     <div className={cx('flex justify-start py-1 font-semibold text-black/50')} onClick={seeMoreComment}>
                         <span className={'cursor-pointer pr-4 hover:underline'}>{t('see_more')}</span>
@@ -96,6 +149,7 @@ function Comment({ inforPost, isInputComment }) {
                     </div>
                 )}
 
+                {/* input write cmt */}
                 {isInputComment && (
                     <div className={cx('relative mt-6 flex items-center justify-start')}>
                         <div className="flex-shrink-0">
@@ -109,15 +163,34 @@ function Comment({ inforPost, isInputComment }) {
                             className="ml-4 w-full rounded-xl bg-background-color-secondnary px-4 py-2"
                             placeholder={t('write_cmt')}
                             ref={inputRef}
+                            value={valueComment}
+                            onChange={(e) => setValueComment(e.target.value)}
+                            onKeyDown={handleKeyDown}
                         />
-                        <div className="absolute right-3 cursor-pointer hover:text-text-color-link">
-                            <FontAwesomeIcon icon={faPaperPlane} />
+                        <div className="absolute right-3 " onClick={postCommentAPI}>
+                            {loadingCreateComment ? (
+                                <span>
+                                    <Spinner className={'!h-4 !w-4'} />
+                                </span>
+                            ) : (
+                                <FontAwesomeIcon
+                                    className="cursor-pointer hover:text-text-color-link"
+                                    icon={faPaperPlane}
+                                />
+                            )}
                         </div>
                     </div>
                 )}
             </div>
+            {loadingGeneral && <Loading />}
         </Fragment>
     );
 }
+
+Comment.propTypes = {
+    inforPost: PropTypes.object.isRequired,
+    isInputComment: PropTypes.bool.isRequired,
+    focusInputComment: PropTypes.number.isRequired,
+};
 
 export default Comment;
