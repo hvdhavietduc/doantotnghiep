@@ -117,7 +117,7 @@ public class CommentService {
             throw new ResponseException("Comment not found", HttpStatus.NOT_FOUND, 404);
         }
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Page<Comment> commentPage = commentRepository.findAllByIdIn(comment.getChildIds(), pageable);
 
         List<Comment> comments = commentPage.getContent();

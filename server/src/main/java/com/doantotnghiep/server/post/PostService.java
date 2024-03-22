@@ -159,7 +159,7 @@ public class PostService {
     }
 
     public ResponseEntity<AllPostResponse> getAllPostByUserId(String userId, Integer page, Integer size) throws ResponseException {
-        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
+                Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Page<Post> postPage = postRepository.findAllByAuthorId(userId, paging);
         List<Post> posts = postPage.getContent();
 
@@ -228,7 +228,7 @@ public class PostService {
             throw new ResponseException("Post not found", HttpStatus.NOT_FOUND, 404);
         }
 
-        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").ascending());
+        Pageable paging = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Page<Comment> commentPage = commentRepository.findAllByIdIn(post.getCommentIds(), paging);
 
         List<Comment> comments = commentPage.getContent();
