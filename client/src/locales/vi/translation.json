@@ -298,6 +298,7 @@
         "hour": "giờ",
         "minute": "phút",
         "just_finished": "vừa xong",
-        "see_more_feedback": "Xem thêm phản hồi"
+        "see_more_feedback": "Xem thêm phản hồi",
+        "delete": "Xóa"
     }
 }

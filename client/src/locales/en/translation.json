@@ -298,6 +298,7 @@
         "hour": "hours",
         "minute": "minutes",
         "just_finished": "just finished",
-        "see_more_feedback": "See more feedback"
+        "see_more_feedback": "See more feedback",
+        "delete": "delete"
     }
 }
