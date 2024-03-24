@@ -63,7 +63,7 @@ const api = {
         GETALLCMT: '/posts/comments',
         GETCMTBYCMT: '/comments/ofComment',
         DELETECMTOFPOST: '/comments/ofPost',
-        DELETECMTOFCMT: '/comments/ofPost',
+        DELETECMTOFCMT: '/comments/ofComment',
         CREATECMT: '/comments',
     },
 };

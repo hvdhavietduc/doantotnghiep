@@ -94,7 +94,7 @@ const deleteCommentOfComment = async (token, parentId, commentId) => {
 };
 
 const deleteCommentOfPost = async (token, postId, commentId) => {
-    const res = await httpRequest.delete(config.api.forum.DELETECMTOFCMT, {
+    const res = await httpRequest.delete(config.api.forum.DELETECMTOFPOST, {
         params: {
             postId: postId,
             commentId: commentId,

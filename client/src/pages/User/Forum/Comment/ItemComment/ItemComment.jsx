@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
@@ -9,15 +10,22 @@ import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 import Feedback from '../Feedback';
 import PopperMenu from '~/components/PopperMenu';
 import getListItemInMenuPopper from '~/config/listItemInMenuPopper';
+import { deleteCommentOfPost, deleteCommentOfComment } from '~/services/forumService';
+import config from '~/config';
+import handleError from '~/config/handleError';
+import notify from '~/utils/notify';
+import Spinner from '~/components/Spinner';
 
 const cx = classNames;
 
-function ItemComment({ inforComment, inforPost }) {
+function ItemComment({ inforComment, inforPost, setIsDeleted, setIsDeletedFeedback }) {
     const [isInputFeedback, setIsInputFeedback] = useState(false);
-    const [isBtnOperationCmt, setIsBtnOperationCmt] = useState(false);
     const [focusInputComment, setFocusInputComment] = useState(0);
+    const [isBtnOperationCmt, setIsBtnOperationCmt] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
+    const [cookie] = useCookies(['token']);
 
     const nowDate = new Date();
     const commentDate = new Date(inforComment.createdAt);
@@ -70,10 +78,57 @@ function ItemComment({ inforComment, inforPost }) {
         setIsBtnOperationCmt(false);
     };
 
+    const DeleteCommentOfPostAPI = async () => {
+        const token = cookie.token;
+        setIsDeleting(true);
+        await deleteCommentOfPost(token, inforPost.id, inforComment.id)
+            .then(() => {
+                setIsDeleting(false);
+                setIsDeleted(true);
+            })
+            .catch((error) => {
+                setIsDeleting(false);
+                const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
+                if (!error.response) {
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    return;
+                }
+                const { message } = error.response.data;
+                const configLogic = config.forum;
+                handleError(configLogic, message);
+            });
+    };
+
+    const DeleteCommentOfCommentAPI = async () => {
+        const token = cookie.token;
+        setIsDeleting(true);
+        await deleteCommentOfComment(token, inforComment.parentId, inforComment.id)
+            .then(() => {
+                setIsDeleting(false);
+                setIsDeletedFeedback(true);
+            })
+            .catch((error) => {
+                setIsDeleting(false);
+                const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
+                if (!error.response) {
+                    notify.error(messeageNotify.ERROR_NETWORD);
+                    return;
+                }
+                const { message } = error.response.data;
+                const configLogic = config.forum;
+                handleError(configLogic, message);
+            });
+    };
+
     const handleClickItemToOperationCMT = (data) => {
         switch (data.code) {
             case 'delete':
-                console.log('delete');
+                if (inforComment.parentId) {
+                    DeleteCommentOfCommentAPI();
+                } else {
+                    DeleteCommentOfPostAPI();
+                }
+
                 break;
             default:
         }
@@ -99,7 +154,7 @@ function ItemComment({ inforComment, inforPost }) {
                     <div className="relative inline-block rounded-2xl bg-background-color-secondnary px-3 py-2">
                         <div className="font-semibold">Trái Cà tím</div>
                         <div>{inforComment.content}</div>
-                        {isBtnOperationCmt && (
+                        {isBtnOperationCmt && !isDeleting && (
                             <PopperMenu
                                 items={getListItemInMenuPopper().forum.ItemComment}
                                 handleClick={handleClickItemToOperationCMT}
@@ -109,6 +164,12 @@ function ItemComment({ inforComment, inforPost }) {
                                     icon={faEllipsis}
                                 />
                             </PopperMenu>
+                        )}
+
+                        {isDeleting && (
+                            <div className="absolute bottom-[50%] right-[-20px] translate-y-[50%] cursor-pointer">
+                                <Spinner className={'!h-4 !w-4'} />
+                            </div>
                         )}
                     </div>
                 </div>
@@ -137,5 +198,7 @@ function ItemComment({ inforComment, inforPost }) {
 ItemComment.propTypes = {
     inforPost: PropTypes.object,
     inforComment: PropTypes.object.isRequired,
+    setIsDeleted: PropTypes.func,
+    setIsDeletedFeedback: PropTypes.func,
 };
 export default ItemComment;

@@ -9,7 +9,6 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import NoimageAvatar from '~/assets/img/noImageAvatar.png';
 import ItemComment from '../ItemComment';
 import Spinner from '~/components/Spinner';
-import Loading from '~/components/Loading';
 import { getCommentOfComment, createComment } from '~/services/forumService';
 import config from '~/config';
 import handleError from '~/config/handleError';
@@ -23,25 +22,23 @@ function Feedback({ inforComment, inforPost, isInputFeedback, focusInputComment 
     const [listFeedback, setListFeedback] = useState([]);
     const [valueFeedBack, setValueFeedBack] = useState('');
     const [loading, setLoading] = useState(false);
-    const [loadingGeneral, setLoadingGeneral] = useState(false);
     const [loadingCreateFeedback, setLoadingCreateFeedback] = useState(false);
+    const [isDeletedFeedback, setIsDeletedFeedback] = useState(false);
 
     const inputRef = useRef();
 
     const { t } = useTranslation('translation', { keyPrefix: 'Forum' });
     const [cookie] = useCookies(['token']);
 
-    const getAllCommentOfCommentAPI = async () => {
+    const getAllCommentOfCommentAPI = async (page = 0, size = 3) => {
         const token = cookie.token;
-        setLoadingGeneral(true);
-        await getCommentOfComment(token, inforComment.id)
+
+        await getCommentOfComment(token, inforComment.id, page, size)
             .then((result) => {
                 setTotalPageFeedback(result.totalPage);
                 setListFeedback(result.comments);
-                setLoadingGeneral(false);
             })
             .catch((error) => {
-                setLoadingGeneral(false);
                 const messeageNotify = config.forum.errorMesseage.getMesseageNotify();
                 if (!error.response) {
                     notify.error(messeageNotify.ERROR_NETWORD);
@@ -126,6 +123,14 @@ function Feedback({ inforComment, inforPost, isInputFeedback, focusInputComment 
     }, []);
 
     useEffect(() => {
+        if (isDeletedFeedback === true) {
+            getAllCommentOfCommentAPI(0, (curentPageFeedback + 1) * 3);
+            setIsDeletedFeedback(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isDeletedFeedback]);
+
+    useEffect(() => {
         if (isInputFeedback === true) {
             inputRef.current.focus();
         }
@@ -138,7 +143,11 @@ function Feedback({ inforComment, inforPost, isInputFeedback, focusInputComment 
                 <Fragment>
                     <div>
                         {listFeedback.map((feedback, index) => (
-                            <ItemComment key={index} inforComment={feedback} />
+                            <ItemComment
+                                key={index}
+                                inforComment={feedback}
+                                setIsDeletedFeedback={setIsDeletedFeedback}
+                            />
                         ))}
                     </div>
 
@@ -191,7 +200,6 @@ function Feedback({ inforComment, inforPost, isInputFeedback, focusInputComment 
                     </div>
                 </div>
             )}
-            {loadingGeneral && <Loading />}
         </Fragment>
     );
 }
