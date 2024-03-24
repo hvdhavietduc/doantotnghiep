@@ -9,11 +9,12 @@ import wordsbooks from './WordsBooks';
 import manageWordFolder from './ManageWordFolder';
 import manageUser from './ManageUser';
 import manageNews from './ManageNews';
-import manageVideo from './ManageVideo'
+import manageVideo from './ManageVideo';
 import ManageWordCategory from './ManageWordCategory';
 import ManageWordInCategory from './ManageWordInCategory';
 import lookup from './Lookup';
 import forum from './Forum';
+import getListItemInMenuPopper from './listItemInMenuPopper';
 
 const config = {
     routes,
@@ -32,6 +33,7 @@ const config = {
     ManageWordInCategory,
     forum,
     lookup,
+    getListItemInMenuPopper,
 };
 
 export default config;

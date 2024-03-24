@@ -59,7 +59,12 @@ const api = {
         CREATEPOST: '/posts',
         EDITPOST: '/posts',
         DELETEPOST: '/posts',
-        GETALL: '/posts/all'
+        GETALL: '/posts/all',
+        GETALLCMT: '/posts/comments',
+        GETCMTBYCMT: '/comments/ofComment',
+        DELETECMTOFPOST: '/comments/ofPost',
+        DELETECMTOFCMT: '/comments/ofComment',
+        CREATECMT: '/comments',
     },
 };
 

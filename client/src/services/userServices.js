@@ -10,17 +10,18 @@ const getMe = async (token) => {
     return res.data;
 };
 
-const getAllUser = async (token, page) => {
+const getAllUser = async (token, page, size = 10) => {
     const res = await httpRequest.get(config.api.user.GETALLUSER, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
         params: {
             page: page,
+            size: size,
         },
     });
     return res.data;
-}
+};
 
 const deleteUser = async (token, userId) => {
     const res = await httpRequest.delete(config.api.user.DELETEUSER, {
@@ -32,6 +33,6 @@ const deleteUser = async (token, userId) => {
         },
     });
     return res.data;
-}
+};
 
-export { getMe, getAllUser, deleteUser};
+export { getMe, getAllUser, deleteUser };

@@ -258,7 +258,7 @@
         "word_not_exist": "Word not exist",
         "word_already_exist": "Word already exist"
     },
-    "Forum":{
+    "Forum": {
         "title": "Title",
         "content": "Content",
         "author": "Author",
@@ -286,6 +286,19 @@
         "like": "Like",
         "share": "Share",
         "file_cannot_exceed_1mb": "File cannot exceed 1MB",
-        "file_not_image": "File is not image"
+        "file_not_image": "File is not image",
+        "write_cmt": "Write comment",
+        "feedback": "feedback",
+        "write_feedback": "Write feedback",
+        "see_more": "See more...",
+        "year": "years",
+        "month": "months",
+        "week": "week",
+        "day": "days",
+        "hour": "hours",
+        "minute": "minutes",
+        "just_finished": "just finished",
+        "see_more_feedback": "See more feedback",
+        "delete": "delete"
     }
 }

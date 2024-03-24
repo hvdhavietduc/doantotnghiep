@@ -258,7 +258,7 @@
         "word_not_exist": "Từ này không tồn tại",
         "word_already_exist": "Từ này đã tồn tại"
     },
-    "Forum":{
+    "Forum": {
         "title": "Tiêu đề",
         "content": "Nội dung",
         "author": "Tác giả",
@@ -286,6 +286,19 @@
         "like": "Thích",
         "share": "Chia sẻ",
         "file_cannot_exceed_1mb": "File không thể vượt quá 1mb",
-        "file_not_image": "File không phải là ảnh"
+        "file_not_image": "File không phải là ảnh",
+        "write_cmt": "Viết bình luận",
+        "feedback": "Phản hồi",
+        "write_feedback": "Viết phản hồi",
+        "see_more": "Xem thêm bình luận...",
+        "year": "năm",
+        "month": "tháng",
+        "week": "tuần",
+        "day": "ngày",
+        "hour": "giờ",
+        "minute": "phút",
+        "just_finished": "vừa xong",
+        "see_more_feedback": "Xem thêm phản hồi",
+        "delete": "Xóa"
     }
 }
