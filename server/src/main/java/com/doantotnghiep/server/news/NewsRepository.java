@@ -17,4 +17,6 @@ public interface NewsRepository extends MongoRepository<News, String> {
     Page<News> findAllByContentContaining(String content, Pageable pageable);
     Integer countAllBy();
     News findAllByTitle(String title);
+
+    Page<News> findAllByIdIn(List<String> newsIds, Pageable paging);
 }
