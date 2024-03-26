@@ -24,5 +24,7 @@ public class Video {
     public Date createdAt;
     @Field
     public Date updatedAt;
+    @Field
+    public String categpryId;
 
 }

@@ -28,6 +28,10 @@ public class UpdateVideoRequest {
 
     @Valid
     @NotNull(message = "isKeepVideo must not be null")
-    @NotEmpty(message = "isKeepVideo must not be empty")
     private Boolean isKeepVideo;
+
+    @Valid
+    @NotNull(message = "Category id must not be null")
+    @NotEmpty(message = "Category id must not be empty")
+    private String categoryId;
 }

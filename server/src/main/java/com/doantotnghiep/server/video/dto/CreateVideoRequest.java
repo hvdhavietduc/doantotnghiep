@@ -25,4 +25,9 @@ public class CreateVideoRequest {
     private String description;
 
     private MultipartFile video;
+
+    @Valid
+    @NotNull(message = "Category id must not be null")
+    @NotEmpty(message = "Category id must not be empty")
+    private String categoryId;
 }

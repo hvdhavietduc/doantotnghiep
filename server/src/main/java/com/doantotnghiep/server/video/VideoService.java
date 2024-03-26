@@ -6,6 +6,8 @@ import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.video.Response.AllVideoResponse;
 import com.doantotnghiep.server.video.dto.CreateVideoRequest;
 import com.doantotnghiep.server.video.dto.UpdateVideoRequest;
+import com.doantotnghiep.server.videoCategory.VideoCategory;
+import com.doantotnghiep.server.videoCategory.VideoCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +27,7 @@ import java.util.List;
 @ControllerAdvice
 public class VideoService {
     private final VideoRepository videoRepository;
+    private final VideoCategoryRepository videoCategoryRepository;
     private final CloudinaryService cloudinaryService;
 
     public ResponseEntity<Video> getVideoById(String id) throws ResponseException {
@@ -55,9 +58,17 @@ public class VideoService {
                     .url(urlVideo)
                     .createdAt(new Date())
                     .updatedAt(new Date())
+                    .categpryId(request.getCategoryId())
                     .build();
 
-            return ResponseEntity.ok(videoRepository.save(video));
+            Video newVideo = videoRepository.save(video);
+            VideoCategory videoCategory = videoCategoryRepository.findById(request.getCategoryId()).orElse(null);
+            if (videoCategory != null) {
+                videoCategory.getVideoIds().add(newVideo.getId());
+                videoCategoryRepository.save(videoCategory);
+            }
+
+            return ResponseEntity.ok(newVideo);
         } catch (ResponseException e) {
             throw new ResponseException(e.getMessage(), e.getStatus(), e.getStatusCode());
         }
@@ -99,6 +110,15 @@ public class VideoService {
             Video video = videoRepository.findById(id).orElse(null);
             if (video == null) {
                 throw new ResponseException(VideoErrorEnum.VIDEO_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
+            }
+
+            VideoCategory videoCategory = videoCategoryRepository.findById(video.getCategpryId()).orElse(null);
+            if (videoCategory != null) {
+                videoCategory.getVideoIds().remove(video.getId());
+                videoCategoryRepository.save(videoCategory);
+            }
+            else{
+                throw new ResponseException("Category not found", HttpStatus.NOT_FOUND, 404);
             }
             videoRepository.deleteById(id);
             return ResponseEntity.ok(true);
