@@ -1,6 +1,6 @@
 package com.doantotnghiep.server.post.response;
 
-import com.doantotnghiep.server.comment.Comment;
+import com.doantotnghiep.server.comment.response.CommentResponse;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,5 +11,5 @@ import java.util.List;
 public class CommentPostResponse {
     Integer total;
     Integer totalPage;
-    List<Comment> comments;
+    List<CommentResponse> comments;
 }

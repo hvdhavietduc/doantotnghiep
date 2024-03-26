@@ -1,11 +1,12 @@
 package com.doantotnghiep.server.comment;
 
 import com.doantotnghiep.server.comment.response.CommentOfCommentResponse;
+import com.doantotnghiep.server.comment.response.CommentResponse;
 import com.doantotnghiep.server.common.ErrorEnum.AuthErrorEnum;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.post.Post;
 import com.doantotnghiep.server.post.PostRepository;
-import com.doantotnghiep.server.post.PostService;
+import com.doantotnghiep.server.user.Response.UserResponse;
 import com.doantotnghiep.server.user.User;
 import com.doantotnghiep.server.user.UserRepository;
 import com.doantotnghiep.server.user.UserService;
@@ -29,9 +30,10 @@ import java.util.List;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
     private final PostRepository postRepository;
 
-    public ResponseEntity<Comment> createComment(String userId, String postId, String content, String parentId) throws ResponseException {
+    public ResponseEntity<CommentResponse> createComment(String userId, String postId, String content, String parentId) throws ResponseException {
         User user = userRepository.findUsersById(userId);
         if (user == null) {
             throw new ResponseException(AuthErrorEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND, 404);
@@ -72,8 +74,20 @@ public class CommentService {
             post.getCommentIds().add(savedComment.getId());
             postRepository.save(post);
         }
-
-        return ResponseEntity.ok(savedComment);
+        UserResponse userResponse = userService.getUserById(userId).getBody();
+        CommentResponse response = CommentResponse.builder()
+                .id(savedComment.getId())
+                .author(userResponse)
+                .createdAt(savedComment.getCreatedAt())
+                .authorId(userId)
+                .childIds(savedComment.getChildIds())
+                .content(savedComment.getContent())
+                .isLevel1(savedComment.getIsLevel1())
+                .parentId(savedComment.getParentId())
+                .postId(savedComment.getPostId())
+                .updatedAt(savedComment.getUpdatedAt())
+                .build();
+        return ResponseEntity.ok(response);
     }
 
     public ResponseEntity<Comment> deleteCommentOfPost(String userId, String commentId, String postId) throws ResponseException {
@@ -121,9 +135,26 @@ public class CommentService {
         Page<Comment> commentPage = commentRepository.findAllByIdIn(comment.getChildIds(), pageable);
 
         List<Comment> comments = commentPage.getContent();
+        List<CommentResponse> commentResponses = new ArrayList<>();
+        for (Comment cmt : comments) {
+            UserResponse user = userService.getUserById(cmt.getAuthorId()).getBody();
+            CommentResponse commentResponse = CommentResponse.builder()
+                    .id(cmt.getId())
+                    .author(user)
+                    .createdAt(cmt.getCreatedAt())
+                    .authorId(cmt.getAuthorId())
+                    .childIds(cmt.getChildIds())
+                    .content(cmt.getContent())
+                    .isLevel1(cmt.getIsLevel1())
+                    .parentId(cmt.getParentId())
+                    .postId(cmt.getPostId())
+                    .updatedAt(cmt.getUpdatedAt())
+                    .build();
+            commentResponses.add(commentResponse);
+        }
 
         CommentOfCommentResponse response = CommentOfCommentResponse.builder()
-                .comments(comments)
+                .comments(commentResponses)
                 .totalPage(commentPage.getTotalPages())
                 .total(comments.size())
                 .build();

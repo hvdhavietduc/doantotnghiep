@@ -2,12 +2,10 @@ package com.doantotnghiep.server.user.Response;
 
 import com.doantotnghiep.server.user.Role;
 import lombok.Builder;
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Field;
+import lombok.Data;
 
 @Builder
+@Data
 public class UserResponse {
     public String id;
     public String username;

@@ -3,6 +3,7 @@ package com.doantotnghiep.server.post;
 import com.doantotnghiep.server.cloudinary.CloudinaryService;
 import com.doantotnghiep.server.comment.Comment;
 import com.doantotnghiep.server.comment.CommentRepository;
+import com.doantotnghiep.server.comment.response.CommentResponse;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.post.dto.CreatePostRequest;
 import com.doantotnghiep.server.post.dto.UpdatePostRequest;
@@ -234,10 +235,28 @@ public class PostService {
         List<Comment> comments = commentPage.getContent();
         Integer total = comments.size();
         Integer totalPage = commentPage.getTotalPages();
+
+        List<CommentResponse> commentResponses = new ArrayList<>();
+        for (Comment comment : comments) {
+            UserResponse user = userService.getUserById(comment.getAuthorId()).getBody();
+            CommentResponse response = CommentResponse.builder()
+                    .id(comment.getId())
+                    .author(user)
+                    .createdAt(comment.getCreatedAt())
+                    .authorId(comment.getAuthorId())
+                    .childIds(comment.getChildIds())
+                    .content(comment.getContent())
+                    .isLevel1(comment.getIsLevel1())
+                    .parentId(comment.getParentId())
+                    .postId(comment.getPostId())
+                    .updatedAt(comment.getUpdatedAt())
+                    .build();
+            commentResponses.add(response);
+        }
         CommentPostResponse response = CommentPostResponse.builder()
                 .total(total)
                 .totalPage(totalPage)
-                .comments(comments)
+                .comments(commentResponses)
                 .build();
 
         return ResponseEntity.ok(response);

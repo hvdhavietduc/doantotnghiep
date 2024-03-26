@@ -2,6 +2,7 @@ package com.doantotnghiep.server.comment;
 
 import com.doantotnghiep.server.comment.dto.AddCommentRequest;
 import com.doantotnghiep.server.comment.response.CommentOfCommentResponse;
+import com.doantotnghiep.server.comment.response.CommentResponse;
 import com.doantotnghiep.server.config.JwtService;
 import com.doantotnghiep.server.exception.ResponseException;
 import com.doantotnghiep.server.exception.ValidateExceptionHandle;
@@ -22,7 +23,7 @@ public class CommentController {
     private final JwtService jwtService;
 
     @PostMapping("")
-    public ResponseEntity<Comment> createComment(HttpServletRequest request, @Valid @RequestBody AddCommentRequest addCommentRequest, BindingResult bindingResult) throws ResponseException {
+    public ResponseEntity<CommentResponse> createComment(HttpServletRequest request, @Valid @RequestBody AddCommentRequest addCommentRequest, BindingResult bindingResult) throws ResponseException {
         try {
             User user = jwtService.getUserFromHeader(request);
             validateExceptionHandle.handleException(bindingResult);
