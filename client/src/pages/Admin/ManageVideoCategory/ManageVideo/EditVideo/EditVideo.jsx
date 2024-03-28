@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
+import { useLocation } from 'react-router-dom';
 
 import styles from './EditVideo.module.scss';
 import PopperForm from '~/components/PopperForm';
@@ -25,6 +26,8 @@ function EditVideo({ setIsPoperEditVideo, onPageChange, oldVideo }) {
     const { t } = useTranslation('translation', { keyPrefix: 'ManageVideo' });
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
+    const location = useLocation();
+    const categoryId = location.pathname.split('/')[2];
 
     const {
         register,
@@ -64,6 +67,7 @@ function EditVideo({ setIsPoperEditVideo, onPageChange, oldVideo }) {
             data.append('video', formData.video[0]);
         }
         data.append('isKeepVideo', formData.isKeepOldVideo);
+        data.append('categoryId', categoryId);
 
         const messeageNotify = config.manageVideo.errorMesseage.getMesseageNotify();
         handleMiddleEditVideo(data).catch((error) => {

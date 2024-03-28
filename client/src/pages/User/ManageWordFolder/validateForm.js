@@ -24,7 +24,7 @@ const getValid = () => ({
         },
         pattern: {
             value: constantsValid.pattern.TITLE,
-            message: i18next.t('ManageWordFolder.title') + i18next.t('valid.contain_only_letters_number_and_spaces'),
+            message: i18next.t('ManageWordFolder.title') + i18next.t('Valid.contain_only_letters_number_and_spaces'),
         },
     },
     definition: {

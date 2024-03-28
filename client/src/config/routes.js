@@ -52,6 +52,8 @@ const routes = {
         MANAGEQUIZZES: '/manage_quizzes',
         MANAGEWORDCATEGORIES: '/manage_wcategories/:page',
         MANAGEWORDINCATEGORY: '/manage_wcategories/:cagtegoryId/:page',
+        MANAGENEWSINCATEGORY: '/manage_news/:categoryId/:page',
+        MANAGEVIDEOINCATEGORY: '/manage_videos/:categoryId/:page',
         MANAGENEWS: '/manage_news/:page',
         MANAGEVIDEOS: '/manage_videos/:page',
     },

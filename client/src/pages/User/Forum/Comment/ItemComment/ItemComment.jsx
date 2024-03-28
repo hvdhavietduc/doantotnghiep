@@ -143,7 +143,7 @@ function ItemComment({ inforComment, inforPost, setIsDeleted, setIsDeletedFeedba
                         'h-8 w-8': inforComment.childIds.length > 0,
                         'h-6 w-6': inforComment.childIds.length === 0,
                     })}
-                    src={inforPost?.author?.avatar ? inforPost?.author?.avatar : NoimageAvatar}
+                    src={inforComment?.author?.avatar ? inforComment?.author?.avatar : NoimageAvatar}
                     alt="Avatar"
                 />
             </div>
@@ -152,7 +152,7 @@ function ItemComment({ inforComment, inforPost, setIsDeleted, setIsDeletedFeedba
                 {/* content comment */}
                 <div className="pr-6" onMouseEnter={showBtnOperationCMT} onMouseLeave={hideBtnOperationCMT}>
                     <div className="relative inline-block rounded-2xl bg-background-color-secondnary px-3 py-2">
-                        <div className="font-semibold">Trái Cà tím</div>
+                        <div className="font-semibold">{inforComment.author.name}</div>
                         <div>{inforComment.content}</div>
                         {isBtnOperationCmt && !isDeleting && (
                             <PopperMenu

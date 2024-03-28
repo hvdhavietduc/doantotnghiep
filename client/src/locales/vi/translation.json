@@ -6,6 +6,16 @@
         "characters": " kí tự",
         "contain_only_letters_number_and_spaces": " chỉ có thể chứa kí tự, chữ số và khoảng trắng"
     },
+    "Breadcrumb": {
+        "home": "Trang chủ",
+        "manage_user": "Quản lý người dùng",
+        "manage_news": "Quản lý tin tức",
+        "manage_videos": "Quản lý video",
+        "manage_word_categories": "Quản lý phân loại từ vựng",
+        "manage_news_categories": "Quản lý phân loại tin tức",
+        "manage_video_categories": "Quản lý phân loại video",
+        "manage_word": "Quản lý từ vựng"
+    },
     "Error": {
         "error_network": "Lỗi kết nối mạng"
     },
@@ -257,6 +267,38 @@
         "category_of_word_not_found": "Không tìm thấy phân loại từ của từ này",
         "word_not_exist": "Từ này không tồn tại",
         "word_already_exist": "Từ này đã tồn tại"
+    },
+    "ManageVideoCategory": {
+        "name": "Tên phân loại",
+        "action": "Hành động",
+        "are_you_sure_to_delete_category": "Bạn có chắc chắn muốn xóa phân loại này không",
+        "delete_category_success": "Xóa phân loại thành công",
+        "add_category": "Thêm phân loại",
+        "edit_category": "Chỉnh sửa phân loại",
+        "add_category_success": "Thêm phân loại thành công",
+        "edit_category_success": "Chỉnh sửa phân loại thành công",
+        "category_not_found": "Không tìm thấy phân loại hiện tại",
+        "category_already_exist": "Phân loại này đã tồn tại",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "manage_video_lists": "Quản lý danh sách video",
+        "video_count": "Số lượng video"
+    },
+    "ManageNewsCategory": {
+        "name": "Tên phân loại",
+        "action": "Hành động",
+        "are_you_sure_to_delete_category": "Bạn có chắc chắn muốn xóa phân loại này không",
+        "delete_category_success": "Xóa phân loại thành công",
+        "add_category": "Thêm phân loại",
+        "edit_category": "Chỉnh sửa phân loại",
+        "add_category_success": "Thêm phân loại thành công",
+        "edit_category_success": "Chỉnh sửa phân loại thành công",
+        "category_not_found": "Không tìm thấy phân loại hiện tại",
+        "category_already_exist": "Phân loại này đã tồn tại",
+        "create_at": "Ngày tạo",
+        "update_at": "Ngày cập nhật",
+        "manage_news_lists": "Quản lý danh sách bài báo",
+        "news_count": "Số lượng bài báo"
     },
     "Forum": {
         "title": "Tiêu đề",
