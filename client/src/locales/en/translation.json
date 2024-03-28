@@ -6,6 +6,16 @@
         "characters": " characters",
         "contain_only_letters_number_and_spaces": " contain only letters, number and spaces"
     },
+    "Breadcrumb": {
+        "home": "Home",
+        "manage_user": "Manage user",
+        "manage_news": "Manage news",
+        "manage_videos": "Manage videos",
+        "manage_word_categories": "Manage word categories",
+        "manage_news_categories": "Manage news categories",
+        "manage_video_categories": "Manage video categories",
+        "manage_word": "Manage word"
+    },
     "Error": {
         "error_network": "Error network"
     },
@@ -257,6 +267,38 @@
         "category_of_word_not_found": "Category of word not found",
         "word_not_exist": "Word not exist",
         "word_already_exist": "Word already exist"
+    },
+    "ManageVideoCategory": {
+        "name": "Category name",
+        "action": "Action",
+        "are_you_sure_to_delete_category": "Are you sure to delete category ?",
+        "delete_category_success": "Delete category success",
+        "add_category": "Add category",
+        "edit_category": "Edit category",
+        "add_category_success": "Add category success",
+        "edit_category_success": "Edit category success",
+        "category_not_found": "Category not found",
+        "category_already_exist": "Category already exist",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "manage_video_lists": "Manage video lists",
+        "video_count": "Video count"
+    },
+    "ManageNewsCategory": {
+        "name": "Category name",
+        "action": "Action",
+        "are_you_sure_to_delete_category": "Are you sure to delete category ?",
+        "delete_category_success": "Delete category success",
+        "add_category": "Add category",
+        "edit_category": "Edit category",
+        "add_category_success": "Add category success",
+        "edit_category_success": "Edit category success",
+        "category_not_found": "Category not found",
+        "category_already_exist": "Category already exist",
+        "create_at": "Create at",
+        "update_at": "Update at",
+        "manage_news_lists": "Manage news lists",
+        "news_count": "News count"
     },
     "Forum": {
         "title": "Title",

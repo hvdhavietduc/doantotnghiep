@@ -22,7 +22,7 @@ function MyPost() {
     const dispatch = useDispatch();
 
     const allPost = useSelector((state) => state.myPost.allPost);
-
+    console.log(allPost)
     const getAllMyPostAPI = async () => {
         setLoading(true);
         const token = cookie.token;

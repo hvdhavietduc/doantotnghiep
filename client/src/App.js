@@ -63,7 +63,7 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
+                                    <Layout  listBreadcrumb={route.listBreadcrumb} >
                                         <Page />
                                     </Layout>
                                 }
@@ -80,7 +80,7 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
+                                    <Layout >
                                         <Page />
                                     </Layout>
                                 }

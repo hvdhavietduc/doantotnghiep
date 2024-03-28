@@ -12,10 +12,11 @@ import Image from '~/components/Image';
 import config from '~/config';
 import { getNavigationAdmin } from '~/layout/Header/Constant';
 import { getAdminMenu } from '../Constant';
+import Breadcrumb from '~/components/Breadcrumb';
 
 const cx = classNames.bind(styles);
 
-function HeaderAdmin() {
+function HeaderAdmin({ listBreadcrumb }) {
     // const currentLanguage = useSelector((state) => state.language.currentLanguage);
 
     const [showMenu, setShowMenu] = useState(false);
@@ -44,9 +45,8 @@ function HeaderAdmin() {
         changeLanguage(currentLanguage);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return (
-        <div className={cx('fixed left-0 top-0 z-10 flex w-full justify-center bg-pink-100', 'header')}>
+        <div className={cx('fixed left-0 top-0 z-10 w-full flex-col justify-center bg-pink-100', 'header')}>
             <div className={cx('flex h-full w-full items-center justify-between', 'max-xl:relative', 'inner')}>
                 <button className={cx('invisible', 'max-xl:visible max-xl:pr-4')} onClick={handleClickBtnMenu}>
                     <FontAwesomeIcon icon={faBars} />
@@ -89,6 +89,7 @@ function HeaderAdmin() {
 
                 <Action userMenu={userMenu} />
             </div>
+            {listBreadcrumb && <Breadcrumb className={'z-0'} listBreadcrumb={listBreadcrumb} />}
         </div>
     );
 }

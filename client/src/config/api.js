@@ -66,6 +66,20 @@ const api = {
         DELETECMTOFCMT: '/comments/ofComment',
         CREATECMT: '/comments',
     },
+    videoCategory: {
+        GETALL: '/videoCategory/all',
+        CREATE: '/videoCategory',
+        EDIT: '/videoCategory',
+        DELETE: '/videoCategory',
+        GETBYID: '/videoCategory',
+    },
+    newsCategory: {
+        GETALL: '/newsCategory/all',
+        CREATE: '/newsCategory',
+        EDIT: '/newsCategory',
+        DELETE: '/newsCategory',
+        GETBYID: '/newsCategory',
+    },
 };
 
 export default api;

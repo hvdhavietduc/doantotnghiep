@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
+import { useLocation } from 'react-router-dom';
 
 import PopperForm from '~/components/PopperForm';
 import Loading from '~/components/Loading';
@@ -19,6 +20,10 @@ function AddNews({ setIsPoperAddNews, onPageChange }) {
     // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie] = useCookies(['token']);
 
+    const location = useLocation();
+
+    const currentPath = location.pathname;
+    const categoryId = currentPath.split('/')[2];
     const {
         register,
         handleSubmit,
@@ -51,6 +56,7 @@ function AddNews({ setIsPoperAddNews, onPageChange }) {
         const data = {
             title: formData.title,
             content: formData.content,
+            categoryId: categoryId,
         };
         const messeageNotify = config.manageWordFolder.errorMesseage.getMesseageNotify();
         handleMiddleCreateNews(data).catch((error) => {

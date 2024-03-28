@@ -102,7 +102,7 @@ function ManageWord() {
             <InputSearch handleValue={handleAddWordToCategory} action={t('click_to_add')} className="m-3" />
             <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-                    <thead className="bg-gray-50 text-base uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+                    <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-16 py-3 text-center">
                                 {t('word')}
@@ -116,7 +116,7 @@ function ManageWord() {
                         {allWord.map((word, index) => (
                             <tr
                                 key={index}
-                                className=" border-b text-base odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800 dark:hover:bg-gray-600"
+                                className=" border-b odd:bg-white even:bg-gray-50 hover:bg-gray-100 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800 dark:hover:bg-gray-600"
                             >
                                 <th
                                     scope="row"

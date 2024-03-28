@@ -6,15 +6,15 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import Pagination from '~/components/Pagination';
-import DeleteWordCategory from './DeleteWordCategory';
-import AddWordCategory from './AddWordCategory';
-import EditWordCategory from './EditWordCategory';
 import Loading from '~/components/Loading';
-import { getAllCategory } from '~/services/manageWordCategoryServices';
+import {  getAllVideoCategories } from '~/services/manageVideoCategoryServices';
 import notify from '~/utils/notify';
 import config from '~/config';
+import AddVideoCategory from './AddVideoCategory';
+import EditVideoCategory from './EditVideoCategory';
+import DeleteVideoCategory from './DeleteVideoCategory';
 
-function ManageWordCategory() {
+function ManageVideoCategory() {
     const [allCategory, setAllCategory] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isPoperDeleteCategory, setIsPoperDeleteCategory] = useState(false);
@@ -24,7 +24,7 @@ function ManageWordCategory() {
     const [categoryIdToDelete, setCategoryIdToDelete] = useState();
     const [categoryToEdit, setCategoryToEdit] = useState();
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-    const { t } = useTranslation('translation', { keyPrefix: 'ManageWordCategory' });
+    const { t } = useTranslation('translation', { keyPrefix: 'ManageVideoCategory' });
 
     const [cookies] = useCookies(['token']);
 
@@ -38,9 +38,9 @@ function ManageWordCategory() {
         const token = cookies.token;
         setLoading(true);
 
-        await getAllCategory(token, page - 1)
+        await getAllVideoCategories(token, page - 1)
             .then((result) => {
-                setAllCategory(result.wordCategories);
+                setAllCategory(result.videoCategories);
                 setTotalPage(result.totalPage);
                 setLoading(false);
             })
@@ -56,12 +56,12 @@ function ManageWordCategory() {
     };
 
     const onPageChange = async (value) => {
-        navigate(`/manage_wcategories/${value}`);
+        navigate(`/manage_videos/${value}`);
     };
 
     useEffect(() => {
         if (currentPage < 1) {
-            navigate('/manage_wcategories/1');
+            navigate('/manage_videos/1');
         }
         getAllCategoryAPI(currentPage);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +101,7 @@ function ManageWordCategory() {
                                 {t('name')}
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                {t('word_count')}
+                                {t('video_count')}
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 {t('create_at')}
@@ -126,16 +126,16 @@ function ManageWordCategory() {
                                 >
                                     {category.name}
                                 </th>
-                                <td className="px-6 py-4">{category.wordIds.length}</td>
+                                <td className="px-6 py-4">{category.videoIds.length}</td>
                                 <td className="px-6 py-4">{category.createdAt}</td>
                                 <td className="px-6 py-4">{category.updatedAt}</td>
                                 <td className="flex cursor-pointer gap-5 px-6 py-4 ">
                                     <button
                                         type="button"
-                                        onClick={() => navigate(`/manage_wcategories/${category.id}/1`)}
+                                        onClick={() => navigate(`/manage_videos/${category.id}/1`)}
                                         className="mb-2 me-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                     >
-                                        {t('manage_word_lists')}
+                                        {t('manage_video_lists')}
                                     </button>
                                     <FontAwesomeIcon
                                         className=" text-xl text-red-500"
@@ -158,22 +158,22 @@ function ManageWordCategory() {
             </div>
             {loading && <Loading />}
             {isPoperDeleteCategory && (
-                <DeleteWordCategory
-                    setIsPoperDeleteWordCategory={setIsPoperDeleteCategory}
+                <DeleteVideoCategory
+                    setIsPoperDeleteVideoCategory={setIsPoperDeleteCategory}
                     categoryId={categoryIdToDelete}
                     forceUpdate={forceUpdate}
                 />
             )}
             {isPoperAddCategory && (
-                <AddWordCategory
-                    setIsPoperAddWordCategory={setIsPoperAddCategory}
+                <AddVideoCategory
+                    setIsPoperAddVideoCategoryCategory={setIsPoperAddCategory}
                     onPageChange={onPageChange}
                     forceUpdate={forceUpdate}
                 />
             )}
             {isPoperEditCategory && (
-                <EditWordCategory
-                    setIsPoperEditWordCategory={setIsPoperEditCategory}
+                <EditVideoCategory
+                    setIsPoperEditVideoCategory={setIsPoperEditCategory}
                     onPageChange={onPageChange}
                     oldCategory={categoryToEdit}
                     forceUpdate={forceUpdate}
@@ -183,4 +183,4 @@ function ManageWordCategory() {
     );
 }
 
-export default ManageWordCategory;
+export default ManageVideoCategory;

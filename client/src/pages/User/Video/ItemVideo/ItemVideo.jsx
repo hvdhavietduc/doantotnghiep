@@ -29,7 +29,8 @@ function ItemVideo({ inforVideo, pageDetail }) {
                     { 'w-full justify-between': pageDetail },
                 )}
             >
-                <Image className={cx('h-[150px] w-full', { 'h-[92px] !w-[170px]': pageDetail })} src={ImgVideo} />
+                {/* <Image className={cx('h-[150px] w-full', { 'h-[92px] !w-[170px]': pageDetail })} src={ImgVideo} /> */}
+                <video src={inforVideo.url}></video>
                 <div className={cx({ 'w-[170px] text-sm': pageDetail })}>
                     <div className={cx('mt-2 font-semibold leading-4', { '!mt-0': pageDetail })}>
                         {inforVideo?.title || 'name is not avaiable'}
