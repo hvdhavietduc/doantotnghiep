@@ -20,6 +20,8 @@ public class News {
     public Date createdAt;
     @Field
     public Date updatedAt;
+    @Field
+    public String categoryId;
 
     public News() {
     }

@@ -52,7 +52,7 @@ public class NewsCategoryController {
         return newsCategoryService.deleteNewsCategory(id);
     }
 
-    @GetMapping("/{id}/Newss")
+    @GetMapping("/{id}/news")
     public AllNewsInCategory getAllNewsInCategory(@PathVariable String id, @RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) throws ResponseException {
         return newsCategoryService.getAllNewsInCategory(id, page, size);
     }
